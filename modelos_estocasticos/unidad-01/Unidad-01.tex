@@ -1,0 +1,391 @@
+% =================================================================
+\documentclass[ 10pt, xcolor = dvipsnames]{beamer}
+\usepackage{ beamerthemesplit, lmodern}
+\usetheme{Madrid}
+\usecolortheme[named=Brown]{structure}
+\useinnertheme{rectangles}
+\setbeamertemplate{frametitle continuation}{}
+\beamertemplatenavigationsymbolsempty
+\usepackage{../../macros-general}
+\input{../../beamer_section-slides}
+
+% =================================================================
+\title[Modelos Estoc\'asticos: Unidad 01]{Modelos Estoc\'asticos para Manufactura y Servicios (INDG-1008): \textbf{Unidad 01} }
+\author[L. I. Reyes Castro]{Luis I. Reyes Castro}
+\institute[ESPOL]{\normalsize Escuela Superior Polit\'ecnica del Litoral (ESPOL) \\ Guayaquil - Ecuador}
+\date[2017-T1]{2017 - Primer T\'ermino}
+
+% -----------------------------------------------------------------
+\begin{document}
+
+% -----------------------------------------------------------------
+\begin{frame}[noframenumbering]
+\titlepage
+\end{frame}
+\begin{frame}[noframenumbering]
+\frametitle{Contenido del Tema}
+\tableofcontents[ subsectionstyle = hide]
+\end{frame}
+
+% =================================================================
+\section{Repaso de Variables Aleatorias}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Valor Esperado: 
+\begin{itemize}
+\item Si $X$ es una variable aleatoria discreta entonces 
+\[
+\Exp[X] \, = \, \sum_{ x \, \in \, \support(X) } x \, \Pr(x)
+\]
+donde la sumatoria es sobre todos los valores que puede tomar $X$. 
+\item Si $X$ es una variable aleatoria continua entonces 
+\[
+\Exp[X] \, = \, \int_{ x \, \in \, \support(X) } x \, f(x) \, dx
+\]
+donde la integraci\'on es sobre todos los valores que puede tomar $X$. 
+\item Si $X,Y$ son variables aleatorias y $a,b$ son constantes entonces: 
+\[
+\Exp[ \, a X + b Y \, ] \, = \, a \, \Exp[X] + b \, \Exp[Y]
+\]
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Independecia de Variables Aleatorias: 
+\begin{itemize}
+\item Decimos que las variables aleatorias discretas $X,Y$ son independientes si \linebreak para todo posible par de valores $(x,y)$ que las variables aleatorias \linebreak pueden tomar es el caso que: 
+\[
+\Pr( \, X = x, \, Y = y \, ) \, = \,
+\Pr( \, X = x \, ) \, \Pr( \, Y = y \, )
+\]
+\item Si $X,Y$ son variables aleatorias independientes entonces: 
+\[
+\Exp[XY] \, = \, \Exp[X] \, \Exp[Y]
+\]
+N\'otese que esta relaci\'on en general no es v\'alida par variables aleatorias dependientes. 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Condicionalmiento: 
+\begin{itemize}
+\item Si $X,Y$ son dos variables aleatorias entonces la probabilidad del valor $x$ de la primera variable condicional en el valor $y$ de la segunda esta dado por: 
+\[
+\Pr( \, x \mid y \, ) \, = \, 
+\frac{ \Pr( \, X = x, \, Y = y ) }{ \Pr( \, Y = y \, ) }
+\]
+\item Claramente, si $X,Y$ son variables aleatorias independientes entonces para todo valor $x$ de la primera variable y todo valor $y$ de la segunda: 
+\[
+\Pr( \, x \mid y \, ) \, = \, \Pr(x)
+\]
+\framebreak
+\item Si $X,Y$ son dos variables aleatorias entonces para todo valor $y$ de la \linebreak segunda variable aleatoria: 
+\[
+\Exp[ \, X \mid y \, ] \, = \, \sum_{ x \, \in \, \support(X) } x \, \Pr( \, x \mid \, y )
+\]
+\item Si $X,Y$ son dos variables aleatorias entonces: 
+\[
+\Exp[X] \, = \, \Exp[ \, \Exp[ \, X \mid Y \, ] \, ] \, = \, 
+\sum_{ y \, \in \, \support(Y) } \Exp[ \, X \mid y \, ] \, \Pr(y)
+\]
+
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Variable Aleatoria Geom\'etrica:
+\begin{itemize}
+\item Tenemos dos tipos, denotadas $\Geo(p;\ZNN)$ y $\Geo(p;\Nat)$. 
+\item $\Geo(p;\ZNN)$ representa el n\'umero de ensayos que tenemos que realizar \linebreak hasta obtener el primer experimento exitoso, por lo que toma valores en \linebreak los enteros no-negativos. Si $X \sim \Geo(p;\ZNN)$ entonces: 
+\[
+\Exp[X] \, = \, \frac{1-p}{p} \qquad \qquad \qquad
+\var(X) \, = \, \frac{1-p}{p^2}
+\]
+\item $\Geo(p;\Nat)$ representa el \'indice del ensayo que result\'o en el primer experimento exitoso, por lo que toma valores en los n\'umeros naturales. \linebreak Si $X \sim \Geo(p;\Nat)$ entonces: 
+\[
+\Exp[X] \, = \, \frac{1}{p} \qquad \qquad \qquad
+\var(X) \, = \, \frac{1-p}{p^2}
+\]
+\end{itemize}
+
+\end{frame}
+
+% =================================================================
+\section{Proceso Bernoulli}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\textbf{Ejemplo:}
+
+En una f\'abrica una m\'aquina tiene un componente que usualmente debe ser reemplazado. A pesar de que reemplazar el componente toma unos pocos minutos al final de la jornada de trabajo, cada d\'ia de operaci\'on de la m\'aquina el componente se puede da\~nar con probabilidad $p$, independientemente de lo que haya pasado antes. Con esto en mente: 
+\begin{itemize}
+\item Cu\'antas veces a la semana, en promedio, tendr\'an que reemplazar el componente? 
+\item Si han pasado cuatro d\'ias desde la \'ultima vez que se cambi\'o en componente, cu\'al es la probabilidad de que se da\~ne ma\~nana? 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Proceso Bernoulli con par\'ametro $p$: 
+\begin{itemize}
+\item Es una secuencia de variables aleatorias Bernoulli con par\'ametro $p$ independientes e ind\'enticamente distribuidas que representan la \linebreak presencia o ausencia de arribos. 
+\item Formalmente es una secuencia de variables aleatorias $X_1, \, X_2, \, X_3, \, X_4, \, \dots$ donde: 
+\begin{itemize}
+\item Para todo \'indice $i$ tenemos que $X_i \sim \Bernoulli(p)$. 
+\item Para todo par de \'indices $i,j$ es el caso que $X_i$ es independiente de $X_j$. 
+\end{itemize}
+\item Ocurre un arribo en el per\'iodo $t$ si $X_t = 1$; caso contrario no ocurri\'o un arribo en ese per\'iodo. 
+\item Claramente, el n\'umero esperado de arribos a lo largo de $n$ per\'iodos es: 
+\[
+\Exp \left[ \; \sum_{t=1}^n X_t \, \right] \, = \,
+\sum_{t=1}^n \Exp[ \, X_t \, ] \, = \, n p
+\]
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Tiempo entre arribos: 
+\begin{itemize}
+\item Para todo \'indice $i$ la variable aleatoria $T_i$ representa el n\'umero de per\'iodos que transcurrieron desde el $i$\tsup{avo} arribo hasta el $(i+1)$\tsup{avo} arribo. 
+\begin{itemize}
+\item N\'otese que $\support(T_i) = \ZNN$. 
+\end{itemize}
+\item Cu\'al es la distribuci\'on de $T_1$? \Ie para cada valor $k \in \ZNN$, cu\'al es la \linebreak probabilidad de que $T_1 = k$? 
+\begin{itemize}
+\item Claramente $k = 0$ con probabilidad $p$. 
+\item Si $k = 1$ entonces $X_1 = 0$ y $X_2 = 1$, \ie en el primer per\'iodo no hubo un arribo y en el segundo per\'iodo hubo un arribo, lo cual sucede con \linebreak probabilidad $(1-p) \, p$. 
+\item Si $k = 2$ entonces $X_1 = 0$, $X_2 = 0$ y $X_3 = 1$, lo cual sucede con \linebreak probabilidad $(1-p)^2 \, p$. 
+\end{itemize}
+\framebreak
+\item Continuando por inducci\'on matem\'atica, vemos que: 
+\[
+\forall \, k \in \ZNN \; \colon \; 
+\Pr( \, T_1 = k \, ) \, = \, (1-p)^k \, p 
+\quad \Longleftrightarrow \quad T_1 \sim \Geo(p;\ZNN)
+\]
+\item \textbf{Teorema:} Para cada \'indice $i$ es el caso que $T_i \sim \Geo(p;\ZNN)$. 
+\item \textbf{Corolario:} En un proceso Bernoulli con par\'ametro $p$ los tiempos entre arribos constituyen una secuencia de variables aleatorias independientes e identicamente distribuidas; en particular, con distribuci\'on geom\'etrica con par\'ametro $p$ soportada en $\ZNN$. 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+N\'umero de arribos en un intervalo: 
+\begin{itemize}
+\item Si para todo \'indice $i$ denotamos a la variable aleatoria $N_i$ como el n\'umero \linebreak de arribos desde el comienzo del proceso hasta el $i$\tsup{avo} periodo, entonces: 
+\[
+N_i \, = \, \sum_{k=1}^i X_k
+\]
+\item \Ie la variable aleatoria $N_i$ es la suma de $i$ variables aleatorias independientes e identicamente distribuidas (IID). 
+\item \textbf{Teorema:} Para cada \'indice $i$ es el caso que $N_i \sim \Binomial(i,p)$. 
+\item \textbf{Corolario:} En un proceso Bernoulli con par\'ametro $p$ el n\'umero de arribos \linebreak a lo largo de un intervalo de $n$ per\'iodos es una variable aleatoria con distribuci\'on binomial con par\'ametros $n$ y $p$. 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Combinaci\'on de Procesos Bernoulli: 
+\begin{itemize}
+\item Supongamos que tenemos dos procesos Bernoulli independientes. 
+\begin{itemize}
+\item El primero tiene par\'ametro $p$. 
+\item El segundo tiene par\'ametro $q$. 
+\end{itemize}
+\item Consideremos un nuevo proceso donde se produce un arribo si y solo si \linebreak ocurre un arribo en ambos procesos. 
+\begin{itemize}
+\item Los arribos en el nuevo proceso son independientes entre si, pues en cada per\'iodo solo dependen en los arribos de los procesos generadores, los cuales no dependen de arribos en tiempos anteriores. 
+\item La probabilidad de un arribo en el nuevo proceso es el producto de las probabilidades de arribo en cada proceso generador, pues los procesos generadores son independientes. 
+\item En conclusi\'on el nuevo proceso es un proceso Bernoulli con par\'ametro $pq$. 
+\end{itemize}
+\framebreak
+\item Consideremos un nuevo proceso donde se produce un arribo si y solo si \linebreak ocurre un arribo en alguno de los dos procesos. 
+\begin{itemize}
+\item Los arribos en el nuevo proceso son independientes entre si, pues en cada per\'iodo solo dependen en los arribos de los procesos generadores, los cuales no dependen de arribos en tiempos anteriores. 
+\item La probabilidad de un arribo en el nuevo proceso es uno menos la probabilidad de que no haya un arribo, la cual es el producto de las probabilidades de que no hayan arribos en cada uno de los procesos generadores, pues los procesos generadores son independientes. 
+\item En conclusi\'on el nuevo proceso es un proceso Bernoulli con par\'ametro $1 - (1-p)(1-q)$. 
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Divisi\'on de Procesos Bernoulli: 
+\begin{itemize}
+\item Supongamos que tenemos un proceso Bernoulli con par\'ametro $p$ que genera dos procesos. 
+\item En cada per\'iodo: 
+\begin{itemize}
+\item Si el proceso principal produce un arribo, lanzamos una moneda sesgada con probabilidad de cara igual a $q$. 
+\item Si la moneda sale cara enviamos el arribo al primer proceso. 
+\item Si la moneda sale sello enviamos el arribo al segundo proceso. 
+\end{itemize}
+\item Entonces: 
+\begin{itemize}
+\item El primer proceso ser\'a un proceso Bernoulli con par\'ametro $p \, q$. 
+\item El segundo proceso ser\'a un proceso Bernoulli con par\'ametro $p \, (1-q)$. 
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+% =================================================================
+\section{Proceso Poisson}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Proceso Poisson con par\'ametro $\lambda$: 
+\begin{itemize}
+\item Es una secuencia de variables aleatorias exponenciales con par\'ametro $\lambda$ independientes e ind\'enticamente distribuidas que representan los tiempos entre arribos. 
+\item Formalmente es una secuencia de variables aleatorias $X_1, \, X_2, \, X_3, \, X_4, \, \dots$ donde: 
+\begin{itemize}
+\item Para todo \'indice $i$ tenemos que $X_i \sim \Exp(\lambda)$. 
+\item Para todo par de \'indices $i,j$ es el caso que $X_i$ es independiente de $X_j$. 
+\end{itemize}
+\item El proceso empieza en el tiempo cero, \ie $t = 0$. 
+\item El primer arribo ocurre en el tiempo $t = X_1$, el segundo en el tiempo $t = X_1 + X_2$, y as\'i sucesivamente; \ie el $i$\tsup{avo} arribo ocurre en: 
+\[
+t \, = \, X_1 + \cdots + X_i \, = \, \sum_{k=1}^i X_k
+\]
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\textbf{Problema - H\&L 17.4-3:}
+
+El tiempo que requiere un mec\'anico para reparar una m\'aquina tiene una distribuci\'on exponencial con media de 4 horas. Sin embargo, una herramienta especial reducir\'ia esta media a 2 horas. Si el mec\'anico repara una m\'aquina en menos de 2 horas, se le pagan
+\$100; de otra manera se le pagan \$80. Determine el aumento esperado en el pago del mec\'anico si usa esta herramienta especial. 
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\textbf{Resoluci\'on:}
+\begin{itemize}
+\item Si denotamos a $X$ como el tiempo que demora el mec\'anico en arreglar una m\'aquina actualmente entonces: 
+\[
+X \sim \Exponential( \lambda = 0.25 )
+\]
+\item Pago del mec\'anico actualmente:
+\begin{itemize}
+\item Si $0 \leq X \leq 2$ gana \$100, lo cual sucede con probabilidad: 
+\[
+\int_{t=0}^2 \lambda \, e^{ -\lambda \, t } dt \; = \;
+\int_{t=0}^2 0.25 \, e^{ -0.25 \, t } dt \; = \; 0.393469
+\]
+\item Si $X > 2$ gana \$80, lo cual sucede con probabilidad:
+\[
+1 - 0.393469 = 0.606531
+\]
+\framebreak
+\item Consecuentemente el pago esperado es: 
+\[
+\$100 \, (0.393469) + \$80 \, (0.606531) \, = \, \$87.87
+\]
+\end{itemize}
+\item Luego, con la nueva m\'aquina tenemos que: 
+\[
+X \sim \Exponential( \lambda = 0.5 )
+\]
+\item Pago del mec\'anico con la nueva  m\'aquina: 
+\begin{itemize}
+\item Si $0 \leq X \leq 2$ gana \$100, lo cual sucede con probabilidad: 
+\[
+\int_{t=0}^2 \lambda \, e^{ -\lambda \, t } dt \; = \;
+\int_{t=0}^2 0.50 \, e^{ -0.50 \, t } dt \; = \; 0.632121
+\]
+\framebreak
+\item Si $X > 2$ gana \$80, lo cual sucede con probabilidad:
+\[
+1 - 0.632121 = 0.367879
+\]
+\item Consecuentemente el pago esperado es: 
+\[
+\$100 \, (0.632121) + \$80 \, (0.367879) \, = \, \$92.64
+\]
+\end{itemize}
+\item Finalmente, el aumente en el pago del mec\'anico gracias a que usa la nueva m\'aquina es de \$4.67. 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Combinaci\'on de Procesos Poisson: 
+\begin{itemize}
+\item Supongamos que tenemos dos procesos Poisson independientes. 
+\begin{itemize}
+\item El primero tiene par\'ametro $\lambda_1$. 
+\item El segundo tiene par\'ametro $\lambda_2$. 
+\end{itemize}
+\item Consideremos un nuevo proceso que combina los arribos de los dos procesos anteriores. 
+\item Entonces el nuevo proceso es un proceso Poisson con par\'ametro $\lambda_1 + \lambda_2$. 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Divisi\'on de Procesos Poisson: 
+\begin{itemize}
+\item Supongamos que tenemos un proceso Poisson con par\'ametro $\lambda$ que genera dos procesos. 
+\item En cada instante: 
+\begin{itemize}
+\item Si el proceso principal produce un arribo, lanzamos una moneda sesgada con probabilidad de cara igual a $p$. 
+\item Si la moneda sale cara enviamos el arribo al primer proceso. 
+\item Si la moneda sale sello enviamos el arribo al segundo proceso. 
+\end{itemize}
+\item Entonces: 
+\begin{itemize}
+\item El primer proceso ser\'a un proceso Poisson con par\'ametro $\lambda \, p$. 
+\item El segundo proceso ser\'a un proceso Poisson con par\'ametro $\lambda \, (1-p)$. 
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\end{document}
