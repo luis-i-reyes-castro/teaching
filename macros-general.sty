@@ -1,0 +1,78 @@
+\ProvidesPackage{macros-general}
+
+% Required packages: Level-1
+\RequirePackage[ linesnumbered, ruled, vlined]{ algorithm2e}
+\RequirePackage{ amsfonts, amsmath, amssymb, amsthm}
+\RequirePackage{ color, colortbl}
+\RequirePackage{ dsfont}
+\RequirePackage{ float}
+\RequirePackage{ hhline}
+\RequirePackage{ graphicx}
+\RequirePackage{ latexsym}
+\RequirePackage{ mathtools, multicol, multirow}
+\RequirePackage{ parskip, pbox, pifont}
+\RequirePackage{ ragged2e}
+\RequirePackage{ setspace, stmaryrd, subcaption}
+\RequirePackage{ tabularx}
+\RequirePackage{ wasysym}
+% Required packages: Level-2
+\RequirePackage{ epstopdf}
+% Hyperlink setup
+\hypersetup{ colorlinks, linkcolor =, urlcolor = blue, citecolor = blue}
+
+% Language
+\newcommand{\define}{\triangleq}
+\newcommand{\done}{\hfill $\square$}
+\newcommand{\eqCIRC}{\stackrel{\circ}{=}}
+\newcommand{\eqSTAR}{\stackrel{*}{=}}
+\newcommand{\eg}{\textit{e.g.,\;}}
+\newcommand{\egc}{\textit{e.g.:\;}}
+\newcommand{\Eg}{\textit{E.g.,\;}}
+\newcommand{\Egc}{\textit{E.g.:\;}}
+\newcommand{\ie}{\textit{i.e.,\;}}
+\newcommand{\iec}{\textit{i.e.:\;}}
+\newcommand{\Ie}{\textit{I.e.,\;}}
+\newcommand{\Iec}{\textit{I.e.:\;}}
+\newcommand{\QED}{\hfill $\blacksquare$}
+\newcommand{\tsup}[1]{\ensuremath{^{\text{#1}}}}
+\newcommand{\tsub}[1]{\ensuremath{_{\text{#1}}}}
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\tilde}[1]{\widetilde{#1}}
+\renewcommand{\vec}[1]{{\boldsymbol{#1}}}
+
+% Optimization & Probability
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\Bernoulli}{\text{Bernoulli}}
+\newcommand{\Binomial}{\text{Binomial}}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\Exponential}{\text{Exponencial}}
+\newcommand{\Geo}{\text{Geo}}
+\newcommand{\Indicate}[1]{ \IndFun \, \{ \, #1 \, \} }
+\newcommand{\Normal}{\mathcal{N}}
+\newcommand{\std}{\text{std}}
+\newcommand{\support}{\text{soporte}}
+\newcommand{\var}{\text{var}}
+\renewcommand{\Pr}{\mathbb{P}}
+
+% Sets
+\newcommand{\Complex}{\mathbb{C}}
+\newcommand{\Nat}{\mathbb{N}}
+\newcommand{\ReNN}{{\Re}_{\geq 0}}
+\newcommand{\ReSP}{{\Re}_{> 0}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ZNN}{{\Z}_{\geq 0}}
+\newcommand{\ZSP}{{\Z}_{\geq 0}}
+\renewcommand{\emptyset}{\varnothing}
+\renewcommand{\Re}{\mathbb{R}}
+\renewcommand{\subset}{\subseteq}
+\renewcommand{\supset}{\supseteq}
+
+% Spacing & Other Commands
+\newcommand{\fullcut}{\vspace{-\baselineskip}}
+\newcommand{\fullskip}{\vspace{\baselineskip}}
+\newcommand{\halfcut}{\vspace{-0.5\baselineskip}}
+\newcommand{\halfskip}{\vspace{0.5\baselineskip}}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\tablename}{Tabla}
+
