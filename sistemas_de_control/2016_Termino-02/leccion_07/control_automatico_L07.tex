@@ -1,0 +1,214 @@
+% =============================================
+% =============================================
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+% Packages: LaTeX (Depth-1)
+\usepackage[ vlined, linesnumbered, ruled]{algorithm2e}
+\usepackage{ amsfonts, amsmath, amssymb, amsthm}
+\usepackage[ titletoc, title]{appendix}
+\usepackage{ bbm}
+\usepackage{ color}
+\usepackage{ dsfont}
+\usepackage{ enumitem}
+\usepackage{ graphicx}
+\usepackage{ fancyhdr, float, fullpage}
+\usepackage{ hyperref}
+\usepackage{ lastpage, latexsym, lipsum}
+\usepackage{ mathrsfs, mathtools, multicol}
+\usepackage{ parskip}
+\usepackage{ setspace, stmaryrd, subcaption}
+\usepackage{ tabularx}
+\usepackage{ wasysym}
+\usepackage[ dvipsnames, table]{ xcolor}
+\usepackage{ xfrac}
+% Packages: LaTeX (Depth-2)
+\usepackage{ epstopdf}
+
+% =============================================
+\topmargin 			= -1.6cm
+\headheight 		= .90cm
+\headsep 			= .80cm
+\textheight 		= 24.0cm
+\textwidth 			= 15.5cm
+\oddsidemargin		= 0.cm
+\evensidemargin 	= 0.cm
+
+% =============================================
+% =============================================
+% Macros: Language
+\newcommand{\define}{\triangleq}
+\newcommand{\done}{\hfill $\square$}
+%\newcommand{\eqCIRC}{\stackrel{\circ}{=}}
+%\newcommand{\eqSTAR}{\stackrel{*}{=}}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\eg}{\textit{e.g.,\;}}
+\newcommand{\egc}{\textit{e.g.:\;}}
+\newcommand{\Eg}{\textit{E.g.,\;}}
+\newcommand{\Egc}{\textit{E.g.:\;}}
+\newcommand{\ie}{\textit{i.e.,\;}}
+\newcommand{\iec}{\textit{i.e.:\;}}
+\newcommand{\Ie}{\textit{I.e.,\;}}
+\newcommand{\Iec}{\textit{I.e.:\;}}
+\newcommand{\QED}{\hfill $\blacksquare$}
+\renewcommand{\tilde}[1]{\widetilde{#1}}
+\newcommand{\tsup}[1]{\ensuremath{^{\text{#1}}}}
+\newcommand{\tsub}[1]{\ensuremath{_{\text{#1}}}}
+\renewcommand{\vec}[1]{{\boldsymbol{#1}}}
+
+% Macros: Optimization & Probability
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\Indicate}[1]{ \IndFun \, \{ \, #1 \, \} }
+\renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\Normal}{\mathcal{N}}
+\newcommand{\std}{\text{std}}
+\newcommand{\var}{\text{var}}
+
+% Macros: Sets
+\newcommand{\Complex}{\mathbb{C}}
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\Nat}{\mathbb{N}}
+\renewcommand{\Re}{\mathbb{R}}
+\newcommand{\ReNN}{{\Re}_{\geq 0}}
+\newcommand{\ReSP}{{\Re}_{> 0}}
+\renewcommand{\subset}{\subseteq}
+\renewcommand{\supset}{\supseteq}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ZNN}{{\Z}_{\geq 0}}
+
+% Macros: Spacing & Other Commands
+\newcommand{\fullcut}{\vspace{-\baselineskip}}
+\newcommand{\fullskip}{\vspace{\baselineskip}}
+\newcommand{\halfcut}{\vspace{-0.5\baselineskip}}
+\newcommand{\halfskip}{\vspace{0.5\baselineskip}}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\tablename}{Tabla}
+
+% =============================================
+% Sesion de Clase
+\newcommand{\sesion}{07}
+% Macros para definiciones, teoremas, etc
+\newcounter{sesion}
+\setcounter{sesion}{\sesion}
+\theoremstyle{definition}
+\newtheorem{definition}{Definici\'on}[sesion]
+\newtheorem{example}[definition]{Ejemplo}
+\newtheorem{exercise}[definition]{Ejercicio}
+\newtheorem{note}[definition]{Nota}
+\newtheorem{problem}[definition]{Problema}
+\newtheorem{theorem}[definition]{Teorema}
+
+% =============================================
+% =============================================
+\newcommand{\HeaderLine}{}
+\newcommand{\FooterLine}{P\'agina \thepage ~de \pageref*{LastPage}}
+
+\pagestyle{fancyplain}
+\fancyhf{}
+
+\rhead[]{\fancyplain{}{\HeaderLine}}
+\lhead[\fancyplain{}{\HeaderLine}]{}
+\lfoot[\fancyplain{}{\FooterLine}]{}
+\rfoot[]{\fancyplain{}{\FooterLine}}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+% =============================================
+% =============================================
+\begin{document}
+\allowdisplaybreaks
+
+\begin{center}
+\Large Control Autom\'atico: Lecci\'on \sesion \\[1ex]
+\small \textbf{A\~no:} 2016-2017 \qquad \textbf{T\'ermino:} II \qquad
+\textbf{Instructor:} Luis I. Reyes Castro \qquad \textbf{Paralelo:} 02
+\end{center}
+\halfskip
+
+\fbox{
+
+\begin{minipage}[b][\height][t]{\textwidth}
+\vspace{0.2 cm}
+
+\begin{center}
+\textbf{COMPROMISO DE HONOR}
+\end{center}
+\vspace{0.4 cm}
+
+\scriptsize
+{
+Yo, \rule{60mm}{.1pt} al firmar este compromiso, reconozco que la presente lecci\'on est\'a dise\~nada para ser resuelta de manera individual, que puedo usar un l\'apiz o pluma y una calculadora cient\'ifica, \linebreak que solo puedo comunicarme con la persona responsable de la recepci\'on de la lecci\'on, y que cualquier instrumento de comunicaci\'on que hubiere tra\'ido debo apagarlo. Tambi\'en estoy conciente que no debo consultar libros, notas, \linebreak ni materiales did\'acticos adicionales a los que el instructor entregue durante la lecci\'on o autorice a utilizar. Finalmente, me comprometo a desarrollar y presentar mis respuestas de manera clara y ordenada. \\
+
+Firmo al pie del presente compromiso como constancia de haberlo le\'ido y aceptado. 
+\vspace{0.4 cm}
+
+Firma: \rule{60mm}{.1pt} \qquad N\'umero de matr\'icula: \rule{40mm}{.1pt} \hspace{0.5cm} \\[-0.8ex]
+
+}
+
+\end{minipage}
+
+}
+\vspace{\baselineskip}
+
+% =============================================
+\begin{problem}
+\textbf{[3 Puntos]} Para cada uno de los siguientes sistemas, encuentre su error en estado estable para las siguientes entradas: 
+\begin{itemize}
+\item Escal\'on, \ie $r(t) = u(t)$
+\item Rampa, \ie $r(t) = t \, u(t)$
+\item Par\'abola, \ie $r(t) = (1/2) \, t^2 \, u(t)$. 
+\end{itemize}
+\halfskip
+
+\begin{figure}[htb]
+\centering
+\includegraphics[ width = 0.74\textwidth]{fig_P7-32.jpg} \\[4ex]
+\includegraphics[ width = 0.74\textwidth]{fig_P7-33.jpg}
+\end{figure}
+
+\end{problem}
+\vspace{\baselineskip}
+
+\newpage
+
+% =============================================
+\begin{problem}
+\textbf{[3 Puntos]} Para siguiente sistema encuentre valores para las ganancias $K_1$ y $K_2$ tales que: 
+\begin{itemize}
+\item La tasa de amortiguamiento sea igual a 0.5. 
+\item El error en estado estable para una entrada tipo rampa sea del 10\%. 
+\end{itemize}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[ width = 0.66\textwidth]{fig_P7-35.jpg}
+\end{figure}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% =============================================
+\begin{problem}
+\textbf{[4 Puntos]} Bosqueje el lugar geom\'etrico de las ra\'ices \emph{(root locus)} para el sistema mostrado en la figura cuando: 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[ width = 0.64\textwidth]{fig_P8-3.jpg}
+\end{figure}
+\halfskip
+
+\begin{enumerate}[label=\alph*.]
+\item $\displaystyle G(s) \, = \, K \, \frac{s + 4}{(s+1)(s-7)}$
+\item $\displaystyle G(s) \, = \, K \, \frac{s + 2}{s^2 + 8s + 25}$
+\item $\displaystyle G(s) \, = \, K \, \frac{(s+1)(s+2)}{s^2 -2s + 2}$
+\item $\displaystyle G(s) \, = \, K \, \frac{s^2 + 4}{s \, (s^2 + 1)}$
+\end{enumerate}
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
