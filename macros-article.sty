@@ -1,0 +1,42 @@
+% Style file header
+\ProvidesPackage{macros-article}
+
+% Require other article-class packages
+\RequirePackage[ titletoc, title]{ appendix}
+\RequirePackage{ fancyhdr, fullpage}
+\RequirePackage{ hyperref}
+\RequirePackage{ lastpage}
+\RequirePackage[ dvipsnames, table]{ xcolor}
+
+% Define macros for definitions, examples, etc.
+\newcounter{numero}
+\theoremstyle{definition}
+\newtheorem{definition}{Definici\'on}[numero]
+\newtheorem{example}[definition]{Ejemplo}
+\newtheorem{exercise}[definition]{Ejercicio}
+\newtheorem{note}[definition]{Nota}
+\newtheorem{problem}[definition]{Problema}
+\newtheorem{theorem}[definition]{Teorema}
+
+% Setup page preferences
+\newcommand{\HeaderLine}{}
+\newcommand{\FooterLine}{P\'agina \thepage ~de \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\pagestyle{fancyplain}
+\fancyhf{}
+\rhead[]{\fancyplain{}{\HeaderLine}}
+\lhead[\fancyplain{}{\HeaderLine}]{}
+\lfoot[\fancyplain{}{\FooterLine}]{}
+\rfoot[]{\fancyplain{}{\FooterLine}}
+
+% Setup page margins
+\topmargin      = -1.6cm
+\headheight     = .90cm
+\headsep        = .80cm
+\textheight     = 24.0cm
+\textwidth      = 15.5cm
+\oddsidemargin  = 0.cm
+\evensidemargin = 0.cm
+
