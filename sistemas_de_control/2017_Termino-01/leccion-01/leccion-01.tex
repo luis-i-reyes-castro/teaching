@@ -1,0 +1,93 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../../macros-general}
+\usepackage{../../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{01}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\begin{center}
+\Large Sistemas de Control (EYAG-1005): Lecci\'on \numero \\[1ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\halfskip
+
+\input{../../../article_compromiso-honor}
+
+% =============================================
+\begin{problem}
+\textbf{[10 Puntos]} Considere el siguiente modelo de un tubo de pitot electr\'onico montado en la punta de la nariz de un aeronave de alas fijas. El aire entra a una presi\'on $p(t)$, el cual desplaza un tope de masa $m$ y \'area frontal $A$ que esta conectado a la estructura por un resorte con constante $k_r$. Adem\'as el tope experimenta una fuerza de fricci\'on proporcional a su velocidad por una constante $k_f$. El tope hace girar un engranaje de radio $r_e$ que est\'a conectado a un micro-generador que produce un voltage proporcional a la velocidad angular del engranaje. El engranage es muy ligero, asi que podemos suponer que su momento de inercia es despreciable. Finalmente, el micro-generador est\'a conectado a un circuito RC, como se muestra abajo. 
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.8\columnwidth}
+\input{leccion-01_prob-01.eps_tex}
+\end{figure}
+
+Encuentre la funci\'on de transferencia cuya entrada es la presi\'on y cuya salida sea el voltage sobre el capacitor, \ie si denotamos como $v_C(t)$ al voltage del capacitor entonces: 
+\[
+G(s) \; = \; \frac{V_C(s)}{P(s)}
+\]
+
+\emph{Soluci\'on:} Definiendo la direcci\'on hacia la derecha como positiva, vemos que la sumatoria de fuerzas en el tope es 
+\begin{equation}
+m \, \ddot{x}(t) \, = \, 
+A \, p(t) - k_r \, x(t) - k_f \, \dot{x}(t) \, ,
+\label{eq:mecanico}
+\end{equation}
+donde el primer t\'ermino del lado derecho es la fuerza debida a la presi\'on, el segundo es la fuerza debida al resorte y el tercero es la fuerza debida a la fricci\'on. Adem\'as, la relaci\'on entre la velocidad del tope y la velocidad angular del engranaje es: 
+\[
+\dot{x}(t) \, = \, r_e \, \omega(t) \quad \Longleftrightarrow \quad
+\omega(t) \, = \, (1/r_e) \, \dot{x}(t)
+\]
+A su vez, dado que el micro-generador produce un voltage $v(t) = k_\omega \, \omega(t)$, vemos que: 
+\begin{equation}
+v(t) \, = \, (k_\omega/r_e) \, \dot{x}(t)
+\label{eq:engranaje}
+\end{equation}
+Luego analizamos el circuito. Como el \'unico elemento almacenador de energ\'ia es el capacitor, la \'unica ecuaci\'on de estado es $\dot{v}_C(t) \, = \, (1/C) \, i(t)$. Adem\'as, usando la Ley de Voltages de Kirchhoff vemos que: 
+\[
+v(t) \, = \, R \, i(t) + v_c(t) \quad \Longrightarrow \quad
+i(t) \, = \, (1/R) \, ( \, v(t) - v_C(t) \, )
+\]
+Consecuentemente la ecuaci\'on de estado es: 
+\begin{equation}
+\dot{v}_C(t) \, = \, (1/RC) \, v(t) - (1/RC) \, v_C(t)
+\label{eq:electrico}
+\end{equation}
+
+Despu\'es, tomamos la Transformaci\'on de Laplace de cada una de las tres ecuaciones diferenciales obtenidas anteriormente: 
+\begin{align}
+( \, m \, s^2 + k_f \, s + k_r \, ) \, X(s) \, 
+& = \, A \, P(s) \\
+V(s) \, & = \, (k_\omega/r_e) \, s \, X(s) \\
+s \, V_C(s) \, & = \, (1/RC) \, ( \, V(s) - V_C(s) \, )
+\end{align}
+Ahora despejamos para la funci\'on de transferencia. Si empezamos con la \'ultima ecuaci\'on y reemplazamos $V(s)$ usando la segunda ecuaci\'on, obtenemos: 
+\begin{align*}
+& ( \, s + 1/RC \, ) \, V_C(s) \, = \, (1/RC) \, V(s)  \\
+& \Longrightarrow \;
+( \, s + 1/RC \, ) \, V_C(s) \, = \, (1/RC) \, (k_\omega/r_e) \, X(s)
+\end{align*}
+Finalmente, reemplazando para $X(s)$ usando la primera ecuaci\'on, tenemos: 
+\[
+( \, s + 1/RC \, ) \, V_C(s) \, = \,
+\left( \frac{k_\omega}{r_e \, R \, C} \right)
+\left( \frac{A}{m \, s^2 + k_f \, s + k_r} \right) P(s)
+\]
+En conclusi\'on: 
+\[
+G(s) \, = \, 
+\frac{A \, k_\omega}{ ( \, r_e \, R \, C \, ) \, ( \, s + 1/RC \, ) \, ( \, m \, s^2 + k_f \, s + k_r \, )}
+\]
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
