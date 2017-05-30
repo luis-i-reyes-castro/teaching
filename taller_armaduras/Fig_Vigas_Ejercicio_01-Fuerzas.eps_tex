@@ -1,0 +1,71 @@
+%% Creator: Inkscape 0.91_64bit, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'Fig_Vigas_Ejercicio_01-Fuerzas.eps' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{320bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.625)%
+    \put(0,0){\includegraphics[width=\unitlength]{Fig_Vigas_Ejercicio_01-Fuerzas.eps}}%
+    \put(0.37499999,0.46249996){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$n_1$}}}%
+    \put(0.40000001,0.16249993){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$F_A$}}}%
+    \put(0.6375,0.16249993){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$F_B$}}}%
+    \put(0.60000001,0.46249996){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$n_2$}}}%
+    \put(0.1125,0.225){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$n_3$}}}%
+    \put(0.41250002,0.23749998){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$n_4$}}}%
+    \put(0.6375,0.23749998){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$n_5$}}}%
+    \put(0.86250002,0.225){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$n_6$}}}%
+    \put(0.23920645,0.30177687){\color[rgb]{0,0,1}\rotatebox{45.78275341}{\makebox(0,0)[lb]{\smash{$F_{13}$}}}}%
+    \put(0.46991364,0.45063571){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$F_{12}$}}}%
+    \put(0.48427272,0.36475688){\color[rgb]{0,0,1}\rotatebox{-46.26415615}{\makebox(0,0)[lb]{\smash{$F_{15}$}}}}%
+    \put(0.37298492,0.28813885){\color[rgb]{0,0,1}\rotatebox{90}{\makebox(0,0)[lb]{\smash{$F_{14}$}}}}%
+    \put(0.2523004,0.22548696){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$F_{34}$}}}%
+    \put(0.49180521,0.18100209){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$F_{45}$}}}%
+    \put(0.70703883,0.18100209){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$F_{56}$}}}%
+    \put(0.63924627,0.290015){\color[rgb]{0,0,1}\rotatebox{90}{\makebox(0,0)[lb]{\smash{$F_{25}$}}}}%
+    \put(0.70740297,0.36465627){\color[rgb]{0,0,1}\rotatebox{-44.8543192}{\makebox(0,0)[lb]{\smash{$F_{26}$}}}}%
+  \end{picture}%
+\endgroup%
