@@ -18,15 +18,7 @@
 
 % -----------------------------------------------------------------
 \begin{document}
-
-% -----------------------------------------------------------------
-\begin{frame}[noframenumbering]
-\titlepage
-\end{frame}
-\begin{frame}[noframenumbering]
-\frametitle{Contenido del Tema}
-\tableofcontents[ subsectionstyle = hide]
-\end{frame}
+\input{../../beamer_table-contents}
 
 % =================================================================
 \section{Repaso de Variables Aleatorias}
@@ -385,6 +377,106 @@ Divisi\'on de Procesos Poisson:
 \item El primer proceso ser\'a un proceso Poisson con par\'ametro $\lambda \, p$. 
 \item El segundo proceso ser\'a un proceso Poisson con par\'ametro $\lambda \, (1-p)$. 
 \end{itemize}
+\end{itemize}
+
+\end{frame}
+
+% =================================================================
+\section{Cadenas de Markov}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Elementos Constitutivos: 
+\begin{itemize}
+\item Conjunto finito de $n$ estados, donde cada estado es una representaci\'on de una posible situaci\'on de inter\'es. 
+\item Matriz de transici\'on $P \in \Re^{n \times n}$ donde para cada par de estados $i,j$ \linebreak la entrada $(i,j)$ de la matriz, \ie aquella en la $i$\tsup{ava} fila y $j$\tsup{ava} columna, \linebreak es la probabilididad, cuando el estado actual es $i$, de hacer una transici\'on \linebreak al estado $j$. 
+\end{itemize}
+\framebreak
+
+Definici\'on Formal: 
+\begin{itemize}
+\item Es una secuencia de variables aleatorias discretas $X_0, \, X_1, \, X_2, \, X_3, \, \dots$ \linebreak donde para cada \'indice de tiempo discreto $t$ la variable aleatoria $X_t$ \linebreak es el estado del proceso en el tiempo $t$. 
+\item Tiene la Propiedad Markoviana, \ie que para cualquier historia de \linebreak $t+1$ estados $i_0, \, i_1, \, \dots, \, i_t$ y cualquier posible estado futuro $i_{t+1}$: 
+\begin{align*}
+& \Pr( \, X_{t+1} = i_{t+1} \mid 
+X_{0} = i_{0}, \, X_{1} = i_{1}, \, \dots, \, X_{t} = i_{t} \, ) \\
+& = \, \Pr( \, X_{t+1} = i_{t+1} \mid X_{t} = i_{t} \, )
+\end{align*}
+\fullcut
+\halfcut
+\begin{itemize}
+\item F\'ijese que por definici\'on de la matriz de transici\'on $P$: 
+\[
+P(i,j) \, = \, \Pr( \, X_{t+1} = j \mid X_{t} = i \, )
+\]
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\textbf{Ejemplo de Clima (H\&L, Secci\'on 16.1):}
+
+El clima en el pueblo de Centerville puede cambiar con rapidez de un d\'ia a otro. Sin embargo, las posibilidades de tener clima seco (sin lluvia) ma\~nana es de alguna forma mayor si hoy est\'a seco, es decir, si no llueve. En particular, la probabilidad de que ma\~nana este seco es de 0.8 si hoy est\'a seco, pero es de solo 0.6 si hoy llueve. Estas probabilidades no cambian si se considera la informaci\'on acerca del clima en los d\'ias anteriores a hoy. 
+
+Modele este proceso clim\'atico como una Cadena de Markov. 
+\framebreak
+
+\textbf{Ejemplo (H\&L, Secci\'on 16.1):}
+
+La tienda de fotograf\'ia de Dave tiene el siguiente problema de inventario. \linebreak El negocio tiene en almac\'en un modelo especial de c\'amara que se puede solicitar cada semana. Sean $D_1, \, D_2, \, D_3, \dots$ las demandas respectivas de esta c\'amara, \ie el n\'umero de unidades que se vender\'ian si el inventario no se agota, \linebreak durante la cada semana. Suponga que las $D_t$ son variables aleatorias independientes e id\'enticamente distribuidas que tienen una distribuci\'on Poisson con media de 1. Defina a $X_0$ como el n\'umero de c\'amaras que se tiene en el momento de iniciar el proceso, y para cada $t$ defina a la variable aleatoria $X_t$ como n\'umero de c\'amaras que se tienen al final de la semana $t$. 
+\framebreak
+
+Dave desear\'aa aprender m\'as acerca de c\'omo evoluciona este proceso
+estoc\'astico a trav\'es del tiempo mientras se utiliza la pol\'itica de pedidos actual: Al final de la $t$\tsup{ava} semana, el s\'abado en la noche, la tienda hace un pedido que le entregan \linebreak en el momento de abrir la tienda, el lunes en la ma\~nana. La pol\'itica es: 
+\begin{itemize}
+\item Si $X_t = 0$, ordena 3 c\'amaras. 
+\item Caso contrario, \ie si $X_t > 0$, no ordena ninguna c\'amara. 
+\end{itemize}
+
+Modele esta pol\'itica de inventario como una Cadena de Markov. 
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Propagaci\'on de Estados
+
+
+\begin{itemize}
+\item Supongamos que el estado inicial de una Cadena de Markov no es conocido \linebreak a priori sino que obedece una distribuci\'on inicial $\vec{\pi_0} \in \Re^n$, donde: 
+\[
+\forall i \colon \, \vec{\pi_0}(i) \, = \, \Pr( \, X_0 = i \, )
+\]
+\item Como caso especial, si el estado inicial fuere $i_0$, entonces la distribuci\'on inicial ser\'ia: 
+\[
+\vec{\pi_0}(i_0) \, = \, 1; \qquad
+\forall i \neq i_0 \colon \, \vec{\pi_0}(i) \, = \, 0;
+\]
+\framebreak
+\item Entonces, si denotamos a $\vec{\pi_1}$ como la distribuci\'on del primer estado, \linebreak tenemos que para todo estado $i_1$ :
+\begin{align*}
+\forall i \colon \, \vec{\pi_1}(i_1) \, = \,
+\Pr( \, X_1 = i_1 \, ) \,
+& = \, \sum_{i_0=1}^n \Pr( \, X_0 = i_0 \, ) \, \Pr( \, X_1 = i_1 \mid X_0 = i_0 \, ) \\
+& = \, \sum_{i_0=1}^n \vec{\pi_0}(i_0) \, P(i_0,i_1) \\
+& \Longrightarrow \; \vec{\pi_1} \, = \, \vec{\pi_0} \, P
+\end{align*}
+\item M\'as a\'un, para cualquier n\'umero de tiempos $t$ :
+\[
+\vec{\pi_t} \, = \, \vec{\pi_{t-1}} \, P
+\, = \, \vec{\pi_{t-2}} \, P^2 \, = \, \cdots
+\, = \, \vec{\pi_{0}} \, P^t
+\]
+
 \end{itemize}
 
 \end{frame}
