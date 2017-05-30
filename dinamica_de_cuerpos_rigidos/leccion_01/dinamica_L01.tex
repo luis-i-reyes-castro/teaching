@@ -1,0 +1,226 @@
+% =============================================
+% =============================================
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+% Packages: LaTeX (Depth-1)
+\usepackage[ vlined, linesnumbered, ruled]{algorithm2e}
+\usepackage{ amsfonts, amsmath, amssymb, amsthm}
+\usepackage[ titletoc, title]{appendix}
+\usepackage{ bbm}
+\usepackage{ color}
+\usepackage{ dsfont}
+\usepackage{ enumitem}
+\usepackage{ graphicx}
+\usepackage{ fancyhdr, float, fullpage}
+\usepackage{ hyperref}
+\usepackage{ lastpage, latexsym, lipsum}
+\usepackage{ mathrsfs, mathtools, multicol}
+\usepackage{ parskip}
+\usepackage{ setspace, stmaryrd, subcaption}
+\usepackage{ tabularx}
+\usepackage{ wasysym}
+\usepackage[ dvipsnames, table]{ xcolor}
+\usepackage{ xfrac}
+% Packages: LaTeX (Depth-2)
+\usepackage{ epstopdf}
+
+% =============================================
+\topmargin 			= -1.6cm
+\headheight 		= .90cm
+\headsep 			= .80cm
+\textheight 		= 24.0cm
+\textwidth 			= 15.5cm
+\oddsidemargin		= 0.cm
+\evensidemargin 	= 0.cm
+
+% =============================================
+% =============================================
+% Macros: Language
+\newcommand{\define}{\triangleq}
+\newcommand{\done}{\hfill $\square$}
+%\newcommand{\eqCIRC}{\stackrel{\circ}{=}}
+%\newcommand{\eqSTAR}{\stackrel{*}{=}}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\eg}{\textit{e.g.,\;}}
+\newcommand{\egc}{\textit{e.g.:\;}}
+\newcommand{\Eg}{\textit{E.g.,\;}}
+\newcommand{\Egc}{\textit{E.g.:\;}}
+\newcommand{\ie}{\textit{i.e.,\;}}
+\newcommand{\iec}{\textit{i.e.:\;}}
+\newcommand{\Ie}{\textit{I.e.,\;}}
+\newcommand{\Iec}{\textit{I.e.:\;}}
+\newcommand{\QED}{\hfill $\blacksquare$}
+\renewcommand{\tilde}[1]{\widetilde{#1}}
+\newcommand{\tsup}[1]{\ensuremath{^{\text{#1}}}}
+\newcommand{\tsub}[1]{\ensuremath{_{\text{#1}}}}
+\renewcommand{\vec}[1]{{\boldsymbol{#1}}}
+
+% Macros: Optimization & Probability
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\Exp}{\mathbb{E}}
+\newcommand{\Indicate}[1]{ \IndFun \, \{ \, #1 \, \} }
+\renewcommand{\Pr}{\mathbb{P}}
+\newcommand{\Normal}{\mathcal{N}}
+\newcommand{\std}{\text{std}}
+\newcommand{\var}{\text{var}}
+
+% Macros: Sets
+\newcommand{\Complex}{\mathbb{C}}
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\Nat}{\mathbb{N}}
+\renewcommand{\Re}{\mathbb{R}}
+\newcommand{\ReNN}{{\Re}_{\geq 0}}
+\newcommand{\ReSP}{{\Re}_{> 0}}
+\renewcommand{\subset}{\subseteq}
+\renewcommand{\supset}{\supseteq}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\ZNN}{{\Z}_{\geq 0}}
+
+% Macros: Spacing & Other Commands
+\newcommand{\fullcut}{\vspace{-\baselineskip}}
+\newcommand{\fullskip}{\vspace{\baselineskip}}
+\newcommand{\halfcut}{\vspace{-0.5\baselineskip}}
+\newcommand{\halfskip}{\vspace{0.5\baselineskip}}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\tablename}{Tabla}
+
+% =============================================
+% Sesion de Clase
+\newcommand{\sesion}{01}
+% Macros para definiciones, teoremas, etc
+\newcounter{sesion}
+\setcounter{sesion}{\sesion}
+\theoremstyle{definition}
+\newtheorem{definition}{Definici\'on}[sesion]
+\newtheorem{example}[definition]{Ejemplo}
+\newtheorem{exercise}[definition]{Ejercicio}
+\newtheorem{note}[definition]{Nota}
+\newtheorem{problem}[definition]{Problema}
+\newtheorem{theorem}[definition]{Teorema}
+
+% =============================================
+% =============================================
+\newcommand{\HeaderLine}{}
+\newcommand{\FooterLine}{P\'agina \thepage ~de \pageref*{LastPage}}
+
+\pagestyle{fancyplain}
+\fancyhf{}
+
+\rhead[]{\fancyplain{}{\HeaderLine}}
+\lhead[\fancyplain{}{\HeaderLine}]{}
+\lfoot[\fancyplain{}{\FooterLine}]{}
+\rfoot[]{\fancyplain{}{\FooterLine}}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+% =============================================
+% =============================================
+\begin{document}
+\allowdisplaybreaks
+
+\begin{center}
+\Large Din\'amica (FIMCP-01271): Lecci\'on \sesion \\[0.5ex]
+\small \textbf{A\~no:} 2016-2017 \qquad \textbf{T\'ermino:} II \qquad
+\textbf{Instructor:} Luis I. Reyes Castro \qquad \textbf{Paralelo:} 02
+\end{center}
+\halfskip
+
+\fbox{
+
+\begin{minipage}[b][\height][t]{\textwidth}
+\vspace{0.2 cm}
+
+\begin{center}
+\textbf{COMPROMISO DE HONOR}
+\end{center}
+\vspace{0.4 cm}
+
+\scriptsize
+{
+Yo, \rule{60mm}{.1pt} al firmar este compromiso, reconozco que la presente lecci\'on est\'a dise\~nada para ser resuelta de manera individual, que puedo usar un l\'apiz o pluma y una calculadora cient\'ifica, \linebreak que solo puedo comunicarme con la persona responsable de la recepci\'on de la lecci\'on, y que cualquier instrumento de comunicaci\'on que hubiere tra\'ido debo apagarlo. Tambi\'en estoy conciente que no debo consultar libros, notas, \linebreak ni materiales did\'acticos adicionales a los que el instructor entregue durante la lecci\'on o autorice a utilizar. Finalmente, me comprometo a desarrollar y presentar mis respuestas de manera clara y ordenada. \\
+
+Firmo al pie del presente compromiso como constancia de haberlo le\'ido y aceptado. 
+\vspace{0.4 cm}
+
+Firma: \rule{60mm}{.1pt} \qquad N\'umero de matr\'icula: \rule{40mm}{.1pt} \hspace{0.5cm} \\[-0.8ex]
+
+}
+
+\end{minipage}
+
+}
+\fullskip
+
+% =============================================
+\begin{problem}
+La aceleraci\'on de una part\'icula est\'a definida por la relaci\'on $a = -K \sqrt{v}$, donde $K$ es una constante. Si se sabe que en $t = 0$ tenemos $x = 0$ m y $v = 81$ m/s, y que cuando $x = 18$ m tenemos $v = 36$ m/s, determine: 
+\begin{enumerate}[label=\alph*.]
+\item \textbf{[3 Puntos]} Una expresi\'on matem\'atica que relacione la posici\'on $x(t)$, la velocidad $v(t)$ y la constante $K$. \\ \emph{Soluci\'on:}
+\begin{itemize}
+\item Como $a = v \, \frac{dv}{dx}$, tenemos: 
+\begin{align*}
+v \, \frac{dv}{dx} \; = \; -K v^{1/2} \quad
+& \Longrightarrow \quad 
+v^{1/2} \, dv \; = \; -K \, dx \\
+& \Longrightarrow \quad 
+\frac{2}{3} \, ( v(t)^{3/2} - v(0)^{3/2} ) 
+\; = \; -K \, ( x(t) - x(0) )
+\end{align*}
+\item Dado que $x(0) = 0$ m y $v(0) = 81$ m/s, tenemos: 
+\[
+\frac{2}{3} \, ( v(t)^{3/2} - 81^{3/2} ) 
+\; = \; -K \, x(t) \quad \Longleftrightarrow \quad
+v(t)^{3/2} \; = \; -\frac{3K}{2} \, x(t) + 81^{3/2}
+\]
+\end{itemize}
+\item \textbf{[2 Puntos]} El valor de $K$. \\ \emph{Soluci\'on:}
+\begin{itemize}
+\item Como $x(t) = 18$ m cuando $v(t) = 36$ m/s, tenemos: 
+\[
+\frac{2}{3} \, ( 36^{3/2} - 81^{3/2} ) 
+\; = \; -18K \quad \Longrightarrow \quad K \; = \; 19
+\]
+\end{itemize}
+\item \textbf{[1 Punto]} La velocidad de la part\'icula cuando $x = 20$ m. \\ \emph{Soluci\'on:}
+\begin{itemize}
+\item Como $x(t) = 20$ m, tenemos: 
+\[
+v(t)^{3/2} \; = \; -\frac{(3)(19)}{2} \, (20) + 81^{3/2} \quad \Longrightarrow \quad 
+v(t) \; = \; 159^{2/3} \text{ m/s} \; = \; 29.35 \text{ m/s}
+\]
+\end{itemize}
+\item \textbf{[3 Puntos]} Una expresi\'on matem\'atica que relacione la velocidad $v(t)$ con el tiempo $t$. \\ \emph{Soluci\'on:}
+\begin{itemize}
+\item Como $a = \frac{dv}{dt}$, tenemos: 
+\begin{align*}
+\frac{dv}{dt} \; = \; -K v^{1/2} \quad
+& \Longrightarrow \quad 
+v^{-1/2} \, dv \; = \; -K \, dt \\
+& \Longrightarrow \quad 
+2 \, ( v(t)^{1/2} - v(0)^{1/2} ) \; = \; -K t \\
+& \Longrightarrow \quad 
+v(t) \; = \; \left( \sqrt{v(0)} - \frac{1}{2} \, K t \, \right)^2
+\end{align*}
+\item Dado que $v(0) = 81$ m/s y que $K = 19$, tenemos: 
+\[
+v(t) \; = \; 
+\left( 9 - \frac{19}{2} \, t \, \right)^2
+\]
+\end{itemize}
+\item \textbf{[1 Punto]} El tiempo requerido para que la part\'icula quede en reposo. \\ \emph{Soluci\'on:}
+\begin{itemize}
+\item De la \'ultima expresi\'on, vemos que $v(t) = 0$ cuando: 
+\[
+9 - \frac{19}{2} \, t \; = \; 0 \quad \Longleftrightarrow \quad
+t \; = \; 0.947 \text{ s}
+\]
+\end{itemize}
+\end{enumerate}
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
