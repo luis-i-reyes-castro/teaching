@@ -1,0 +1,109 @@
+% =================================================================
+\documentclass[ 10pt, xcolor = dvipsnames]{beamer}
+\usepackage{ beamerthemesplit, lmodern}
+\usetheme{Madrid}
+\usecolortheme[named=Brown]{structure}
+\useinnertheme{rectangles}
+\setbeamertemplate{frametitle continuation}{}
+\beamertemplatenavigationsymbolsempty
+\usepackage{../../../macros-general}
+\usepackage{../../../macros-beamer}
+%\input{../../../beamer_section-slides}
+
+% =================================================================
+\title[Sistemas de Control: Unidad 02]{Sistemas de Control (EYAG-1005): \textbf{Unidad 02} }
+\author[L. I. Reyes Castro]{Luis I. Reyes Castro}
+\institute[ESPOL]{\normalsize Escuela Superior Polit\'ecnica del Litoral (ESPOL) \\ Guayaquil - Ecuador}
+\date[2017-T1]{2017 - Primer T\'ermino}
+
+% -----------------------------------------------------------------
+\begin{document}
+\input{../../../beamer_table-contents}
+
+% =================================================================
+\section{Sistemas Electromec\'anicos}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\begin{columns}
+
+\begin{column}{0.45\textwidth}
+\textbf{Ejemplo \\ (Nise, Problema 2.46*):}
+\halfskip
+
+Considere el siguiente mecanismo donde un motor DC controlado por armadura actua sobre un bloque de masa a trav\'es de un sistema de engranajes, donde la entrada es el voltage de entrada del motor $e_a(t)$ y la salida es la posici\'on del bloque de masa $x(t)$. 
+\halfskip
+
+Encuentre su funci\'on de transferencia, \iec
+\[
+G(s) \, = \, \frac{X(s)}{E_a(s)}
+\]
+
+\end{column}
+
+\begin{column}{0.45\textwidth}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\columnwidth]{nise_prob-2-46.jpeg}
+\end{figure}
+\end{column}
+
+\end{columns}
+\framebreak
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{nise_prob-2-46.eps_tex}
+\end{figure}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Modelos: 
+\begin{itemize}
+\item Motor DC: 
+\begin{align*}
+T_m(t) \, & = \, K_t \, i_a(t) \\[1ex]
+v_a(t) \, & = \, K_b \, \dot{\theta}_1(t) \\[1ex]
+e_a(t) \, & = \, R_a \, i_a(t) + v_a(t)
+\end{align*}
+\item Sistema mec\'anico rotacional: 
+\begin{align*}
+& J_1 \, \ddot{\theta}_1(t) + J_2 \, \ddot{\theta}_2(t) 
+\, = \, T_m(t) - D_a \, \dot{\theta}_1(t) - D_2 \, \dot{\theta}_2(t) \\[1ex]
+& N_1 \, \theta_1(t) \, = \, N_2 \, \theta_2(t) \\[1ex]
+& x(t) \, = \, r \, \theta_2(t)
+\end{align*}
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Tomando la transformaci\'on de Laplace: 
+\begin{itemize}
+\item Motor DC: 
+\[
+E_a(s) \, = \, R_a \, I_a(s) + K_b \, s \, \Theta_1(s)
+\]
+\item Sistema mec\'anico rotacional: 
+\begin{align*}
+& ( \, J_1 s^2 + D_a s \, ) \, \Theta_1(s) + 
+( \, J_2 s^2 + D_2 s \, ) \, \Theta_2(s) 
+\, = \, K_t \, I_a(s) \\[1ex]
+& \Theta_1(s) \, = \, ( N_2/N_1 ) \, \Theta_2(s) \\[1ex]
+& \Theta_2(s) \, = \, (1/r) \, X(s)
+\end{align*}
+\end{itemize}
+
+\end{frame}
+
+\end{document}
