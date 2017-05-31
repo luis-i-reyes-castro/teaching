@@ -63,8 +63,8 @@
     \put(0.69320801,0.24982658){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$\theta_2(t)$}}}%
     \put(0.69987467,0.35649325){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$N_1$}}}%
     \put(0.62754761,0.30575147){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$N_2$}}}%
-    \put(0.11320801,0.40982658){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$I_a(t)$}}}%
-    \put(0.4816735,0.14316008){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J_2 \, = \, J+r^2 m$}}}%
+    \put(0.11320801,0.40982658){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$i_a(t)$}}}%
+    \put(0.4816735,0.14316008){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J_2 \, = \, 2J+r^2 m$}}}%
     \put(0.4816735,0.09316034){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$D_2 \, = \, r \, f_v$}}}%
     \put(0.4816735,0.04316031){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$x(t) = r \, \theta_2(t)$}}}%
     \put(0.4816735,0.19316011){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J_1 \,= \, J_a+J$}}}%

@@ -232,9 +232,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.0151626"
-     inkscape:cx="223.84883"
-     inkscape:cy="43.509082"
+     inkscape:zoom="2.5075813"
+     inkscape:cx="140.4311"
+     inkscape:cy="80.691145"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -244,7 +244,7 @@
      inkscape:window-width="1301"
      inkscape:window-height="744"
      inkscape:window-x="65"
-     inkscape:window-y="24"
+     inkscape:window-y="299"
      inkscape:window-maximized="1"
      inkscape:bbox-paths="false"
      inkscape:snap-bbox-midpoints="true"
@@ -270,7 +270,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -822,7 +822,7 @@
          x="33.962402"
          id="tspan7606"
          sodipodi:role="line"
-         dx="0 0 0 0 -0.0099999998">$I_a(t)$</tspan></text>
+         dx="0 0 0 0 -0.0099999998">$i_a(t)$</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text7627"
@@ -835,7 +835,7 @@
          y="699.27435"
          x="208.59111"
          id="tspan7629"
-         sodipodi:role="line">$J_2 \, = \, J+r^2 m$</tspan></text>
+         sodipodi:role="line">$J_2 \, = \, 2J+r^2 m$</tspan></text>
     <text
        transform="scale(0.69275268,1.4435166)"
        xml:space="preserve"

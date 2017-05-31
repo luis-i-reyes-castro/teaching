@@ -11,7 +11,7 @@
 %\input{../../../beamer_section-slides}
 
 % =================================================================
-\title[Sistemas de Control: Unidad 02]{Sistemas de Control (EYAG-1005): \textbf{Unidad 02} }
+\title[Sistemas de Control]{Sistemas de Control (EYAG-1005) }
 \author[L. I. Reyes Castro]{Luis I. Reyes Castro}
 \institute[ESPOL]{\normalsize Escuela Superior Polit\'ecnica del Litoral (ESPOL) \\ Guayaquil - Ecuador}
 \date[2017-T1]{2017 - Primer T\'ermino}
@@ -22,6 +22,19 @@
 
 % =================================================================
 \section{Sistemas Electromec\'anicos}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Modelo del motor DC controlado por armadura: 
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{motor-dc_armadura.eps_tex}
+\end{figure}
+
+\end{frame}
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
@@ -48,11 +61,18 @@ G(s) \, = \, \frac{X(s)}{E_a(s)}
 \centering
 \includegraphics[width=\columnwidth]{nise_prob-2-46.jpeg}
 \end{figure}
+\fullskip
+{
+\scriptsize
+\textbf{Observaci\'on:} Cada uno de los tres engranajes tiene momento de inercia $J = 1$ kg-m\tsup{2}, mientras que la cremallera es ideal. 
+}
+
 \end{column}
 
 \end{columns}
 \framebreak
 
+Modelo del motor y del sistema mec\'anico rotacional: 
 \begin{figure}[htb]
 \centering
 \def\svgwidth{0.9\columnwidth}
@@ -81,12 +101,7 @@ e_a(t) \, & = \, R_a \, i_a(t) + v_a(t)
 & x(t) \, = \, r \, \theta_2(t)
 \end{align*}
 \end{itemize}
-
-\end{frame}
-
-% -----------------------------------------------------------------
-\begin{frame}[allowframebreaks]
-\frametitle{\insertsection}
+\framebreak
 
 Tomando la transformaci\'on de Laplace: 
 \begin{itemize}
@@ -101,6 +116,46 @@ E_a(s) \, = \, R_a \, I_a(s) + K_b \, s \, \Theta_1(s)
 \, = \, K_t \, I_a(s) \\[1ex]
 & \Theta_1(s) \, = \, ( N_2/N_1 ) \, \Theta_2(s) \\[1ex]
 & \Theta_2(s) \, = \, (1/r) \, X(s)
+\end{align*}
+\end{itemize}
+\framebreak
+
+Reemplazando valores para evitar cargar con muchas constantes: 
+\begin{itemize}
+\item Motor DC: 
+\[
+E_a(s) \, = \, I_a(s) + s \, \Theta_1(s)
+\]
+\item Sistema mec\'anico rotacional: 
+\begin{align*}
+& ( \, 2 s^2 + s \, ) \, \Theta_1(s) + 
+( \, 6 s^2 + 2 s \, ) \, \Theta_2(s) 
+\, = \, I_a(s) \\[1ex]
+& \Theta_1(s) \, = \, 2 \, \Theta_2(s) \, = \, X(s) \\[1ex]
+& \Theta_2(s) \, = \, (1/2) \, X(s)
+\end{align*}
+\end{itemize}
+\framebreak
+
+Despejando: 
+\begin{itemize}
+\item De la ecuaci\'on del motor DC: 
+\[
+I_a(s) \, = \, E_a(s) - s \, \Theta_1(s)
+\]
+\item De las ecuaciones del sistema mec\'anico rotacional: 
+\begin{align*}
+& ( \, 2 s^2 + s \, ) \, \Theta_1(s) + 
+( \, 6 s^2 + 2 s \, ) \, \Theta_2(s) \, = \,
+E_a(s) - s \, \Theta_1(s) \\[1ex]
+\Longrightarrow \quad
+& ( \, 2 s^2 + 2 s \, ) \, \Theta_1(s) + 
+( \, 6 s^2 + 2 s \, ) \, \Theta_2(s) = \, E_a(s) \\[1ex]
+\Longrightarrow \quad
+& ( \, 2 s^2 + 2 s \, ) \, X(s) + 
+( \, 3 s^2 + s \, ) \, X(s) = \, E_a(s) \\[1ex]
+\Longrightarrow \quad
+& G(s) \, = \, \frac{1}{ 5 s^2 + 3s }
 \end{align*}
 \end{itemize}
 
