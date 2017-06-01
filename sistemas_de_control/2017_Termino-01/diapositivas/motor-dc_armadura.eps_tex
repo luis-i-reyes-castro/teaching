@@ -50,14 +50,15 @@
   \makeatother%
   \begin{picture}(1,0.5)%
     \put(0,0){\includegraphics[width=\unitlength]{motor-dc_armadura.eps}}%
-    \put(0.08969317,0.22676628){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$e_a(t)$}}}%
+    \put(0.07422284,0.24343295){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$e_a(t)$}}}%
     \put(0.76460464,0.21333489){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J_a$}}}%
-    \put(0.34654129,0.29417473){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$R_a$}}}%
-    \put(0.34654129,0.20676628){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$L_a$}}}%
-    \put(0.83646149,0.15416981){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$\theta_a(t)$}}}%
-    \put(0.14635984,0.4108414){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$i_a(t)$}}}%
-    \put(0.2816735,0.12649349){\color[rgb]{0.6745098,0.32156863,0}\makebox(0,0)[lb]{\smash{$v_{fr}(t) \, = \, K_b \, \dot{\theta}_a(t)$}}}%
-    \put(0.54834017,0.26676176){\color[rgb]{0,0.65882353,0}\makebox(0,0)[lb]{\smash{$T_m(t) \,= \, K_t \, i_a(t)$}}}%
-    \put(0.39882647,0.42316009){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$e_a(t) \, = \, R_a \, i_a(t) + L_a \, \frac{d i_a(t)}{dt}+v_{fr}(t)$}}}%
+    \put(0.29654129,0.34315971){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$R_a$}}}%
+    \put(0.29654129,0.23575127){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$L_a$}}}%
+    \put(0.81782275,0.27982673){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$\theta_a(t)$}}}%
+    \put(0.14654134,0.36834302){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$i_a(t)$}}}%
+    \put(0.2316735,0.1498267){\color[rgb]{0.6745098,0.32156863,0}\makebox(0,0)[lb]{\smash{$v_{fr}(t) \, = \, K_b \, \dot{\theta}_a(t)$}}}%
+    \put(0.58624781,0.15500964){\color[rgb]{0,0.65882353,0}\makebox(0,0)[lb]{\smash{$T_m(t) \,= \, K_t \, i_a(t)$}}}%
+    \put(0.45571572,0.40575151){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$e_a(t) \, = \, R_a \, i_a(t) + L_a \, \frac{d i_a(t)}{dt}+v_{fr}(t)$}}}%
+    \put(0.57987467,0.26982658){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$D_a$}}}%
   \end{picture}%
 \endgroup%
