@@ -19,6 +19,7 @@
 % -----------------------------------------------------------------
 \begin{document}
 \input{../../beamer_table-contents}
+\input{../../macros-espanol}
 
 % =================================================================
 \section{Repaso de Variables Aleatorias}
@@ -388,31 +389,20 @@ Divisi\'on de Procesos Poisson:
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-Elementos Constitutivos: 
+El Modelo: 
 \begin{itemize}
 \item Conjunto finito de $n$ estados, donde cada estado es una representaci\'on de una posible situaci\'on de inter\'es. 
-\item Matriz de transici\'on $P \in \Re^{n \times n}$ donde para cada par de estados $i,j$ \linebreak la entrada $(i,j)$ de la matriz, \ie aquella en la $i$\tsup{ava} fila y $j$\tsup{ava} columna, \linebreak es la probabilididad, cuando el estado actual es $i$, de hacer una transici\'on \linebreak al estado $j$. 
-\end{itemize}
-\framebreak
-
-Definici\'on Formal: 
+\item Matriz de transici\'on $\vec{P} \in \Re^{n \times n}$
 \begin{itemize}
-\item Es una secuencia de variables aleatorias discretas $X_0, \, X_1, \, X_2, \, X_3, \, \dots$ \linebreak donde para cada \'indice de tiempo discreto $t$ la variable aleatoria $X_t$ \linebreak es el estado del proceso en el tiempo $t$. 
-\item Tiene la Propiedad Markoviana, \ie que para cualquier historia de \linebreak $t+1$ estados $i_0, \, i_1, \, \dots, \, i_t$ y cualquier posible estado futuro $i_{t+1}$: 
-\begin{align*}
-& \Pr( \, X_{t+1} = i_{t+1} \mid 
-X_{0} = i_{0}, \, X_{1} = i_{1}, \, \dots, \, X_{t} = i_{t} \, ) \\
-& = \, \Pr( \, X_{t+1} = i_{t+1} \mid X_{t} = i_{t} \, )
-\end{align*}
-\fullcut
-\halfcut
-\begin{itemize}
-\item F\'ijese que por definici\'on de la matriz de transici\'on $P$: 
+\item Para cada par de estados $i,j$: 
 \[
-P(i,j) \, = \, \Pr( \, X_{t+1} = j \mid X_{t} = i \, )
+\vec{P}(i,j) \, = \, 
+\Pr \, ( \, 
+\text{siguiente estado sea } j \mid
+\text{estado actual es } i \, )
 \]
+\item Cada una de las filas de la matriz suman a uno. 
 \end{itemize}
-
 \end{itemize}
 
 \end{frame}
@@ -421,26 +411,28 @@ P(i,j) \, = \, \Pr( \, X_{t+1} = j \mid X_{t} = i \, )
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-\textbf{Ejemplo de Clima (H\&L, Secci\'on 16.1):}
+\textbf{H\&L, Secci\'on 16.1 - Ejemplo de Clima:}
 
-El clima en el pueblo de Centerville puede cambiar con rapidez de un d\'ia a otro. Sin embargo, las posibilidades de tener clima seco (sin lluvia) ma\~nana es de alguna forma mayor si hoy est\'a seco, es decir, si no llueve. En particular, la probabilidad de que ma\~nana este seco es de 0.8 si hoy est\'a seco, pero es de solo 0.6 si hoy llueve. Estas probabilidades no cambian si se considera la informaci\'on acerca del clima en los d\'ias anteriores a hoy. 
+El clima en el pueblo de Centerville puede cambiar con rapidez de un d\'ia a otro. Sin embargo, las posibilidades de tener clima seco (sin lluvia) ma\~nana es de alguna forma mayor si hoy est\'a seco, es decir, si no llueve. En particular, \linebreak la probabilidad de que ma\~nana este seco es de 0.8 si hoy est\'a seco, pero \linebreak es de solo 0.6 si hoy llueve. Estas probabilidades no cambian si se considera \linebreak la informaci\'on acerca del clima en los d\'ias anteriores a hoy. 
 
 Modele este proceso clim\'atico como una Cadena de Markov. 
 \framebreak
 
-\textbf{Ejemplo (H\&L, Secci\'on 16.1):}
+Estados: 
+\begin{enumerate}
+\item Est\'a seco
+\item Llueve
+\end{enumerate}
 
-La tienda de fotograf\'ia de Dave tiene el siguiente problema de inventario. \linebreak El negocio tiene en almac\'en un modelo especial de c\'amara que se puede solicitar cada semana. Sean $D_1, \, D_2, \, D_3, \dots$ las demandas respectivas de esta c\'amara, \ie el n\'umero de unidades que se vender\'ian si el inventario no se agota, \linebreak durante la cada semana. Suponga que las $D_t$ son variables aleatorias independientes e id\'enticamente distribuidas que tienen una distribuci\'on Poisson con media de 1. Defina a $X_0$ como el n\'umero de c\'amaras que se tiene en el momento de iniciar el proceso, y para cada $t$ defina a la variable aleatoria $X_t$ como n\'umero de c\'amaras que se tienen al final de la semana $t$. 
-\framebreak
-
-Dave desear\'aa aprender m\'as acerca de c\'omo evoluciona este proceso
-estoc\'astico a trav\'es del tiempo mientras se utiliza la pol\'itica de pedidos actual: Al final de la $t$\tsup{ava} semana, el s\'abado en la noche, la tienda hace un pedido que le entregan \linebreak en el momento de abrir la tienda, el lunes en la ma\~nana. La pol\'itica es: 
-\begin{itemize}
-\item Si $X_t = 0$, ordena 3 c\'amaras. 
-\item Caso contrario, \ie si $X_t > 0$, no ordena ninguna c\'amara. 
-\end{itemize}
-
-Modele esta pol\'itica de inventario como una Cadena de Markov. 
+Matriz de transici\'on:
+\[
+\vec{P} \, = \, 
+\left[
+\begin{array}{cc}
+0.8 & 0.2 \\ 0.6 & 0.4
+\end{array}
+\right]
+\]
 
 \end{frame}
 
@@ -448,35 +440,164 @@ Modele esta pol\'itica de inventario como una Cadena de Markov.
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-Propagaci\'on de Estados
+\textbf{H\&L, Secci\'on 16.1 - Ejemplo en Manejo de Inventario:}
 
+La tienda de fotograf\'ia de Dave se admministra semanalmente y est\'a abierta al p\'ublico desde el lunes en la ma\~nana hasta el s\'abado en la noche. Dave tiene en almac\'en un modelo especial de c\'amara que se vende relativamente bien. \linebreak Sean $D_1, \, D_2, \, D_3, \dots$ las demandas semanales de la c\'amara en unidades, \linebreak \ie el n\'umero de unidades que se vender\'ian si el inventario fuere inagotable. \linebreak M\'as precisamente, suponga que las demandas $D_t$ son variables aleatorias i.i.d. \linebreak que siguen una distribuci\'on Poisson con par\'ametro $\lambda = 1$. 
 
+Dave maneja el inventario de acuerdo a la siguiente pol\'itica:
+\begin{itemize}
+\item Si no hay unidades de la c\'amara en inventario, se hace un pedido al proveedor por tres unidades. En este caso, el proveedor entregar\'a el pedido \linebreak el lunes a primera hora, justo antes de que la tienda abra. 
+\item Caso contrario, no se hace un pedido. 
+\end{itemize}
+\framebreak
+
+Definiendo a los cuatro posibles n\'umero de c\'amaras en inventario al final de cada semana como los estados, modele la pol\'itica de inventario descrita como una Cadena de Markov. 
+
+Por si acaso, el orden de las actividades de la \tava semana es: 
+\begin{enumerate}
+\item Si se hizo un pedido al proveedor de las c\'amaras al final de la \linebreak \tmava semana se reciben las unidades que se pidieron. 
+\item Se abre la tienda desde el lunes en la ma\~nana hasta el s\'abado en la noche. Durante este tiempo se venden entre cero y tres c\'amaras. 
+\item Se cierra la tienda. 
+\item De ser necesario, se hace un pedido al proveedor de las c\'amaras. 
+\end{enumerate}
+\framebreak
+
+Estados: 
+\begin{enumerate}
+\item Quedan 0 unidades en inventario al final de la semana
+\item Quedan 1 unidades en inventario al final de la semana
+\item Quedan 2 unidades en inventario al final de la semana
+\item Quedan 3 unidades en inventario al final de la semana
+\end{enumerate}
+
+Matriz de transici\'on:
+\[
+\vec{P} \, = \, 
+\left[
+\begin{array}{cccc}
+0.08 & 0.18 & 0.37 & 0.37 \\
+0.63 & 0.37 & 0    & 0    \\
+0.26 & 0.37 & 0.37 & 0    \\
+0.08 & 0.18 & 0.37 & 0.37
+\end{array}
+\right]
+\]
+
+\framebreak
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Definici\'on Formal: 
+\begin{itemize}
+\item Es una secuencia de variables aleatorias discretas $X_0, \, X_1, \, X_2, \, X_3, \, \dots$ \linebreak donde para cada \'indice de tiempo discreto $t$ la variable aleatoria $X_t$ \linebreak es el estado del proceso en el tiempo $t$. 
+\item Tiene la \textbf{Propiedad Markoviana}, \ie que para cualquier historia de estados que culmina en el estado actual $x_0, \, x_1, \, \dots, \, x_t$ y para cualquier posible \linebreak estado futuro $x_{t+1}$ es el caso que: 
+\begin{align*}
+& \Pr( \, X_{t+1} = x_{t+1} \mid 
+X_{0} = x_{0}, \, X_{1} = x_{1}, \, \dots, \, x_{t} = x_{t} \, ) \\[1ex]
+& = \, \Pr( \, X_{t+1} = x_{t+1} \mid X_{t} = x_{t} \, )
+\end{align*}
+\fullcut
+\halfcut
+\begin{itemize}
+\item Observe adem\'as que por definici\'on de la matriz de transici\'on $\vec{P}$ : 
+\[
+\vec{P}(i,j) \, = \,
+\Pr( \, X_{t+1} = j \mid X_{t} = i \, )
+\]
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Propagaci\'on de Distribuciones: 
 \begin{itemize}
 \item Supongamos que el estado inicial de una Cadena de Markov no es conocido \linebreak a priori sino que obedece una distribuci\'on inicial $\vec{\pi_0} \in \Re^n$, donde: 
 \[
-\forall i \colon \, \vec{\pi_0}(i) \, = \, \Pr( \, X_0 = i \, )
+\forall x \colon \, \vec{\pi_0}(x) \, = \, \Pr( \, X_0 = x \, )
 \]
-\item Como caso especial, si el estado inicial fuere $i_0$, entonces la distribuci\'on inicial ser\'ia: 
+\item Como caso especial, sup\'ongase que el estado inicial es conocido, \eg \linebreak que $X_0 = x_0$. Entonces la distribuci\'on inicial ser\'ia: 
 \[
-\vec{\pi_0}(i_0) \, = \, 1; \qquad
-\forall i \neq i_0 \colon \, \vec{\pi_0}(i) \, = \, 0;
+\vec{\pi_0}(x_0) \, = \, 1; \qquad
+\forall x \neq x_0 \colon \, \vec{\pi_0}(x) \, = \, 0;
 \]
+\end{itemize}
 \framebreak
-\item Entonces, si denotamos a $\vec{\pi_1}$ como la distribuci\'on del primer estado, \linebreak tenemos que para todo estado $i_1$ :
-\begin{align*}
-\forall i \colon \, \vec{\pi_1}(i_1) \, = \,
-\Pr( \, X_1 = i_1 \, ) \,
-& = \, \sum_{i_0=1}^n \Pr( \, X_0 = i_0 \, ) \, \Pr( \, X_1 = i_1 \mid X_0 = i_0 \, ) \\
-& = \, \sum_{i_0=1}^n \vec{\pi_0}(i_0) \, P(i_0,i_1) \\
-& \Longrightarrow \; \vec{\pi_1} \, = \, \vec{\pi_0} \, P
-\end{align*}
-\item M\'as a\'un, para cualquier n\'umero de tiempos $t$ :
-\[
-\vec{\pi_t} \, = \, \vec{\pi_{t-1}} \, P
-\, = \, \vec{\pi_{t-2}} \, P^2 \, = \, \cdots
-\, = \, \vec{\pi_{0}} \, P^t
-\]
 
+\begin{itemize}
+\item Ahora, si denotamos a $\vec{\pi_1}$ como la distribuci\'on del primer estado, \linebreak tenemos que para todo posible primer estado $x_1$ :
+\begin{align*}
+\forall x_1 \colon \, \vec{\pi_1}(x_1) \, 
+& = \, \Pr( \, X_1 = x_1 \, ) \\[1ex]
+& = \, \sum_{\text{estados } x_0} \Pr( \, X_0 = x_0 \, ) \; \Pr( \, X_1 = x_1 \mid X_0 = x_0 \, ) \\[1ex]
+& = \, \sum_{\text{estados } x_0} \vec{\pi_0}(x_0) \, \vec{P}(x_0,x_1)
+\end{align*}
+\item Matricialmente, eso equivale a: 
+\[
+\vec{\pi_1'} \, = \, \vec{\pi_0'} \, \vec{P}
+\]
+\end{itemize}
+\framebreak
+
+\begin{itemize}
+\item Luego, si denotamos a $\vec{\pi_2}$ como la distribuci\'on del segundo estado, \linebreak tenemos que para todo posible segundo estado $x_2$ :
+\begin{align*}
+\forall x_2 \colon \, \vec{\pi_2}(x_2) \,
+& = \, \Pr( \, X_2 = x_2 \, ) \\[1ex]
+& = \, \sum_{\text{estados } x_1} \Pr( \, X_1 = x_1 \, ) \; \Pr( \, X_2 = x_2 \mid X_1 = x_1 \, ) \\[1ex]
+& = \, \sum_{\text{estados } x_1} \vec{\pi_1}(x_1) \, \vec{P}(x_1,x_2)
+\end{align*}
+\item Matricialmente, tenemos que: 
+\[
+\vec{\pi_2'} \, = \, \vec{\pi_1'} \, \vec{P}
+\]
+\end{itemize}
+\framebreak
+
+\begin{itemize}
+\item M\'as generalmente, si conocemos la distribuci\'on del estado actual $\vec{\pi_t}$, entonces para la distribuci\'on del siguiente estado, denotada $\vec{\pi_{t+1}}$, \linebreak es el caso que: 
+\begin{align*}
+\forall x_{t+1} \colon \, \vec{\pi_{t+1}}(x_{t+1}) \, 
+& = \, \Pr( \, X_{t+1} = x_{t+1} \, ) \\[1ex]
+& = \, \sum_{\text{estados } x_t} \Pr( \, X_t = x_t \, ) \; \Pr( \, X_{t+1} = x_{t+1} \mid X_t = x_t \, ) \\[1ex]
+& = \, \sum_{\text{estados } x_t} \vec{\pi_t}(x_t) \, \vec{P}(x_t,x_{t+1})
+\end{align*}
+\item Matricialmente, tenemos que: 
+\[
+\vec{\pi_{t+1}'} \, = \, \vec{\pi_t'} \, \vec{P}
+\]
+\end{itemize}
+\framebreak
+
+\begin{itemize}
+\item Usando inducci\'on matem\'atica, es f\'acil ver que: 
+\[
+\forall t \colon \;
+\vec{\pi_t'} \, = \, \vec{\pi_0'} \, \vec{P}^t
+\]
+\item Adem\'as, si la Cadena de Markov no tiene ciclos determin\'isicos entonces \linebreak sin importar la distribuci\'on inicial $\vec{\pi_0}$ es el caso que la distribuci\'on del \linebreak estado actual $\vec{\pi_t}$ converge a una \'unica distribuci\'on $\vec{\pi^*}$, conocida como la distribuci\'on en estado estable o estacionaria de la cadena. \Iec 
+\[
+\exists! \, \vec{\pi^*} \colon \;
+\lim_{ t \rightarrow \infty } \vec{\pi_t} \; = \;
+\vec{\pi^*}
+\]
+\end{itemize}
+\framebreak
+
+\begin{itemize}
+\item Finalmente, si la distribuci\'on en estado estable (estacionaria) existe entonces dicha distribuci\'on es invariante: 
+\[
+\vec{(\pi^*)'} \, = \, \vec{(\pi^*)'} \, \vec{P}
+\]
+\item Esto implica que si la distribuci\'on del estado inicial es igual a la distribuci\'on estacionaria, \ie que si $X_0 \sim \vec{\pi^*}$, entonces la distribuci\'on del primer estado es igual a la distribuci\'on estacionaria, \ie que $X_1 \sim \vec{\pi^*}$, lo que a su vez implica que la distribuci\'on del segundo estado es igual a la distribuci\'on estacionaria, \ie que $X_2 \sim \vec{\pi^*}$, y asi sucesivamente. 
 \end{itemize}
 
 \end{frame}
