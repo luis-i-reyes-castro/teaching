@@ -1,7 +1,8 @@
 """
 @author: Luis I. Reyes Castro
 
-Problema del Robot Vigilante:
+Problema del Robot Vigilante
+
 ===================================
 ===================================
 ||         ||         ::         ||
@@ -13,6 +14,7 @@ Problema del Robot Vigilante:
 ||         ::         ::         ||
 ===================================
 ===================================
+
 """
 
 import numpy as np
@@ -31,9 +33,9 @@ P = np.array( [ [ 1/2,   0,   0, 1/2,   0,   0 ],
 # Crea una nuevo objeto que representa una Cadena de Markov
 cadena = CadenaDeMarkov( S, P)
 # Genera muestras de 60 pasos empezando desde Loc-1
-cadena.muestrea_secuencia( inicio = 'Loc-1', num_pasos = 60)
+( X_t, freq) = cadena.muestrea_secuencia( inicio = 'Loc-1', num_pasos = 1000)
 
 # Define la distribucion inicial
-pi_0 = ( 1/2, 0, 0, 1/2, 0, 0)
+pi_0 = ( 1, 0, 0, 0, 0, 0)
 # Propagala por 60 pasos
-dists = cadena.propaga_distribucion( distribucion = pi_0, num_pasos = 600)
+pi_t = cadena.propaga_distribucion( inicio = pi_0, num_pasos = 1000)

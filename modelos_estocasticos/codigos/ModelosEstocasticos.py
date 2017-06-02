@@ -150,8 +150,9 @@ class CadenaDeMarkov :
                        tamano (n,) que sea un vector de probabilidad.
         @param num_pasos: Numero de pasos a muestrear.
 
-        @return Una lista de longitud num_pasos conteniendo los indices de
-                los estados muestreados.
+        @return Una 2-tupla que contiene en su primera entrada una lista de
+        longitud num_pasos conteniendo los indices de los estados muestreados y
+        en su segunda entrada el vector de frecuencias de visitas a estados.
         """
 
         # Verifica que se haya provisto un estado o distribucion inicial
@@ -192,56 +193,61 @@ class CadenaDeMarkov :
         # Para cada iteracion...
         for t in range(num_pasos) :
             # Registra el estado actual y lo imprime
-            X[t] = self.S[indice_estado]
-            print( 'X_' + str(t) + ': ' + X[t] )
+            X[t] = indice_estado
+            print( 'X_' + str(t) + ': ' + self.S[X[t]] )
             # Obtiene el vector de probabilidades de transicion asociadas
             # con el estado actual
             prob_transicion = self.P[ indice_estado, :]
             # Muestrea el indice del siguiente estado
             indice_estado = np.random.choice( self.n, p = prob_transicion)
 
-        # Retorna la secuencia de indices de estados visitados
-        return X
+        # Computa el vector de frecuencias de visitas a estados
+        frequencia = np.zeros( shape = ( self.n,) )
+        for estado in range(self.n) :
+            visitas = [ 1.0 if X[t] == estado else 0.0 for t in range(num_pasos) ]
+            frequencia[estado] = sum(visitas) / num_pasos
 
-    def propaga_distribucion( self, distribucion, num_pasos) :
+        # Retorna la secuencia de indices de estados visitados y el vector
+        # de frecuencias de visitas a estados
+        return ( X, frequencia)
+
+    def propaga_distribucion( self, inicio, num_pasos) :
         """
         Propaga una distribucion del estado inicial por un numero de pasos deseado
 
-        @param distribucion: Distribucion del estado inicial. Debe ser un arreglo
-                             de tamano (n,) que sea un vector de probabilidad.
-        @param num_pasos: Numero de pasos a muestrear.
+        @param inicio: Distribucion del estado inicial. Debe ser un arreglo
+                       de tamano (n,) que sea un vector de probabilidad.
+        @param num_pasos: Numero de pasos a propagar.
 
-        @return Una lista de longitud num_pasos conteniendo las distribuciones
-                deseadas como vectores de probabilidad
+        @return Una matriz numpy de tamano num_pasos-por-n donde la entrada (t,i)
+        es la probabilidad en el periodo t de estar en el estado i.
         """
 
         # Verifica que la distribucion sea un arreglo numpy
-        if not isinstance( distribucion, ( list, tuple, np.ndarray) ) :
-            raise ValueError( 'Parametro distribucion debe ser una lista, tupla ' +
+        if not isinstance( inicio, ( list, tuple, np.ndarray) ) :
+            raise ValueError( 'Parametro inicio debe ser una lista, tupla ' +
                               'o vector numpy' )
+
         # Verifica que la distribucion sea un vector de tamano n
-        distribucion = np.array(distribucion)
+        inicio = np.array(inicio)
         tamano_correcto = ( self.n,)
-        if not np.shape( distribucion) == tamano_correcto :
-            raise ValueError( 'Parametro distribucion debe ser un arreglo ' +
+        if not np.shape( inicio) == tamano_correcto :
+            raise ValueError( 'Parametro inicio debe ser un arreglo ' +
                               'de tamano ' + str(tamano_correcto) )
-        if np.any( distribucion < 0.0 ) or abs( np.sum(distribucion) - 1.0 ) > 1e-8 :
-            raise ValueError( 'Parametro distribucion debe ser un vector de ' +
+        if np.any( inicio < 0.0 ) or abs( np.sum(inicio) - 1.0 ) > 1e-8 :
+            raise ValueError( 'Parametro inicio debe ser un vector de ' +
                               'probabilidades' )
 
         # Inicializa la historia arbitrariamente para evitar alocaciones de
         # memoria durante el muestreo
         pi = np.zeros( shape = ( num_pasos, self.n) )
-        pi[-1,:] = distribucion
+        pi[-1,:] = inicio
 
         # Para cada iteracion...
         for t in range(num_pasos) :
-            # Computa la distribucion actual
+            # Computa la distribucion actual de acuerdo a la recursion:
+            # pi_t+1' = pi_t' * P
             pi[t,:] = np.dot( pi[t-1,:], self.P).flatten()
-
-        # Imprime mensaje de inicio
-        print( 'Propagando una distribucion por ' + str(num_pasos) + ' pasos' )
-        print( pi )
 
         # Retorna la secuencia de distribuciones computadas
         return pi
