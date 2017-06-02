@@ -62,7 +62,7 @@ class ProcesoBernoulli :
 
         # Imprime la secuencia de estados
         for t in range(num_pasos) :
-            print( 'X_' + str(t) + ': ' + self.S[X[t]] )
+            print( 'X_' + str(t) + ': ' + str( self.S[X[t]] ) )
 
         # Retorna la secuencia de indices de estados
         return X
@@ -146,7 +146,7 @@ class CadenaDeMarkov :
                        Si es un estado debe encontrarse en la lista de estados,
                        caso contrario se arrojara un error. Si es el indice de
                        un estado debe ser un entero entre cero y n-1.
-                       Si es una distribucion debe ser un arreglo numpy de
+                       Si es una distribucion debe ser un arreglo de
                        tamano (n,) que sea un vector de probabilidad.
         @param num_pasos: Numero de pasos a muestrear.
 
@@ -157,25 +157,30 @@ class CadenaDeMarkov :
         # Verifica que se haya provisto un estado o distribucion inicial
         if inicio is None :
             raise ValueError( 'Provea un estado o distribucion inicial' )
-        # Ejecuta si inicio es el indice del estado inicial
+
+        # Si inicio es el indice del estado inicial solo lo copiamos
         if isinstance( inicio, int) and 0 <= inicio < self.n :
             indice_estado = inicio
-        # Ejecuta si inicio es un vector de probabilidades iniciales
-        elif isinstance( inicio, np.ndarray) :
+
+        # Si inicio no es una lista, tupla o vector busca su indice
+        elif not isinstance( inicio, ( list, tuple, np.ndarray) ) :
+            try :
+                indice_estado = int( self.S.index(inicio) )
+            except Exception :
+                raise ValueError( 'Estado \'' + str(inicio) + '\' no existe' )
+
+        # Si inicio es un vector de probabilidades iniciales entonces
+        # usalo para muestrear el estado inicial
+        else :
+            inicio = np.array(inicio)
             tamano_correcto = ( self.n,)
             if not np.shape(inicio) == tamano_correcto :
-                raise ValueError( 'Parametro inicio debe ser un arreglo numpy ' +
+                raise ValueError( 'Parametro inicio debe ser un arreglo ' +
                                   'de tamano ' + str(tamano_correcto) )
             if np.any( inicio < 0.0 ) or abs( np.sum(inicio) - 1.0 ) > 1e-8 :
                 raise ValueError( 'Parametro inicio debe ser un vector de ' +
                                   'probabilidades' )
             indice_estado = np.random.choice( self.n, p = inicio)
-        else :
-            # Intenta buscar 'inicio' entre los estados y obtener su indice
-            try :
-                indice_estado = int( self.S.index(inicio) )
-            except Exception :
-                raise ValueError( 'Estado inicial \'' + str(inicio) + '\' no existe' )
 
         # Imprime mensaje de inicio
         print( 'Muestreando una secuencia de ' + str(num_pasos) + ' pasos' )
@@ -202,7 +207,7 @@ class CadenaDeMarkov :
         """
         Propaga una distribucion del estado inicial por un numero de pasos deseado
 
-        @param distribucion: Distribucion del estado inicial. Debe ser un arreglo numpy
+        @param distribucion: Distribucion del estado inicial. Debe ser un arreglo
                              de tamano (n,) que sea un vector de probabilidad.
         @param num_pasos: Numero de pasos a muestrear.
 
@@ -211,31 +216,32 @@ class CadenaDeMarkov :
         """
 
         # Verifica que la distribucion sea un arreglo numpy
-        if not isinstance( distribucion, np.ndarray) :
-            raise ValueError( 'Parametro distribucion debe ser un arreglo numpy ' )
+        if not isinstance( distribucion, ( list, tuple, np.ndarray) ) :
+            raise ValueError( 'Parametro distribucion debe ser una lista, tupla ' +
+                              'o vector numpy' )
         # Verifica que la distribucion sea un vector de tamano n
+        distribucion = np.array(distribucion)
         tamano_correcto = ( self.n,)
         if not np.shape( distribucion) == tamano_correcto :
-            raise ValueError( 'Parametro distribucion debe ser un arreglo numpy ' +
+            raise ValueError( 'Parametro distribucion debe ser un arreglo ' +
                               'de tamano ' + str(tamano_correcto) )
         if np.any( distribucion < 0.0 ) or abs( np.sum(distribucion) - 1.0 ) > 1e-8 :
             raise ValueError( 'Parametro distribucion debe ser un vector de ' +
                               'probabilidades' )
 
-        # Imprime mensaje de inicio
-        print( 'Propagando una distribucion por ' + str(num_pasos) + ' pasos' )
-
         # Inicializa la historia arbitrariamente para evitar alocaciones de
         # memoria durante el muestreo
-        pi = [ 0 for t in range(num_pasos) ]
+        pi = np.zeros( shape = ( num_pasos, self.n) )
+        pi[-1,:] = distribucion
 
         # Para cada iteracion...
         for t in range(num_pasos) :
-            # Registra la distribucion actual y la imprime
-            pi[t] = distribucion
-            print( 'pi_' + str(t) + ': ' + pi[t] )
-            # Computa la distribucion del siguiente estado
-            distribucion = np.dot( distribucion, self.P).flatten()
+            # Computa la distribucion actual
+            pi[t,:] = np.dot( pi[t-1,:], self.P).flatten()
+
+        # Imprime mensaje de inicio
+        print( 'Propagando una distribucion por ' + str(num_pasos) + ' pasos' )
+        print( pi )
 
         # Retorna la secuencia de distribuciones computadas
         return pi
