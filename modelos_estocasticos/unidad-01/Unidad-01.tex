@@ -518,7 +518,7 @@ X_{0} = x_{0}, \, X_{1} = x_{1}, \, \dots, \, x_{t} = x_{t} \, ) \\[1ex]
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-Propagaci\'on de Distribuciones: 
+Propagaci\'on de la Distribuci\'on Inicial: 
 \begin{itemize}
 \item Supongamos que el estado inicial de una Cadena de Markov no es conocido \linebreak a priori sino que obedece una distribuci\'on inicial $\vec{\pi_0} \in \Re^n$, donde: 
 \[
@@ -580,12 +580,12 @@ Propagaci\'on de Distribuciones:
 \begin{itemize}
 \item Usando inducci\'on matem\'atica, es f\'acil ver que: 
 \[
-\forall t \colon \;
+\forall t \geq 1 \colon \;
 \vec{\pi_t'} \, = \, \vec{\pi_0'} \, \vec{P}^t
 \]
 \item Adem\'as, si la Cadena de Markov no tiene ciclos determin\'isicos entonces \linebreak sin importar la distribuci\'on inicial $\vec{\pi_0}$ es el caso que la distribuci\'on del \linebreak estado actual $\vec{\pi_t}$ converge a una \'unica distribuci\'on $\vec{\pi^*}$, conocida como la distribuci\'on en estado estable o estacionaria de la cadena. \Iec 
 \[
-\exists! \, \vec{\pi^*} \colon \;
+\exists! \, \vec{\pi^*} \in \Re^n \colon \;
 \lim_{ t \rightarrow \infty } \vec{\pi_t} \; = \;
 \vec{\pi^*}
 \]
@@ -599,6 +599,27 @@ Propagaci\'on de Distribuciones:
 \]
 \item Esto implica que si la distribuci\'on del estado inicial es igual a la distribuci\'on estacionaria, \ie que si $X_0 \sim \vec{\pi^*}$, entonces la distribuci\'on del primer estado es igual a la distribuci\'on estacionaria, \ie que $X_1 \sim \vec{\pi^*}$, lo que a su vez implica que la distribuci\'on del segundo estado es igual a la distribuci\'on estacionaria, \ie que $X_2 \sim \vec{\pi^*}$, y asi sucesivamente. 
 \end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+C\'alculo de la Distribuci\'on en Estado Estable: 
+\begin{enumerate}
+\item Escribimos una ecuaci\'on para cada uno de los $n$ estado: 
+\[
+\forall e \colon \, \vec{\pi}(e) \; = \; 
+\sum_{\text{estados }x} \vec{\pi}(x) \, \vec{P}(x,e) 
+\]
+\item Desechamos arbitrariamente una de las $n$ ecuaciones anteriores y la reemplazamos por: 
+\[
+\sum_{\text{estados }e} \vec{\pi}(e) \; = \; 1
+\]
+\item Resolvemos el sistema de ecuaciones lineales resultante, el cual tiene \linebreak $n$ inc\'ognitas y $n$ ecuaciones linealmente independientes. 
+
+\end{enumerate}
 
 \end{frame}
 
