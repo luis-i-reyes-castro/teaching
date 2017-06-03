@@ -64,8 +64,44 @@ class ProcesoBernoulli :
         for t in range(num_pasos) :
             print( 'X_' + str(t) + ': ' + str( self.S[X[t]] ) )
 
-        # Retorna la secuencia de indices de estados
-        return X
+        # Computa el vector de frecuencias
+        frequencia = np.zeros( shape = (2,) )
+        frequencia[1] = 1.0 * sum(X) / num_pasos
+        frequencia[0] = 1 - frequencia[1]
+
+        # Retorna la secuencia de indices de estados y las frecuencias de visita
+        return ( X, frequencia)
+
+    def divide_proceso( self, probabilidades) :
+        """
+        Divide al proceso de acuerdo al vector de probabilidades ingresado
+
+        @param probabilidades: Vector de probabilidades
+
+        @return Lista de los n procesos Bernoulli resultantes, donde n es la
+        longitud del vector de probabilidades ingresado
+        """
+
+        # Verifica que el vector de probabilidades sea valido
+        if not isinstance( probabilidades, ( list, tuple, np.ndarray) ) :
+            raise ValueError( 'Parametro inicio debe ser una lista, tupla ' +
+                              'o vector numpy' )
+
+        # Verifica que la distribucion sea un vector de tamano n
+        probabilidades = np.array( probabilidades).flatten()
+        if np.any( probabilidades < 0.0 ) \
+        or abs( np.sum(probabilidades) - 1.0 ) > 1e-8 :
+            raise ValueError( 'Parametro inicio debe ser un vector de ' +
+                              'probabilidades' )
+
+        # Crea cada uno de los procesos
+        procesos = []
+        for ( i, _) in enumerate(probabilidades) :
+            nuevo_proceso = ProcesoBernoulli( self.S, probabilidades[i] * self.p)
+            procesos.append( nuevo_proceso )
+
+        # Crea los dos procesos
+        return procesos
 
 class CadenaDeMarkov :
     """
@@ -136,7 +172,7 @@ class CadenaDeMarkov :
         """
         return self.__dict__
 
-    def muestrea_secuencia( self, inicio, num_pasos) :
+    def muestrea( self, inicio, num_pasos) :
         """
         Muestrea aleatoriamente una secuencia de estados de acuerdo a la
         matriz de transicion de la cadena por un numero de pasos deseado
