@@ -16,29 +16,28 @@ class ProcesoBernoulli :
     """
 
     # Miembros:
-    S = []
-    p = 0.5 # parametro
+    p = 0.0 # parametro
 
-    def __init__( self, estados, parametro) :
+    def __init__( self, parametro = None, procesos = None, modo = None) :
         """
         Constructor
 
-        @param estados: Lista conteniendo los dos posibles estados
         @param parametro: Parametro del proceso Bernoulli
+        @param procesos: Lista de procesos Bernoulli, en caso de que se desee
+                         instanciar el proceso como la combinacion de otros
+                         procesos ya existentes
+        @param modo: Modo de combinacion (de ser aplicable)
         """
 
-        # Verifica y copia la lista de los dos estados posibles
-        if not isinstance( estados, list) or len(estados) != 2 :
-            raise ValueError( 'Parametro estados debe ser una lista de ' +
-                              'longitud exactamente igual a dos' )
-        else :
-            self.S = estados
+        if parametro is not None :
+            if 0 < parametro < 1 :
+                self.p = parametro
+            else :
+                raise ValueError( 'Parametro del proceso debe ser un decimal ' +
+                                  'en el intervalo abierto (0,1)' )
 
-        # Verifica y copia el valor del parametro del proceso
-        if not ( 0 < parametro < 1 ) :
-            raise ValueError( 'Parametro del proceso debe estar entre cero y uno' )
-        else :
-            self.p = parametro
+        elif procesos is not None :
+            self.combina_procesos( procesos, modo)
 
         return
 
@@ -46,40 +45,33 @@ class ProcesoBernoulli :
         """
         Muestrea aleatoriamente del proceso por un numero de pasos deseado
 
-        @param num_pasos: Numero de pasos a muestrear.
+        @param num_pasos: Numero de pasos a muestrear
 
-        @return Una lista de longitud num_pasos conteniendo los indices de
-                los estados muestreados.
+        @return Una 2-tupla conteniendo en su primera entrada los indices de
+                los estados muestreados y en su segunda entrada las frecuencias
+                de los estados ocurridos
         """
-
-        # Imprime mensaje de inicio
-        print( 'Muestreando una secuencia de ' + str(num_pasos) + ' pasos' )
 
         # Muestrea num_pasos variables aleatorias Uniforme(0,1)
         U = np.random.random_sample(num_pasos)
         # Genera variables Bernoulli usando las variables uniformes
         X = np.where( U < self.p, 0, 1)
 
-        # Imprime la secuencia de estados
-        for t in range(num_pasos) :
-            print( 'X_' + str(t) + ': ' + str( self.S[X[t]] ) )
-
         # Computa el vector de frecuencias
         frequencia = np.zeros( shape = (2,) )
         frequencia[1] = 1.0 * sum(X) / num_pasos
         frequencia[0] = 1 - frequencia[1]
 
-        # Retorna la secuencia de indices de estados y las frecuencias de visita
         return ( X, frequencia)
 
     def divide_proceso( self, probabilidades) :
         """
         Divide al proceso de acuerdo al vector de probabilidades ingresado
 
-        @param probabilidades: Vector de probabilidades
+        @param probabilidades: Vector de probabilidades de los n procesos
 
         @return Lista de los n procesos Bernoulli resultantes, donde n es la
-        longitud del vector de probabilidades ingresado
+                longitud del vector de probabilidades ingresado
         """
 
         # Verifica que el vector de probabilidades sea valido
@@ -94,14 +86,44 @@ class ProcesoBernoulli :
             raise ValueError( 'Parametro inicio debe ser un vector de ' +
                               'probabilidades' )
 
-        # Crea cada uno de los procesos
+        # Instancia cada nuevo proceso con su parametro correcto
         procesos = []
         for ( i, _) in enumerate(probabilidades) :
-            nuevo_proceso = ProcesoBernoulli( self.S, probabilidades[i] * self.p)
+            nuevo_proceso = ProcesoBernoulli( probabilidades[i] * self.p )
             procesos.append( nuevo_proceso )
 
-        # Crea los dos procesos
         return procesos
+
+    def combina_procesos( self, procesos, modo = 'AND') :
+        """
+        Combina una lista de procesos Bernoulli
+
+        @param procesos: Lista de los n procesos Bernoulli que se desea combinar
+        @param modo: Modo de combinacion. Opciones: 'AND', 'OR'
+        """
+
+        # Verifica que procesos sea una lista o tupla
+        if not isinstance( procesos, ( list, tuple) ) :
+            raise ValueError( 'Parametro procesos debe ser una lista o tupla ' +
+                              'de objetos de esta misma clase' )
+
+        # Extrae los parametros de los procesos en la lista
+        lista_parametros = []
+        for ( i, proceso) in enumerate(procesos) :
+            if not isinstance( proceso, ProcesoBernoulli) :
+                raise ValueError( 'En el parametro procesos, entrada ' + str(i) +
+                                  ': objeto no es de la clase ProcesoBernoulli' )
+            lista_parametros.append( proceso.p )
+
+        # Calcula el parametro del nuevo proceso
+        if modo == 'AND' :
+            self.p = np.prod( lista_parametros )
+        elif modo == 'OR' :
+            self.p = 1.0 - np.prod( 1.0 - lista_parametros )
+        else :
+            raise ValueError( 'Modo invalido, opciones validas son: AND, XOR' )
+
+        return
 
 class CadenaDeMarkov :
     """
@@ -174,8 +196,7 @@ class CadenaDeMarkov :
 
     def muestrea( self, inicio, num_pasos) :
         """
-        Muestrea aleatoriamente una secuencia de estados de acuerdo a la
-        matriz de transicion de la cadena por un numero de pasos deseado
+        Muestrea aleatoriamente una secuencia de estados
 
         @param inicio: Inicio de la secuencia. Puede ser un estado, el indice de
                        un estado, o una distribucion del estado inicial.
@@ -186,10 +207,15 @@ class CadenaDeMarkov :
                        tamano (n,) que sea un vector de probabilidad.
         @param num_pasos: Numero de pasos a muestrear.
 
-        @return Una 2-tupla que contiene en su primera entrada una lista de
-        longitud num_pasos conteniendo los indices de los estados muestreados y
-        en su segunda entrada el vector de frecuencias de visitas a estados.
+        @return Una 3-tupla que contiene en su primera entrada la secuencia de
+                estados muestreada, en su segunda entrada la lista de indices
+                de los mismos estados, y en su tercera entrada el vector de
+                frecuencias de la muestra.
         """
+
+        # Inicializa la historia de estados arbitrariamente para evitar
+        # alocaciones de memoria durante el muestreo
+        X = [ 0 for t in range(num_pasos) ]
 
         # Verifica que se haya provisto un estado o distribucion inicial
         if inicio is None :
@@ -197,17 +223,18 @@ class CadenaDeMarkov :
 
         # Si inicio es el indice del estado inicial solo lo copiamos
         if isinstance( inicio, int) and 0 <= inicio < self.n :
-            indice_estado = inicio
+            X[-1] = inicio
 
-        # Si inicio no es una lista, tupla o vector busca su indice
+        # Si inicio no es una lista, tupla o vector entonces busca el indice
+        # del estado inicio, si existe; caso contrario avisa
         elif not isinstance( inicio, ( list, tuple, np.ndarray) ) :
             try :
-                indice_estado = int( self.S.index(inicio) )
+                X[-1] = int( self.S.index(inicio) )
             except Exception :
                 raise ValueError( 'Estado \'' + str(inicio) + '\' no existe' )
 
         # Si inicio es un vector de probabilidades iniciales entonces
-        # usalo para muestrear el estado inicial
+        # lo utilizamos para muestrear el estado inicial
         else :
             inicio = np.array(inicio)
             tamano_correcto = ( self.n,)
@@ -217,25 +244,18 @@ class CadenaDeMarkov :
             if np.any( inicio < 0.0 ) or abs( np.sum(inicio) - 1.0 ) > 1e-8 :
                 raise ValueError( 'Parametro inicio debe ser un vector de ' +
                                   'probabilidades' )
-            indice_estado = np.random.choice( self.n, p = inicio)
+            X[-1] = np.random.choice( self.n, p = inicio)
 
-        # Imprime mensaje de inicio
-        print( 'Muestreando una secuencia de ' + str(num_pasos) + ' pasos' )
-
-        # Inicializa la historia arbitrariamente para evitar alocaciones de
-        # memoria durante el muestreo
-        X = [ 0 for t in range(num_pasos) ]
-
-        # Para cada iteracion...
+        # Para cada paso...
         for t in range(num_pasos) :
-            # Registra el estado actual y lo imprime
-            X[t] = indice_estado
-            print( 'X_' + str(t) + ': ' + self.S[X[t]] )
-            # Obtiene el vector de probabilidades de transicion asociadas
-            # con el estado actual
-            prob_transicion = self.P[ indice_estado, :]
-            # Muestrea el indice del siguiente estado
-            indice_estado = np.random.choice( self.n, p = prob_transicion)
+            # Extrae la fila de la matriz de transicion asociada con el
+            # estado anterior
+            prob_transicion = self.P[ X[t-1], :]
+            # Muestrea el indice del estado actual
+            X[t] = np.random.choice( self.n, p = prob_transicion)
+
+        # Construye la secuencia de estados a partir de la lista de indices
+        secuencia = [ self.S[ X[t] ] for t in range(num_pasos) ]
 
         # Computa el vector de frecuencias de visitas a estados
         frequencia = np.zeros( shape = ( self.n,) )
@@ -243,20 +263,18 @@ class CadenaDeMarkov :
             visitas = [ 1.0 if X[t] == estado else 0.0 for t in range(num_pasos) ]
             frequencia[estado] = sum(visitas) / num_pasos
 
-        # Retorna la secuencia de indices de estados visitados y el vector
-        # de frecuencias de visitas a estados
-        return ( X, frequencia)
+        return ( secuencia, X, frequencia)
 
     def propaga_distribucion( self, inicio, num_pasos) :
         """
-        Propaga una distribucion del estado inicial por un numero de pasos deseado
+        Propaga la distribucion del estado inicial
 
         @param inicio: Distribucion del estado inicial. Debe ser un arreglo
                        de tamano (n,) que sea un vector de probabilidad.
         @param num_pasos: Numero de pasos a propagar.
 
-        @return Una matriz numpy de tamano num_pasos-por-n donde la entrada (t,i)
-        es la probabilidad en el periodo t de estar en el estado i.
+        @return Una matriz numpy de tamano ( num_pasos, n) cuya entrada (t,i)
+                es la probabilidad en el periodo t de estar en el estado i.
         """
 
         # Verifica que la distribucion sea un arreglo numpy

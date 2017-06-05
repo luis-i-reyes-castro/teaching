@@ -7,10 +7,8 @@ Problema de las Lineas de Produccion
 
 from ModelosEstocasticos import ProcesoBernoulli
 
-# Lista de estados
-S = [ 'Vacio', 'Lleno' ]
 # Crea una nuevo objeto que representa una linea de produccion
-linea = ProcesoBernoulli( estados = S, parametro = 0.8)
+linea = ProcesoBernoulli(0.8)
 # Genera muestras de 1000 pasos
 ( X, freq) = linea.muestrea( num_pasos = 1000)
 
@@ -20,3 +18,5 @@ linea = ProcesoBernoulli( estados = S, parametro = 0.8)
 ( X1, freq1) = linea1.muestrea( num_pasos = 1000)
 ( X2, freq2) = linea2.muestrea( num_pasos = 1000)
 ( X3, freq3) = linea3.muestrea( num_pasos = 1000)
+
+linea4 = ProcesoBernoulli( [ linea1, linea2] )
