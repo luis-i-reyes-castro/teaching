@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.91, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'motor-dc_armadura.eps' (pdf, eps, ps)
+%% Accompanies image file 'simple-wing.eps' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -49,16 +49,12 @@
   \global\let\svgscale\undefined%
   \makeatother%
   \begin{picture}(1,0.5)%
-    \put(0,0){\includegraphics[width=\unitlength]{motor-dc_armadura.eps}}%
-    \put(0.07422284,0.24343295){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$e_a(t)$}}}%
-    \put(0.72860906,0.35442111){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J_a$}}}%
-    \put(0.29654129,0.34315971){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$R_a$}}}%
-    \put(0.29654129,0.23575127){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$L_a$}}}%
-    \put(0.85590075,0.38692747){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$\theta_a(t)$}}}%
-    \put(0.14654134,0.36834302){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$z_a(t)$}}}%
-    \put(0.2316735,0.14982671){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$v_{bf}(t) \, = \, K_b \, \dot{\theta}_a(t)$}}}%
-    \put(0.44615902,0.30100247){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$T_m(t) \,= \, K_t \, z_a(t)$}}}%
-    \put(0.41549316,0.06834324){\color[rgb]{1,0.49803922,0}\makebox(0,0)[lb]{\smash{$e_a(t) \, = \, R_a \, z_a(t) + L_a \, \dot{z}_a(t)+v_{bf}(t)$}}}%
-    \put(0.7008434,0.41100233){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$D_a$}}}%
+    \put(0,0){\includegraphics[width=\unitlength]{simple-wing.eps}}%
+    \put(0.05567889,0.2251997){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$\theta(t)$}}}%
+    \put(0.41988113,0.42368584){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$F_{aero}(t)$}}}%
+    \put(0.85746362,0.36055359){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$\alpha(t)$}}}%
+    \put(0.42200869,0.32353234){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$c_{aero}$}}}%
+    \put(0.30590943,0.15782531){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$F_{aero}(t) \, = \, K_F \, \sin( \, \alpha(t) \, )$}}}%
+    \put(0.30590942,0.10612758){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$T_{aero}(t) \, = \, K_T \, \sin( \, \theta(t) \, )$}}}%
   \end{picture}%
 \endgroup%
