@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.91, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'simple-wing.eps' (pdf, eps, ps)
+%% Accompanies image file 'drone-pusher.eps' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -49,12 +49,16 @@
   \global\let\svgscale\undefined%
   \makeatother%
   \begin{picture}(1,0.5)%
-    \put(0,0){\includegraphics[width=\unitlength]{simple-wing.eps}}%
-    \put(0.04667763,0.15073333){\color[rgb]{1,0.49803922,0}\rotatebox{14.99999999}{\makebox(0,0)[lb]{\smash{$\theta_e(t)$}}}}%
-    \put(0.90031753,0.32625415){\color[rgb]{1,0.49803922,0}\makebox(0,0)[lb]{\smash{$\alpha(t)$}}}%
-    \put(0.50553775,0.2930794){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$c_{aero}$}}}%
-    \put(0.3750465,0.3862163){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$F_{aero}(t) \, = \, K_f \, \sin( \alpha(t) )$}}}%
-    \put(0.14178377,0.28356509){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$T_{aero}(t) \, = \, K_t \, \dot{\alpha}(t)$}}}%
-    \put(0.29852179,0.12658046){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$T_{elev}(t) \, = \, K_e \, \sin( \theta_e(t) )$}}}%
+    \put(0,0){\includegraphics[width=\unitlength]{drone-pusher.eps}}%
+    \put(0.23616335,0.24132189){\color[rgb]{1,0.49803922,0}\rotatebox{14.99999953}{\makebox(0,0)[lb]{\smash{$\theta_e(t)$}}}}%
+    \put(0.82061969,0.30794225){\color[rgb]{1,0.49803922,0}\makebox(0,0)[lb]{\smash{$\alpha(t)$}}}%
+    \put(0.1074084,0.17280429){\color[rgb]{1,0,0}\rotatebox{14.99999999}{\makebox(0,0)[lb]{\smash{$F_p$}}}}%
+    \put(0.22530404,0.1809758){\color[rgb]{1,0,0}\rotatebox{14.99999999}{\makebox(0,0)[lb]{\smash{$c_m$}}}}%
+    \put(0.49845225,0.27207282){\color[rgb]{1,0,0}\rotatebox{14.99999999}{\makebox(0,0)[lb]{\smash{$c_{aero}$}}}}%
+    \put(0.29391819,0.09140911){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$mg$}}}%
+    \put(0.36770728,0.32973537){\color[rgb]{0,0.49803922,0}\rotatebox{14.99999999}{\makebox(0,0)[lb]{\smash{$\ell$}}}}%
+    \put(0.4584953,0.40858338){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$F_{aero}(t) \, = \, K_f \, \sin( \alpha(t) )$}}}%
+    \put(0.60089514,0.17105526){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$T_{aero}(t) \, = \, K_t \, \dot{\alpha}(t)$}}}%
+    \put(0.37028522,0.12397131){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$T_{elev}(t) \, = \, K_e \, \sin( \theta_e(t) )$}}}%
   \end{picture}%
 \endgroup%
