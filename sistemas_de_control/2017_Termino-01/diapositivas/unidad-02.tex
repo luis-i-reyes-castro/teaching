@@ -148,17 +148,19 @@ Z_a(s) \, = \, \frac{ E_a(s) - K_b \, s \, \Theta_1(s) }{R_a}
 \begin{align*}
 & \frac{1}{r} \, \left[ \,
 \left( \frac{N_2 \, ( J_a + J )}{N_1} + 2J + J_2 \, \right) s^2 + 
-\left( \frac{N_2 \, ( D_a + K_b )}{N_1} + D_2 \, \right) s \, \right] X(s) \\
+\left( \frac{N_2 \, ( D_a + K_t K_b / R_a )}{N_1} + D_2 \, \right) s \, \right] X(s) \\
 & = \, \left( \frac{K_t}{R_a} \right) E_a(t)
 \end{align*}
 \item Finally:
 \begin{align*}
 & G(s) \, = \,
-\frac{r \, K_t}{R_a}
-\left[ \,
+\frac{ \frac{r \, K_t}{R_a} }{
 \left( \frac{N_2 \, ( J_a + J )}{N_1} + 2J + J_2 \, \right) s^2 + 
-\left( \frac{N_2 \, ( D_a + K_b )}{N_1} + D_2 \, \right) s \, \right]^{-1} \\
-& \Longrightarrow \, G(s) \, = \, \frac{1}{ 5 s^2 + 3s }
+\left( \frac{N_2 \, ( D_a + K_t K_b / R_a )}{N_1} + D_2 \, \right) s } \\
+& \Longrightarrow \, G(s)
+\, = \, \frac{1}{ 5 s^2 + 4s } 
+\, = \, \frac{1/5}{ s^2 + (4/5)s } 
+\, = \, \frac{1/5}{ s \, ( \, s + (4/5) \, ) }
 \end{align*}
 \end{itemize}
 
