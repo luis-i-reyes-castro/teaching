@@ -233,8 +233,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.8284271"
-     inkscape:cx="173.81389"
-     inkscape:cy="72.463732"
+     inkscape:cx="196.47833"
+     inkscape:cy="73.624702"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -270,7 +270,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -369,7 +369,7 @@
          y="638.68854"
          x="236.65121"
          id="tspan4343"
-         sodipodi:role="line">$J_1$</tspan></text>
+         sodipodi:role="line">$J_a$</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.69354904;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 174.71796,935.98576 A 5.2820283,7.3763003 0 0 1 180,943.36207 l 0,0 a 5.2820283,7.3763003 0 0 1 -5.28204,7.37631"
@@ -582,7 +582,7 @@
          y="538.47321"
          x="162.91809"
          id="tspan6652"
-         sodipodi:role="line">$T_m(t) \, = \, K_T \, z_a(t)$</tspan></text>
+         sodipodi:role="line">$T_m(t) \, = \, K_t \, z_a(t)$</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:21.91324234px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -683,40 +683,40 @@
     <text
        sodipodi:linespacing="125%"
        id="text7627"
-       y="699.27435"
-       x="223.02628"
+       y="687.11316"
+       x="215.80869"
        style="font-style:normal;font-weight:normal;font-size:27.7101078px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"
        transform="scale(0.69275268,1.4435166)"><tspan
          style="font-size:8.65940857px"
-         y="699.27435"
-         x="223.02628"
+         y="687.11316"
+         x="215.80869"
          id="tspan7629"
-         sodipodi:role="line">$J_2 \, = \, r^2 m$</tspan></text>
+         sodipodi:role="line">$J_2 \, = \, m \, r^2$</tspan></text>
     <text
        transform="scale(0.69275268,1.4435166)"
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:27.7101078px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="223.02628"
-       y="709.66559"
+       x="215.80869"
+       y="697.50439"
        id="text7650"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan7652"
-         x="223.02628"
-         y="709.66559"
-         style="font-size:8.65940857px">$D_2 \, = \, r^2 \, f_v$</tspan></text>
+         x="215.80869"
+         y="697.50439"
+         style="font-size:8.65940857px">$D_2 \, = \, f_v \, r^2$</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text7654"
-       y="547.28497"
-       x="386.80121"
+       y="606.65247"
+       x="252.04741"
        style="font-style:normal;font-weight:normal;font-size:23.74700928px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"
        transform="scale(0.59367521,1.6844227)"><tspan
          style="font-size:7.42093992px;fill:#0000ff;fill-opacity:1"
-         y="547.28497"
-         x="386.80121"
+         y="606.65247"
+         x="252.04741"
          id="tspan7656"
          sodipodi:role="line">$x(t) = r \, \theta_2(t)$</tspan></text>
     <rect
@@ -743,14 +743,14 @@
     <text
        sodipodi:linespacing="125%"
        id="text7627-6"
-       y="704.1236"
-       x="71.457024"
-       style="font-style:normal;font-weight:normal;font-size:27.7101078px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       y="547.39075"
+       x="92.282921"
+       style="font-style:normal;font-weight:normal;font-size:21.54203606px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#0000ff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"
-       transform="scale(0.69275268,1.4435166)"><tspan
-         style="font-size:8.65940857px;fill:#0000ff;fill-opacity:1"
-         y="704.1236"
-         x="71.457024"
+       transform="scale(0.5385509,1.8568347)"><tspan
+         style="font-size:6.73188639px;fill:#0000ff;fill-opacity:1"
+         y="547.39075"
+         x="92.282921"
          id="tspan7629-7"
          sodipodi:role="line">$v_{bf}(t) \, = \, K_b \, \dot{\theta}_1(t)$</tspan></text>
     <rect

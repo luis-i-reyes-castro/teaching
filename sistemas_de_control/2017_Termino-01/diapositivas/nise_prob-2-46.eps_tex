@@ -51,10 +51,10 @@
   \begin{picture}(1,0.5)%
     \put(0,0){\includegraphics[width=\unitlength]{nise_prob-2-46.eps}}%
     \put(0.05654134,0.22575147){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$e_a(t)$}}}%
-    \put(0.53291074,0.35649308){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J_1$}}}%
+    \put(0.53291074,0.35649308){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J_a$}}}%
     \put(0.22987467,0.29315992){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$R_a$}}}%
     \put(0.22987467,0.20575147){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$L_a$}}}%
-    \put(0.31549928,0.41834311){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$T_m(t) \, = \, K_T \, z_a(t)$}}}%
+    \put(0.31549928,0.41834311){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$T_m(t) \, = \, K_t \, z_a(t)$}}}%
     \put(0.42896198,0.29649321){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$\theta_1(t)$}}}%
     \put(0.66482756,0.41125691){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$D_a$}}}%
     \put(0.83437879,0.10834299){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$D_2$}}}%
@@ -62,11 +62,11 @@
     \put(0.71143522,0.35649324){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J,N_1$}}}%
     \put(0.58194605,0.30575117){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J,N_2$}}}%
     \put(0.11320801,0.40982658){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$z_a(t)$}}}%
-    \put(0.51500683,0.14316008){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J_2 \, = \, r^2 m$}}}%
-    \put(0.51500683,0.09316034){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$D_2 \, = \, r^2 \, f_v$}}}%
-    \put(0.76544763,0.43500976){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$x(t) = r \, \theta_2(t)$}}}%
-    \put(0.16500682,0.11982687){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$v_{bf}(t) \, = \, K_b \, \dot{\theta}_1(t)$}}}%
-    \put(0.73246103,0.24982657){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J$}}}%
+    \put(0.49834015,0.20167635){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J_2 \, = \, m \, r^2$}}}%
+    \put(0.49834015,0.15167662){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$D_2 \, = \, f_v \, r^2$}}}%
+    \put(0.49878099,0.10167659){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$x(t) = r \, \theta_2(t)$}}}%
+    \put(0.1656635,0.11982675){\color[rgb]{0,0,1}\makebox(0,0)[lb]{\smash{$v_{bf}(t) \, = \, K_b \, \dot{\theta}_1(t)$}}}%
+    \put(0.73246103,0.24982656){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J$}}}%
     \put(0.7889614,0.21220807){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$J_2$}}}%
   \end{picture}%
 \endgroup%

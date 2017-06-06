@@ -11,23 +11,31 @@
 \input{../../../beamer_section-slides}
 
 % =================================================================
-\title[Sistemas de Control]{Sistemas de Control (EYAG-1005) }
-\author[L. I. Reyes Castro]{Luis I. Reyes Castro}
+\title[Control Systems]{Control Systems Engineering (EYAG-1005) }
+\author[L. I. Reyes-Castro]{Luis I. Reyes-Castro}
 \institute[ESPOL]{\normalsize Escuela Superior Polit\'ecnica del Litoral (ESPOL) \\ Guayaquil - Ecuador}
-\date[2017-T1]{2017 - Primer T\'ermino}
+\date[2017-T1]{2017 - First Term}
 
 % -----------------------------------------------------------------
 \begin{document}
 \input{../../../beamer_table-contents}
 
 % =================================================================
-\section{Sistemas Electromec\'anicos}
+\section{Mechanical Systems}
+
+% =================================================================
+\section{Electric Circuits}
+
+% =================================================================
+\section{Armature-controlled DC Motors}
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-Modelo del motor DC controlado por armadura: 
+The model for the armature-controlled DC motor involves both an electric circuit an a rotational mechanical system. \textbf{If no load is attached to the armature} \linebreak then the models are as shown below: 
+\halfskip
+
 \begin{figure}[htb]
 \centering
 \def\svgwidth{0.9\columnwidth}
@@ -43,13 +51,13 @@ Modelo del motor DC controlado por armadura:
 \begin{columns}
 
 \begin{column}{0.45\textwidth}
-\textbf{Ejemplo \\ (Nise, Problema 2.46*):}
+\textbf{Example \\ (Nise, Problem 2.46*):}
 \halfskip
 
-Considere el siguiente mecanismo donde un motor DC controlado por armadura actua sobre un bloque de masa a trav\'es de un sistema de engranajes, donde la entrada es el voltage de entrada del motor $e_a(t)$ y la salida es la posici\'on del bloque de masa $x(t)$. 
+Consider the mechanism on the right, where an armature-controlled DC motor drives a block of mass by means of a system of gears. The input is the supplied voltage $e_a(t)$ and the output is the displacement of the block of mass $x(t)$. 
 \halfskip
 
-Encuentre su funci\'on de transferencia, \iec
+Find the transfer function:
 \[
 G(s) \, = \, \frac{X(s)}{E_a(s)}
 \]
@@ -63,8 +71,8 @@ G(s) \, = \, \frac{X(s)}{E_a(s)}
 \end{figure}
 \fullskip
 {
-\scriptsize
-\textbf{Observaci\'on:} Cada uno de los tres engranajes tiene momento de inercia $J = 1$ kg-m\tsup{2}, mientras que la cremallera es ideal. 
+\small
+\textbf{Note:} Each of the three gears shown has moment of inertia $J = 1$ kg-m\tsup{2}. 
 }
 
 \end{column}
@@ -72,7 +80,7 @@ G(s) \, = \, \frac{X(s)}{E_a(s)}
 \end{columns}
 \framebreak
 
-Modelo del motor y del sistema mec\'anico rotacional: 
+Electric circuit and equivalent rotational mechanical system: 
 \begin{figure}[htb]
 \centering
 \def\svgwidth{0.9\columnwidth}
@@ -85,90 +93,85 @@ Modelo del motor y del sistema mec\'anico rotacional:
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-Modelos: 
+Models: 
 \begin{itemize}
-\item Motor DC: 
+\item Electric circuit:
+\[
+e_a(t) \, = \, R_a \, z_a(t) + K_b \, \dot{\theta}_1(t)
+\]
+\item Rotational mechanical system:
 \begin{align*}
-T_m(t) \, & = \, K_t \, i_a(t) \\[1ex]
-v_a(t) \, & = \, K_b \, \dot{\theta}_1(t) \\[1ex]
-e_a(t) \, & = \, R_a \, i_a(t) + v_a(t)
-\end{align*}
-\item Sistema mec\'anico rotacional: 
-\begin{align*}
-& J_1 \, \ddot{\theta}_1(t) + J_2 \, \ddot{\theta}_2(t) 
-\, = \, T_m(t) - D_a \, \dot{\theta}_1(t) - D_2 \, \dot{\theta}_2(t) \\[1ex]
+& ( J_a + J ) \, \ddot{\theta}_1(t) + ( 2J + J_2 ) \, \ddot{\theta}_2(t) 
+\, = \, K_t \, z_a(t) - D_a \, \dot{\theta}_1(t) - D_2 \, \dot{\theta}_2(t) \\[1ex]
 & N_1 \, \theta_1(t) \, = \, N_2 \, \theta_2(t) \\[1ex]
 & x(t) \, = \, r \, \theta_2(t)
 \end{align*}
 \end{itemize}
 \framebreak
 
-Tomando la transformaci\'on de Laplace: 
+Taking the Laplace Transform of both equations on both sides: 
 \begin{itemize}
-\item Motor DC: 
+\item Electric circuit:
 \[
-E_a(s) \, = \, R_a \, I_a(s) + K_b \, s \, \Theta_1(s)
+E_a(s) \, = \, R_a \, Z_a(s) + K_b \, s \, \Theta_1(s)
 \]
-\item Sistema mec\'anico rotacional: 
+\item Rotational mechanical system:
 \begin{align*}
-& ( \, J_1 s^2 + D_a s \, ) \, \Theta_1(s) + 
-( \, J_2 s^2 + D_2 s \, ) \, \Theta_2(s) 
-\, = \, K_t \, I_a(s) \\[1ex]
+& ( \, ( J_a + J ) \, s^2 + D_a \, s \, ) \, \Theta_1(s) + 
+( \, ( 2J + J_2 ) \, s^2 + D_2 \, s \, ) \, \Theta_2(s) 
+\, = \, K_t \, Z_a(s) \\[1ex]
 & \Theta_1(s) \, = \, ( N_2/N_1 ) \, \Theta_2(s) \\[1ex]
 & \Theta_2(s) \, = \, (1/r) \, X(s)
 \end{align*}
 \end{itemize}
 \framebreak
 
-Reemplazando valores para evitar cargar con muchas constantes: 
+Solving...
 \begin{itemize}
-\item Motor DC: 
+\item Armature current:
 \[
-E_a(s) \, = \, I_a(s) + s \, \Theta_1(s)
+Z_a(s) \, = \, \frac{ E_a(s) - K_b \, s \, \Theta_1(s) }{R_a}
 \]
-\item Sistema mec\'anico rotacional: 
+\item Angles in terms of displacements:
+\[
+\Theta_1(s) \, = \, \left( \frac{N_2}{N_1 \, r} \right) X(s) \qquad \qquad
+\Theta_2(s) \, = \, \left( \frac{1}{r} \right) X(s)
+\]
+\item Sum of torques equation: 
 \begin{align*}
-& ( \, 2 s^2 + s \, ) \, \Theta_1(s) + 
-( \, 6 s^2 + 2 s \, ) \, \Theta_2(s) 
-\, = \, I_a(s) \\[1ex]
-& \Theta_1(s) \, = \, 2 \, \Theta_2(s) \, = \, X(s) \\[1ex]
-& \Theta_2(s) \, = \, (1/2) \, X(s)
+& ( \, ( J_a + J ) \, s^2 + D_a \, s \, )\left( \frac{N_2}{N_1 \, r} \right) X(s) + 
+( \, ( 2J + J_2 ) \, s^2 + D_2 \, s \, ) \left( \frac{1}{r} \right) X(s) \\
+& = \, \left( \frac{K_t}{R_a} \right) \, \left[ \, E_a(s) - K_b \left( \frac{N_2}{N_1 \, r} \right) s \, X(s) \, \right]
 \end{align*}
-\end{itemize}
 \framebreak
-
-Despejando: 
-\begin{itemize}
-\item De la ecuaci\'on del motor DC: 
-\[
-I_a(s) \, = \, E_a(s) - s \, \Theta_1(s)
-\]
-\item De las ecuaciones del sistema mec\'anico rotacional: 
+\item Sum of torques equation (continued):
 \begin{align*}
-& ( \, 2 s^2 + s \, ) \, \Theta_1(s) + 
-( \, 6 s^2 + 2 s \, ) \, \Theta_2(s) \, = \,
-E_a(s) - s \, \Theta_1(s) \\[1ex]
-\Longrightarrow \quad
-& ( \, 2 s^2 + 2 s \, ) \, \Theta_1(s) + 
-( \, 6 s^2 + 2 s \, ) \, \Theta_2(s) = \, E_a(s) \\[1ex]
-\Longrightarrow \quad
-& ( \, 2 s^2 + 2 s \, ) \, X(s) + 
-( \, 3 s^2 + s \, ) \, X(s) = \, E_a(s) \\[1ex]
-\Longrightarrow \quad
-& G(s) \, = \, \frac{1}{ 5 s^2 + 3s }
+& \frac{1}{r} \, \left[ \,
+\left( \frac{N_2 \, ( J_a + J )}{N_1} + 2J + J_2 \, \right) s^2 + 
+\left( \frac{N_2 \, ( D_a + K_b )}{N_1} + D_2 \, \right) s \, \right] X(s) \\
+& = \, \left( \frac{K_t}{R_a} \right) E_a(t)
+\end{align*}
+\item Finally:
+\begin{align*}
+& G(s) \, = \,
+\frac{r \, K_t}{R_a}
+\left[ \,
+\left( \frac{N_2 \, ( J_a + J )}{N_1} + 2J + J_2 \, \right) s^2 + 
+\left( \frac{N_2 \, ( D_a + K_b )}{N_1} + D_2 \, \right) s \, \right]^{-1} \\
+& \Longrightarrow \, G(s) \, = \, \frac{1}{ 5 s^2 + 3s }
 \end{align*}
 \end{itemize}
 
 \end{frame}
 
 % =================================================================
-\section{Veh\'iculos Aeroespaciales}
+\section{Aerospace Vehicles}
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-Modelos de un ala sencilla con elevador:
+Model of a simple 2D wing with elevator:
 \begin{figure}[htb]
 \centering
 \def\svgwidth{0.9\columnwidth}
@@ -181,7 +184,7 @@ Modelos de un ala sencilla con elevador:
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-Aeronave en configuraci\'on Puller (Jalador): 
+Model of a \textbf{puller-configuration} fixed-wing aircraft: 
 \begin{figure}[htb]
 \centering
 \def\svgwidth{\columnwidth}
@@ -194,7 +197,7 @@ Aeronave en configuraci\'on Puller (Jalador):
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-Aeronave en configuraci\'on Pusher (Empujador): 
+Model of a \textbf{pusher-configuration} fixed-wing aircraft: 
 \begin{figure}[htb]
 \centering
 \def\svgwidth{\columnwidth}
