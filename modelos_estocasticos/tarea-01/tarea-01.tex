@@ -1,0 +1,65 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{01}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Tarea \numero \\[1ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+%\input{../../article_compromiso-honor}
+
+% =============================================
+\begin{problem}
+Suponga que usted ha sido encargado con del manejo del inventario de algunos productos no-perecederos en un supermercado que abre todos los d\'ias a sus clientes por la misma cantidad de tiempo. Para mantener una consistencia en el manejo de inventario a trav\'es de los varios productos que se venden en el supermercado, el gerente ha dispuesto que todos los inventarios se controlen mediante pol\'iticas de punto de reposici\'on. 
+
+M\'as precisamente, al final de cada d\'ia se cuenta el inventario del producto y se hace un pedido por $Q_{rep}$ unidades al proveedor si el inventario es menor o igual a $I_{rep}$ unidades, \linebreak el cual es entregado por el proveedor al comienzo del siguiente d\'ia antes de la hora de apertura de la tienda; caso contrario, no se hace un pedido. F\'ijese que bajo estas suposiciones el m\'aximo inventario posible es $I_{rep} + Q_{rep}$. 
+
+Adicionalmente,como es de costumbre en este campo de estudio, usted hace la suposici\'on simplificatoria que las demandas del producto $D_1, \, D_2, \, \dots$ constituyen una secuencia de variables aleatorias i.i.d. con distribuci\'on Poisson con par\'ametro $\lambda$. 
+
+Ahora, asuma que usted desea modelar las pol\'iticas de manejo inventario 
+
+
+ usando Cadenas de Markov. En particular, usted quiere ser capaz de construir la matriz de transici\'on para cualquier producto con demanda $\lambda$, n\'umero unidades por reposici\'on $Q_{rep}$ y punto de reposici\'on $I_{rep}$. 
+
+
+\fullskip
+\begin{center}
+\begin{minipage}{0.8\textwidth}
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=0,
+               frame=lines,
+               framesep=2mm]{Python}
+# Entradas:
+lambda_demanda = 6.9 # Parametro de la demanda
+I_reposicion = 5 # Inventario de reposicion
+Q_reposicion = 5 # Cantidad por reposicion
+
+# Salida: Matriz de probabilidad de la Cadena de Markov
+# como un arreglo numpy de tamano (n,n),
+# donde n = I_reposicion + Q_reposicion + 1
+P = su_funcion( lambda_demanda, I_reposicion, Q_reposicion)
+\end{minted}
+\end{minipage}
+\end{center}
+
+
+
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
