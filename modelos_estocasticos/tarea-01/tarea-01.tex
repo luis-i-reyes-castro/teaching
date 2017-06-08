@@ -40,11 +40,11 @@ Q_{rep}, & \text{si } 0 \leq I_t \leq I_{rep} \, ; \\
 \end{cases}
 \]
 
-Con todo esto en mente, para cada problema de manejo de inventario con demanda $\lambda$ y pol\'itica de punto de reposici\'on $(I_{rep},Q_{rep})$ podemos construir una Cadena de Markov en $n = I_{max} + 1$ estados. M\'as precisamente, los estados ser\'ian: Cero unidades en inventario, una unidad en inventario, y asi sucesivamente, hasta $I_{max}$ unidades en inventario. 
+Con todo esto en mente, para cada problema de manejo de inventario con demanda $\lambda$ y pol\'itica de punto de reposici\'on $(I_{rep},Q_{rep})$ podemos construir una Cadena de Markov en $n = I_{max} + 1$ estados. M\'as precisamente, los estados ser\'ian: Cero unidades en inventario, una unidad en inventario, dos unidades en inventario, y asi sucesivamente, hasta $I_{max}$ unidades en inventario. 
 
 \textbf{Primera Actividad: (X Puntos)}
 
-Escriba una funci\'on en Python que tome como entrada (1) el par\'ametro $\lambda$ de la distribuci\'on Poisson de la demanda, (2) el inventario de reposici\'on $I_{rep}$ y (3) la cantidad por reposici\'on $Q_{rep}$, y que produzca como \'unica salida un arreglo {\tt numpy} de taman\~no $(n,n)$. Por ejemplo, yo usar\'ia su funci\'on de la siguiente manera:
+Escriba una funci\'on en {\tt Python} que tome como entrada (1) el par\'ametro $\lambda$ de la distribuci\'on Poisson de la demanda, (2) el inventario de reposici\'on $I_{rep}$ y (3) la cantidad por reposici\'on $Q_{rep}$, y que produzca como \'unica salida la matriz de transici\'on de la cadena de Markov correspondiente como un arreglo {\tt numpy} de taman\~no $(n,n)$. Por ejemplo, yo usar\'ia su funci\'on de la siguiente manera:
 \halfskip
 
 \begin{center}
@@ -57,10 +57,10 @@ Escriba una funci\'on en Python que tome como entrada (1) el par\'ametro $\lambd
                framesep=2mm]{Python}
 # Entradas:
 lambda_demanda = 6.9 # Parametro de la demanda
-I_reposicion = 5 # Inventario de reposicion
-Q_reposicion = 5 # Cantidad por reposicion
+I_rep = 5 # Inventario de reposicion
+Q_rep = 5 # Cantidad por reposicion
 # Salida: Matriz de probabilidad de la Cadena de Markov
-matriz_P = su_funcion( lambda_demanda, I_reposicion, Q_reposicion)
+matriz_P = su_funcion( lambda_demanda, I_rep, Q_rep)
 \end{minted}
 \end{minipage}
 \end{center}
