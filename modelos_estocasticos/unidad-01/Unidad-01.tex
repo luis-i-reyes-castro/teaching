@@ -593,7 +593,7 @@ Propagaci\'on de la Distribuci\'on Inicial:
 \framebreak
 
 \begin{itemize}
-\item Finalmente, si la distribuci\'on en estado estable (estacionaria) existe entonces dicha distribuci\'on es invariante: 
+\item Finalmente, si la distribuci\'on en estado estable (estacionaria) existe \linebreak entonces dicha distribuci\'on es invariante: 
 \[
 \vec{(\pi^*)'} \, = \, \vec{(\pi^*)'} \, \vec{P}
 \]
@@ -627,11 +627,63 @@ C\'alculo de la Distribuci\'on en Estado Estable:
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-Clases de estados:
+Algunas definiciones:
 \begin{itemize}
-\item Transitorios
-\item Recurrentes
+\item Un \textbf{camino} desde el estado $i$ hasta el estado $j$ es una secuencia finita de estados que empieza en el estado $i$ y termina en el estado $j$ donde cada transici\'on entre estados a lo largo del camino tiene probabilidad positiva. 
+\item El estado $i$ puede \textbf{alcanzar} al estado $j$ si existe al menos un camino \linebreak desde $i$ hasta $j$. 
+\item Un par de estados $i,j$ se \textbf{comunican} si el estado $i$ puede alcanzar al \linebreak estado $j$ y vice-versa. 
+\item Un estado $i$ es \textbf{transitorio} si puede alcanzar otro estado $j$ tal que tal que \linebreak el estado $i$ no puede ser alcanzado desde el estado $j$. 
+\item Un estado $i$ es \textbf{recurrente} si no es transitorio. 
+\begin{itemize}
+\item Toda cadena de Markov tiene al menos un estado recurrente. 
 \end{itemize}
+\framebreak
+\item Un estado $i$ es \textbf{absorbente} si es recurrente y adem\'as no puede ser abandonado una vez que ocurre. 
+\item Un subconjunto de estados es una \textbf{clase recurrente} si:
+\begin{itemize}
+\item Todos sus estados son recurrentes. 
+\item Todo par de estados en la clase se comunican. 
+\end{itemize}
+\item Un estado $i$ tiene \textbf{per\'iodo $k$} si todo camino de retorno al estado tiene una longitud igual al alg\'un m\'ultiplo de $k$. M\'as formalmente:
+\[
+k \, = \, \text{MCD} \{ \, n \geq 1 \colon \Pr( \, X_n = i \mid X_0 = i \, ) > 0 \, \}
+\]
+Adem\'as, si $k = 1$ entonces decimos que el estado es \textbf{aperi\'odico}. 
+\item Una cadena es \textbf{aperi\'odica} si tiene al menos un estado aperi\'odico. 
+\framebreak
+\item Decimos que una cadena es \textbf{irreducible} o es una \textbf{uni-cadena} si: 
+\begin{itemize}
+\item Es aperi\'odica. 
+\item Todos sus estados pertenecen a una \'unica clase recurrente. 
+\end{itemize}
+\end{itemize}
+\fullskip
+
+Algunos resultados generales:
+\begin{itemize}
+\item Si una cadena es aperi\'odica entonces tiene al menos una distribuci\'on en estado estable; caso contrario, la cadena no puede tener ninguna \linebreak distribuci\'on en estado estable. 
+\item Para el caso de cadenas aperi\'odicas, sin importar si existe una o m\'as distribuciones en estado estable, todas las distribuciones en estado estable \linebreak le asignan cero probabilidad a los estados transitorios. 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Algunos resultados para cadenas con \textbf{una sola clase recurrente:}
+\begin{itemize}
+\item La distribuci\'on en estado estable existe, es \'unica, y no depende de la distribuci\'on del estado inicial. 
+\item Todo estado recurrente tiene probabilidad en estado estable positiva. 
+\end{itemize}
+\fullskip
+
+Algunos resultados para cadenas con \textbf{m\'as de una clase recurrente:}
+\begin{itemize}
+\item La distribuci\'on en estado estable existe pero no es \'unica y depende de la distribuci\'on del estado inicial. 
+\item Todo estado recurrente que puede ser alcanzado desde el estado inicial \linebreak tiene probabilidad en estado estable positiva, la cual puede ser computada por propagaci\'on de distribuciones. 
+\end{itemize}
+
 
 \end{frame}
 
