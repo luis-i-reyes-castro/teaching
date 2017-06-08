@@ -11,6 +11,8 @@
 \begin{document}
 \allowdisplaybreaks
 
+\input{../../macros-espanol}
+
 \begin{center}
 \Large Modelos Estoc\'asticos (INDG-1008): Tarea \numero \\[1ex]
 \small \textbf{Semestre:} 2017-2018 T\'ermino I \qquad
@@ -24,17 +26,27 @@
 \begin{problem}
 Suponga que usted ha sido encargado con del manejo del inventario de algunos productos no-perecederos en un supermercado que abre todos los d\'ias a sus clientes por la misma cantidad de tiempo. Para mantener una consistencia en el manejo de inventario a trav\'es de los varios productos que se venden en el supermercado, el gerente ha dispuesto que todos los inventarios se controlen mediante pol\'iticas de punto de reposici\'on. 
 
-M\'as precisamente, al final de cada d\'ia se cuenta el inventario del producto y se hace un pedido por $Q_{rep}$ unidades al proveedor si el inventario es menor o igual a $I_{rep}$ unidades, \linebreak el cual es entregado por el proveedor al comienzo del siguiente d\'ia antes de la hora de apertura de la tienda; caso contrario, no se hace un pedido. F\'ijese que bajo estas suposiciones el m\'aximo inventario posible es $I_{rep} + Q_{rep}$. 
+M\'as precisamente, al final de cada d\'ia se cuenta el inventario del producto y si este es menor o igual a $I_{rep}$ unidades se hace un pedido de reposici\'on por $Q_{rep}$ unidades al proveedor, el cual es entregado por el mismo al comienzo del siguiente d\'ia antes de la hora de apertura de la tienda; caso contrario, no se hace un pedido de reposici\'on. F\'ijese que bajo estas suposiciones el m\'aximo inventario posible es:
+\[
+I_{max} \, = \, I_{rep} + Q_{rep}
+\]
+Adicionalmente,como es de costumbre en este campo de estudio, usted hace la suposici\'on simplificatoria que las demandas del producto $D_1, \, D_2, \, \dots$ constituyen una secuencia de variables aleatorias i.i.d. con distribuci\'on Poisson con par\'ametro $\lambda$. M\'as a\'un, si para cada d\'ia $t$ denotamos a $I_t$ como el inventario a la hora de apertura de la tienda del \tavo d\'ia, a $D_t$ como la demanda del d\'ia, \ie la cantidad que se vender\'ia ese d\'ia si el inventario fuere inagotable, a $R_t$ como la cantidad repuesta entre la noche del \tavo d\'ia y la hora de apertura del \tMavo d\'ia, tenemos que:
+\[
+I_{t+1} \, = \, \max \{ \, 0, \, I_t - D_t \, \} + R_t \, ; \qquad
+R_t \, = \, 
+\begin{cases}
+Q_{rep}, & \text{si } 0 \leq I_t \leq I_{rep} \, ; \\
+0, & \text{caso contrario;}
+\end{cases}
+\]
 
-Adicionalmente,como es de costumbre en este campo de estudio, usted hace la suposici\'on simplificatoria que las demandas del producto $D_1, \, D_2, \, \dots$ constituyen una secuencia de variables aleatorias i.i.d. con distribuci\'on Poisson con par\'ametro $\lambda$. 
+Con todo esto en mente, para cada problema de manejo de inventario con demanda $\lambda$ y pol\'itica de punto de reposici\'on $(I_{rep},Q_{rep})$ podemos construir una Cadena de Markov en $n = I_{max} + 1$ estados. M\'as precisamente, los estados ser\'ian: Cero unidades en inventario, una unidad en inventario, y asi sucesivamente, hasta $I_{max}$ unidades en inventario. 
 
-Ahora, asuma que usted desea modelar las pol\'iticas de manejo inventario 
+\textbf{Primera Actividad: (X Puntos)}
 
+Escriba una funci\'on en Python que tome como entrada (1) el par\'ametro $\lambda$ de la distribuci\'on Poisson de la demanda, (2) el inventario de reposici\'on $I_{rep}$ y (3) la cantidad por reposici\'on $Q_{rep}$, y que produzca como \'unica salida un arreglo {\tt numpy} de taman\~no $(n,n)$. Por ejemplo, yo usar\'ia su funci\'on de la siguiente manera:
+\halfskip
 
- usando Cadenas de Markov. En particular, usted quiere ser capaz de construir la matriz de transici\'on para cualquier producto con demanda $\lambda$, n\'umero unidades por reposici\'on $Q_{rep}$ y punto de reposici\'on $I_{rep}$. 
-
-
-\fullskip
 \begin{center}
 \begin{minipage}{0.8\textwidth}
 \begin{minted}[mathescape,
@@ -47,17 +59,14 @@ Ahora, asuma que usted desea modelar las pol\'iticas de manejo inventario
 lambda_demanda = 6.9 # Parametro de la demanda
 I_reposicion = 5 # Inventario de reposicion
 Q_reposicion = 5 # Cantidad por reposicion
-
 # Salida: Matriz de probabilidad de la Cadena de Markov
-# como un arreglo numpy de tamano (n,n),
-# donde n = I_reposicion + Q_reposicion + 1
-P = su_funcion( lambda_demanda, I_reposicion, Q_reposicion)
+matriz_P = su_funcion( lambda_demanda, I_reposicion, Q_reposicion)
 \end{minted}
 \end{minipage}
 \end{center}
+\halfskip
 
-
-
+\emph{Sugerencia:} Para hacerse la vida m\'as f\'acil a la hora de calcular probabilidades le recomiendo que utilice la funcion {\tt poisson.pmf()} de la librer\'ia {\tt scipy.stats}. \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html}{Click aqu\'i} para la documentaci\'on. Por ejemplo, para calcular l
 
 \end{problem}
 \vspace{\baselineskip}
