@@ -17,7 +17,7 @@
 \begin{center}
 \Large Sistemas de Control (EYAG-1005): Tarea \numero \\[1ex]
 \small \textbf{Semestre:} 2017-2018 T\'ermino I \qquad
-\textbf{Instructor:} Luis I. Reyes Castro
+\textbf{Instructores:} Reyes, Leon, Agila, Salazar
 \end{center}
 \halfskip
 
@@ -26,7 +26,29 @@
 
 % -----------------------------------------------------------------
 \begin{problem}
-En el siguiente sistema mec\'anico la entrada es el torque $T(t)$ y la salida es el desplazamiento del bloque de masa $x(t)$. Encuentre la funci\'on de transferencia, \iec
+Un giroscopio es un instrumento para medir velocidades angulares en veh\'iculos aeroespaciales como aviones, cohetes y sat\'elites. Considere el siguiente modelo de un giroscopio de un solo grado de libertad que mide velocidades angulares en el eje-$z$ y produce deflecciones angulares en el eje-$x$, cuya ecuaci\'on diferencial es: \[
+J_x \, \ddot{\theta}_x(t) + D_x \, \dot{\theta}_x(t) + K_x \, \theta_x(t)
+\,  = \, J \, \omega \, \dot{\theta}_z(t)
+\]
+\fullcut
+\fullcut
+\begin{figure}[htb]
+\centering
+\includegraphics[ width = 0.6\textwidth]{figures/Nise_Prob-3-17.jpg}
+\end{figure}
+
+Suponiendo adem\'as que el eje-$x$ est\'a conectado a un potenci\'ometro que indica $C$ voltios por cada grado de deflecci\'on, y denotando al voltage de salida del potenci\'ometro como $v_{pot}(t)$, encuentre la funci\'on de transferencia del giroscopio, \iec
+\[
+G(s) \, = \, 
+\frac{V_{pot}(s)}{\Theta_z(s)}
+\]
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+En el sistema mec\'anico mostrado en la primera figura de la siguiente p\'agina la entrada es el torque $T(t)$ y la salida es el desplazamiento del bloque de masa $x(t)$. \linebreak Encuentre su funci\'on de transferencia, \iec
 \[
 G(s) \, = \, 
 \frac{X(s)}{T(s)}
@@ -41,44 +63,50 @@ G(s) \, = \,
 
 % -----------------------------------------------------------------
 \begin{problem}
-Considere el siguiente sistema mec\'anico rotacional donde un motor de corriente directa (DC) controlado por armadura sirve de actuador. La entrada es el voltage de la armadura $e_a(t)$ y la salida es el desplazamiento angular $\theta_2(t)$. Encuentre la funci\'on de transferencia, \iec
+Considere el sistema mec\'anico rotacional mostrado en la segunda figura de la siguiente p\'agina, donde un motor DC controlado por armadura actua sobre un eje. \linebreak La entrada es el voltage de la armadura $e_a(t)$ y la salida es el desplazamiento angular $\theta_2(t)$. Encuentre su funci\'on de transferencia, \iec
 \[
 G(s) \, = \, 
 \frac{\Theta_2(s)}{E_a(s)}
 \]
-\begin{figure}[H]
+\emph{Sugerencia:} Para calcular los par\'ametros del motor a partir de la curva torque-RPM refi\'erase a la Secci\'on 2.8 del texto de Nise, ``Electromechanical System Transfer Functions''.
+
+\begin{figure}[ht]
 \centering
 \includegraphics[width=0.66\textwidth]{figures/Nise_Prob-2-43.jpg}
 \end{figure}
 
+
+
 \end{problem}
 \vspace{\baselineskip}
 
 % -----------------------------------------------------------------
 \begin{problem}
-Un giroscopio es un instrumento para medir velocidades angulares. Considere el siguiente modelo de un giroscopio de un solo grado de libertad que mide velocidades angulares en el eje-$z$ y produce deflecciones angulares en el eje-$x$, cuya ecuaci\'on diferencial es: \[
-J_x \, \ddot{\theta}_x(t) + D_x \, \dot{\theta}_x(t) + K_x \, \theta_x(t)
-\,  = \, J \, \omega \, \dot{\theta}_z(t)
-\]
-\fullcut
-\fullcut
+Dado el siguiente sistema encuentre su funci\'on de transferencia en circuito cerrado como funci\'on de las funciones de transferencia de sus subsistemas. 
+
 \begin{figure}[htb]
 \centering
-\includegraphics[ width = 0.6\textwidth]{figures/Nise_Prob-3-17.jpg}
+\includegraphics[width=0.88\textwidth]{figures/bloques2.JPG}
 \end{figure}
-
-Suponiendo adem\'as que el eje-$x$ est\'a conectado a un potenci\'ometro que indica $c$ voltios por cada grado de deflecci\'on, y denotando al voltage de salida del potenci\'ometro como $v_{pot}(t)$, encuentre la funci\'on de transferencia del giroscopio, \iec
-\[
-G(s) \, = \, 
-\frac{V_{pot}(s)}{\Theta_z(s)}
-\]
 
 \end{problem}
 \vspace{\baselineskip}
 
 % -----------------------------------------------------------------
 \begin{problem}
-Para el siguiente sistema de control, encuentre su funci\'on de transferencia en circuito cerrado como funci\'on de $K$. 
+Para el sistema en la primera figura de la siguiente p\'agina encuentre la funci\'on de transferencia en circuito cerrado como funci\'on de las funciones de transferencia de sus subsistemas. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{figures/bloques3.JPG}
+\end{figure}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+Para el sistema de control de direcci\'on de un veh\'iculo terrestre mostrado en la segunda figura de la siguiente p\'agina, encuentre su funci\'on de transferencia en circuito cerrado como funci\'on de $K$. 
 
 \begin{figure}[H]
 \centering
@@ -90,16 +118,16 @@ Para el siguiente sistema de control, encuentre su funci\'on de transferencia en
 
 % -----------------------------------------------------------------
 \begin{problem}
-Considere el sistema de control de posici\'on angular mostrado en la figura de arriba. Con esto en mente: 
-\begin{enumerate}[label=\alph*.]
-\item Encuentre valores para las ganancias $K_1$ y $K_f$ de tal manera que las m\'etricas de respuesta en el tiempo del sistema en circuito cerrado sean: 
+Considere el sistema de control de posici\'on angular mostrado en la figura de abajo. Encuentre valores para las ganancias $K_1$ y $K_f$ de tal manera que las m\'etricas de respuesta en el tiempo del sistema en circuito cerrado sean: 
 \begin{itemize}
 \item Porcentaje de sobrepaso del 25\%. 
 \item Tiempo de asentamiento de 0.2 segundos. 
 \end{itemize}
-\item Calcule el error en estado estable del sistema en circuito cerrado para una entrada escal\'on $r(t) = u(t)$ y para una entrada rampa $r(t) = t \, u(t)$. 
-\end{enumerate}
-
+Adem\'as, calcule el error en estado estable del sistema para:
+\begin{itemize}
+\item Una entrada escal\'on $r(t) \, = \, C_1 \, u(t)$.
+\item Una entrada rampa $r(t) \, = \, C_2 \, t \, u(t)$. 
+\end{itemize}
 \begin{figure}[H]
 \centering
 \includegraphics[ width = 0.6\textwidth]{figures/fig_P9-8.jpg}
@@ -110,25 +138,52 @@ Considere el sistema de control de posici\'on angular mostrado en la figura de a
 
 % -----------------------------------------------------------------
 \begin{problem}
-Considere el sistema de control de cabeceo de un veh\'iculo a\'ereo no-tripulado mostrado en la figura de abajo. 
+Considere el sistema de control de cabeceo de un veh\'iculo a\'ereo no-tripulado mostrado en la primera figura de la siguiente p\'agina. 
+\begin{enumerate}[label=\alph*.]
+\item Asumiendo la forma del controlador mostrada en la figura, bosqueje el lugar geom\'etrico de las ra\'ices \emph{(root locus)}. 
+\item De acuerdo a su bosquejo anterior, determine la veracidad o falsedad de cada uno de las siguientes proposiciones. 
+\begin{itemize}
+\item El sistema es estable para todo valor de la ganancia $K$. 
+\item Existe un valor de $K$ tal que si $K$ excede ese valor entonces el sistema es inestable. 
+\item Existe un valor de $K$ para el cual todos los polos del sistema son complejos. 
+\item Existe un valor de $K$ para el cual todos los polos del sistema son reales. 
+\end{itemize}
 
 \begin{figure}[htb]
 \centering
 \includegraphics[ width = 0.64\textwidth]{figures/fig_P6-12.jpg}
 \end{figure}
 
-Con esto en mente: 
-\begin{enumerate}[label=\alph*.]
-\item Asumiendo la forma del controlador mostrada en la figura, bosqueje el lugar geom\'etrico de las ra\'ices \emph{(root locus)}. 
-\item De acuerdo a su bosquejo anterior, determine la veracidad o falsedad de cada uno de las siguientes proposiciones. 
+\end{enumerate}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+Para siguiente sistema de control angular encuentre valores para las ganancias $K_1$ y $K_2$ tales que en circuito cerrado el sistema tenga las siguientes caracter\'isticas: 
 \begin{itemize}
-\item Existe al menos un valor de la ganancia $K$ tal que si $K$ es inferior a ese valor entonces el sistema es estable. 
-\item Existe al menos un valor de la ganancia $K$ tal que si $K$ es superior a ese valor entonces el sistema es inestable.  
-\item Existe un valor de la ganancia $K$ para el cual todos los polos son complejos. 
-\item Existe un valor de la ganancia $K$ para el cual todos los polos son reales. 
+\item Tasa de amortiguamiento $\zeta = 0.5$. 
+\item Error en estado estable $e(\infty) = 0.1 \, C$ para una entrada rampa $r(t) \, = \, C \, t \, u(t)$. 
 \end{itemize}
 
-\end{enumerate}
+\begin{figure}[htb]
+\centering
+\includegraphics[ width = 0.52\textwidth]{figures/fig_P7-35.jpg}
+\end{figure}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+Estime la funci\'on de transferencia del sistema de segundo orden cuya respuesta a una entrada escal\'on es como se muestra abajo: 
+\fullskip
+
+\begin{figure}[htb]
+\centering
+\includegraphics[ width = \textwidth]{figures/especificaciones.JPG}
+\end{figure}
 
 \end{problem}
 \vspace{\baselineskip}
