@@ -679,9 +679,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="10.030325"
-     inkscape:cx="110.20836"
-     inkscape:cy="75.672265"
+     inkscape:zoom="2.5075813"
+     inkscape:cx="169.22378"
+     inkscape:cy="86.612657"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -696,7 +696,7 @@
      inkscape:bbox-paths="false"
      inkscape:snap-bbox-midpoints="true"
      inkscape:snap-bbox-edge-midpoints="false"
-     inkscape:snap-grids="false"
+     inkscape:snap-grids="true"
      inkscape:object-paths="false"
      inkscape:snap-intersection-paths="true"
      inkscape:object-nodes="true"
@@ -718,7 +718,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -737,72 +737,72 @@
     <path
        sodipodi:nodetypes="cc"
        style="fill:none;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#Arrow2Mstart)"
-       d="m 216.72293,967.45077 50,0"
+       d="m 223.01216,967.45077 50,0"
        id="path3397"
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:5.53572273px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff7f00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="-381.01538"
-       y="469.01117"
+       x="-368.51724"
+       y="469.80237"
        id="text4846"
        sodipodi:linespacing="125%"
-       transform="matrix(0.46950436,-0.12580331,0.53247642,1.987229,0,0)"><tspan
+       transform="matrix(0.46950437,-0.12580331,0.53247643,1.987229,0,0)"><tspan
          sodipodi:role="line"
          id="tspan4848"
-         x="-381.01538"
-         y="469.01117">$\theta_e(t)$</tspan></text>
+         x="-368.51724"
+         y="469.80237">$\theta_e(t)$</tspan></text>
     <path
        inkscape:connector-curvature="0"
        id="path7097"
-       d="m 196.72293,972.45079 50,0"
+       d="m 203.01216,972.45079 50,0"
        style="fill:none;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker7099)"
        sodipodi:nodetypes="cc" />
     <path
        sodipodi:nodetypes="cc"
        style="fill:none;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker7525)"
-       d="m 178.72293,977.45079 50,0"
+       d="m 185.01216,977.45079 50,0"
        id="path7523"
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
        id="path8819"
-       d="m 159.72293,982.45079 50,0"
+       d="m 166.01216,982.45079 50,0"
        style="fill:none;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker8821)"
        sodipodi:nodetypes="cc" />
     <path
        sodipodi:nodetypes="cc"
        style="fill:none;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker9271)"
-       d="m 141.72293,987.45079 50,0"
+       d="m 148.01216,987.45079 50,0"
        id="path9269"
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
        id="path9821"
-       d="m 121.72293,992.4508 50,0.01"
+       d="m 128.01216,992.4508 50,0.01"
        style="fill:none;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker9823)"
        sodipodi:nodetypes="cc" />
     <path
        sodipodi:nodetypes="cc"
        style="fill:none;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker10207)"
-       d="m 103.72292,997.4508 50.00001,0.01"
+       d="m 110.01215,997.4508 50.00001,0.01"
        id="path10205"
        inkscape:connector-curvature="0" />
     <path
        inkscape:connector-curvature="0"
        id="path10553"
-       d="m 84.722917,1002.4508 50.000013,0.01"
+       d="m 91.012143,1002.4508 50.000017,0.01"
        style="fill:none;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.25;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker10555)"
        sodipodi:nodetypes="cc" />
     <path
        transform="matrix(-0.8660254,-0.5,-0.5,0.8660254,0,0)"
-       d="m -691.63472,714.25008 a 49.182461,49.182461 0 0 1 7.54769,-9.61559"
+       d="m -697.08137,711.10549 a 49.182461,49.182461 0 0 1 7.54768,-9.61559"
        sodipodi:end="3.9316791"
        sodipodi:start="3.6824901"
        sodipodi:ry="49.182461"
        sodipodi:rx="49.182461"
-       sodipodi:cy="739.5744"
-       sodipodi:cx="-649.47321"
+       sodipodi:cy="736.42981"
+       sodipodi:cx="-654.91986"
        sodipodi:type="arc"
        id="path12140"
        style="fill:none;fill-opacity:1;stroke:#ff7f00;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#marker12142);marker-end:url(#marker12296)"
@@ -812,11 +812,11 @@
        sodipodi:linespacing="125%"
        id="text14268"
        y="531.21326"
-       x="444.89368"
+       x="456.25922"
        style="font-style:normal;font-weight:normal;font-size:6.30210209px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff7f00;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
          y="531.21326"
-         x="444.89368"
+         x="456.25922"
          id="tspan14270"
          sodipodi:role="line">$\alpha(t)$</tspan></text>
     <g
@@ -832,13 +832,13 @@
        id="rect17258"
        width="175"
        height="20"
-       x="-197.62961"
-       y="969.18903"
+       x="-191.55469"
+       y="970.81677"
        ry="10"
        transform="matrix(0.96592583,-0.25881905,0.25881905,0.96592583,0,0)" />
     <g
        id="g5282"
-       transform="translate(-152.33827,46.6885)">
+       transform="translate(-146.04904,46.6885)">
       <ellipse
          transform="matrix(0.96592583,-0.25881905,0.25881905,0.96592583,0,0)"
          ry="10.000017"
@@ -858,21 +858,21 @@
     </g>
     <path
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.3125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.58039216"
-       d="m 69.608275,984.72673 -3.882286,-14.48889 19.318517,-5.17638 18.371174,10.6066"
+       d="m 75.897501,984.72673 -3.882286,-14.48889 19.318517,-5.17638 18.371178,10.6066"
        id="path17480"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
     <path
        inkscape:connector-curvature="0"
        id="path19130"
-       d="m 253.77593,945.64526 -20.5377,5.50301"
+       d="m 260.06516,945.64526 -20.5377,5.50301"
        style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:0.3125;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:1.25, 1.25;stroke-dashoffset:0;stroke-opacity:1"
        sodipodi:nodetypes="cc" />
     <g
        id="g14704"
        transform="translate(-35.29293,19.464165)" />
     <g
-       transform="matrix(1,0,0,-1,-67.370734,1955.8342)"
+       transform="matrix(1,0,0,-1,-61.081508,1955.8342)"
        id="g20488">
       <path
          style="fill:none;fill-rule:evenodd;stroke:#ff0000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker5265)"
@@ -890,7 +890,7 @@
     </g>
     <g
        id="g20494"
-       transform="matrix(-0.25881905,-0.96592583,-0.96592583,0.25881905,986.73827,905.6008)">
+       transform="matrix(-0.25881905,-0.96592583,-0.96592583,0.25881905,989.98732,906.68876)">
       <path
          inkscape:connector-curvature="0"
          id="path20496"
@@ -901,30 +901,30 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:6.30210209px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="-411.72061"
-       y="539.39703"
+       x="-406.55804"
+       y="540.44379"
        id="text21388"
        sodipodi:linespacing="125%"
        transform="matrix(0.53450372,-0.14321984,0.46772359,1.7455682,0,0)"><tspan
          sodipodi:role="line"
          id="tspan21390"
-         x="-411.72061"
-         y="539.39703">$F_p$</tspan></text>
+         x="-406.55804"
+         y="540.44379">$F_p$</tspan></text>
     <text
        transform="matrix(0.53450372,-0.14321984,0.46772359,1.7455682,0,0)"
        sodipodi:linespacing="125%"
        id="text21392"
-       y="543.15222"
-       x="-348.83554"
+       y="544.05292"
+       x="-337.85727"
        style="font-style:normal;font-weight:normal;font-size:6.30210209px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
-         y="543.15222"
-         x="-348.83554"
+         y="544.05292"
+         x="-337.85727"
          id="tspan21394"
          sodipodi:role="line">$c_m$</tspan></text>
     <g
        id="g5294"
-       transform="translate(55.29293,-11.46416)">
+       transform="translate(61.582156,-11.46416)">
       <text
          transform="matrix(0.53450372,-0.14321984,0.46772359,1.7455682,0,0)"
          sodipodi:linespacing="125%"
@@ -1026,16 +1026,16 @@
        sodipodi:linespacing="125%"
        id="text28021"
        y="567.15942"
-       x="159.34586"
+       x="170.71141"
        style="font-style:normal;font-weight:normal;font-size:6.30210209px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
          y="567.15942"
-         x="159.34586"
+         x="170.71141"
          id="tspan28023"
          sodipodi:role="line">$mg$</tspan></text>
     <g
        id="g5264"
-       transform="translate(-42.858745,-13.71449)">
+       transform="translate(-36.569519,-13.71449)">
       <path
          sodipodi:nodetypes="cc"
          inkscape:connector-curvature="0"
@@ -1064,38 +1064,58 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.09432745px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="220.81236"
+       x="230.90872"
        y="579.18365"
        id="text14316"
        sodipodi:linespacing="125%"
        transform="scale(0.6229207,1.6053408)"><tspan
          sodipodi:role="line"
          id="tspan14318"
-         x="220.81236"
-         y="579.18365">$F_{aero}(t) \, = \, K_f \, \sin( \alpha(t) )$</tspan></text>
+         x="230.90872"
+         y="579.18365">$L(t) \, = \, K_L\, \sin( \alpha(t) )$</tspan></text>
     <text
        transform="scale(0.57734574,1.7320644)"
        sodipodi:linespacing="125%"
        id="text14320"
        y="577.9494"
-       x="312.23672"
+       x="323.1301"
        style="font-style:normal;font-weight:normal;font-size:6.57528353px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
          y="577.9494"
-         x="312.23672"
+         x="323.1301"
          id="tspan14322"
-         sodipodi:role="line">$T_{aero}(t) \, = \, K_t \, \dot{\alpha}(t)$</tspan></text>
+         sodipodi:role="line">$T_d(t) \, = \, K_d \, \dot{\alpha}(t)$</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:6.51922417px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="194.06187"
+       x="205.04889"
        y="581.10754"
        id="text4529"
        sodipodi:linespacing="125%"
        transform="scale(0.57242344,1.7469585)"><tspan
          sodipodi:role="line"
          id="tspan4531"
-         x="194.06187"
-         y="581.10754">$T_{elev}(t) \, = \, K_e \, \sin( \theta_e(t) )$</tspan></text>
+         x="205.04889"
+         y="581.10754">$T_e(t) \, = \, K_e \, \sin( \theta_e(t) )$</tspan></text>
+    <g
+       transform="translate(-148.64714,47.347561)"
+       id="g4200">
+      <ellipse
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.3125;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.57861639"
+         id="ellipse4202"
+         cx="-39.49403"
+         cy="963.98035"
+         rx="0.44444498"
+         ry="10.000017"
+         transform="matrix(0.96592583,-0.25881905,0.25881905,0.96592583,0,0)" />
+      <ellipse
+         ry="10.000017"
+         rx="0.44444498"
+         cy="984.98041"
+         cx="-39.49403"
+         id="ellipse4204"
+         style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:0.3125;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.57861639"
+         transform="matrix(0.96592583,-0.25881905,0.25881905,0.96592583,0,0)" />
+    </g>
   </g>
 </svg>

@@ -50,11 +50,10 @@
   \makeatother%
   \begin{picture}(1,0.5)%
     \put(0,0){\includegraphics[width=\unitlength]{simple-wing.eps}}%
-    \put(0.04667763,0.15073333){\color[rgb]{1,0.49803922,0}\rotatebox{14.99999999}{\makebox(0,0)[lb]{\smash{$\theta_e(t)$}}}}%
+    \put(0.04667763,0.15073334){\color[rgb]{1,0.49803922,0}\rotatebox{14.99999999}{\makebox(0,0)[lb]{\smash{$\theta_e(t)$}}}}%
     \put(0.90031753,0.32625415){\color[rgb]{1,0.49803922,0}\makebox(0,0)[lb]{\smash{$\alpha(t)$}}}%
     \put(0.50553775,0.2930794){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$c_{aero}$}}}%
-    \put(0.3750465,0.3862163){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$F_{aero}(t) \, = \, K_f \, \sin( \alpha(t) )$}}}%
-    \put(0.14178377,0.28356509){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$T_{aero}(t) \, = \, K_t \, \dot{\alpha}(t)$}}}%
-    \put(0.29852179,0.12658046){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$T_{elev}(t) \, = \, K_e \, \sin( \theta_e(t) )$}}}%
+    \put(0.3750465,0.3862163){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$L(t) \, = \, K_L \, \sin( \alpha(t) )$}}}%
+    \put(0.29852179,0.12658046){\color[rgb]{1,0,0}\makebox(0,0)[lb]{\smash{$T_e(t) \, = \, K_e \, \sin( \theta_e(t) )$}}}%
   \end{picture}%
 \endgroup%

@@ -6,26 +6,27 @@
 \useinnertheme{rectangles}
 \setbeamertemplate{frametitle continuation}{}
 \beamertemplatenavigationsymbolsempty
-\usepackage{../../../macros-general}
-\usepackage{../../../macros-beamer}
-\input{../../../beamer_section-slides}
+\usepackage{../../macros-general}
+\usepackage{../../macros-beamer}
 \graphicspath{{./figures/}}
 
 % =================================================================
-\title[Control Systems]{Control Systems Engineering (EYAG-1005) }
+\newcommand{\shorttitle}{Control Systems Engineering - Unit 02}
+\title[\shorttitle]{Control Systems Engineering (EYAG-1005): \\ \textbf{Unit 02} }
 \author[L. I. Reyes-Castro]{Luis I. Reyes-Castro}
 \institute[ESPOL]{\normalsize Escuela Superior Polit\'ecnica del Litoral (ESPOL) \\ Guayaquil - Ecuador}
-\date[2017-T1]{2017 - First Term}
+\date[2017-T1]{2017 - Term 1}
 
 % -----------------------------------------------------------------
 \begin{document}
-\input{../../../beamer_table-contents}
+\input{../../beamer_table-contents}
+\input{../../beamer_section-slides}
 
 % =================================================================
-\section{Mechanical Systems}
+\section{Fluid Reservoirs and Mixing Tanks}
 
 % =================================================================
-\section{Electric Circuits}
+\section{Hydraulic and Neumatic Actuators}
 
 % =================================================================
 \section{Armature-controlled DC Motors}
@@ -127,7 +128,6 @@ E_a(s) \, = \, R_a \, Z_a(s) + K_b \, s \, \Theta_1(s)
 \end{itemize}
 \framebreak
 
-Solving...
 \begin{itemize}
 \item Armature current:
 \[
@@ -174,12 +174,33 @@ Z_a(s) \, = \, \frac{ E_a(s) - K_b \, s \, \Theta_1(s) }{R_a}
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-Model of a simple 2D wing with elevator:
+Introduction to the longitudinal dynamics of fixed-wing aircraft:
+\begin{itemize}
+\item Consider only aircraft with massless, flat, very wide, rectangular wings. 
+\item Define angle of attack $\alpha(t)$ as the angle between the surface of the wings and the airflow. Also assume vertical elevators are available, and denote \linebreak the elevator deflection angle as $\theta_e(t)$. 
+\item Assume angle of attack is low, \eg $-10\deg \leq \alpha(t) \leq +25\deg$, so that \linebreak no wing stalling is possible. 
+\item Define the aerodynamic center $c_{aero}$ as the point where the lift force $L(t)$ acts. Also, assume $L(t)$ is proportional to the sine of the angle of attack. 
+\item Assume elevator generates torque on the wing $T_e(t)$ proportional to the sine of its deflection angle. 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Model of a massless, flat, very wide, rectangular wing with elevator:
 \begin{figure}[htb]
 \centering
 \def\svgwidth{0.9\columnwidth}
 \input{figures/simple-wing.eps_tex}
 \end{figure}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
 
 \end{frame}
 
