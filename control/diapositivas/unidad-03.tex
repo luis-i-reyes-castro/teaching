@@ -19,6 +19,8 @@
 \end{minipage}
 \end{center}
 }
+\newcommand{\Laplace}{\mathcal{L}}
+\newcommand{\LaplaceInv}{\Laplace^{-1}}
 
 % =================================================================
 \newcommand{\shorttitle}{Control Systems Engineering - Unit 03}
@@ -32,11 +34,94 @@
 \input{../../beamer_table-contents}
 \input{../../beamer_section-slides}
 
-%% =================================================================
-%\section{First-order Systems}
+% =================================================================
+\section{First-order Systems}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\textbf{Definition:}
+
+We say that a system with transfer function $G(s)$ is of first-order if: 
+\[
+G(s) \; = \; \frac{K}{ s + \sigma }
+\qquad \text{for some } K, \sigma > 0
+\]
+\framebreak
+
+Step response, \ie $r(t) \, = \, u(t)$ : 
+\begin{align*}
+R(s) \; = \; \frac{1}{s} \qquad 
+& \Longrightarrow \quad
+c(t) \; = \; \LaplaceInv[ \, R(s) \, G(s) \, ] \\
+& \Longrightarrow \quad
+c(t) \; = \; \LaplaceInv \left[ \;
+\frac{K}{ s ( s + \sigma ) } \; \right] \\[2ex]
+& \Longrightarrow \quad
+c(t) \; = \; \LaplaceInv \left[ \;
+\frac{K / \sigma}{s} - \frac{K / \sigma}{s + \sigma} \; \right] \\[2ex]
+& \Longrightarrow \quad
+c(t) \; = \; \left[ \;
+\frac{K}{\sigma} - \frac{K}{\sigma} \, e^{ -\sigma t }
+\; \right] u(t) \, , \quad \forall t \in \Re \\[2ex]
+& \Longrightarrow \quad
+c(t) \; = \; 
+\frac{K}{\sigma} - \frac{K}{\sigma} \, e^{ -\sigma t },
+\quad \forall t \geq 0
+\end{align*}
+
+\end{frame}
 
 %% =================================================================
-%\section{Second-order Systems}
+\section{Second-order Systems}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Recall the following results from elementary algebra: 
+\begin{itemize}
+\item For any $\alpha, \beta, \gamma \in \Re$ the roots of the second-order polinomial 
+\[
+D(s) \, = \, \alpha \, s^2 + \beta \, s + \gamma
+\]
+are as follows:  
+\[
+s_1 \; = \; 
+-\frac{\beta}{2 \alpha} + \frac{\sqrt{ \beta^2 - 4 \, \alpha \, \gamma }}{2 \, \alpha} \qquad \qquad
+s_2 \; = \; 
+-\frac{\beta}{2 \alpha} + \frac{\sqrt{ \beta^2 - 4 \, \alpha \, \gamma }}{2 \, \alpha}
+\]
+Therefore: 
+\begin{itemize}
+\item If $\beta^2 > 4 \, \alpha \, \gamma$ then the roots are repeated and different. 
+\item If $\beta^2 = 4 \, \alpha \, \gamma$ then the roots are repeated and identical. 
+\item If $\beta^2 < 4 \, \alpha \, \gamma$ then the roots are complex conjugates. 
+\end{itemize}
+\framebreak
+
+\item For any $a, b \in \Re$ the roots of the second-order polinomial 
+\[
+D(s) \, = \, s^2 + a \, s + b
+\]
+are as follows:  
+\[
+s_1 \; = \; 
+-\frac{a}{2} + \frac{\sqrt{ a^2 - 4b }}{2} \qquad \qquad
+s_2 \; = \; 
+-\frac{a}{2} - \frac{\sqrt{ a^2 - 4b }}{2}
+\]
+Therefore: 
+\begin{itemize}
+\item If $a^2 > 4 b$ then the roots are repeated and different. 
+\item If $a^2 = 4 b$ then the roots are repeated and identical. 
+\item If $a^2 < 4 b$ then the roots are complex conjugates. 
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
 
 %% =================================================================
 %\section{Stability}
@@ -55,9 +140,9 @@ Recall the reference signals:
 \end{figure}
 \framebreak
 
-Recall the following result: 
+Recall the following property of the Laplace Transform: 
 
-\theoremblock{Laplace Transform - Final Value Theorem}{
+\theoremblock{Final Value Theorem}{
 For any function $f(t)$ defined for $t \geq 0$ with Laplace Transform $F(s)$ \linebreak we have that: 
 \[
 \lim_{ t \rightarrow \infty } \, f(t) \quad = \quad
@@ -72,7 +157,7 @@ For any function $f(t)$ defined for $t \geq 0$ with Laplace Transform $F(s)$ \li
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-Steady-state errors for feedthrough systems: 
+Steady-state errors for simple feedthrough systems: 
 \fullskip
 
 \begin{figure}
@@ -84,6 +169,7 @@ Steady-state errors for feedthrough systems:
 & \Longrightarrow \; E(s) \; = \; R(s) \, [ \, 1 - T(s) \, ] \\[1ex]
 & \Longrightarrow \; e(\infty) \; = \; 
 \lim_{ t \rightarrow \infty } e(t) \; = \; 
+\lim_{ s \rightarrow 0 } s \, E(t) \; = \; 
 \lim_{ s \rightarrow 0 } \; s \, R(s) \, [ \, 1 - T(s) \, ]
 \end{align*}
 \framebreak
@@ -92,19 +178,19 @@ Steady-state errors for feedthrough systems:
 \item Step input $r(t) \, = \, u(t)$ :
 \[
 R(s) \, = \, \frac{1}{s} \qquad \Longrightarrow \qquad
-e(\infty) \; = \; 
+e_{step}(\infty) \; = \; 
 \lim_{ s \rightarrow 0 } \; 1 - T(s)
 \]
 \item Ramp input $r(t) \, = \, t \, u(t)$ :
 \[
 R(s) \, = \, \frac{1}{s^2} \qquad \Longrightarrow \qquad
-e(\infty) \; = \; 
+e_{ramp}(\infty) \; = \; 
 \lim_{ s \rightarrow 0 } \; \frac{1 - T(s)}{s}
 \]
 \item Parabolic input $r(t) \, = \, (1/2) \, t^2 \, u(t)$ :
 \[
 R(s) \, = \, \frac{1}{s^3} \qquad \Longrightarrow \qquad
-e(\infty) \; = \; 
+e_{parabolic}(\infty) \; = \; 
 \lim_{ s \rightarrow 0 } \; \frac{1 - T(s)}{s^2}
 \]
 \end{itemize}
@@ -128,6 +214,7 @@ Steady-state errors for unity-feedback systems:
 & \Longrightarrow \; E(s) \; = \; \frac{R(s)}{1 + G(s)} \\[1ex]
 & \Longrightarrow \; e(\infty) \; = \; 
 \lim_{ t \rightarrow \infty } e(t) \; = \; 
+\lim_{ s \rightarrow 0 } s \, E(t) \; = \; 
 \lim_{ s \rightarrow 0 } \; \frac{ s \, R(s) }{1 + G(s)}
 \end{align*}
 \framebreak
@@ -177,9 +264,30 @@ e_{ramp}(\infty) \; = \; \frac{1}{K_v}
 \[
 K_a \; = \; \lim_{ s \rightarrow 0 } \; s^2 \,G(s)
 \qquad \Longrightarrow \qquad
-e_{ramp}(\infty) \; = \; \frac{1}{K_a}
+e_{parabolic}(\infty) \; = \; \frac{1}{K_a}
 \]
 \end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\textbf{System Type:}
+Number of integrators (poles at $s = 0$) on the forward path.
+
+\begin{figure}
+\centering
+\includegraphics[width=0.6\columnwidth]{figures/Nise_Fig-7-8.jpg}
+\end{figure}
+\fullskip
+
+Steady-state error as a function of system type:
+\begin{figure}
+\centering
+\includegraphics[width=\columnwidth]{figures/Nise_Table-7-2.jpg}
+\end{figure}
 
 \end{frame}
 
@@ -194,6 +302,95 @@ For non-unity non-unity-feedback systems, simply re-write the system in unity-fe
 \centering
 \includegraphics[width=0.7\columnwidth]{figures/Nise_Fig-7-15.jpg}
 \end{figure}
+
+\end{frame}
+
+% =================================================================
+\section{Evan's Root Locus}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Motivating example: 
+\fullskip
+
+\begin{figure}
+\centering
+\includegraphics[width=0.68\columnwidth]{figures/Nise_Figure-8-4.jpg}
+\end{figure}
+\framebreak
+
+\begin{figure}
+\centering
+\includegraphics[width=0.56\columnwidth]{figures/Nise_Table-8-1.jpg}
+\end{figure}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+The root locus concerns the design of closed-loop control systems with the following architecture: 
+\begin{figure}
+\centering
+\includegraphics[width=0.5\columnwidth]{figures/Nise_Figure-8-1.jpg}
+\end{figure}
+\framebreak
+
+Definitions: 
+\begin{itemize}
+\item Loop gain: $K$
+\item Open-loop transfer function: $G(s) \, H(s)$
+\end{itemize}
+\fullskip
+
+Objective: 
+\begin{itemize}
+\item Sketch the roots of the closed-loop transfer function as the loop gain $K$ \linebreak ranges from near zero (\ie $K \rightarrow 0^+$) to infinity (\ie $K \rightarrow +\infty$). 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Root locus sketching rules:
+\begin{itemize}
+\item The root locus is symmetric about the real axis. 
+\item The number of branches, \ie pole trayectories, equals the number of poles \linebreak of the open-loop transfer function. 
+\item Each branch begins at an open-loop pole and ends either: 
+\begin{itemize}
+\item At an open-loop zero. 
+\item At infinity along an asymptote. 
+\end{itemize}
+\item Along the real line, root locus branches can be found to the left of any \linebreak odd number of real open-loop poles or open-loop zeros. 
+\framebreak
+
+\item If the root locus has asymptotes, then the number of asymptotes is: 
+\[
+\text{ ( number of open-loop poles ) } -  
+\text{ ( number of open-loop zeros ) }
+\]
+%\fullcut
+%\begin{itemize}
+%\item This assumes, of course, that $G(s)$ is a \emph{causal} transfer function, \ie that \linebreak the order of its numerator does not exceed the order of its denominator. 
+%\end{itemize}
+\item If the root locus has asymptotes, then the centroid of the asymptotes is located along the real axis at the point: 
+\[
+\sigma_a \; = \; 
+\frac{ \sum \text{(open-loop pole locations)} - \sum \text{(open-loop zero locations)} }{ \text{number of asymptotes} }
+\]
+\item If the root locus has asymptotes, then their angles in radians are: 
+\[
+\theta_a \; = \; 
+\frac{ ( 2k + 1 ) \, \pi }{ \text{number of asymptotes} }
+\qquad
+\text{for } k \, = \, 0, \, \pm 1, \, \pm 2, \, \dots
+\]
+\end{itemize}
 
 \end{frame}
 
