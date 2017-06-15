@@ -11,7 +11,8 @@
 \input{../../beamer_section-slides}
 
 % =================================================================
-\title[Modelos Estoc\'asticos: Unidad 01]{Modelos Estoc\'asticos para Manufactura y Servicios (INDG-1008): \textbf{Unidad 01} }
+\newcommand{\shorttitle}{Modelos Estoc\'asticos - Unidad 01}
+\title[\shorttitle]{Modelos Estoc\'asticos para Manufactura y Servicios (INDG-1008): \textbf{Unidad 01} }
 \author[L. I. Reyes Castro]{Luis I. Reyes Castro}
 \institute[ESPOL]{\normalsize Escuela Superior Polit\'ecnica del Litoral (ESPOL) \\ Guayaquil - Ecuador}
 \date[2017-T1]{2017 - Primer T\'ermino}
@@ -385,11 +386,14 @@ Divisi\'on de Procesos Poisson:
 % =================================================================
 \section{Cadenas de Markov}
 
+% =================================================================
+\subsection{Modelamiento}
+
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 
-El Modelo: 
+Una \textbf{Cadena de Markov} es un modelo matem\'atico de un proceso estoc\'astico \linebreak en tiempo discreto constitu\'ido por: 
 \begin{itemize}
 \item Conjunto finito de $n$ estados, donde cada estado es una representaci\'on de una posible situaci\'on de inter\'es. 
 \item Matriz de transici\'on $\vec{P} \in \Re^{n \times n}$
@@ -409,7 +413,7 @@ El Modelo:
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 
 \textbf{H\&L, Secci\'on 16.1 - Ejemplo de Clima:}
 
@@ -438,7 +442,7 @@ Matriz de transici\'on:
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 
 \textbf{H\&L, Secci\'on 16.1 - Ejemplo en Manejo de Inventario:}
 
@@ -489,7 +493,7 @@ Matriz de transici\'on:
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 
 Definici\'on Formal: 
 \begin{itemize}
@@ -514,9 +518,12 @@ X_{0} = x_{0}, \, X_{1} = x_{1}, \, \dots, \, x_{t} = x_{t} \, ) \\[1ex]
 
 \end{frame}
 
+% =================================================================
+\subsection{Distribuci\'on en Estado Estable}
+
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 
 Propagaci\'on de la Distribuci\'on Inicial: 
 \begin{itemize}
@@ -604,7 +611,7 @@ Propagaci\'on de la Distribuci\'on Inicial:
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 
 C\'alculo de la Distribuci\'on en Estado Estable: 
 \begin{enumerate}
@@ -623,9 +630,12 @@ C\'alculo de la Distribuci\'on en Estado Estable:
 
 \end{frame}
 
+% =================================================================
+\subsection{Estados Transitorios y Recurrentes}
+
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 
 Algunas definiciones:
 \begin{itemize}
@@ -669,7 +679,7 @@ Algunos resultados generales:
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 
 Algunos resultados para cadenas con \textbf{una sola clase recurrente:}
 \begin{itemize}
@@ -689,7 +699,7 @@ Algunos resultados para cadenas con \textbf{m\'as de una clase recurrente:}
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
-\frametitle{\insertsection}
+\frametitle{\insertsubsection}
 
 \textbf{Ejercicio en Clase:}
 \begin{itemize}
@@ -708,6 +718,22 @@ Algunos resultados para cadenas con \textbf{m\'as de una clase recurrente:}
 \end{itemize}
 
 \end{frame}
+
+% =================================================================
+\subsection{Cadenas de Nacimiento-muerte}
+
+%% -----------------------------------------------------------------
+%\begin{frame}[allowframebreaks]
+%\frametitle{\insertsubsection}
+%
+%Blah...
+%
+%\end{frame}
+%
+%\end{document}
+
+% =================================================================
+\subsection{Tiempo de Primer Paso}
 
 \end{document}
 
