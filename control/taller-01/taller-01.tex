@@ -1,0 +1,62 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{01}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\begin{center}
+\Large Sistemas de Control (EYAG-1005): Taller \numero \\[1ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\halfskip
+
+Integrantes del Grupo:
+\fullskip
+\fullskip
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Para el sistema mostrado en la figura de abajo, encuentre: 
+\begin{itemize}
+\item \textbf{[2 Puntos]} La funci\'on de transferencia en circuito cerrado $T(s) = C(s) / R(s)$. 
+\item \textbf{[2 Puntos]} La tasa de amortiguamiento, el porcentage de sobrepaso, el tiempo pico y el tiempo de asentamiento. 
+\end{itemize}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.64\columnwidth]{Nise_Prob-5-17.jpg}
+\end{figure}
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+En el 2014 el destructor estadounidense \emph{U.S.S. Ponce} demostr\'o exitosamente, por primera vez en la historia, el uso de un l\'aser de alta energ\'ia para detener un blanco m\'ovil. Con esto en mente, especulemos sobre el funcionamiento del sistema de gu\'ia del l\'aser a bordo del \emph{U.S.S. Ponce}. La mayor\'ia de destructores estadounidenses cuentan con grandes radares de apertura sint\'etica, asi que supondremos que un radar de este tipo es usado para guiar al l\'aser. (Un radar de apertura sint\'etica est\'a f\'isicamente sujeto a la estructura de su veh\'iculo portador y por lo tanto no necesita girar.) Supondremos tambi\'en que: 
+\begin{itemize}
+\item Cuando se desea apuntar el l\'aser hacia un potencial blanco el radar de apertura sint\'etica genera un \'angulo $\theta_r(t)$ que se utiliza como referencia para el \'angulo del l\'aser $\theta(t)$. 
+\item El lazo de control tiene arquitectura de retro-alimentaci\'on unitaria con compensaci\'on delantera. Es decir, en cada instante se calcula el error angular $\theta_e(t) = \theta_r(t) - \theta(t)$ y se ingresa esa se\~nal a un compensador con funci\'on de transferencia $G_c(s)$ que genera el voltage que alimenta al motor el\'ectrico. 
+\item El l\'aser es actuado por un motor el\'ectrico que genera un torque $T(t)$ sobre su estructura de 10 N-m por cada voltio de entrada. 
+\item El momento de inercia de la estructura del l\'aser es de $J = 280$ kg-m\tsup{2} y el torque generado por la fricci\'on de la misma es de $K_f = 8.5$ N-m/(grado/s). 
+\end{itemize}
+
+Con esto en mente, suponga que usted fue el ingeniero encargado del dise\~no del sistema de gu\'ia del l\'aser y complete cada una de las siguientes actividades: 
+\begin{itemize}
+\item \textbf{[2 Puntos]} Bosqueje el lazo de control del sistema de gu\'ia del l\'aser. 
+\item \textbf{[2 Puntos]} Suponga que el almirantazgo estadounidense especific\'o que el l\'aser debe ser capaz de ``apuntarle a embarcaciones enemigas navengando a velocidades de hasta 50 nudos a distancias de no menos de 1 milla n\'autica del destructor con un error no mayor a 5 milimetros''. Dise\~ne el compensador $G_c(s)$ m\'as sencillo capaz de alcanzar esta especificaci\'on. 
+\item \textbf{[2 Puntos]} Suponga que el almirantazgo estadounidense especific\'o que el l\'aser debe ser capaz de ``apuntarle a aeronaves enemigas volando a cualquier velocidad con aceleraciones de hasta 2 nudos por segundo a distancias de no menos de 1 milla n\'autica del destructor con un error no mayor a 2 centimetros''. Dise\~ne el compensador $G_c(s)$ m\'as sencillo capaz de alcanzar esta especificaci\'on. 
+\end{itemize}
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
