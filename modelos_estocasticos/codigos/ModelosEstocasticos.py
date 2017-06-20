@@ -10,36 +10,96 @@ para Manufactura y Servicios (INDG-1008).
 
 import numpy as np
 
+# -------------------------------------------------------------------------------------
 class ProcesoBernoulli :
     """
     Implementa las principales funciones de un proceso Bernoulli.
     """
 
     # Miembros:
-    p = 0.0 # parametro
+    p = None # parametro
 
-    def __init__( self, parametro = None, procesos = None, modo = None) :
+    def __init__( self, p, modo = 'AND') :
         """
         Constructor
 
-        @param parametro: Parametro del proceso Bernoulli
-        @param procesos: Lista de procesos Bernoulli, en caso de que se desee
-                         instanciar el proceso como la combinacion de otros
-                         procesos ya existentes
-        @param modo: Modo de combinacion (de ser aplicable)
+        @param p: Parametro del proceso o lista o tupla de proceso a combinar.
+                  - Si p es un decimal en (0,1) entonces se instancia un
+                    proceso Bernoulli independiente con ese parametro.
+                  - Si p es una lista o tupla de procesos Bernoulli entonces se
+                    instancia la combinacion de esos procesos de acuerdo al
+                    parametro modo.
+        @param modo: Modo de combinacion (de ser aplicable): 'AND', 'OR'
         """
 
-        if parametro is not None :
-            if 0 < parametro < 1 :
-                self.p = parametro
-            else :
-                raise ValueError( 'Parametro del proceso debe ser un decimal ' +
-                                  'en el intervalo abierto (0,1)' )
+        if not isinstance( p, ( float, list, tuple) ) :
+            raise ValueError( 'Parametro p debe ser una probabilidad o una ' +
+                              'lista o tupla de procesos Bernoulli' )
 
-        elif procesos is not None :
-            self.combina_procesos( procesos, modo)
+        elif isinstance( p, float) :
+            if not ( 0 < p < 1 ) :
+                raise ValueError( 'Instanciar un proceso independiente requiere ' +
+                                  'que el parametro p sea un decimal ' +
+                                  'en el intervalo abierto (0,1)' )
+            else :
+                self.p = p
+
+        else :
+            self.combina( p, modo)
 
         return
+
+    def combina( self, procesos, modo) :
+
+        # Verifica que cada objeto en procesos sea un proceso Bernoulli
+        for proceso in procesos :
+            if not isinstance( proceso, ProcesoBernoulli) :
+                raise ValueError( 'Lista o tupla de procesos tiene al menos una ' +
+                                  'entrada que no es de la clase ProcesoBernoulli' )
+
+        # Extrae los parametros de los procesos en la lista
+        parametros = np.array( [ proceso.p for proceso in procesos ] )
+
+        # Calcula el parametro del nuevo proceso
+        if modo == 'AND' :
+            self.p = np.prod( parametros )
+        elif modo == 'OR' :
+            self.p = 1.0 - np.prod( 1.0 - parametros )
+        else :
+            raise ValueError( 'Modo invalido, opciones validas son: AND, XOR' )
+
+        return
+
+    def divide( self, probabilidades) :
+        """
+        Divide al proceso de acuerdo al vector de probabilidades ingresado
+
+        @param probabilidades: Vector de probabilidades de los n procesos
+
+        @return Lista de los n procesos Bernoulli resultantes, donde n es la
+                longitud del vector de probabilidades ingresado
+        """
+
+        # Verifica que el vector de probabilidades sea valido
+        if not isinstance( probabilidades, ( list, tuple, np.ndarray) ) :
+            raise ValueError( 'Parametro inicio debe ser una lista, tupla ' +
+                              'o vector numpy' )
+
+        # Verifica que la distribucion sea un vector de tamano n
+        probabilidades = np.array( probabilidades).flatten()
+        if np.any( probabilidades < 0.0 ) \
+        or abs( np.sum(probabilidades) - 1.0 ) > 1e-8 :
+            raise ValueError( 'Parametro inicio debe ser una lista, tupla o ' +
+                              'vector de probabilidades, i.e. sus entradas ' +
+                              'deben ser no-negativas y sumar a uno')
+
+        # Instancia cada nuevo proceso con su parametro correcto
+        procesos = []
+        for ( i, _) in enumerate(probabilidades) :
+            nuevo_proceso = ProcesoBernoulli( probabilidades[i] * self.p )
+            procesos.append( nuevo_proceso )
+
+        return procesos
 
     def muestrea( self, num_pasos) :
         """
@@ -64,67 +124,7 @@ class ProcesoBernoulli :
 
         return ( X, frequencia)
 
-    def divide_proceso( self, probabilidades) :
-        """
-        Divide al proceso de acuerdo al vector de probabilidades ingresado
-
-        @param probabilidades: Vector de probabilidades de los n procesos
-
-        @return Lista de los n procesos Bernoulli resultantes, donde n es la
-                longitud del vector de probabilidades ingresado
-        """
-
-        # Verifica que el vector de probabilidades sea valido
-        if not isinstance( probabilidades, ( list, tuple, np.ndarray) ) :
-            raise ValueError( 'Parametro inicio debe ser una lista, tupla ' +
-                              'o vector numpy' )
-
-        # Verifica que la distribucion sea un vector de tamano n
-        probabilidades = np.array( probabilidades).flatten()
-        if np.any( probabilidades < 0.0 ) \
-        or abs( np.sum(probabilidades) - 1.0 ) > 1e-8 :
-            raise ValueError( 'Parametro inicio debe ser un vector de ' +
-                              'probabilidades' )
-
-        # Instancia cada nuevo proceso con su parametro correcto
-        procesos = []
-        for ( i, _) in enumerate(probabilidades) :
-            nuevo_proceso = ProcesoBernoulli( probabilidades[i] * self.p )
-            procesos.append( nuevo_proceso )
-
-        return procesos
-
-    def combina_procesos( self, procesos, modo = 'AND') :
-        """
-        Combina una lista de procesos Bernoulli
-
-        @param procesos: Lista de los n procesos Bernoulli que se desea combinar
-        @param modo: Modo de combinacion. Opciones: 'AND', 'OR'
-        """
-
-        # Verifica que procesos sea una lista o tupla
-        if not isinstance( procesos, ( list, tuple) ) :
-            raise ValueError( 'Parametro procesos debe ser una lista o tupla ' +
-                              'de objetos de esta misma clase' )
-
-        # Extrae los parametros de los procesos en la lista
-        lista_parametros = []
-        for ( i, proceso) in enumerate(procesos) :
-            if not isinstance( proceso, ProcesoBernoulli) :
-                raise ValueError( 'En el parametro procesos, entrada ' + str(i) +
-                                  ': objeto no es de la clase ProcesoBernoulli' )
-            lista_parametros.append( proceso.p )
-
-        # Calcula el parametro del nuevo proceso
-        if modo == 'AND' :
-            self.p = np.prod( lista_parametros )
-        elif modo == 'OR' :
-            self.p = 1.0 - np.prod( 1.0 - lista_parametros )
-        else :
-            raise ValueError( 'Modo invalido, opciones validas son: AND, XOR' )
-
-        return
-
+# -------------------------------------------------------------------------------------
 class CadenaDeMarkov :
     """
     Implementa las principales funciones de una Cadena de Markov.
