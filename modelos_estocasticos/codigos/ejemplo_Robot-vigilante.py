@@ -36,7 +36,9 @@ cadena = CadenaDeMarkov( S, P)
 ( X_t, freq) = cadena.muestrea( inicio = 'Loc-1', num_pasos = 1000)
 
 # Define la distribucion inicial como Loc-1 de manera deterministica
-# (i.e., el estado inicial es Loc-1)
-pi_0 = ( 1, 0, 0, 0, 0, 0)
-# Propagala por 1000 pasos
-pi_t = cadena.propaga_distribucion( inicio = pi_0, num_pasos = 1000)
+# (i.e., el estado inicial es Loc-1) y la propaga por 100 pasos
+pi_0 = { 'Loc-1' : 1.0 }
+pi_t = cadena.propaga_distribucion( distribucion_inicial = pi_0, num_pasos = 100)
+
+# Computa la distribucion estacionaria (i.e. en estado estable) de la cadena
+pi_estrella = cadena.distribucion_estacionaria()

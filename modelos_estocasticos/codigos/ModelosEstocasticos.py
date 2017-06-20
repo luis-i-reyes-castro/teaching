@@ -131,17 +131,16 @@ class CadenaDeMarkov :
     """
 
     # Miembros
-    S = [] # lista de estados
     n = 0  # numero de estados
-    P = np.array([]) # matriz de transicion
+    estados = [] # lista de estados
+    matriz_P = np.array([]) # matriz de transicion
 
     def __init__( self, estados, matriz_transicion) :
         """
         Constructor
 
-        @param estados: Lista de estados. Los elementos de la lista pueden ser
-                        literalmente cualquier objeto de python, pero recomiendo
-                        usar cadenas de caracteres (i.e. strings).
+        @param estados: Lista de estados, donde cada estado es representado por
+                        una cadena de caracteres (i.e. un tipo string).
         @param matriz_P: Matriz de transicion. Debe ser un arreglo numpy
                          de tamano (n,n), donde n es el numero de estados.
         """
@@ -153,8 +152,8 @@ class CadenaDeMarkov :
             raise ValueError( 'Numero de estados debe ser al menos dos' )
 
         # Copia los estados ingresados y los cuenta
-        self.S = estados
-        self.n = len(estados)
+        self.n       = len(estados)
+        self.estados = estados
 
         # Verifica que el parametro matriz de transicion sea un arreglo numpy
         if not isinstance( matriz_transicion, np.ndarray) :
@@ -182,7 +181,7 @@ class CadenaDeMarkov :
                                'probabilidad en la fila ' + str(fila) )
 
         # Copia la matriz de transicion ingresada
-        self.P = matriz_transicion
+        self.matrix_P = matriz_transicion
 
         return
 
@@ -209,8 +208,8 @@ class CadenaDeMarkov :
 
         @return Una 3-tupla que contiene en su primera entrada la secuencia de
                 estados muestreada, en su segunda entrada la lista de indices
-                de los mismos estados, y en su tercera entrada el vector de
-                frecuencias de la muestra.
+                de los mismos estados, y en su tercera entrada el diccionario de
+                frecuencias de visitas a estados de la muestra.
         """
 
         # Inicializa la historia de estados arbitrariamente para evitar
@@ -229,7 +228,7 @@ class CadenaDeMarkov :
         # del estado inicio, si existe; caso contrario avisa
         elif not isinstance( inicio, ( list, tuple, np.ndarray) ) :
             try :
-                X[-1] = int( self.S.index(inicio) )
+                X[-1] = int( self.estados.index(inicio) )
             except Exception :
                 raise ValueError( 'Estado \'' + str(inicio) + '\' no existe' )
 
@@ -250,58 +249,100 @@ class CadenaDeMarkov :
         for t in range(num_pasos) :
             # Extrae la fila de la matriz de transicion asociada con el
             # estado anterior
-            prob_transicion = self.P[ X[t-1], :]
+            prob_transicion = self.matrix_P[ X[t-1], :]
             # Muestrea el indice del estado actual
             X[t] = np.random.choice( self.n, p = prob_transicion)
 
-        # Construye la secuencia de estados a partir de la lista de indices
-        secuencia = [ self.S[ X[t] ] for t in range(num_pasos) ]
+        # Construye la secuencia de estados visitados
+        estados_visitados = [ self.estados[ X[t] ] for t in range(num_pasos) ]
 
-        # Computa el vector de frecuencias de visitas a estados
-        frequencia = np.zeros( shape = ( self.n,) )
-        for estado in range(self.n) :
-            visitas = [ 1.0 if X[t] == estado else 0.0 for t in range(num_pasos) ]
-            frequencia[estado] = sum(visitas) / num_pasos
+        # Construye el diccionario de frecuencias de visitas a estados
+        frequencias = { estado : 0.0 for estado in self.estados }
 
-        return ( secuencia, X, frequencia)
+        for estado_visitado in estados_visitados :
+            frequencias[estado_visitado] += 1.0
 
-    def propaga_distribucion( self, inicio, num_pasos) :
+        for estado in frequencias :
+            frequencias[estado] /= num_pasos
+
+        return ( estados_visitados, frequencias)
+
+    def propaga_distribucion( self, distribucion_inicial, num_pasos) :
         """
         Propaga la distribucion del estado inicial
 
-        @param inicio: Distribucion del estado inicial. Debe ser un arreglo
-                       de tamano (n,) que sea un vector de probabilidad.
+        @param distribucion_inicial: Distribucion del estado inicial como un
+                       diccionario disperso, i.e. solo se requiere especificar
+                       los estados con probabilidades estrictamente positivas.
         @param num_pasos: Numero de pasos a propagar.
 
         @return Una matriz numpy de tamano ( num_pasos, n) cuya entrada (t,i)
                 es la probabilidad en el periodo t de estar en el estado i.
         """
 
-        # Verifica que la distribucion sea un arreglo numpy
-        if not isinstance( inicio, ( list, tuple, np.ndarray) ) :
-            raise ValueError( 'Parametro inicio debe ser una lista, tupla ' +
-                              'o vector numpy' )
+        # Verifica que la distribucion sea un diccionario
+        if not isinstance( distribucion_inicial, dict ) :
+            raise ValueError( 'Parametro distribucion_inicial debe ser ' +
+                              'un diccionario.' )
 
-        # Verifica que la distribucion sea un vector de tamano n
-        inicio = np.array(inicio)
-        tamano_correcto = ( self.n,)
-        if not np.shape( inicio) == tamano_correcto :
-            raise ValueError( 'Parametro inicio debe ser un arreglo ' +
-                              'de tamano ' + str(tamano_correcto) )
-        if np.any( inicio < 0.0 ) or abs( np.sum(inicio) - 1.0 ) > 1e-8 :
-            raise ValueError( 'Parametro inicio debe ser un vector de ' +
-                              'probabilidades' )
+        # Costruye el vector de distribucion inicial a partir del diccionario
+        pi_t = np.zeros( shape = ( self.n) )
+        for estado in distribucion_inicial :
+            if not estado in self.estados :
+                raise ValueError ( 'Entrada \'' + str(estado) + '\' del parametro ' +
+                                   'distribucion_inicial no es un estado' )
+            else :
+                indice_estado = self.estados.index( estado)
+                pi_t[indice_estado] = distribucion_inicial[estado]
 
-        # Inicializa la historia arbitrariamente para evitar alocaciones de
-        # memoria durante el muestreo
-        pi = np.zeros( shape = ( num_pasos, self.n) )
-        pi[-1,:] = inicio
+        # Verifica el vector de distribucion inicial
+        if np.any( pi_t < 0.0 ) or abs( np.sum(pi_t) - 1.0 ) > 1e-8 :
+            raise ValueError( 'Parametro distribucion_inicial no representa una ' +
+                              'distribucion valida porque alguna entrada ' +
+                              'es negativa o porque sus entradas no suman a uno.' )
 
         # Para cada iteracion...
         for t in range(num_pasos) :
             # Computa la distribucion actual de acuerdo a la recursion:
             # pi_t+1' = pi_t' * P
-            pi[t,:] = np.dot( pi[t-1,:], self.P).flatten()
+            pi_t = np.dot( pi_t, self.matrix_P).flatten()
 
-        # Retorna la secuencia de distribuciones computadas
-        return pi
+        # Formatea la distribucion final como un diccionario y la retorna
+        distribucion_final = { estado : 0.0 for estado in self.estados }
+        for i in range(self.n) :
+            distribucion_final[ self.estados[i] ] = pi_t[i]
+
+        return distribucion_final
+
+    def distribucion_estacionaria( self) :
+        """
+        Computa la distribucion estacionaria de la cadena (si la cadena es ergodica).
+
+        @return La distribucion estacionaria de la cadena como un diccionario,
+                si la cadena es ergodica; caso contrario, se imprime un mensaje
+                indicando que la cadena no es ergodica y se retorna None.
+        """
+
+        # Declara la matriz del lado izquierdo A = P' - I
+        matriz_A = self.matrix_P.transpose() - np.identity( self.n)
+        # Declara el vector del lado derecho b = 0
+        vector_b = np.zeros( shape = ( self.n) )
+
+        # Reemplaza la ultima fila de matriz_A con unos
+        matriz_A[ -1, :] = 1.0
+        # Reemplaza la ultima entrada de vector_b con uno
+        vector_b[-1] = 1.0
+
+        # Computa la distribucion estacionaria
+        try :
+            vector_pi = np.linalg.solve( matriz_A, vector_b)
+        except np.linalg.LinAlgError :
+            print( 'Esta cadena no es ergodica!' )
+            return None
+
+        # Construye el diccionario de la distribucion
+        pi_estrella = { estado : 0.0 for estado in self.estados }
+        for i in range(self.n) :
+            pi_estrella[ self.estados[i] ] = vector_pi[i]
+
+        return pi_estrella
