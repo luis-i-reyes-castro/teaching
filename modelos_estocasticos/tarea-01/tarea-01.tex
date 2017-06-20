@@ -38,21 +38,21 @@ Adem\'as, por favor entregue todas las funciones en Python que se le soliciten e
 
 % -----------------------------------------------------------------
 \begin{problem}
-Un fabricante tiene una m\'aquina complicada. Al comienzo de cualquier d\'ia, si la m\'aquina funciona bien entonces con probabilidad $p$ la misma estar\'a descompuesta para el final del d\'ia y pasar\'a el resto del siguiente d\'ia en reparaci\'on. Modele esta situaci\'on como una cadena de Markov con tres estados y construya la matriz de transici\'on de la cadena en funci\'on de $p$. Adem\'as, determine el porcentaje promedio de utilizaci\'on de la m\'aquina. 
+\textbf{(2 Puntos)} Un fabricante tiene una m\'aquina complicada. Al comienzo de cada d\'ia si la m\'aquina est\'a operativa entonces con probabilidad $p$ la misma se descompondr\'a durante el d\'ia y los t\'ecinos ser\'an llamados para arreglarla al d\'ia siguiente. Suponiendo que los t\'ecnicos siempre se toman dos d\'ias para arreglar la m\'aquina, modele esta situaci\'on como una cadena de Markov con tres estados y construya la matriz de transici\'on de la cadena en funci\'on del par\'ametro $p$ y encuentre el porcentaje de los d\'ias que la m\'aquina empieza el d\'ia estando operativa. 
 
 \end{problem}
 \vspace{\baselineskip}
 
 % -----------------------------------------------------------------
 \begin{problem}
-En el problema anterior, suponga que el fabricante tiene una m\'aquina de repuesto que utiliza solamente cuando la m\'aquina principal est\'a descompuesta. Similar al caso de la m\'aquina principal, si la m\'aquina de repuesto est\'a funcionando bien entonces con probabilidad $q$ se descompondr\'a antes del final del d\'ia y requerir\'a un d\'ia entero para reparar. Modele esta situaci\'on como una cadena de Markov con y construya la matriz de transici\'on de la cadena en funci\'on de $p$ y $q$. Provea el grafo de la cadena. No necesita calcular probabilidades en estado estable. 
+\textbf{(6 Puntos)} En el problema anterior, suponga que el fabricante tiene una m\'aquina de repuesto que utiliza solamente cuando la m\'aquina principal est\'a descompuesta. Similar al caso de la m\'aquina principal, si al comienzo de cualquier d\'ia la m\'aquina de repuesto est\'a operativa entonces con probabilidad $q$ se descompondr\'a durante el d\'ia y los t\'ecnicos ser\'an llamados a repararla al d\'ia siguiente. Nuevamente, los t\'ecnicos se tomar\'an dos d\'ias en arreglar la m\'aquina. Modele esta nueva situaci\'on como una cadena de Markov y construya la matriz de transici\'on en funci\'on de $p$ y $q$. No necesita bosquejar el grafo de la cadena ni calcular probabilidades en estado estable. 
 
 \end{problem}
 \vspace{\baselineskip}
 
 % -----------------------------------------------------------------
 \begin{problem}
-Suponga que usted trabaja en una concesionaria de maquinaria de construcci\'on. Usted ha sido encargado con calcular el costo de la garant\'ia de tres a\~nos para excavadoras que ofrece la empresa. De los archivos del departamento de ventas, usted ha podido observar que: 
+\textbf{(3 Puntos)} Suponga que usted trabaja en una concesionaria de maquinaria de construcci\'on. Usted ha sido encargado con calcular el costo de la garant\'ia de tres a\~nos para excavadoras que ofrece la empresa. De los archivos del departamento de ventas, usted ha podido observar que: 
 \begin{itemize}
 \item Solo el 2\% de los clientes piden la garant\'ia en el primer a\~no. 
 \item El 5\% de los clientes que no tuvieron problemas con su m\'aquina en el primer a\~no piden la garant\'ia en el segundo a\~no. 
@@ -83,9 +83,9 @@ Q_{rep}, & \text{si } 0 \leq I_t \leq I_{rep} \, ; \\
 
 Con todo esto en mente, para cada problema de manejo de inventario con demanda $\lambda$ y pol\'itica de punto de reposici\'on $(I_{rep},Q_{rep})$ podemos construir una Cadena de Markov en $n = I_{max} + 1$ estados. M\'as precisamente, los estados ser\'ian: Cero unidades en inventario, una unidad en inventario, dos unidades en inventario, y asi sucesivamente, hasta $I_{max}$ unidades en inventario. 
 
-\textbf{Primera Actividad: (X Puntos)}
+\textbf{Primera Actividad: (6 Puntos)}
 
-Escriba una funci\'on en Python que tome como entrada (1) el par\'ametro $\lambda$ de la distribuci\'on Poisson de la demanda, (2) el inventario de reposici\'on $I_{rep}$ y (3) la cantidad por reposici\'on $Q_{rep}$, y que produzca como \'unica salida la matriz de transici\'on de la cadena de Markov correspondiente como un arreglo {\tt numpy} de taman\~no $(n,n)$. Por favor defina el nombre de su funci\'on como {\tt construye\_mat\_inventario}. Por ejemplo, yo usar\'ia mi funci\'on asi:
+Escriba una funci\'on en Python que tome como entrada (1) el par\'ametro $\lambda$ de la distribuci\'on Poisson de la demanda, (2) el inventario de reposici\'on $I_{rep}$ y (3) la cantidad por reposici\'on $Q_{rep}$, \linebreak y que produzca como \'unica salida la matriz de transici\'on de la cadena de Markov correspondiente como un arreglo {\tt numpy} de taman\~no $(n,n)$. Por favor defina el nombre de su funci\'on como {\tt construye\_mat\_inventario}. Por ejemplo, yo usar\'ia mi funci\'on asi:
 \halfskip
 
 \begin{center}
@@ -130,7 +130,7 @@ prob = poisson.pmf( mu = 4.8, k = 3)
 \end{center}
 \fullskip
 
-\textbf{Segunda Actividad: (Y Puntos)}
+\textbf{Segunda Actividad: (2 Puntos)}
 
 Construya la matriz de transici\'on para el problema para cada uno de los siguientes casos: 
 \begin{table}[htb]
@@ -149,11 +149,11 @@ Por favor presente sus matrices como tablas con los decimales redondeados a tres
 
 \emph{Nota:} Usted puede llevar a cabo esta actividad a\'un sin haber realizado la primera. 
 
-\textbf{Tercera Actividad: (Z Puntos)}
+\textbf{Tercera Actividad: (4 Puntos)}
 
 Calcule la distribuci\'on en estado estable para cada uno de los cuatro casos de la actividad anterior. Por favor presente sus resultados en dos tablas separados, una para cada producto, de tal manera que se pueda apreciar la influencia de la pol\'itica de manejo de inventario sobre la distribuci\'on estacionaria de la cadena. 
 
-\textbf{Cuarta Actividad: (W Puntos)}
+\textbf{Cuarta Actividad: (4 Puntos)}
 
 Para comparar las pol\'iticas necesitamos una funci\'on de utilidad. En nuestro caso, la funci\'on de utilidad ser\'a la diferencia entre la utilidad neta por ventas y el costo de retenci\'on de la mercader\'ia. Si para cualquier d\'ia definimos a la variable aleatoria $D$ como la demanda de ese d\'ia, \linebreak a la variable aleatoria $V$ como el n\'umero de unidades que se vender\'an ese d\'ia, a $u$ como la utilidad neta por unidad del producto vendido, y a $c$ como el costo de retenci\'on por unidad del producto por d\'ia, entonces la utilidad diaria de un nivel de inventario $I \in \{ \, 0, \, 1, \, \dots, \, I_{max} \, \}$ se calcula de la siguiente manera: 
 \[
@@ -182,7 +182,7 @@ Considere un conjunto de instalaciones industriales vigiladas por robots como se
 \input{figures/prob_robot-vigilante.eps_tex}
 \end{figure}
 
-\textbf{Primera Actividad: (X Puntos)}
+\textbf{Primera Actividad: (4 Puntos)}
 
 Escriba una funci\'on en Python que tome como entrada (1) el n\'umero $k$ de filas del arreglo que representa a la instalaci\'on, (2) el n\'umero $\ell$ de columnas del mismo arreglo y (3) una lista de 2-tuplas que especifica (en cualquier orden) los \'indices de los pares de \'areas que definen las paredes internas de la instalaci\'on, y que produzca como \'unica salida la matriz de transici\'on de la cadena de Markov correspondiente como un arreglo {\tt numpy} de taman\~no $(n,n)$, donde $n = k \, \ell$. Por favor defina el nombre de su funci\'on como {\tt construye\_mat\_robot}. Por ejemplo, para la geometr\'ia de la Instalaci\'on $A$, yo usar\'ia mi funci\'on asi:
 \halfskip
@@ -209,13 +209,15 @@ P = contruye_mat_robots( k, l, paredes)
 \end{center}
 \fullskip
 
-\textbf{Segunda Actividad: (X Puntos)}
+\textbf{Segunda Actividad: (2 Puntos)}
 
 Para las dos instalaciones mostradas en la figura, compute la frecuencia de visitas a las \'areas de la instalaci\'on y pres\'entelas como un mapa de calor. Adicionalmente, indique cu\'ales son las \'areas m\'as seguras y las \'areas m\'as vulnerables. 
 
-\textbf{Tercera Actividad: (X Puntos)}
+\textbf{Tercera Actividad: (2 Puntos)}
 
-Empezando con la pol\'itica aleatoria uniforme, modifique las probabilidades de transici\'on del robot del tal manera que su distribuci\'on en estado estable sea `tan cerca' de la distribuci\'on inicial como le sea posible. Justifique su proceso e indique cu\'ales probabilidades de transici\'on fueron incrementadas o disminuidas. 
+Empezando con la pol\'itica aleatoria uniforme, modifique las probabilidades de transici\'on del robot del tal manera que su distribuci\'on en estado estable sea `tan cerca' de la distribuci\'on uniforme como le sea posible. Justifique su razonamiento explicando sus desiciones de dise\~no, \eg indicando cu\'ales probabilidades de transici\'on fueron incrementadas o disminuidas. 
+
+\emph{Nota:} Este problema no tiene una respuesta `correcta'. Lo que busca es que ustedes practiquen con un problema de dise\~no minimamente realista. 
 
 \end{problem}
 \vspace{\baselineskip}
