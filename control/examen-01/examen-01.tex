@@ -1,0 +1,111 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{01}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\begin{center}
+\Large Sistemas de Control (EYAG-1005): Evaluaci\'on \numero \\[1ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino I \qquad
+\textbf{Instructor:} Luis Reyes, Jonathan Le\'on
+\end{center}
+\halfskip
+
+\input{../../article_compromiso-honor}
+
+% =============================================
+\begin{problem}
+Considere el modelo del sistema de control lateral de una nave espacial mostrado en la figura de abajo. La nave tiene una masa total de $M$ kilogramos y cuenta con dos propulsores laterales alimentados por una servo-v\'alvula. La servo-v\'alvula est\'a constitu\'ida por un tope de masa $m$, el cual se muestra en la figura como el bloque negro con forma trapezoidal, actuado por un motor DC que produce un torque $T(t)$ sobre un engranaje de radio $r$ que mueve el tope mediante una cremallera ideal. El tope est\'a unido a un resorte con constante de $K$ Newtons/m y experimenta una fricci\'on de $D$ Newtons/(m/s). En cuanto a los propulsores laterales, estos producen una fuerza lateral sobre la nave que es proporcional a la posici\'on del tope de la servo-v\'alvula. En particular, si denotamos a la posici\'on del tope de la servo-v\'alvula como $x(t)$ entonces la fuerza propulsiva lateral producida por los propulsores, denotada $f_p(t)$, satisface: 
+\[
+f_p(t) \, = \, K_f \, x(t)
+\]
+\begin{figure}[htb]
+\centering
+\def\svgwidth{\columnwidth}
+\input{figure_spacecraft.eps_tex}
+\end{figure}
+
+Con esto en mente: 
+\begin{itemize}
+\item \textbf{[5 Puntos]} Encuentre la funci\'on de transferencia: 
+\[
+G_1(s) \; = \; \frac{F_p(s)}{T(s)}
+\]
+\item \textbf{[2 Puntos]} Encuentre la funci\'on de transferencia: 
+\[
+G_2(s) \; = \; \frac{\Delta Y(s)}{T(s)}
+\]
+\item \textbf{[4 Puntos]} Bosqueje el lugar geom\'etrico de las ra\'ices \emph{(root locus)} para la funci\'on de transferencia $G_2(s)$. 
+
+\end{itemize}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% =============================================
+\begin{problem}
+Considere el sistema de control de cabeceo de un aeronave no-tripulada de alas fijas mostrado en la figura de abajo. La planta tiene funci\'on de transferencia: 
+\[
+G_P(s) \; = \; \frac{0.072}{ s^2 - 2.9 \, s - 1.7 }
+\]
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.8\columnwidth}
+\input{prob_estabilizar-el-avion.eps_tex}
+\end{figure}
+
+Con esto en mente: 
+\begin{itemize}
+\item \textbf{[1 Punto]} Es la planta estable?
+\item \textbf{[3 Puntos]} Bosqueje el lugar geom\'etrico de las ra\'ices \emph{(root locus)} para el caso cuando el compensador es un simple amplificador, \ie $G_C(s) = K$. Adem\'as, explique, usando su diagrama, si existe alg\'un valor de la ganancia $K$ para el cual el sistema es estable. 
+\item \textbf{[3 Puntos]} Bosqueje el lugar geom\'etrico de las ra\'ices \emph{(root locus)} para el caso cuando el compensador es el siguiente controlador PD: 
+\[
+G_C(s) = K \, ( s + z ), \qquad \text{donde } z = 2.9
+\]
+Adem\'as, explique, usando su diagrama, si existe alg\'un valor de la ganancia $K$ para el cual el sistema es estable. 
+\item \textbf{[4 Puntos]} Para el caso del controlador PD, encuentre valores para la ganancia $K$ y el cero $z$ de tal manera que en circuito cerrado el sistema tenga tiempo pico $T_p = 0.9$ segundos y sobrepaso del 15\%. 
+
+\end{itemize}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% =============================================
+\begin{problem}
+Considere el sistema de control de temperatura de un horno mostrado en la figura de abajo. La evoluci\'on en el tiempo del cambio de temperatura $\Delta T(t)$ del horno depende de cantidad de calor que produce una resistencia que es alimentada por un voltage $v(t)$. \linebreak En particular, la ecuaci\'on diferencial que gobierna al horno es: 
+\[
+15 \, \frac{d}{dt} \Delta T(t) + 340 \, \Delta T \, = \, 2.78 \, v(t)
+\]
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.8\columnwidth}
+\input{prob_estabilizar-el-avion.eps_tex}
+\end{figure}
+
+Con esto en mente: 
+\begin{itemize}
+\item \textbf{[2 Puntos]} Encuentre la funci\'on de transferencia de la planta, \ie del horno: 
+\[
+G_P(s) \; = \; \frac{\Delta T(s)}{V(s)}
+\]
+\item \textbf{[2 Puntos]} Para el caso cuando el compensador es un simple amplificador, \ie \linebreak $G_C(s) = K$, encuentre el error en estado estable para una entrada escal\'on de diez grados. 
+\item \textbf{[4 Puntos]} Para el caso cuando el compensador es un controlador PI, \ie
+\[
+G_P(s) \; = \; K_p + \frac{K_i}{s}
+\]
+encuentre valores para las ganancias $K_p$ y $K_i$ de tal manera que en circuito cerrado el sistema tenga un tiempo de asentamiento de dos minutos y un sobrepaso del 3\%. Adem\'as, reporte el error en estado estable para una entrada escal\'on de diez grados y una entrada rampa de un grado por minuto. 
+\end{itemize}
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
