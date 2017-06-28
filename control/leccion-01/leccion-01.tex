@@ -1,8 +1,8 @@
 % -----------------------------------------------------------------
 % Document class: Article
 \documentclass[ a4paper, twoside, 11pt]{article}
-\usepackage{../../../macros-general}
-\usepackage{../../../macros-article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
 % Number of the handout, quiz, exam, etc.
 \newcommand{\numero}{01}
 \setcounter{numero}{\numero}
@@ -18,7 +18,7 @@
 \end{center}
 \halfskip
 
-\input{../../../article_compromiso-honor}
+\input{../../article_compromiso-honor}
 
 % =============================================
 \begin{problem}
@@ -73,18 +73,17 @@ Ahora despejamos para la funci\'on de transferencia. Si empezamos con la \'ultim
 \begin{align*}
 & ( \, s + 1/RC \, ) \, V_C(s) \, = \, (1/RC) \, V(s)  \\
 & \Longrightarrow \;
-( \, s + 1/RC \, ) \, V_C(s) \, = \, (1/RC) \, (k_\omega/r_e) \, X(s)
+( \, s + 1/RC \, ) \, V_C(s) \, = \, (1/RC) \, (k_\omega/r_e) \, s \, X(s)
 \end{align*}
 Finalmente, reemplazando para $X(s)$ usando la primera ecuaci\'on, tenemos: 
 \[
 ( \, s + 1/RC \, ) \, V_C(s) \, = \,
-\left( \frac{k_\omega}{r_e \, R \, C} \right)
-\left( \frac{A}{m \, s^2 + k_f \, s + k_r} \right) P(s)
+\left( \frac{k_\omega}{r_e \, R \, C} \right) s \left( \frac{A}{m \, s^2 + k_f \, s + k_r} \right) P(s)
 \]
 En conclusi\'on: 
 \[
 G(s) \, = \, 
-\frac{A \, k_\omega}{ ( \, r_e \, R \, C \, ) \, ( \, s + 1/RC \, ) \, ( \, m \, s^2 + k_f \, s + k_r \, )}
+\frac{A \, k_\omega \, s}{ ( \, r_e \, R \, C \, ) \, ( \, s + 1/RC \, ) \, ( \, m \, s^2 + k_f \, s + k_r \, )}
 \]
 
 \end{problem}
