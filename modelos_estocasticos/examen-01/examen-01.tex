@@ -1,0 +1,63 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{01}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Examen \numero \\[1ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+\input{../../macros-espanol}
+\input{../../article_compromiso-honor}
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[7 Puntos]} Un operador de servicios de telefon\'ia celular est\'a en proceso de instalar una antena en un barrio promedio, donde se puede esperar que la antena reciba en promedio $\lambda$ paquetes de datos por ciclo (\eg por milisegundo). Para poder satisfacer esta demanda se instal\'o un buffer, \ie una cola, con capacidad de $M$ paquetes. Adem\'as se instalaron $n$ transmisores que operan en canales independientes pero ruidosos. En particular, cada transmisor que es encargado con el env\'io de un paquete de datos logra transmitirlo exitosamente con probabilidad $\gamma$. Cuando una transmisi\'on fracasa se mantiene al paquete en el buffer y se reintenta la transmisi\'on en el siguiente per\'iodo. 
+
+Cada ciclo de operaci\'on, digamos el \tavo ciclo, avanza de la siguiente manera: 
+\begin{enumerate}
+\item Se empieza el ciclo con $X_{t-1}$ paquetes en el b\'uffer. 
+\item Se reciben nuevos paquetes si el buffer lo permite, de tal manera que el nuevo n\'umero de paquetes en el buffer es: 
+\[
+\min \; \{ \; X_{t-1} + D_t \, , \; M \, \} \, ,
+\qquad \text{donde } D_t \sim \Poisson(\lambda)
+\]
+\item Los transmisores intentan enviar cuantos paquetes puedan. Si hay $n$ paquetes o m\'as en el buffer, entonces cada uno de los transmisores es asignado aleatoriamente a un \'unico paquete, y cada transmisor logra enviar su paquete con \'exito con probabilidad $\gamma$, independiente de los otros. Si hay menos de $n$ paquetes en el buffer se opera de la misma manera, pero en este caso habr\'a uno o m\'as transmisores a los que no se les asignen paquetes durante este ciclo. 
+\end{enumerate}
+
+Con todo esto en mente, construya un modelo de Cadena de Markov de este proceso para el caso particular cuando $M = 5$ y $n = 3$. En particular, explique cuales son los estados y liste todas las probabilidades de transici\'on positivas. Al desarrollar su respuesta por favor haga uso de la siguiente notaci\'on: 
+\begin{align*}
+p(\lambda;k) \, 
+& \define \, \Pr \, ( \, \Poisson(\lambda) = k \, ) \\
+\hat{p}(\lambda;k) \, 
+& \define \, \Pr \, ( \, \Poisson(\lambda) \geq k \, ) \\
+b(n,\gamma;k) \, 
+& \define \, \Pr \, ( \, \Binomial(n,\gamma) = k \, )
+\end{align*}
+
+\emph{Nota:} En vez de listar las probabilidades usted puede construir la matriz de transici\'on siempre y cuando la desarrolle con suficiente espacio, \eg en una hoja vac\'ia en formato retrato. 
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+
+
+
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
