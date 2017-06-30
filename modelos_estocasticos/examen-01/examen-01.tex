@@ -23,39 +23,84 @@
 
 % -----------------------------------------------------------------
 \begin{problem}
-\textbf{[7 Puntos]} Un operador de servicios de telefon\'ia celular est\'a en proceso de instalar una antena en un barrio promedio, donde se puede esperar que la antena reciba en promedio $\lambda$ paquetes de datos por ciclo (\eg por milisegundo). Para poder satisfacer esta demanda se instal\'o un buffer, \ie una cola, con capacidad de $M$ paquetes. Adem\'as se instalaron $n$ transmisores que operan en canales independientes pero ruidosos. En particular, cada transmisor que es encargado con el env\'io de un paquete de datos logra transmitirlo exitosamente con probabilidad $\gamma$. Cuando una transmisi\'on fracasa se mantiene al paquete en el buffer y se reintenta la transmisi\'on en el siguiente per\'iodo. 
+\textbf{[4 Puntos]} El call center de una empresa de servicios al consumidor recibe en promedio, $\lambda_1 = 11.9$ llamadas por hora para Servicio al Cliente y $\lambda_2 = 21.4$ llamadas por hora para Servicio T\'enico. De los clientes que llaman para Servicio al Cliente el $p_{12} = 5.3\%$ es referido a Servicio T\'ecnico, mientras que de los clientes que llaman a Servicio T\'ecnico el $p_{21} = 17.6\%$ es referido a Servicio al Cliente. Con esto en mente, calcule el n\'umero promedio de clientes por hora que debe atender el departamento de Servicio al Cliente y el deparatamento de Servicio T\'ecnico. 
 
-Cada ciclo de operaci\'on, digamos el \tavo ciclo, avanza de la siguiente manera: 
-\begin{enumerate}
-\item Se empieza el ciclo con $X_{t-1}$ paquetes en el b\'uffer. 
-\item Se reciben nuevos paquetes si el buffer lo permite, de tal manera que el nuevo n\'umero de paquetes en el buffer es: 
-\[
-\min \; \{ \; X_{t-1} + D_t \, , \; M \, \} \, ,
-\qquad \text{donde } D_t \sim \Poisson(\lambda)
-\]
-\item Los transmisores intentan enviar cuantos paquetes puedan. Si hay $n$ paquetes o m\'as en el buffer, entonces cada uno de los transmisores es asignado aleatoriamente a un \'unico paquete, y cada transmisor logra enviar su paquete con \'exito con probabilidad $\gamma$, independiente de los otros. Si hay menos de $n$ paquetes en el buffer se opera de la misma manera, pero en este caso habr\'a uno o m\'as transmisores a los que no se les asignen paquetes durante este ciclo. 
-\end{enumerate}
-
-Con todo esto en mente, construya un modelo de Cadena de Markov de este proceso para el caso particular cuando $M = 5$ y $n = 3$. En particular, explique cuales son los estados y liste todas las probabilidades de transici\'on positivas. Al desarrollar su respuesta por favor haga uso de la siguiente notaci\'on: 
-\begin{align*}
-p(\lambda;k) \, 
-& \define \, \Pr \, ( \, \Poisson(\lambda) = k \, ) \\
-\hat{p}(\lambda;k) \, 
-& \define \, \Pr \, ( \, \Poisson(\lambda) \geq k \, ) \\
-b(n,\gamma;k) \, 
-& \define \, \Pr \, ( \, \Binomial(n,\gamma) = k \, )
-\end{align*}
-
-\emph{Nota:} En vez de listar las probabilidades usted puede construir la matriz de transici\'on siempre y cuando la desarrolle con suficiente espacio, \eg en una hoja vac\'ia en formato retrato. 
+\emph{Sugerencia:} Piense en t\'erminos de divisi\'on y combinaci\'on de procesos. 
 
 \end{problem}
 \vspace{\baselineskip}
 
 % -----------------------------------------------------------------
 \begin{problem}
+Una m\'aquina caprichosa tiene el siguiente comportamiento: 
+\begin{itemize}
+\item Si la m\'aquina termina el d\'ia en buen estado, la misma terminar\'a el siguiente d\'ia en buen estado con probabilidad $p$. Caso contrario terminar\'a averiada. 
+\item Si la m\'aquina termina el d\'ia averiada entonces los t\'ecnicos se tomar\'an todo el siguiente d\'ia para intentar arreglarla. Con probabilidad $q$ lograr\'an arreglar la m\'aquina; caso contrario, tendr\'an que volverlo a intentar el siguiente d\'ia. 
+\end{itemize}
 
+Con todo esto en mente: 
+\begin{enumerate}[label=\alph*.]
+\item \textbf{[2 Puntos]} Construya un modelo de Cadena de Markov del comporamiento de esta m\'aquina. En particular, bosqueje el grafo y construya la matriz de transici\'on. 
+\item \textbf{[4 Puntos]} Encuentre la distribuci\'on en estado estable de su modelo. 
+\end{enumerate}
 
+\end{problem}
+\vspace{\baselineskip}
 
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[7 Puntos]} Un operador de servicios de telefon\'ia celular est\'a en proceso de instalar una antena en un barrio promedio, donde se puede esperar que la antena reciba un paquete de datos para su transmisi\'on durante cada ciclo (\eg durante cada milisegundo) con probabilidad $\lambda \in (0.99,1)$. Para poder satisfacer esta demanda se instal\'o un buffer con capacidad para $M$ paquetes de datos junto con $n$ transmisores que operan en canales independientes pero ruidosos; en particular, cada transmisor que es encargado con el env\'io de un paquete logra transmitirlo exitosamente con probabilidad $\mu \in (0.94,0.98)$. Cuando una transmisi\'on fracasa se mantiene al paquete en el buffer y se reintenta la transmisi\'on en el siguiente per\'iodo. 
+
+Cada ciclo de operaci\'on, digamos el \tavo ciclo, avanza de la siguiente manera: 
+\begin{enumerate}
+\item Se empieza el ciclo con $X_{t-1}$ paquetes en el b\'uffer. 
+\item Si el buffer no est\'a lleno, se puede recibir un nuevo paquete con probabilidad $\lambda$, de tal manera que el nuevo n\'umero de paquetes en el buffer es: 
+\[
+\min \; \{ \; X_{t-1} + D_t \, , \; M \, \} \, ,
+\qquad \text{donde } D_t \sim \Bernoulli(\lambda)
+\]
+\item Los transmisores intentan enviar cuantos paquetes puedan. Si hay $n$ paquetes o m\'as en el buffer, entonces cada uno de los transmisores es asignado aleatoriamente a un \'unico paquete, y cada transmisor logra enviar su paquete con \'exito con probabilidad $\mu$, independiente de los otros. Si hay menos de $n$ paquetes en el buffer se opera de la misma manera, pero en este caso habr\'a uno o m\'as transmisores a los que no ser\'a necesario asignarles paquetes durante este ciclo. 
+\end{enumerate}
+
+Con todo esto en mente, construya un modelo de Cadena de Markov de este proceso para el caso particular cuando $M = 5$ y $n = 3$. En particular, explique cuales son los estados y liste todas las probabilidades de transici\'on positivas. 
+
+\emph{Nota:} En vez de listar las probabilidades usted puede construir la matriz de transici\'on siempre y cuando la desarrolle con suficiente espacio, \eg en una hoja vac\'ia en formato retrato. 
+
+\emph{Sugerencia:} La suma de $k$ variables aleatorias i.i.d. con distribuci\'on $\Bernoulli(\mu)$ es una variable aleatoria con distribuci\'on $\Binomial(k,\mu)$. 
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+Considere un proceso estoc\'astico Markoviano $X_0, \, X_1, \, X_2,\, \dots$ cuyos estados son los enteros no-negativos. El proceso evoluciona de la siguiente manera: 
+\begin{itemize}
+\item Si $X_t = 0$ entonces: 
+\[
+X_{t+1} \; = \; 
+\begin{cases}
+1, & \text{con probabilidad } p \\
+0, & \text{con probabilidad } 1-p 
+\end{cases}
+\]
+\item Si $X_t > 0$ entonces: 
+\[
+X_{t+1} \; = \; 
+\begin{cases}
+X_t + 1, & \text{con probabilidad } p \\
+X_t - 1, & \text{con probabilidad } q \\
+X_t, & \text{con probabilidad } 1-p-q
+\end{cases}
+\]
+\end{itemize}
+
+Con todo esto en mente: 
+\begin{enumerate}[label=\alph*.]
+\item \textbf{[2 Puntos]} Construya un modelo de Cadena de Markov de nacimiento-muerte para este proceso. En particular, bosqueje el grafo para los primeros cuatro estados. 
+\item \textbf{[3 Puntos]} Escriba las ecuaciones de estado estable para los primeros tres estados. 
+\item \textbf{[2 Puntos]} Escriba las probabilidades en estado estable de los n\'umeros uno y dos en funci\'on de la probabilidad en estado estable del n\'umero cero. 
+\item \textbf{[3 Puntos]} Escriba una expresi\'on para la probabilidad en estado estable de cualquier n\'umero $i \geq 1$ como funci\'on de la probabilidad en estado estable del n\'umero cero. 
+\end{enumerate}
 
 \end{problem}
 \vspace{\baselineskip}
