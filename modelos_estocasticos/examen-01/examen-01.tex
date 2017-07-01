@@ -23,9 +23,20 @@
 
 % -----------------------------------------------------------------
 \begin{problem}
-\textbf{[4 Puntos]} El call center de una empresa de servicios al consumidor recibe en promedio, $\lambda_1 = 11.9$ llamadas por hora para Servicio al Cliente y $\lambda_2 = 21.4$ llamadas por hora para Servicio T\'enico. De los clientes que llaman para Servicio al Cliente el $p_{12} = 5.3\%$ es referido a Servicio T\'ecnico, mientras que de los clientes que llaman a Servicio T\'ecnico el $p_{21} = 17.6\%$ es referido a Servicio al Cliente. Con esto en mente, calcule el n\'umero promedio de clientes por hora que debe atender el departamento de Servicio al Cliente y el deparatamento de Servicio T\'ecnico. 
+\textbf{[4 Puntos]} El call center de una empresa de servicios al consumidor recibe en promedio, $\lambda_1 = 11.9$ llamadas por hora para Servicio al Cliente y $\lambda_2 = 21.4$ llamadas por hora para Servicio T\'ecnico. De los clientes que llaman para Servicio al Cliente el $p_{12} = 5.3\%$ es referido a Servicio T\'ecnico, mientras que de los clientes que llaman a Servicio T\'ecnico el $p_{21} = 17.6\%$ es referido a Servicio al Cliente. Con esto en mente, calcule el n\'umero promedio de clientes por hora que debe atender el departamento de Servicio al Cliente y el deparatamento de Servicio T\'ecnico. 
 
 \emph{Sugerencia:} Piense en t\'erminos de divisi\'on y combinaci\'on de procesos. 
+
+\emph{Soluci\'on:} Pensemos en las llamadas como siendo generadas por dos Procesos Poisson con intensidades $\lambda_1$ y $\lambda_2$. En este contexto, podemos pensar que en cada arribo al primer proceso se lanza una moneda sesgada con probabilidad de cara igual a $p_{12}$, independiente de todos los otros arribos. Si sale cara entonces el arribo es enviado al segundo proceso, caso contrario este se mantiene en el primer proceso. Con estas consideraciones en mente, recordando nuestros resultados para divisi\'on y combinaci\'on de procesos Poisson vemos que el n\'umero promedio de clientes por hora que debe atender el departamento de Servicio al Cliente es: 
+\[
+\lambda_1 \, ( 1 - p_{12} ) + \lambda_2 \, p_{21} \; = \;
+(11.9)(1-0.053) + (21.4)(0.176) \; = \; 15.04
+\]
+Similarmente, el n\'umero promedio de clientes por hora que debe atender el departamento de Servicio T\'ecnico es: 
+\[
+\lambda_1 \, p_{12} + \lambda_2 \, ( 1 - p_{21} ) \; = \;
+(11.9)(0.053) + (21.4)(1-0.176) \; = \; 18.26
+\]
 
 \end{problem}
 \vspace{\baselineskip}
@@ -43,6 +54,38 @@ Con todo esto en mente:
 \item \textbf{[2 Puntos]} Construya un modelo de Cadena de Markov del comporamiento de esta m\'aquina. En particular, bosqueje el grafo y construya la matriz de transici\'on. 
 \item \textbf{[4 Puntos]} Encuentre la distribuci\'on en estado estable de su modelo. 
 \end{enumerate}
+
+\emph{Soluci\'on al literal (a):} Los estados son: 
+\begin{enumerate}
+\item La m\'aquina termina el d\'ia en buen estado. 
+\item La m\'aquina termina el d\'ia averiada. 
+\end{enumerate}
+La matriz de transici\'on es: 
+\[
+\vec{P} \; = \;
+\left[
+\begin{array}{cc}
+p & 1-p \\ q & 1-q
+\end{array}
+\right]
+\]
+
+\emph{Soluci\'on al literal (b):} La ecuaci\'on de estado estable para el primer estado es: 
+\[
+\pi_1 \; = \; p \, \pi_1 + q \, \pi_2
+\]
+Consecuentemente: 
+\[
+\pi_2 \; = \; \left( \frac{1-p}{q} \right) \pi_1
+\]
+A su vez, dado que $\pi_1 + \pi_2 = 1$, vemos que: 
+\[
+\left( 1 + \frac{1-p}{q} \right) \pi_1 \; = \; 1
+\qquad \Longrightarrow \qquad
+\pi_1 \; = \; \frac{q}{1-p+q}
+\qquad \Longrightarrow \qquad
+\pi_2 \; = \; \frac{1-p}{1-p+q}
+\]
 
 \end{problem}
 \vspace{\baselineskip}
@@ -67,6 +110,127 @@ Con todo esto en mente, construya un modelo de Cadena de Markov de este proceso 
 \emph{Nota:} En vez de listar las probabilidades usted puede construir la matriz de transici\'on siempre y cuando la desarrolle con suficiente espacio, \eg en una hoja vac\'ia en formato retrato. 
 
 \emph{Sugerencia:} La suma de $k$ variables aleatorias i.i.d. con distribuci\'on $\Bernoulli(\mu)$ es una variable aleatoria con distribuci\'on $\Binomial(k,\mu)$. 
+
+\textbf{Soluci\'on:} Consideramos cada posible estado: 
+\begin{itemize}
+% ---------------------------------------------------------
+\item Si $X_{t-1} = 0$ entonces: 
+\begin{itemize}
+\item Si $X_t = 0$ es porque hubo un arribo de paquete y una transmisi\'on exitosa o porque no hubo un arribo de paquete, \iec
+\[
+\vec{P}(0,0) \; = \; \lambda \, \mu + (1-\lambda)
+\]
+\item Si $X_t = 1$ es porque hubo un arribo de paquete y una transmisi\'on fallida, \iec
+\[
+\vec{P}(0,1) \; = \; \lambda \, (1-\mu)
+\]
+\end{itemize}
+% ---------------------------------------------------------
+\item Si $X_{t-1} = 1$ entonces: 
+\begin{itemize}
+\item Si $X_t = 0$ es porque hubo un arribo de paquete y dos de las dos transmisiones fueron exitosas o porque no hubo un arribo de paquete y la \'unica transmisi\'on fue exitosa, \iec
+\[
+\vec{P}(1,0) \; = \; \lambda \, \mu^2 + (1-\lambda) \, \mu
+\]
+\item Si $X_t = 1$ es porque hubo un arribo de paquete y una de las dos transmisiones fue exitosa o porque no hubo un arribo de paquete y la \'unica transmisi\'on fue fallida, \iec
+\[
+\vec{P}(1,1) \; = \; \lambda \, { 2 \choose 1 } \, \mu \, (1-\mu) + (1-\lambda) \, (1-\mu)
+\]
+\item Si $X_t = 2$ es porque hubo un arribo de paquete y dos de las dos transmisiones fueron fallidas, \iec
+\[
+\vec{P}(1,2) \; = \; \lambda \, (1-\mu)^2
+\]
+\end{itemize}
+% ---------------------------------------------------------
+\item Si $X_{t-1} = 2$ entonces: 
+\begin{itemize}
+\item Si $X_t = 0$ es porque hubo un arribo de paquete y tres de las tres transmisiones fueron exitosas o porque no hubo un arribo de paquete y dos de las dos transmisiones fueron exitosas, \iec
+\[
+\vec{P}(2,0) \; = \; \lambda \, \mu^3 + (1-\lambda) \, \mu^2
+\]
+\item Si $X_t = 1$ es porque hubo un arribo de paquete y dos de las tres transmisiones fueron exitosas o porque no hubo un arribo de paquete y una de las dos transmisiones fue exitosa, \iec
+\[
+\vec{P}(2,1) \; = \; \lambda \, { 3 \choose 2 } \, \mu^2 \, (1-\mu) + (1-\lambda) \, { 2 \choose 1 } \, \mu \, (1-\mu)
+\]
+\item Si $X_t = 2$ es porque hubo un arribo de paquete y una de las tres transmisiones fue exitosa o porque no hubo un arribo de paquete y dos de las dos transmisiones fueron fallidas, \iec
+\[
+\vec{P}(2,2) \; = \; \lambda \, { 3 \choose 1 } \, \mu \, (1-\mu)^2 + (1-\lambda) \, (1-\mu)^2
+\]
+\item Si $X_t = 3$ es porque hubo un arribo de paquete y tres de las tres transmisiones fueron fallidas, \iec
+\[
+\vec{P}(2,3) \; = \; \lambda \, (1-\mu)^3
+\]
+\end{itemize}
+% ---------------------------------------------------------
+\item Si $X_{t-1} = 3$ entonces: 
+\begin{itemize}
+\item Si $X_t = 0$ es porque no hubo un arribo de paquete y tres de las tres transmisiones fueron exitosas, \iec
+\[
+\vec{P}(3,0) \; = \; (1-\lambda) \, \mu^3
+\]
+\item Si $X_t = 1$ es porque hubo un arribo de paquete y tres de las tres transmisiones fueron exitosas o porque no hubo un arribo de paquete y dos de las tres transmisiones fueron exitosas, \iec
+\[
+\vec{P}(3,1) \; = \; \lambda \, \mu^3 + (1-\lambda) \, { 3 \choose 2 } \, \mu^2 \, (1-\mu)
+\]
+\item Si $X_t = 2$ es porque hubo un arribo de paquete y dos de las tres transmisiones fueron exitosas o porque no hubo un arribo de paquete y una de las tres transmisiones fue exitosa, \iec
+\[
+\vec{P}(3,2) \; = \; \lambda \, { 3 \choose 2 } \, \mu^2 \, (1-\mu) + (1-\lambda) \, { 3 \choose 1 } \, \mu \, (1-\mu)^2
+\]
+\item Si $X_t = 3$ es porque hubo un arribo de paquete y una de las tres transmisiones fue exitosa o porque no hubo un arribo de paquete y tres de las tres transmisiones fueron fallidas, \iec
+\[
+\vec{P}(3,3) \; = \; \lambda \, { 3 \choose 1 } \, \mu \, (1-\mu)^2 + (1-\lambda) \, (1-\mu)^3
+\]
+\item Si $X_t = 4$ es porque hubo un arribo de paquete y tres de las tres transmisiones fueron fallidas, \iec
+\[
+\vec{P}(3,4) \; = \; \lambda \, (1-\mu)^3
+\]
+\end{itemize}
+% ---------------------------------------------------------
+\item Si $X_{t-1} = 4$ entonces: 
+\begin{itemize}
+\item Si $X_t = 1$ es porque no hubo un arribo de paquete y tres de las tres transmisiones fueron exitosas, \iec
+\[
+\vec{P}(4,1) \; = \; (1-\lambda) \, \mu^3
+\]
+\item Si $X_t = 2$ es porque hubo un arribo de paquete y tres de las tres transmisiones fueron exitosas o porque no hubo un arribo de paquete y dos de las tres transmisiones fueron exitosas, \iec
+\[
+\vec{P}(4,2) \; = \; \lambda \, \mu^3 + (1-\lambda) \, { 3 \choose 2 } \, \mu^2 \, (1-\mu)
+\]
+\item Si $X_t = 3$ es porque hubo un arribo de paquete y dos de las tres transmisiones fueron exitosas o porque no hubo un arribo de paquete y una de las tres transmisiones fue exitosa, \iec
+\[
+\vec{P}(4,3) \; = \; \lambda \, { 3 \choose 2 } \, \mu^2 \, (1-\mu) + (1-\lambda) \, { 3 \choose 1 } \, \mu \, (1-\mu)^2
+\]
+\item Si $X_t = 4$ es porque hubo un arribo de paquete y una de las tres transmisiones fue exitosa o porque no hubo un arribo de paquete y tres de las tres transmisiones fueron fallidas, \iec
+\[
+\vec{P}(4,4) \; = \; \lambda \, { 3 \choose 1 } \, \mu \, (1-\mu)^2 + (1-\lambda) \, (1-\mu)^3
+\]
+\item Si $X_t = 5$ es porque hubo un arribo de paquete y tres de las tres transmisiones fueron fallidas, \iec
+\[
+\vec{P}(4,5) \; = \; \lambda \, (1-\mu)^3
+\]
+\end{itemize}
+% ---------------------------------------------------------
+\item Si $X_{t-1} = 5$ entonces: 
+\begin{itemize}
+\item Si $X_t = 2$ es porque tres de las tres transmisiones fueron exitosas, \iec
+\[
+\vec{P}(5,2) \; = \; \mu^3
+\]
+\item Si $X_t = 3$ es porque dos de las tres transmisiones fueron exitosas, \iec
+\[
+\vec{P}(5,3) \; = \; { 3 \choose 2 } \, \mu^2 \, (1-\mu)
+\]
+\item Si $X_t = 4$ es porque una de las tres transmisiones fue exitosa, \iec
+\[
+\vec{P}(4,3) \; = \; { 3 \choose 1 } \, \mu \, (1-\mu)^2
+\]
+\item Si $X_t = 5$ es porque tres de las tres transmisiones fueron fallidas, \iec
+\[
+\vec{P}(4,4) \; = \; (1-\mu)^3
+\]
+\end{itemize}
+\end{itemize}
+
 
 \end{problem}
 \vspace{\baselineskip}
