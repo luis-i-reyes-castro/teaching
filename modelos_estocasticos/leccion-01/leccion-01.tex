@@ -24,7 +24,146 @@
 \begin{problem}
 \textbf{[5 Puntos]} Los sistemas de telecomunicaciones digitales siempre involucran aleatoriedad, puesto que las transmisiones inal\'ambricas son altamente ruidosas, especialmente sobre largas distancias. Considere un transmisor sobre un canal ruidoso donde, en cada ciclo, \linebreak si hay al menos un paquete de datos en cola entonces el paquete es transmitido exitosamente con probabilidad $p$; caso contrario, el transmisor intentar\'a reenviar el paquete en el siguiente ciclo. Suponga adem\'as que la cola del transmisor tiene tama\~no $B$, lo que significa que si durante un ciclo hay $B$ paquetes en cola entonces cualquier otro paquete que llegue a la cola durante ese ciclo ser\'a rechazado, y por ende perdido para siempre. Finalmente, suponga que los n\'umeros de paquetes que arriban a la cola del transmisor en cada ciclo son variables aleatoria i.i.d. con distribuci\'on Poisson con par\'ametro $\lambda$. 
 
-Con esto en mente, modele la situaci\'on antes mencionada como una Cadena de Markov para el caso cuando $p = 0.98$, $B = 5$ y $\lambda = 0.72$. En particular, provea el grafo de la cadena y la matriz de transici\'on. 
+Con esto en mente, modele la situaci\'on antes mencionada como una Cadena de Markov para el caso cuando $B = 4$. En particular, provea el grafo de la cadena y la matriz de transici\'on. 
+
+\emph{Soluci\'on:} Consideramos cada posible estado: 
+\begin{itemize}
+% ---------------------------------------------------------
+\item Si $X_t = 0$ entonces: 
+\begin{itemize}
+\item Si $X_{t+1} = k$ para cualquier $k \in \{ 0, 1, 2, 3 \}$ es porque hubieron $k$ arribos, \iec
+\[
+\forall k \in \{ 0, 1, 2, 3 \} \; \colon \;
+\vec{P}_{0k} \; = \;
+\Pr \, ( \, \Poisson(\lambda) = k \, ) \; = \; 
+\frac{ \lambda^k \, e^{-\lambda} }{k!}
+\]
+\item Si $X_{t+1} = 4$ es porque hubieron cuatro o m\'as arribos, \iec
+\[
+\vec{P}_{04} \; = \;
+\Pr \, ( \, \Poisson(\lambda) \geq 4 \, ) \; = \; 
+\sum_{k=4}^{\infty} \frac{ \lambda^k \, e^{-\lambda} }{k!}
+\]
+\end{itemize}
+% ---------------------------------------------------------
+\item Si $X_t = 1$ entonces: 
+\begin{itemize}
+\item Si $X_{t+1} = 0$ es porque hubo un env\'io exitoso y ningun arribo, \iec 
+\[
+\vec{P}_{10} \; = \;
+p \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \; = \; 
+p \, e^{-\lambda}
+\]
+\item Si $X_{t+1} = 1$ es porque hubo un env\'io exitoso y un arribo, o porque el env\'io fracas\'o y no hubo un arribo, \iec 
+\begin{align*}
+\vec{P}_{11} \; 
+& = \; p \, \Pr \, ( \, \Poisson(\lambda) = 1 \, ) + 
+(1-p) \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \\
+& = \; p \, \lambda \, e^{-\lambda} + (1-p) \, e^{-\lambda}
+\end{align*}
+\item Si $X_{t+1} = 2$ es porque hubo un env\'io exitoso y dos arribos, o porque el env\'io fracas\'o y hubo un arribo, \iec 
+\begin{align*}
+\vec{P}_{12} \; 
+& = \; p \, \Pr \, ( \, \Poisson(\lambda) = 2 \, ) + 
+(1-p) \, \Pr \, ( \, \Poisson(\lambda) = 1 \, ) \\
+& = \; p \, \frac{\lambda^2 \, e^{-\lambda}}{2!} 
++ (1-p) \, \lambda \, e^{-\lambda}
+\end{align*}
+\item Si $X_{t+1} = 3$ es porque hubo un env\'io exitoso y tres arribos, o porque el env\'io fracas\'o y hubo dos arribos, \iec 
+\begin{align*}
+\vec{P}_{13} \; 
+& = \; p \, \Pr \, ( \, \Poisson(\lambda) = 3 \, ) + 
+(1-p) \, \Pr \, ( \, \Poisson(\lambda) = 2 \, ) \\
+& = \; p \, \frac{\lambda^3 \, e^{-\lambda}}{3!} 
++ (1-p) \, \frac{\lambda^2 \, e^{-\lambda}}{2!} 
+\end{align*}
+\item Si $X_{t+1} = 4$ es porque hubo un env\'io exitoso y cuatro o m\'as arribos, o porque el env\'io fracas\'o y hubo tres o m\'as arribos, \iec 
+\begin{align*}
+\vec{P}_{14} \; 
+& = \; p \, \Pr \, ( \, \Poisson(\lambda) \geq 4 \, ) + 
+(1-p) \, \Pr \, ( \, \Poisson(\lambda) \geq 3 \, ) \\
+& = \; 
+p \, \sum_{k=4}^{\infty} \frac{\lambda^k \, e^{-\lambda}}{k!} 
++ (1-p) \, \sum_{k=3}^{\infty} \frac{\lambda^k \, e^{-\lambda}}{k!} 
+\end{align*}
+\end{itemize}
+% ---------------------------------------------------------
+\item Si $X_t = 2$ entonces: 
+\begin{itemize}
+\item Si $X_{t+1} = 1$ es porque hubo un env\'io exitoso y ningun arribo, \iec 
+\[
+\vec{P}_{21} \; = \;
+p \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \; = \; 
+p \, e^{-\lambda}
+\]
+\item Si $X_{t+1} = 2$ es porque hubo un env\'io exitoso y un arribo, o porque el env\'io fracas\'o y no hubo un arribo, \iec 
+\begin{align*}
+\vec{P}_{22} \; 
+& = \; p \, \Pr \, ( \, \Poisson(\lambda) = 1 \, ) + 
+(1-p) \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \\
+& = \; p \, \lambda \, e^{-\lambda} + (1-p) \, e^{-\lambda}
+\end{align*}
+\item Si $X_{t+1} = 3$ es porque hubo un env\'io exitoso y dos arribos, o porque el env\'io fracas\'o y hubo un arribo, \iec 
+\begin{align*}
+\vec{P}_{23} \; 
+& = \; p \, \Pr \, ( \, \Poisson(\lambda) = 2 \, ) + 
+(1-p) \, \Pr \, ( \, \Poisson(\lambda) = 1 \, ) \\
+& = \; p \, \frac{\lambda^2 \, e^{-\lambda}}{2!} 
++ (1-p) \, \lambda \, e^{-\lambda}
+\end{align*}
+\item Si $X_{t+1} = 4$ es porque hubo un env\'io exitoso y tres o m\'as arribos, o porque el env\'io fracas\'o y hubo dos o m\'as arribos, \iec 
+\begin{align*}
+\vec{P}_{24} \; 
+& = \; p \, \Pr \, ( \, \Poisson(\lambda) \geq 3 \, ) + 
+(1-p) \, \Pr \, ( \, \Poisson(\lambda) \geq 2 \, ) \\
+& = \; 
+p \, \sum_{k=3}^{\infty} \frac{\lambda^k \, e^{-\lambda}}{k!} 
++ (1-p) \, \sum_{k=2}^{\infty} \frac{\lambda^k \, e^{-\lambda}}{k!} 
+\end{align*}
+\end{itemize}
+% ---------------------------------------------------------
+\item Si $X_t = 3$ entonces: 
+\begin{itemize}
+\item Si $X_{t+1} = 2$ es porque hubo un env\'io exitoso y ningun arribo, \iec 
+\[
+\vec{P}_{32} \; = \;
+p \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \; = \; 
+p \, e^{-\lambda}
+\]
+\item Si $X_{t+1} = 3$ es porque hubo un env\'io exitoso y un arribo, o porque el env\'io fracas\'o y no hubo un arribo, \iec 
+\begin{align*}
+\vec{P}_{33} \; 
+& = \; p \, \Pr \, ( \, \Poisson(\lambda) = 1 \, ) + 
+(1-p) \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \\
+& = \; p \, \lambda \, e^{-\lambda} + (1-p) \, e^{-\lambda}
+\end{align*}
+\item Si $X_{t+1} = 4$ es porque hubo un env\'io exitoso y dos o m\'as arribos, o porque el env\'io fracas\'o y hubo uno o m\'as arribos, \iec 
+\begin{align*}
+\vec{P}_{34} \; 
+& = \; p \, \Pr \, ( \, \Poisson(\lambda) \geq 2 \, ) + 
+(1-p) \, \Pr \, ( \, \Poisson(\lambda) \geq 1 \, ) \\
+& = \; 
+p \, \sum_{k=2}^{\infty} \frac{\lambda^k \, e^{-\lambda}}{k!} 
++ (1-p) \, ( \, 1 - e^{-\lambda} \, )
+\end{align*}
+\end{itemize}
+% ---------------------------------------------------------
+\item Si $X_t = 4$ entonces: 
+\begin{itemize}
+\item Si $X_{t+1} = 3$ es porque hubo un env\'io exitoso y ningun arribo, \iec 
+\[
+\vec{P}_{43} \; = \;
+p \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \; = \; 
+p \, e^{-\lambda}
+\]
+\item Caso contrario $X_{t+1} = 4$, \iec 
+\[
+\vec{P}_{44} \; = \; 1 - p \, e^{-\lambda}
+\]
+\end{itemize}
+
+\end{itemize}
+
 
 \end{problem}
 \vspace{\baselineskip}
