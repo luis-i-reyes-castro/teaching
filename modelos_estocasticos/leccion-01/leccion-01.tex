@@ -12,7 +12,7 @@
 \allowdisplaybreaks
 
 \begin{center}
-\Large Modelos Estoc\'asticos (IND-1008): Lecci\'on \numero \\[1ex]
+\Large Modelos Estoc\'asticos (INDG-1008): Lecci\'on \numero \\[1ex]
 \small \textbf{Semestre:} 2017-2018 T\'ermino I \qquad
 \textbf{Instructor:} Luis I. Reyes Castro
 \end{center}
@@ -51,37 +51,37 @@ Con esto en mente, modele la situaci\'on antes mencionada como una Cadena de Mar
 \item Si $X_{t+1} = 0$ es porque hubo un env\'io exitoso y ningun arribo, \iec 
 \[
 \vec{P}_{10} \; = \;
-p \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \; = \; 
+p \cdot \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \; = \;
 p \, e^{-\lambda}
 \]
 \item Si $X_{t+1} = 1$ es porque hubo un env\'io exitoso y un arribo, o porque el env\'io fracas\'o y no hubo un arribo, \iec 
 \begin{align*}
 \vec{P}_{11} \; 
-& = \; p \, \Pr \, ( \, \Poisson(\lambda) = 1 \, ) + 
-(1-p) \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \\
+& = \; p \cdot \Pr \, ( \, \Poisson(\lambda) = 1 \, ) +
+(1-p) \cdot \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \\
 & = \; p \, \lambda \, e^{-\lambda} + (1-p) \, e^{-\lambda}
 \end{align*}
 \item Si $X_{t+1} = 2$ es porque hubo un env\'io exitoso y dos arribos, o porque el env\'io fracas\'o y hubo un arribo, \iec 
 \begin{align*}
 \vec{P}_{12} \; 
-& = \; p \, \Pr \, ( \, \Poisson(\lambda) = 2 \, ) + 
-(1-p) \, \Pr \, ( \, \Poisson(\lambda) = 1 \, ) \\
+& = \; p \cdot \Pr \, ( \, \Poisson(\lambda) = 2 \, ) +
+(1-p) \cdot \Pr \, ( \, \Poisson(\lambda) = 1 \, ) \\
 & = \; p \, \frac{\lambda^2 \, e^{-\lambda}}{2!} 
 + (1-p) \, \lambda \, e^{-\lambda}
 \end{align*}
 \item Si $X_{t+1} = 3$ es porque hubo un env\'io exitoso y tres arribos, o porque el env\'io fracas\'o y hubo dos arribos, \iec 
 \begin{align*}
 \vec{P}_{13} \; 
-& = \; p \, \Pr \, ( \, \Poisson(\lambda) = 3 \, ) + 
-(1-p) \, \Pr \, ( \, \Poisson(\lambda) = 2 \, ) \\
+& = \; p \cdot \Pr \, ( \, \Poisson(\lambda) = 3 \, ) +
+(1-p) \cdot \Pr \, ( \, \Poisson(\lambda) = 2 \, ) \\
 & = \; p \, \frac{\lambda^3 \, e^{-\lambda}}{3!} 
 + (1-p) \, \frac{\lambda^2 \, e^{-\lambda}}{2!} 
 \end{align*}
 \item Si $X_{t+1} = 4$ es porque hubo un env\'io exitoso y cuatro o m\'as arribos, o porque el env\'io fracas\'o y hubo tres o m\'as arribos, \iec 
 \begin{align*}
 \vec{P}_{14} \; 
-& = \; p \, \Pr \, ( \, \Poisson(\lambda) \geq 4 \, ) + 
-(1-p) \, \Pr \, ( \, \Poisson(\lambda) \geq 3 \, ) \\
+& = \; p \cdot \Pr \, ( \, \Poisson(\lambda) \geq 4 \, ) +
+(1-p) \cdot \Pr \, ( \, \Poisson(\lambda) \geq 3 \, ) \\
 & = \; 
 p \, \sum_{k=4}^{\infty} \frac{\lambda^k \, e^{-\lambda}}{k!} 
 + (1-p) \, \sum_{k=3}^{\infty} \frac{\lambda^k \, e^{-\lambda}}{k!} 
@@ -93,30 +93,30 @@ p \, \sum_{k=4}^{\infty} \frac{\lambda^k \, e^{-\lambda}}{k!}
 \item Si $X_{t+1} = 1$ es porque hubo un env\'io exitoso y ningun arribo, \iec 
 \[
 \vec{P}_{21} \; = \;
-p \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \; = \; 
+p \cdot \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \; = \;
 p \, e^{-\lambda}
 \]
 \item Si $X_{t+1} = 2$ es porque hubo un env\'io exitoso y un arribo, o porque el env\'io fracas\'o y no hubo un arribo, \iec 
 \begin{align*}
 \vec{P}_{22} \; 
-& = \; p \, \Pr \, ( \, \Poisson(\lambda) = 1 \, ) + 
-(1-p) \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \\
+& = \; p \cdot \Pr \, ( \, \Poisson(\lambda) = 1 \, ) +
+(1-p) \cdot \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \\
 & = \; p \, \lambda \, e^{-\lambda} + (1-p) \, e^{-\lambda}
 \end{align*}
 \item Si $X_{t+1} = 3$ es porque hubo un env\'io exitoso y dos arribos, o porque el env\'io fracas\'o y hubo un arribo, \iec 
 \begin{align*}
 \vec{P}_{23} \; 
-& = \; p \, \Pr \, ( \, \Poisson(\lambda) = 2 \, ) + 
-(1-p) \, \Pr \, ( \, \Poisson(\lambda) = 1 \, ) \\
+& = \; p \cdot \Pr \, ( \, \Poisson(\lambda) = 2 \, ) +
+(1-p) \cdot \Pr \, ( \, \Poisson(\lambda) = 1 \, ) \\
 & = \; p \, \frac{\lambda^2 \, e^{-\lambda}}{2!} 
 + (1-p) \, \lambda \, e^{-\lambda}
 \end{align*}
 \item Si $X_{t+1} = 4$ es porque hubo un env\'io exitoso y tres o m\'as arribos, o porque el env\'io fracas\'o y hubo dos o m\'as arribos, \iec 
 \begin{align*}
 \vec{P}_{24} \; 
-& = \; p \, \Pr \, ( \, \Poisson(\lambda) \geq 3 \, ) + 
-(1-p) \, \Pr \, ( \, \Poisson(\lambda) \geq 2 \, ) \\
-& = \; 
+& = \; p \cdot \Pr \, ( \, \Poisson(\lambda) \geq 3 \, ) +
+(1-p) \cdot \Pr \, ( \, \Poisson(\lambda) \geq 2 \, ) \\
+& = \;
 p \, \sum_{k=3}^{\infty} \frac{\lambda^k \, e^{-\lambda}}{k!} 
 + (1-p) \, \sum_{k=2}^{\infty} \frac{\lambda^k \, e^{-\lambda}}{k!} 
 \end{align*}
@@ -127,21 +127,21 @@ p \, \sum_{k=3}^{\infty} \frac{\lambda^k \, e^{-\lambda}}{k!}
 \item Si $X_{t+1} = 2$ es porque hubo un env\'io exitoso y ningun arribo, \iec 
 \[
 \vec{P}_{32} \; = \;
-p \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \; = \; 
+p \cdot \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \; = \;
 p \, e^{-\lambda}
 \]
 \item Si $X_{t+1} = 3$ es porque hubo un env\'io exitoso y un arribo, o porque el env\'io fracas\'o y no hubo un arribo, \iec 
 \begin{align*}
 \vec{P}_{33} \; 
-& = \; p \, \Pr \, ( \, \Poisson(\lambda) = 1 \, ) + 
-(1-p) \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \\
+& = \; p \cdot \Pr \, ( \, \Poisson(\lambda) = 1 \, ) +
+(1-p) \cdot \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \\
 & = \; p \, \lambda \, e^{-\lambda} + (1-p) \, e^{-\lambda}
 \end{align*}
 \item Si $X_{t+1} = 4$ es porque hubo un env\'io exitoso y dos o m\'as arribos, o porque el env\'io fracas\'o y hubo uno o m\'as arribos, \iec 
 \begin{align*}
 \vec{P}_{34} \; 
-& = \; p \, \Pr \, ( \, \Poisson(\lambda) \geq 2 \, ) + 
-(1-p) \, \Pr \, ( \, \Poisson(\lambda) \geq 1 \, ) \\
+& = \; p \cdot \Pr \, ( \, \Poisson(\lambda) \geq 2 \, ) +
+(1-p) \cdot \Pr \, ( \, \Poisson(\lambda) \geq 1 \, ) \\
 & = \; 
 p \, \sum_{k=2}^{\infty} \frac{\lambda^k \, e^{-\lambda}}{k!} 
 + (1-p) \, ( \, 1 - e^{-\lambda} \, )
@@ -153,7 +153,7 @@ p \, \sum_{k=2}^{\infty} \frac{\lambda^k \, e^{-\lambda}}{k!}
 \item Si $X_{t+1} = 3$ es porque hubo un env\'io exitoso y ningun arribo, \iec 
 \[
 \vec{P}_{43} \; = \;
-p \, \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \; = \; 
+p \cdot \Pr \, ( \, \Poisson(\lambda) = 0 \, ) \; = \;
 p \, e^{-\lambda}
 \]
 \item Caso contrario $X_{t+1} = 4$, \iec 
@@ -163,7 +163,6 @@ p \, e^{-\lambda}
 \end{itemize}
 
 \end{itemize}
-
 
 \end{problem}
 \vspace{\baselineskip}
@@ -205,7 +204,50 @@ Con esto en mente:
 \item \textbf{[2 Puntos]} Calcule el porcentaje del tiempo que Donald Trump insistir\'a en construir la pared con M\'exico. 
 \end{itemize}
 
+\emph{Soluci\'on:}
+\begin{itemize}
+\item El an\'alisis de estados es como sigue: 
+\begin{itemize}
+\item Los estados transitorios son el 1 (Elecciones) y el 4 (NAFTA). 
+\item Los estados recurrentes son el 2 (Rusia), el 3 (Pared) y el 5 (Twitter). 
+\item Existe una \'unica clase recurrente compuesta por tres estados recurrentes. 
+\item La cadena es aperi\'odica. 
+\item La cadena no es irreducible puesto que tiene estados transitorios. 
+\end{itemize}
+\item Las ecuaciones de estado estacionario son: 
+\begin{align*}
+\pi_1 \; & \; = \; 
+0.5 \, \pi_1 + 0.9 \, \pi_4 \\
+\pi_2 \; & \; = \; 
+0.6 \, \pi_2 + \pi_3 + 0.1 \, \pi_4 + 0.3 \, \pi_5 \\
+\pi_3 \; & \; = \; 0.25 \, \pi_1 + 0.3 \, \pi_5 \\
+\pi_4 \; & \; = \; 0.25 \, \pi_1 \\
+\pi_5 \; & \; = \; 0.4 \, \pi_2 + 0.4 \, \pi_5
+\end{align*}
+Recordando que los estados 1 y 4 son transitorios, tenemos $\pi_1 = \pi_4 = 0$. A su vez esto implica que las ecuaciones asociadas con esos estados son triviales, por lo que nuestro sistema de ecuaciones se reduce a: 
+\begin{align*}
+\pi_2 \; & \; = \; 
+0.6 \, \pi_2 + \pi_3 + 0.3 \, \pi_5 \\
+\pi_3 \; & \; = \; 0.3 \, \pi_5 \\
+\pi_5 \; & \; = \; 0.4 \, \pi_2 + 0.4 \, \pi_5
+\end{align*}
+Finalmente, reemplazando cualquiera de las tres ecuaciones anteriores, \eg digamos que la \'ultima, por la condici\'on de que la suma de las probabilidades debe ser uno, \linebreak llegamos al siguiente sistema: 
+\begin{align*}
+\pi_2 \; & \; = \; 
+0.6 \, \pi_2 + \pi_3 + 0.3 \, \pi_5 \\
+\pi_3 \; & \; = \; 0.3 \, \pi_5 \\
+\pi_2 + \pi_3 + \pi_5 \; & \; = \; 1
+\end{align*}
+\item Las probabilidades en estado estable son: 
+\[
+\pi_2 \; \simeq \; 0.536 \qquad \qquad
+\pi_3 \; \simeq \; 0.107 \qquad \qquad
+\pi_5 \; \simeq \; 0.537
+\]
+Consecuentemente, de acuerdo a este modelo el porcentaje del tiempo que Donald Trump insistir\'a en construir la pared es del 10.7\%. 
 
+
+\end{itemize}
 
 \end{problem}
 \vspace{\baselineskip}
