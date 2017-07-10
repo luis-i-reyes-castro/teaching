@@ -316,7 +316,7 @@ class CadenaDeMarkov :
 
     def distribucion_estacionaria( self) :
         """
-        Computa la distribucion estacionaria de la cadena (si la cadena es ergodica).
+        Computa la distribucion estacionaria de la cadena (si la cadena es ergodica)
 
         @return La distribucion estacionaria de la cadena como un diccionario,
                 si la cadena es ergodica; caso contrario, se imprime un mensaje
@@ -341,8 +341,80 @@ class CadenaDeMarkov :
             return None
 
         # Construye el diccionario de la distribucion
-        pi_estrella = { estado : 0.0 for estado in self.estados }
+        pi_estrella = {}
         for i in range(self.n) :
             pi_estrella[ self.estados[i] ] = vector_pi[i]
 
         return pi_estrella
+
+    def tiempo_esperado_de_retorno( self) :
+        """
+        Computa el tiempo esperado de retorno para cada estado
+
+        @return El tiempo esperado de retorno a cada estado como un diccionario,
+                si la cadena es ergodica; caso contrario, se imprime un mensaje
+                indicando que la cadena no es ergodica y se retorna None.
+        """
+
+        tiempo_esperado = {}
+        pi_estrella     = self.distribucion_estacionaria()
+
+        for estado in pi_estrella :
+            tiempo_esperado[estado] = 1.0 / pi_estrella[estado]
+
+        return tiempo_esperado
+
+    def tiempo_esperado_de_primer_paso( self, estado) :
+        """
+        Computa el tiempo esperado de primer paso desde cada estado hasta
+        el estado espeficicado
+
+        @param estado Estado hacia el cual nos interesa calcular el tiempo esperado
+                      de primer paso. Puede ser un estado o un indice de estado.
+
+        @return El tiempo esperado de primer paso desde cada estado hacia el
+                estado especificado como un diccionario, si la cadena es ergodica;
+                caso contrario, se imprime un mensaje indicando que la cadena
+                no es ergodica y se retorna None.
+        """
+
+        # Verifica que se haya provisto un estado final
+        if estado is None :
+            raise ValueError( 'Provea un estado hacia el cual desea calcular ' +
+                              'el tiempo esperado de primer paso.' )
+
+        # Si el estado final se espefica como un indice no hacemos nada;
+        # caso contrario buscamos el indice del estado
+        if isinstance( estado, int) and 0 <= estado < self.n :
+            pass
+        else :
+            try :
+                estado = int( self.estados.index(estado) )
+            except Exception :
+                raise ValueError( 'Estado \'' + str(estado) + '\' no existe' )
+
+        # Declara la matriz del lado izquierdo A = I - P
+        matriz_A = np.identity( self.n) - self.matrix_P
+        # Declara el vector del lado derecho b = 1
+        vector_b = np.ones( shape = ( self.n) )
+
+        # Reemplaza la fila de la matriz A y la entrada del vector b asociada con
+        # el estado final de tal manera que la ecuacion asociada con esa fila es
+        # 1.0 * T_{estado_final} = 0
+        matriz_A[ estado, :]      = 0.0
+        matriz_A[ estado, estado] = 1.0
+        vector_b[ estado]         = 0.0
+
+        # Computa los tiempos esperados de primer paso para cada estado
+        try :
+            vector_T = np.linalg.solve( matriz_A, vector_b)
+        except np.linalg.LinAlgError :
+            print( 'Esta cadena no es ergodica!' )
+            return None
+
+        # Construye el diccionario de tiempos esperados de primer paso
+        tiempo_esperado = {}
+        for i in range(self.n) :
+            tiempo_esperado[ self.estados[i] ] = vector_T[i]
+
+        return tiempo_esperado
