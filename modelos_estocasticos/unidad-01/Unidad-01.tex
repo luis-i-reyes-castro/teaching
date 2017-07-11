@@ -352,11 +352,14 @@ Combinaci\'on de Procesos Poisson:
 \begin{itemize}
 \item Supongamos que tenemos dos procesos Poisson independientes. 
 \begin{itemize}
-\item El primero tiene par\'ametro $\lambda_1$. 
-\item El segundo tiene par\'ametro $\lambda_2$. 
+\item El primer proceso tiene par\'ametro $\lambda_1$.
+\item El segundo proceso tiene par\'ametro $\lambda_2$.
 \end{itemize}
-\item Consideremos un nuevo proceso que combina los arribos de los dos procesos anteriores. 
-\item Entonces el nuevo proceso es un proceso Poisson con par\'ametro $\lambda_1 + \lambda_2$. 
+\item Consideremos un nuevo proceso que combina los arribos de los dos \linebreak procesos anteriores.
+\item Entonces el nuevo proceso es un proceso Poisson con par\'ametro:
+\[
+\lambda_1 + \lambda_2
+\]
 \end{itemize}
 
 \end{frame}
@@ -396,7 +399,7 @@ Divisi\'on de Procesos Poisson:
 Una \textbf{Cadena de Markov} es un modelo matem\'atico de un proceso estoc\'astico \linebreak en tiempo discreto constitu\'ido por: 
 \begin{itemize}
 \item Conjunto finito de $n$ estados, donde cada estado es una representaci\'on de una posible situaci\'on de inter\'es. 
-\item Matriz de transici\'on $\vec{P} \in \Re^{n \times n}$
+\item Matriz de transici\'on $\vec{P} \in \Re^{n \times n}$, donde: 
 \begin{itemize}
 \item Para cada par de estados $i,j$: 
 \[
@@ -615,7 +618,7 @@ Propagaci\'on de la Distribuci\'on Inicial:
 
 C\'alculo de la Distribuci\'on en Estado Estable: 
 \begin{enumerate}
-\item Escribimos una ecuaci\'on para cada uno de los $n$ estado: 
+\item Escribimos una ecuaci\'on para cada uno de los $n$ estados: 
 \[
 \forall e \colon \, \vec{\pi}(e) \; = \; 
 \sum_{\text{estados }x} \vec{\pi}(x) \, \vec{P}(x,e) 
@@ -720,32 +723,64 @@ Algunos resultados para cadenas con \textbf{m\'as de una clase recurrente:}
 \end{frame}
 
 % =================================================================
-\subsection{Cadenas de Nacimiento-muerte}
-
-%% -----------------------------------------------------------------
-%\begin{frame}[allowframebreaks]
-%\frametitle{\insertsubsection}
-%
-%Blah...
-%
-%\end{frame}
-%
-%\end{document}
+\section{Cadenas de Markov de Tiempo Continuo}
 
 % =================================================================
-\subsection{Tiempo de Primer Paso}
+\subsection{Modelamiento}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+Una \textbf{Cadena de Markov de Tiempo Continuo} es un modelo matem\'atico de un proceso estoc\'astico en tiempo continuo constitu\'ido por: 
+\begin{itemize}
+\item Conjunto finito de $n$ estados, donde cada estado es una representaci\'on de una posible situaci\'on de inter\'es. 
+\item Matriz de tasas de transici\'on $\vec{Q} \in \Re^{n \times n}$, donde: 
+\begin{itemize}
+\item Para todo estado $i$ tenemos que $\vec{Q}(i,i) = 0$. 
+\item La tasa de salida del estado $i$ se define como: 
+\[
+\vec{Q}(i) \; \define \; \sum_{ 1 \leq j \leq n } \vec{Q}(i,j)
+\]
+\framebreak
+\item Cada vez que la cadena ingresa a un estado $i$ la duraci\'on del intervalo \linebreak durante el cual la cadena permanece en ese estado, denotado $T_i$, es una variable aleatoria con distribuci\'on exponencial. M\'as precisamente: 
+\[
+T_i \, \sim \, \Exponential \, ( \, \vec{Q}(i) \, )
+\]
+\item Para cada par de estados $i,j$: 
+\[
+\vec{P}(i,j) \; = \; 
+\Pr \, ( \, \text{siguiente estado sea } j \mid \text{estado actual es } i \, ) \; = \; 
+\frac{ \vec{Q}(i,j) }{ \; \vec{Q}(i) \; }
+\]
+\item Observe adem\'as que para cualquier estado $i$ la sumatoria de las tasas de transici\'on $\vec{Q}(i,j)$ es positiva pero generalmente diferente de uno. 
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+% =================================================================
+\subsection{Distribuci\'on en Estado Estable}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+C\'alculo de la Distribuci\'on en Estado Estable: 
+\begin{enumerate}
+\item Escribimos una ecuaci\'on para cada uno de los $n$ estados: 
+\[
+\forall j \colon \, \vec{\pi}(j) \, \vec{Q}(j) \; = \; 
+\sum_{\text{estados }i} \vec{\pi}(i) \, \vec{Q}(i,j) 
+\]
+\item Desechamos arbitrariamente una de las $n$ ecuaciones anteriores y la reemplazamos por: 
+\[
+\sum_{\text{estados }e} \vec{\pi}(e) \; = \; 1
+\]
+\item Resolvemos el sistema de ecuaciones lineales resultante, el cual tiene \linebreak $n$ inc\'ognitas y $n$ ecuaciones linealmente independientes. 
+
+\end{enumerate}
+
+\end{frame}
 
 \end{document}
-
-
-
-
-
-
-
-
-
-
-
-
-
