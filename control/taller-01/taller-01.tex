@@ -79,6 +79,7 @@ Con esto en mente, suponga que usted fue el ingeniero encargado del dise\~no del
 
 \emph{Soluciones:}
 \begin{itemize}
+% ---------------------------------------------------------
 \item \emph{Literal (i):} De la descripci\'on del problema, si denotamos al voltage de entrada del motor el\'ectrico como $v(t)$ entonces podemos ver que la ecuaci\'on diferencial que gobierna el movimiento de la estructura del l\'aser es: 
 \[
 280 \, \ddot{\theta}(t) \; = \; 10 \, v(t) - (8.5)(180/\pi) \, \dot{\theta}(t)
@@ -94,7 +95,7 @@ Finalmente, la figura de abajo muestra el lazo de control del sistema.
 \def\svgwidth{0.8\columnwidth}
 \input{fig_lazo-de-control.eps_tex}
 \end{figure}
-
+% ---------------------------------------------------------
 \item \emph{Literal (ii):} Primero interpretamos la se\~nal de referencia. Para esto obseramos que: 
 \[
 \dot{\theta_r}(t) \; = \; 
@@ -107,17 +108,55 @@ Esto implica que la se\~nal de referencia es una rampa; m\'as precisamente:
 \]
 Luego, el m\'aximo error permitido es: 
 \[
-e(\infty) \; = \; \frac{5 \, \text{mm}}{1 \, \text{milla n\'autica}} \; = \; \frac{0.005}{1852} \; = \; 2.7 \times 10^{-6}
+e(\infty) \; = \; \frac{5 \, \text{mm}}{1 \, \text{milla n\'autica}} \; = \; \frac{0.005 \text{ m}}{1852 \text{ m}} \; = \; 2.7 \times 10^{-6}
 \]
-Ahora, puesto que la entrada es una rampa y que deseamos alcanzar un error en estado estable finito con respecto a esa entrada rampa, nuestro sistema debe de ser del Tipo I, \ie debe tener un integrador en el lazo. Como la planta ya tiene un integrador, el compensador m\'as sencillo capaz de alcanzar la especificaci\'on es un simple amplificador, \iec
+Ahora, puesto que la entrada es una rampa y que deseamos alcanzar un error en estado estable finito con respecto a esa entrada, nuestro sistema debe de ser del Tipo I, \ie debe tener un integrador en el lazo. Como la planta ya tiene un integrador, el compensador m\'as sencillo capaz de alcanzar la especificaci\'on es un simple amplificador, \iec
 \[
 G_C(s) \; = \; K
 \]
-Para un sistema Tipo I el error en estado estable es el rec\'iproco de la constante de velocidad $K_v$. Para nuestro sistema tenemos que: 
+Para un sistema Tipo I el error en estado estable para una entrada rampa es el rec\'iproco de la constante de velocidad $K_v$. Para nuestro sistema tenemos que: 
 \[
 K_v \; = \; \lim_{ s \rightarrow 0 } \, s \, G_C(s) \, G_P(s)
-\; = \; \frac{0.0357 \, K}{s + 1.74}
+\; = \; \lim_{ s \rightarrow 0 } \, \frac{0.0357 \, K}{s + 1.74} \; = \; \frac{0.0357 \, K}{1.74}
 \]
+Consecuentemente: 
+\begin{align*}
+& \frac{0.0139}{K_v} \; = \; 2.7 \times 10^{-6} \qquad
+\Longrightarrow \qquad \frac{(0.0139)(1.74)}{0.0357 \, K} \; = \; 2.7 \times 10^{-6} \\[1ex]
+& \Longrightarrow \; K \; = \; 2.51 \times 10^5
+\end{align*}
+% ---------------------------------------------------------
+\item \emph{Literal (iii):} Primero interpretamos la se\~nal de referencia. Para esto obseramos que: 
+\[
+\ddot{\theta_r}(t) \; = \; 
+\frac{2 \, \text{nudos/s}}{1 \, \text{milla n\'autica}} \; = \; 
+\frac{1.029 \, \text{m/s\tsup{2}}}{1852 \, \text{m}} \; = \; 5.56 \times 10^{-4} \, \text{rad/s}
+\]
+Esto implica que la se\~nal de referencia es una par\'abola; m\'as precisamente: 
+\[
+\theta_r(t) \; = \; \frac{ 5.56 \times 10^{-4}}{2} \, t^2
+\]
+Luego, el m\'aximo error permitido es: 
+\[
+e(\infty)
+\; = \; \frac{2 \, \text{cm}}{1 \, \text{milla n\'autica}}
+\; = \; \frac{0.020 \text{ m}}{1852 \text{ m}} \; = \; 1.08 \times 10^{-5}
+\]
+Ahora, puesto que la entrada es una par\'abola y que deseamos alcanzar un error en estado estable finito con respecto a esa entrada, nuestro sistema debe de ser del Tipo II, \ie debe tener dos integradores en el lazo. Como la planta ya tiene un integrador, el compensador m\'as sencillo capaz de alcanzar la especificaci\'on es un amplificador con integrador, \iec
+\[
+G_C(s) \; = \; \frac{K}{s}
+\]
+Para un sistema Tipo II el error en estado estable para una entrada parab\'olica es el rec\'iproco de la constante de aceleraci\'on $K_a$. Para nuestro sistema tenemos que: 
+\[
+K_a \; = \; \lim_{ s \rightarrow 0 } \, s^2 \, G_C(s) \, G_P(s)
+\; = \; \lim_{ s \rightarrow 0 } \, \frac{0.0357 \, K}{s + 1.74} \; = \; \frac{0.0357 \, K}{1.74}
+\]
+Consecuentemente: 
+\begin{align*}
+& \frac{ 5.56 \times 10^{-4} }{K_a} \; = \; 1.08 \times 10^{-5} \qquad
+\Longrightarrow \qquad \frac{(5.56 \times 10^{-4})(1.74)}{0.0357 \, K} \; = \; 1.08 \times 10^{-5} \\[1ex]
+& \Longrightarrow \; K \; = \; 2.5 \times 10^3
+\end{align*}
 
 \end{itemize}
 
