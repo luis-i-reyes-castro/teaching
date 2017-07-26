@@ -88,17 +88,17 @@ Consider a stable system with transfer function $G(s)$.
 \begin{itemize}
 \item Furthermore, notice that: 
 \begin{itemize}
-\item Amplitude $M$ is always positive. 
+\item Amplitude $M(\omega)$ is always positive. 
 \begin{itemize}
-\item If $M \in (0,1)$ we get attenuation. 
-\item If $M = 1$ we get amplitude matching. 
-\item If $M > 1$ we get amplification. 
+\item If $M(\omega) \in (0,1)$ we get attenuation. 
+\item If $M(\omega) = 1$ we get amplitude matching. 
+\item If $M(\omega) > 1$ we get amplification. 
 \end{itemize}
-\item Phase may be negative, zero or postive. 
+\item Phase $\phi(\omega)$ may be negative, zero or postive. 
 \begin{itemize}
-\item If $\phi < 0$ then the output lags the input. 
-\item If $\phi = 0$ then the output matches the input. 
-\item If $\phi > 0$ then the output leads the input. 
+\item If $\phi(\omega) < 0$ then the output lags the input. 
+\item If $\phi(\omega) = 0$ then the output matches the input. 
+\item If $\phi(\omega) > 0$ then the output leads the input. 
 \end{itemize}
 \end{itemize}
 \end{itemize}
@@ -109,15 +109,17 @@ Consider a stable system with transfer function $G(s)$.
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-\textbf{Bode Plots} are diagrams of $M(\omega)$ and $\phi(\omega)$. More precisely, they consist of \linebreak the following two plots: 
+\textbf{Bode Plots} show amplitude $M(\omega)$ and phase $\phi(\omega)$ as functions of frequency $\omega$. More precisely, they consist of the following two plots. 
 \begin{itemize}
-\item \textbf{Magnitude Plot}: Amplitude $M(\omega)$ versus frequency $\omega$. 
+\item Magnitude Plot
 \begin{itemize}
+\item Amplitude $M(\omega)$ versus frequency $\omega$. 
 \item The $x$-axis is frequency $\omega$ in decades, \ie $x = \log_{10}(\omega)$. 
-\item The $y$-axis is amplitude $M(\omega)$ in decibels, \ie $y = 20 \cdot \log(M(\omega))$. 
+\item The $y$-axis is amplitude $M(\omega)$ in decibels, \ie $y = 20 \cdot \log_{10}(M(\omega))$. 
 \end{itemize}
-\item \textbf{Phase Plot}: Phase $\phi(\omega)$ versus frequency $\omega$. 
+\item Phase Plot
 \begin{itemize}
+\item Phase $\phi(\omega)$ versus frequency $\omega$. 
 \item The $x$-axis is frequency $\omega$ in decades, \ie $x = \log_{10}(\omega)$. 
 \item The $y$-axis is phase in degrees, \ie $y = \phi(\omega)$. 
 \end{itemize}
@@ -133,14 +135,19 @@ Notice that when sketching Bode Plots by hand, we usually don't draw exactly \li
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
-\frametitle{\insertsection}
+\frametitle{\insertsection: \insertsubsection}
 
 Bode plot for a simple amplifier: $G(s) = K$
 \begin{itemize}
 \item Magnitude plot is constant at $y = 20 \cdot \log_{10}(K)$ decibels. 
 \item Phase plot is constant at $y = 0$ degree. 
 \end{itemize}
-\framebreak
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection: \insertsubsection}
 
 Bode plot for an integrator: $\displaystyle G(s) = \frac{1}{s}$
 \begin{itemize}
@@ -154,7 +161,12 @@ M(\omega) \; = \; \frac{1}{\omega} \quad \& \quad
 \item Magnitude plot is $y = -20 \cdot \log_{10}(\omega)$ decibels, \ie it is a line with slope of $-20$ decibels per decade which hits zero decibels at $\omega = 1$ rad/s. 
 \item Phase plot is constant at $y = -90$ degree. 
 \end{itemize}
-\framebreak
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection: \insertsubsection}
 
 Bode plot for a differentiator: $\displaystyle G(s) = s$
 \begin{itemize}
@@ -166,6 +178,166 @@ M(\omega) \; = \; \omega \quad \& \quad
 \]
 \item Magnitude plot is $y = +20 \cdot \log_{10}(\omega)$ decibels, \ie it is a line with slope of $+20$ decibels per decade which hits zero decibels at $\omega = 1$ rad/s. 
 \item Phase plot is constant at $y = +90$ degree. 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection: \insertsubsection}
+
+Bode plot for a single-pole system: $\displaystyle G(s) = \frac{a}{s+a}$
+\begin{itemize}
+\item Phasor as a function of $\omega$ : 
+\[
+G(j\omega) \; = \; \frac{a}{j\omega + a} \cdot \frac{(-j\omega + a)}{(-j\omega + a)} \; = \; \frac{a^2 - j \omega a}{\omega^2 + a^2} 
+\]
+\item Behavior at the break-away frequency, \ie $\omega = a$ :
+\begin{align*}
+& G(j\omega) \; = \;
+\frac{a^2 - ja^2}{2a^2} \; = \; 
+\frac{1}{2} - j \left( \frac{1}{2} \right) \\[1ex]
+& \Longrightarrow \quad
+M(\omega) \; = \; \frac{1}{\sqrt{2}} \quad \& \quad \phi(\omega) = -45^{\circ}
+\end{align*}
+\halfcut
+\begin{itemize}
+\item In addition, phase $\phi(\omega)$ decreases at $-45^{\circ}$ per decade on the range of frequencies from $\omega = 0.1 a$ to $\omega = 10 a$. 
+\end{itemize}
+
+\framebreak
+
+\item Behavior at low frequencies, \ie $\omega << a$ :
+\[
+G(j\omega) \; = \;
+\frac{a^2 - j \omega a}{\omega^2 + a^2}
+\cdot \frac{(1/a^2)}{(1/a^2)} \; = \; 
+\frac{1 - j(\omega/a)}{(\omega/a)^2 + 1}
+\; \longrightarrow \; 1
+\]
+\fullcut
+\begin{itemize}
+\item Magnitude plot is constant at $y = 0$ decibels. 
+\item Phase plot is constant at $y = 0$ degree. 
+\end{itemize}
+\halfskip
+\item Behavior at high frequencies, \ie $\omega >> a$ :
+\[
+G(j\omega) \; = \;
+\frac{a^2 - j \omega a}{\omega^2 + a^2}
+\cdot \frac{(1/\omega^2)}{(1/\omega^2)} \; = \; 
+\frac{(a/\omega)^2 - j(1/\omega)}{1 + (a/\omega)^2}
+\; \longrightarrow \; -\frac{j}{\omega}
+\]
+\fullcut
+\begin{itemize}
+\item Magnitude plot is $y = -20 \cdot \log_{10}(\omega)$ decibels, \ie it is a line with slope of $-20$ decibels per decade. 
+\item Phase plot is constant at $y = -90$ degree. 
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection: \insertsubsection}
+
+Bode plot for a single-zero system: $\displaystyle G(s) = \frac{s+a}{a}$
+\begin{itemize}
+\item Phasor as a function of $\omega$ : 
+\[
+G(j\omega) \; = \; \frac{j\omega + a}{a}
+\; = \; 1 + j \left( \frac{\omega}{a} \right)
+\]
+\item Behavior at the break-away frequency, \ie $\omega = a$ :
+\[
+G(j\omega) \; = \; 1 + j \quad \Longrightarrow \quad
+M(\omega) \; = \; \sqrt{2} \quad \& \quad
+\phi(\omega) = -45^{\circ}
+\]
+\fullcut
+\begin{itemize}
+\item In addition, phase $\phi(\omega)$ increases at $+45^{\circ}$ per decade on the range of frequencies from $\omega = 0.1 a$ to $\omega = 10 a$. 
+\end{itemize}
+\framebreak
+
+\item Behavior at low frequencies, \ie $\omega << a$ :
+\[
+G(j\omega) \; = \;
+1 + j \left( \frac{\omega}{a} \right) \; \longrightarrow \; 1
+\]
+\fullcut
+\begin{itemize}
+\item Magnitude plot is constant at $y = 0$ decibels. 
+\item Phase plot is constant at $y = 0$ degree. 
+\end{itemize}
+\halfskip
+\item Behavior at high frequencies, \ie $\omega >> a$ :
+\[
+G(j\omega) \; = \;
+1 + j \left( \frac{\omega}{a} \right) \; \longrightarrow \; j\omega
+\]
+\fullcut
+\begin{itemize}
+\item Magnitude plot is $y = +20 \cdot \log_{10}(\omega)$ decibels, \ie it is a line with slope of $+20$ decibels per decade. 
+\item Phase plot is constant at $y = +90$ degree. 
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection: \insertsubsection}
+
+Bode plot for a second-order underdamped system: $\displaystyle G(s) = \frac{\omega_n^2}{s^2 + 2 \zeta \omega_n \, s + \omega_n^2}$
+\begin{itemize}
+\item Phasor as a function of $\omega$ : 
+\[
+G(j\omega) \; = \; 
+\frac{\omega_n^2}{(\omega_n^2 -\omega^2) + 2 \zeta \omega_n \omega \, j} \; = \; 
+\frac{\omega_n^2 \, [ \, (\omega_n^2 -\omega^2) - 2 \zeta \omega_n \omega \, j \, ]  }{(\omega_n^2 -\omega^2)^2 + 4 \zeta^2 \omega_n^2 \omega^2}
+\]
+\item Behavior at the break-away frequency, \ie $\omega = a$ :
+\begin{align*}
+& G(j\omega) \; = \;
+\cdots \\[1ex]
+& \Longrightarrow \quad
+M(\omega) \; = \; ? \quad \& \quad \phi(\omega) = -90^{\circ}
+\end{align*}
+\halfcut
+\begin{itemize}
+\item In addition, phase $\phi(\omega)$ decreases at $-90^{\circ}$ per decade on the range of frequencies from $\omega = 0.1 a$ to $\omega = 10 a$. 
+\end{itemize}
+
+\framebreak
+
+\item Behavior at low frequencies, \ie $\omega << \omega_n$ :
+\[
+G(j\omega) \; = \;
+\cdots
+\; \longrightarrow \; 1
+\]
+\fullcut
+\begin{itemize}
+\item Magnitude plot is constant at $y = 0$ decibels. 
+\item Phase plot is constant at $y = 0$ degree. 
+\end{itemize}
+\halfskip
+\item Behavior at high frequencies, \ie $\omega >> \omega_n$ :
+\[
+G(j\omega) \; = \;
+\cdots
+\; \longrightarrow \; -\frac{1}{\omega^2}
+\]
+\fullcut
+\begin{itemize}
+\item Magnitude plot is $y = -40 \cdot \log_{10}(\omega)$ decibels, \ie it is a line with slope of $-40$ decibels per decade. 
+\item Phase plot is constant at $y = -180$ degree. 
+\end{itemize}
+
 \end{itemize}
 
 \end{frame}
