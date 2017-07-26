@@ -1,0 +1,173 @@
+% =================================================================
+\documentclass[ 10pt, xcolor = dvipsnames]{beamer}
+\usepackage{ beamerthemesplit, lmodern}
+\usetheme{Madrid}
+\usecolortheme[named=Brown]{structure}
+\useinnertheme{rectangles}
+\setbeamertemplate{frametitle continuation}{}
+\beamertemplatenavigationsymbolsempty
+\usepackage{../../macros-general}
+\usepackage{../../macros-beamer}
+\graphicspath{{./figures/}}
+
+\newcommand{\theoremblock}[2]{
+\begin{center}
+\begin{minipage}{0.9\columnwidth}
+\begin{block}{#1}
+#2
+\end{block}
+\end{minipage}
+\end{center}
+}
+\newcommand{\Laplace}{\mathcal{L}}
+\newcommand{\LaplaceInv}{\Laplace^{-1}}
+
+% =================================================================
+\newcommand{\shorttitle}{Control Systems Engineering - Unit 03}
+\title[\shorttitle]{Control Systems Engineering (EYAG-1005): \\ \textbf{Unit 03} }
+\author[L. I. Reyes-Castro]{Luis I. Reyes-Castro}
+\institute[ESPOL]{\normalsize Escuela Superior Polit\'ecnica del Litoral (ESPOL) \\ Guayaquil - Ecuador}
+\date[2017-T1]{Semester: 2017-T1}
+
+% -----------------------------------------------------------------
+\begin{document}
+\input{../../beamer_table-contents}
+\input{../../beamer_section-slides}
+
+% =================================================================
+\section{Bode Plots}
+
+% =================================================================
+\subsection{Introduction}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Consider a stable system with transfer function $G(s)$. 
+\begin{itemize}
+\item Suppose the input $r(t)$ is a sinusoid with frequency $\omega$ and unit amplitude. 
+\item Then the steady-state output $c_{ss}(t)$ must be a a sinusoid with the same frequency $\omega$ but with a particular amplitude $M$ and phase $\phi$ which depend \linebreak on the transfer function $G(s)$ and on the input frequency $\omega$. 
+\end{itemize}
+\halfskip
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.8\columnwidth}
+\input{figures/Bode-plot_definition.eps_tex}
+\end{figure}
+\framebreak
+
+\begin{itemize}
+\item Given $G(s)$ and a frequency $\omega$ we can evaluate the amplitude and phase of the steady-state output by computing the phasor $G(j\omega)$. In particular: 
+\begin{itemize}
+\item The phasor's magnitude yields the amplitude $M(\omega)$. 
+\item The phasor's angle with $+\Re$ yields the phase $\phi(\omega)$. 
+\end{itemize}
+\halfskip
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.72\columnwidth}
+\input{figures/Bode-plot_phasor.eps_tex}
+\end{figure}
+
+\end{itemize}
+\framebreak
+
+\begin{itemize}
+\item We can also estimate $M(\omega)$ and $\phi(\omega)$ experimentally: 
+\halfskip
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.8\columnwidth}
+\input{figures/Bode-plot_sinewaves.eps_tex}
+\end{figure}
+\end{itemize}
+\framebreak
+
+\begin{itemize}
+\item Furthermore, notice that: 
+\begin{itemize}
+\item Amplitude $M$ is always positive. 
+\begin{itemize}
+\item If $M \in (0,1)$ we get attenuation. 
+\item If $M = 1$ we get amplitude matching. 
+\item If $M > 1$ we get amplification. 
+\end{itemize}
+\item Phase may be negative, zero or postive. 
+\begin{itemize}
+\item If $\phi < 0$ then the output lags the input. 
+\item If $\phi = 0$ then the output matches the input. 
+\item If $\phi > 0$ then the output leads the input. 
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\textbf{Bode Plots} are diagrams of $M(\omega)$ and $\phi(\omega)$. More precisely, they consist of \linebreak the following two plots: 
+\begin{itemize}
+\item \textbf{Magnitude Plot}: Amplitude $M(\omega)$ versus frequency $\omega$. 
+\begin{itemize}
+\item The $x$-axis is frequency $\omega$ in decades, \ie $x = \log_{10}(\omega)$. 
+\item The $y$-axis is amplitude $M(\omega)$ in decibels, \ie $y = 20 \cdot \log(M(\omega))$. 
+\end{itemize}
+\item \textbf{Phase Plot}: Phase $\phi(\omega)$ versus frequency $\omega$. 
+\begin{itemize}
+\item The $x$-axis is frequency $\omega$ in decades, \ie $x = \log_{10}(\omega)$. 
+\item The $y$-axis is phase in degrees, \ie $y = \phi(\omega)$. 
+\end{itemize}
+\end{itemize}
+\halfskip
+
+Notice that when sketching Bode Plots by hand, we usually don't draw exactly \linebreak the functions $M(\omega)$ and $\phi(\omega)$ but instead sketch \emph{asymptotic approximations}. 
+
+\end{frame}
+
+% =================================================================
+\subsection{Elementary Systems}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Bode plot for a simple amplifier: $G(s) = K$
+\begin{itemize}
+\item Magnitude plot is constant at $y = 20 \cdot \log_{10}(K)$ decibels. 
+\item Phase plot is constant at $y = 0$ degree. 
+\end{itemize}
+\framebreak
+
+Bode plot for an integrator: $\displaystyle G(s) = \frac{1}{s}$
+\begin{itemize}
+\item Phasor as a function of $\omega$ : 
+\[
+G(j\omega) \; = \; \frac{1}{j\omega} \; = \; -\frac{j}{\omega} 
+\qquad \Longrightarrow \qquad
+M(\omega) \; = \; \frac{1}{\omega} \quad \& \quad
+\phi(\omega) \; = \; -90^{\circ}
+\]
+\item Magnitude plot is $y = -20 \cdot \log_{10}(\omega)$ decibels, \ie it is a line with slope of $-20$ decibels per decade which hits zero decibels at $\omega = 1$ rad/s. 
+\item Phase plot is constant at $y = -90$ degree. 
+\end{itemize}
+\framebreak
+
+Bode plot for a differentiator: $\displaystyle G(s) = s$
+\begin{itemize}
+\item Phasor as a function of $\omega$ : 
+\[
+G(j\omega) \; = \; j\omega \qquad \Longrightarrow \qquad
+M(\omega) \; = \; \omega \quad \& \quad
+\phi(\omega) \; = \; +90^{\circ}
+\]
+\item Magnitude plot is $y = +20 \cdot \log_{10}(\omega)$ decibels, \ie it is a line with slope of $+20$ decibels per decade which hits zero decibels at $\omega = 1$ rad/s. 
+\item Phase plot is constant at $y = +90$ degree. 
+\end{itemize}
+
+\end{frame}
+
+\end{document}
