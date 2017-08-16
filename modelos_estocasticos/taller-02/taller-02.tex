@@ -1,0 +1,35 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{02}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Taller \numero \\[1ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\halfskip
+
+\input{../../article_compromiso-honor}
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[10 Puntos]} En un supermercado los clientes entran al \'area de cajas a una tasa de cuatro por minuto y son atendidos por cada cajero a una tasa de un cliente por minuto. Encuentre el m\'inimo n\'umero de servidores (\ie cajeros) que se requieren para asegurar que el tiempo de espera en cola promedio por cliente no exceda los cinco minutos. Para esto, considere las siguientes opciones: 
+\begin{itemize}
+\item $s = 5$ servidores
+\item $s = 6$ servidores
+\item $s = 8$ servidores
+\end{itemize}
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
