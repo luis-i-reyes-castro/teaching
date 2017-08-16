@@ -1,0 +1,76 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{02}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\begin{center}
+\Large Sistemas de Control (EYAG-1005): Taller \numero \\[1ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\halfskip
+
+Integrantes del Grupo:
+\fullskip
+\fullskip
+\fullskip
+
+\textbf{Nota:} Para los siguientes problemas asuma un lazo de control en cascada con planta $G_P(s)$, compensador $G_C(s)$ y sensor perfecto, tal como se muestra en la figura de abajo. 
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.8\columnwidth}
+\input{fig_Cascade-compensation.eps_tex}
+\end{figure}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[3 Puntos]} Para la planta 
+\[
+G_P(s) \; = \; 
+\frac{s+2}{s(s+4)(s+6)(s+10)}
+\]
+dise\~ne un compensador proporcional, \ie $G_C(s) = K$, tal que en circuito abierto el sistema tenga 10 decibeles de margen de ganancia. 
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[3 Puntos]} Para la planta 
+\[
+G_P(s) \; = \; 
+\frac{1}{s(s+8)(s+15)}
+\]
+dise\~ne un compensador proporcional, \ie $G_C(s) = K$, tal que en circuito cerrado el sistema tenga 20\% de sobrepaso. 
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[4 Puntos]} Para la planta 
+\[
+G_P(s) \; = \; 
+\frac{s+4}{(s+2)(s+6)(s+8)}
+\]
+dise\~ne un compensador de atraso de fase, \ie
+\[
+G_C(s) \; = \; K \, \frac{s+z}{s+p}, 
+\qquad \text{donde } 0 < p < z,
+\]
+tal que \emph{(i)} en circuito abierto el sistema tenga 45\deg de margen de fase y \emph{(ii)} en circuito cerrado el sistema tenga 1\% de error en estado estable ante una entrada escal\'on. 
+
+\end{problem}
+\fullskip
+
+\end{document}
