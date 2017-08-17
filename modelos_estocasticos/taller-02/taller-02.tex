@@ -18,16 +18,51 @@
 \end{center}
 \halfskip
 
-\input{../../article_compromiso-honor}
+Integrantes del Grupo:
+\fullskip
+\fullskip
 
 % -----------------------------------------------------------------
 \begin{problem}
-\textbf{[10 Puntos]} En un supermercado los clientes entran al \'area de cajas a una tasa de cuatro por minuto y son atendidos por cada cajero a una tasa de un cliente por minuto. Encuentre el m\'inimo n\'umero de servidores (\ie cajeros) que se requieren para asegurar que el tiempo de espera en cola promedio por cliente no exceda los cinco minutos. Para esto, considere las siguientes opciones: 
+\textbf{[10 Puntos]} En un supermercado los clientes entran al \'area de cajas a una tasa de cuatro por minuto y son atendidos por cada cajero a una tasa de un cliente por minuto. Encuentre el m\'inimo n\'umero de servidores (\ie cajeros) que se requieren para asegurar que el tiempo de espera en cola promedio por cliente no exceda los cinco minutos. Para esto, considere las siguientes opciones y calcule el tiempo promedio de espera en cola para cada una. 
 \begin{itemize}
 \item $s = 5$ servidores
 \item $s = 6$ servidores
 \item $s = 8$ servidores
 \end{itemize}
+
+\emph{Soluci\'on:} Dado que no se han especificado las distribuciones de los tiempos entre arribos ni de los tiempos de servicios, supondremos un modelo $M/M/s$ y haremos uso de las f\'ormulas para modelos basados en Cadenas de Markov en Tiempo Continuo con tasa de arribo $\lambda = 4$ por minuto y tasa de servicio $\mu = 1$ por minuto. En particular: 
+\begin{itemize}
+\item Para $s = 5$ servidores tenemos $\rho = 4/5 = 0.80$. Consecuentemente: 
+\begin{align*}
+& P_0 \; = \;
+\left[ \; \left( \;
+\sum_{n=0}^{s-1} \frac{(\lambda/\mu)^n}{n!} \right)
++ \frac{(\lambda/\mu)^s}{s!(1-\rho)} \; \right]^{-1} \; = \; 
+\left( \, \frac{103}{3} + \frac{128}{3} \, \right)^{-1} \; = \;
+0.0130
+\end{align*}
+\item Para $s = 6$ servidores tenemos $\rho = 4/6 = 0.67$. Consecuentemente: 
+\begin{align*}
+& P_0 \; = \;
+\left[ \; \left( \;
+\sum_{n=0}^{s-1} \frac{(\lambda/\mu)^n}{n!} \right)
++ \frac{(\lambda/\mu)^s}{s!(1-\rho)} \; \right]^{-1} \; = \; 
+\left( \, \frac{643}{15} + \frac{256}{15} \, \right)^{-1} \; = \;
+0.0167
+\end{align*}
+\item Para $s = 8$ servidores tenemos $\rho = 4/8 = 0.50$. Consecuentemente: 
+\begin{align*}
+& P_0 \; = \;
+\left[ \; \left( \;
+\sum_{n=0}^{s-1} \frac{(\lambda/\mu)^n}{n!} \right)
++ \frac{(\lambda/\mu)^s}{s!(1-\rho)} \; \right]^{-1} \; = \; 
+\left( \, \frac{16319}{315} + \frac{1024}{315} \, \right)^{-1} \; = \;
+0.0182
+\end{align*}
+
+\end{itemize}
+
 
 \end{problem}
 \vspace{\baselineskip}
