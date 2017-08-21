@@ -35,35 +35,117 @@
 \input{../../beamer_section-slides}
 
 % =================================================================
-\section{Introduction and Modeling}
+\section{Model Definition}
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-\end{frame}
+Model Variables: 
+\begin{itemize}
+\item Input vector $\vec{u}(t) \in \Re^{m}$
+\item State vector $\vec{x}(t) \in \Re^{n}$
+\item Output vector $\vec{y}(t) \in \Re^{\ell}$
+\end{itemize}
+\fullskip
 
-% -----------------------------------------------------------------
-\begin{frame}[allowframebreaks]
-\frametitle{\insertsection}
+Model Parameters: 
+\begin{itemize}
+\item State matrix $\vec{A} \in \Re^{n \times n}$
+\item Input matrix $\vec{B} \in \Re^{n \times m}$
+\item Output matrix $\vec{C} \in \Re^{\ell \times n}$
+\item Feedthrough matrix $\vec{D} \in \Re^{\ell \times m}$
+\end{itemize}
+\framebreak
+
+Model Equations: 
+\begin{itemize}
+\item State Equations: 
+\[
+\vec{\dot{x}}(t) \; = \;
+\vec{A} \, \vec{x}(t) \; + \;
+\vec{B} \, \vec{u}(t)
+\]
+\item Output Equations: 
+\[
+\vec{y}(t) \; = \;
+\vec{C} \, \vec{x}(t) \; + \; \vec{D} \, \vec{u}(t)
+\]
+\end{itemize}
 
 \end{frame}
 
 % =================================================================
-\subsection{Mechanical Systems}
+\section{Equivalence with Transfer Functions}
 
 % =================================================================
-\subsection{Electrical Circuits}
+\subsection{SS-to-TF}
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection: \insertsubsection}
 
+Transfer Function Matrix: 
+\begin{itemize}
+\item Compute as: 
+\[
+\vec{G}(s) \; = \;
+\vec{C} \, ( \, s \vec{I} - \vec{A} \, )^{-1} \, \vec{B}
+\; + \; \vec{D}
+\]
+\item Entry $(i,j)$ of matrix $\vec{G}(s)$ is the transfer function from the $j$\tsup{th} input to the $i$\tsup{th} output, assuming all other inputs are zero. 
+\end{itemize}
+
 \end{frame}
+
+% =================================================================
+\subsection{TF-to-SS}
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection: \insertsubsection}
+
+Procedure for Transfer Functions with Constant Numerator, \iec
+\[
+G(s) \; = \; \frac{C(s)}{R(s)} \; = \; 
+\frac{B}{s^n + a_{n-1} s^{n-1} + \cdots + a_1 s + a_0}
+\]
+
+\begin{enumerate}
+\item Re-write the transfer function as an $n$\tsup{th} order differential equation: 
+\[
+\frac{d^n c(t)}{dt^n} \; = \;
+- \, a_{n-1} \, \frac{d^{n-1} c(t)}{dt^{n-1}}
+\, - \, \cdots
+\, - \, a_1 \, \frac{dc(t)}{dt} \, - \, a_0 \, c(t)
+\, + \, B \, r(t)
+\]
+\item Assign states to the output and its derivatives: 
+\[
+x_1(t) \; = \; c(t) \, , \quad
+x_2(t) \; = \; \frac{dc(t)}{dt} \, , \quad
+\cdots \, , \quad
+x_n(t) \; = \; \frac{d^{n-1} c(t)}{dt^{n-1}}
+\]
+\framebreak
+
+\item Write the first $n-1$ state equations: 
+\[
+\dot{x}_1(t) \; = \; x_2(t) \, , \quad
+\dot{x}_2(t) \; = \; x_3(t) \, , \quad
+\cdots \, , \quad
+\dot{x}_{n-1}(t) \; = \; x_n(t)
+\]
+\item Write the last state equation using the differential equation associated with the transfer function. 
+\[
+\dot{x}_{n}(t) \; = \;
+- \, a_{n-1} \, \frac{d^{n-1} c(t)}{dt^{n-1}}
+\, - \, \cdots
+\, - \, a_1 \, \frac{dc(t)}{dt} \, - \, a_0 \, c(t)
+\, + \, B \, r(t)
+\]
+
+\end{enumerate}
 
 \end{frame}
 
