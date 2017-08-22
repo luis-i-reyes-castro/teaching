@@ -131,8 +131,8 @@ class CadenaDeMarkov :
     """
 
     # Miembros
-    n = 0  # numero de estados
-    estados = [] # lista de estados
+    estados  = [] # lista de estados
+    n        = 0  # numero de estados
     matriz_P = np.array([]) # matriz de transicion
 
     def __init__( self, estados, matriz_transicion) :
@@ -150,10 +150,6 @@ class CadenaDeMarkov :
             raise ValueError( 'Parametro estados debe ser una lista' )
         if len(estados) < 2 :
             raise ValueError( 'Numero de estados debe ser al menos dos' )
-
-        # Copia los estados ingresados y los cuenta
-        self.n       = len(estados)
-        self.estados = estados
 
         # Verifica que el parametro matriz de transicion sea un arreglo numpy
         if not isinstance( matriz_transicion, np.ndarray) :
@@ -180,18 +176,23 @@ class CadenaDeMarkov :
                 raise Warning( 'Matriz de transicion tiene fuga o exceso de ' +
                                'probabilidad en la fila ' + str(fila) )
 
-        # Copia la matriz de transicion ingresada
+        # Copia los datos ingresados
+        self.estados  = estados
+        self.n        = len(estados)
         self.matrix_P = matriz_transicion
 
         return
 
     def contenidos( self) :
         """
-        Retorna todos los contenidos del objeto como un diccionario
+        Retorna los contenidos como un diccionario.
 
-        @return Diccionario del objeto
+        @return Diccionario que contiene dos entradas: 'estados' contiene una
+        lista de los estados, 'matriz_transicion' contiene la matriz de transicion
+        como arreglo numpy.
         """
-        return self.__dict__
+
+        return { 'estados' : self.estados, 'matriz_transicion' : self.matrix_P }
 
     def muestrea( self, inicio, num_pasos) :
         """
@@ -385,9 +386,7 @@ class CadenaDeMarkov :
 
         # Si el estado final se espefica como un indice no hacemos nada;
         # caso contrario buscamos el indice del estado
-        if isinstance( estado, int) and 0 <= estado < self.n :
-            pass
-        else :
+        if not isinstance( estado, int) or not ( 0 <= estado < self.n ) :
             try :
                 estado = int( self.estados.index(estado) )
             except Exception :
@@ -406,6 +405,7 @@ class CadenaDeMarkov :
         vector_b[ estado]         = 0.0
 
         # Computa los tiempos esperados de primer paso para cada estado
+        # resolviendo el sistema A * vector_T = b
         try :
             vector_T = np.linalg.solve( matriz_A, vector_b)
         except np.linalg.LinAlgError :
@@ -414,7 +414,40 @@ class CadenaDeMarkov :
 
         # Construye el diccionario de tiempos esperados de primer paso
         tiempo_esperado = {}
-        for i in range(self.n) :
-            tiempo_esperado[ self.estados[i] ] = vector_T[i]
+        for ( i, estado) in enumerate(self.estados) :
+            tiempo_esperado[estado] = vector_T[i]
 
         return tiempo_esperado
+
+    def funcion_de_valor( self, funcion_recompensa, factor_descuento) :
+        """
+        Computa la funcion de valor por estado de acuerdo a la funcion de recompensa
+        ingresada y el factor de descuento.
+
+        @param funcion_recompensa Funcion de recompensa por estado como
+               un diccionario de estados a valores.
+        @param factor_descuento Factor de descuento.
+
+        @return La funcion de valor como un diccionario de estados a valores.
+        """
+
+        # Declara la matriz del lado izquierdo A = I - factor_descuento * P
+        matriz_A = np.identity( self.n) - factor_descuento * self.matrix_P
+        # Declara el vector del lado derecho b = funcion_recompensa
+        vector_b = np.ones( shape = ( self.n) )
+        for ( i, estado) in enumerate(self.estados) :
+            vector_b[i] = funcion_recompensa[estado]
+
+        # Computa la funcion de valor resolviendo el sistema A * vector_V = b
+        try :
+            vector_V = np.linalg.solve( matriz_A, vector_b)
+        except np.linalg.LinAlgError :
+            print( 'Esta cadena no es ergodica!' )
+            return None
+
+        # Construye el diccionario asociado con la funcion de valor
+        funcion_de_valor = {}
+        for ( i, estado) in enumerate(self.estados) :
+            funcion_de_valor[estado] = vector_V[i]
+
+        return funcion_de_valor
