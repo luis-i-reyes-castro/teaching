@@ -1,8 +1,7 @@
 """
 @author: Luis I. Reyes Castro
 
-Problema 17.4A-8 del texto de Taha: Problema de la Agencia de Renta de Carros
-
+Problema de Optimizacion de Inventario
 """
 
 import numpy as np
