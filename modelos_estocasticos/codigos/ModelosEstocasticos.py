@@ -145,6 +145,11 @@ class CadenaDeMarkov :
                          de tamano (n,n), donde n es el numero de estados.
         """
 
+        # Copia los datos ingresados
+        self.estados  = estados
+        self.n        = len(estados)
+        self.matrix_P = matriz_transicion
+
         # Verifica que el parametro estados sea una lista no-vacia
         if not isinstance( estados, list) :
             raise ValueError( 'Parametro estados debe ser una lista' )
@@ -175,11 +180,6 @@ class CadenaDeMarkov :
             if abs( suma_entradas - 1.0 ) > 1E-8 :
                 raise Warning( 'Matriz de transicion tiene fuga o exceso de ' +
                                'probabilidad en la fila ' + str(fila) )
-
-        # Copia los datos ingresados
-        self.estados  = estados
-        self.n        = len(estados)
-        self.matrix_P = matriz_transicion
 
         return
 
