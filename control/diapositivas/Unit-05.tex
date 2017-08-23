@@ -300,24 +300,23 @@ G(j\omega) \; = \;
 \frac{\omega_n^2}{(\omega_n^2 -\omega^2) + 2 \zeta \omega_n \omega \, j} \; = \; 
 \frac{\omega_n^2 \, [ \, (\omega_n^2 -\omega^2) - 2 \zeta \omega_n \omega \, j \, ]  }{(\omega_n^2 -\omega^2)^2 + 4 \zeta^2 \omega_n^2 \omega^2}
 \]
-\item Behavior at the break-away frequency, \ie $\omega = a$ :
+\item Behavior at the natural frequency, \ie $\omega = \omega_n$ :
 \begin{align*}
-& G(j\omega) \; = \;
-\cdots \\[1ex]
+& G(j\omega) \; = \; - \left( \frac{1}{2 \zeta} \right) \, j \\[1ex]
 & \Longrightarrow \quad
-M(\omega) \; = \; ? \quad \& \quad \phi(\omega) = -90^{\circ}
+M(\omega) \; = \frac{1}{2 \zeta} \quad \& \quad \phi(\omega) = -90^{\circ}
 \end{align*}
 \halfcut
 \begin{itemize}
-\item In addition, phase $\phi(\omega)$ decreases at $-90^{\circ}$ per decade on the range of frequencies from $\omega = 0.1 a$ to $\omega = 10 a$. 
+\item In addition, phase $\phi(\omega)$ decreases at $-90^{\circ}$ per decade on the range of frequencies from $\omega = 0.1 \, \omega_n$ to $\omega = 10 \, \omega_n$. 
 \end{itemize}
-
 \framebreak
 
 \item Behavior at low frequencies, \ie $\omega << \omega_n$ :
 \[
 G(j\omega) \; = \;
-\cdots
+\frac{\omega_n^2 \, [ \, (\omega_n^2 -\omega^2) - 2 \zeta \omega_n \omega \, j \, ]  }{(\omega_n^2 -\omega^2)^2 + 4 \zeta^2 \omega_n^2 \omega^2} \cdot
+\frac{ ( 1 / \omega_n^4 ) }{ ( 1 / \omega_n^4 ) }
 \; \longrightarrow \; 1
 \]
 \fullcut
@@ -329,7 +328,8 @@ G(j\omega) \; = \;
 \item Behavior at high frequencies, \ie $\omega >> \omega_n$ :
 \[
 G(j\omega) \; = \;
-\cdots
+\frac{\omega_n^2 \, [ \, (\omega_n^2 -\omega^2) - 2 \zeta \omega_n \omega \, j \, ]  }{(\omega_n^2 -\omega^2)^2 + 4 \zeta^2 \omega_n^2 \omega^2} \cdot
+\frac{ ( 1 / \omega^4 ) }{ ( 1 / \omega^4 ) }
 \; \longrightarrow \; -\frac{1}{\omega^2}
 \]
 \fullcut
@@ -337,8 +337,186 @@ G(j\omega) \; = \;
 \item Magnitude plot is $y = -40 \cdot \log_{10}(\omega)$ decibels, \ie it is a line with slope of $-40$ decibels per decade. 
 \item Phase plot is constant at $y = -180$ degree. 
 \end{itemize}
+\framebreak
+
+\item Behavior at the peak frequency:
+\begin{itemize}
+\item Peak frequency $\omega_p$ is the frequency for which the amplitude is maximum. \linebreak It is very close to the natural frequency $\omega_n$ but it is generally not the same. 
+\item Peak frequency: 
+\[
+\omega_p \; \define \; 
+\argmax_{ \omega > 0 } \; M(\omega) \; = \;
+\omega_n \, \sqrt{1 - 2 \zeta^2}
+\]
+\item Peak amplitude: 
+\[
+M_p \; \define \; M(\omega_p) \; = \;
+\frac{1}{ 2 \zeta \, \sqrt{1 - \zeta^2}}
+\]
+\end{itemize}
+\framebreak
+
+\item Bandwidth: 
+\begin{itemize}
+\item In general bandwidth $\omega_{BW}$ is defined as the frequency for which the amplitude is 3 decibels below the low-frequency asymptote. 
+\item For a second-order underdamped system of the form
+\[
+G(s) = \frac{\omega_n^2}{s^2 + 2 \zeta \omega_n \, s + \omega_n^2}
+\]
+it can be calculated as: 
+\[
+\omega_{BW} \; = \; \omega_n \, 
+\sqrt{ (1 - 2 \zeta^2) + \sqrt{4 \zeta^4 - 4 \zeta^2 + 2} }
+\]
+\end{itemize}
 
 \end{itemize}
+
+\end{frame}
+
+% =================================================================
+\subsection{Gain and Phase Margins}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection: \insertsubsection}
+
+Recall: 
+\begin{figure}
+\centering
+\includegraphics[width=0.5\columnwidth]{figures/Nise_Fig-8-1-a.jpg}
+\end{figure}
+\framebreak
+
+Recall: 
+\begin{itemize}
+\item Open loop transfer function: $K \, G(s) \, H(s)$
+\item Closed-loop transfer function: 
+\[
+T(s) \; = \; \frac{K \, G(s)}{1 + K \, G(s) \, H(s)}
+\]
+\end{itemize}
+
+Margin definitions: 
+\begin{itemize}
+\item Gain margin $G_M$ is the factor by which we can increase $K$ before the closed-loop transfer function $T(s)$ becomes unstable. 
+\item Phase margin $\phi_M$ is closedly related to the delay $T$ we can tolerate in the \linebreak sensor $H(s)$ before $T(s)$ becomes unstable. 
+\begin{itemize}
+\item Unfortunately the gain margin does not correspond to an intuitive concept \linebreak in the time domain. 
+\end{itemize}
+\end{itemize}
+\framebreak
+
+Margin evaluations: 
+\begin{figure}
+\centering
+\includegraphics[width=0.68\columnwidth]{figures/Nise_Fig-10-37.jpg}
+\end{figure}
+
+\end{frame}
+
+% =================================================================
+\subsection{Phase Margin and Damping Ratio}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection: \insertsubsection}
+
+Recall: 
+\begin{figure}
+\centering
+\includegraphics[width=0.5\columnwidth]{figures/Nise_Fig-8-1-a.jpg}
+\end{figure}
+\framebreak
+
+Relationship between Phase Margin and Damping Ratio: 
+\begin{itemize}
+\item The following two quantities are related: 
+\begin{itemize}
+\item The phase margin $\phi_M$ of the open-loop transfer function $K \, G(s) \, H(s)$. 
+\item The damping ratio $\zeta$ of the pair of dominant poles of the closed-loop \linebreak transfer function $T(s)$. 
+\begin{itemize}
+\item This quantity is tightly related to the percent overshoot ($\% OS$). 
+\end{itemize}
+
+\end{itemize}
+\item More precisely, the relationship is: 
+\[
+\phi_M \; = \; \tan^{-1} \left(
+\frac{2 \zeta}{ \sqrt{ -2 \zeta^2 + \sqrt{1 + 4 \zeta^4} } }
+\right)
+\]
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection: \insertsubsection}
+
+Using this Relationship for Design: 
+\begin{enumerate}
+\item Define the desired percent overshoot ($\% OS$) of the closed-loop \linebreak transfer function $T(s)$. 
+\item Calculate the phase margin $\phi_M$ that the open-loop transfer function $K \, G(s) \, H(s)$ needs to have. 
+\item Add lead or lag compensators to increase or decrease the phase margin \linebreak of the open-loop transfer function $K \, G(s) \, H(s)$. 
+\begin{itemize}
+\item While designing, strive for a compensator that achieves the desired \linebreak phase margin while minimally impacting the amplitude diagram. 
+\end{itemize}
+
+\end{enumerate}
+
+\end{frame}
+
+% =================================================================
+\subsection{Steady-state Errors}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection: \insertsubsection}
+
+Recall: 
+\begin{figure}
+\centering
+\includegraphics[width=0.5\columnwidth]{figures/Nise_Fig-8-1-a.jpg}
+\end{figure}
+\framebreak
+
+Relationship between Low-frequency Asymptote and Steady-state Error: 
+\begin{itemize}
+\item The following two quantities are related: 
+\begin{itemize}
+\item The low-frequency asymptote value $M( \omega \rightarrow 0 )$ of the open-loop \linebreak transfer function $K \, G(s) \, H(s)$. 
+\item The step-input error constant $K_p$ of the open-loop transfer function. 
+\item The steady-state error of the closed-loop transfer function $T(s)$ when the input is a unit step, denoted $e_{step}(\infty)$. 
+\end{itemize}
+\item More precisely, the relationship is, in decibels: 
+\[
+M( \omega \rightarrow 0 ) \; = \; K_p \; = \;
+\frac{1}{e_{step}(\infty)} - 1
+\]
+\end{itemize}
+\framebreak
+
+\begin{figure}
+\centering
+\includegraphics[width=0.6\columnwidth]{figures/Nise_Fig-10-51-a.jpg}
+\end{figure}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection: \insertsubsection}
+
+Using this Relationship for Design: 
+\begin{enumerate}
+\item Define the desired steady-state error of the closed-loop \linebreak transfer function $T(s)$ when the input is a unit step. 
+\item Calculate the step-input error constant $K_p$ that the open-loop transfer function $K \, G(s) \, H(s)$ needs to have. 
+\item Add lag or lead compensators to increase or decrease the low-frequency asymptote of the open-loop transfer function $K \, G(s) \, H(s)$. 
+\begin{itemize}
+\item While designing, strive for a compensator that achieves the desired \linebreak low-frequency asymptote while minimally impacting the phase diagram. 
+\end{itemize}
+\end{enumerate}
 
 \end{frame}
 
