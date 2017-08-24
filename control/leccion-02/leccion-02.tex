@@ -1,0 +1,45 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{02}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\begin{center}
+\Large Sistemas de Control (EYAG-1005): Lecci\'on \numero \\[1ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\halfskip
+
+\input{../../article_compromiso-honor}
+
+% =============================================
+\begin{problem}
+Considere un sistema cuya respuesta de la frecuencia es como se muestra en la figura de abajo. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=\textwidth]{leccion-bode.eps}
+\end{figure}
+
+Con esto en mente, complete las siguientes actividades: 
+\begin{enumerate}[label=\alph*.]
+\item \textbf{[4 Puntos]} Calcule los m\'argenes de ganancia y fase del sistema. 
+\item Suponiendo que el sistema es puesto en un lazo de retro-alimentaci\'on unitaria, compute las siguientes m\'etricas de desempe\~no del sistema en circuito cerrado: 
+\begin{itemize}
+\item \textbf{[3 Puntos]} Error en estado estable para entrada escal\'on.  
+\item \textbf{[3 Puntos]} Porcentage de sobrepaso. 
+\end{itemize}
+\end{enumerate}
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
