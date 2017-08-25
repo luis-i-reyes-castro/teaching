@@ -41,6 +41,11 @@ G_P(s) \; = \;
 \]
 dise\~ne un compensador proporcional, \ie $G_C(s) = K$, tal que en circuito abierto el sistema tenga 10 decibeles de margen de ganancia. 
 
+\emph{Soluci\'on:} Usando la aplicaci\'on Control System Designer de MATLAB ingresamos la planta y solicitamos el Diagrama de Bode en lazo abierto. Luego incrementamos la ganancia arrastrando el diagrama de magnitud hacia arriba con el mouse hasta llegar a 10 decibeles de margen de ganancia en lazo abierto. Para este margen encontramos que: 
+\[
+K \; \approx \; 488
+\]
+
 \end{problem}
 \fullskip
 
@@ -53,6 +58,17 @@ G_P(s) \; = \;
 \]
 dise\~ne un compensador proporcional, \ie $G_C(s) = K$, tal que en circuito cerrado el sistema tenga 20\% de sobrepaso. 
 
+\emph{Soluci\'on:} Para $OS = 0.20$ tenemos $\zeta = 0.456$, lo que implica que en circuito abierto debemos tener el siguiente margen de fase. 
+\[
+\phi_M \; = \; \tan^{-1} \left(
+\frac{ 2 \zeta}{ \sqrt{ -2 \zeta^2 + \sqrt{1 + 4 \zeta^4}}}
+\right) \; = \; 0.84 \text{ rad} \; = \; 48.15\deg
+\]
+Usando la aplicaci\'on Control System Designer de MATLAB ingresamos la planta y solicitamos el Diagrama de Bode en lazo abierto. Luego incrementamos la ganancia arrastrando el diagrama de magnitud hacia arriba con el mouse hasta llegar a 48 grados de margen de fase en lazo abierto. Para este margen encontramos que: 
+\[
+K \; \approx \; 566
+\]
+
 \end{problem}
 \fullskip
 
@@ -61,7 +77,7 @@ dise\~ne un compensador proporcional, \ie $G_C(s) = K$, tal que en circuito cerr
 \textbf{[4 Puntos]} Para la planta 
 \[
 G_P(s) \; = \; 
-\frac{s+4}{(s+2)(s+6)(s+8)}
+\frac{s+4}{(s+2)(s+6)(s+8)(s+12)}
 \]
 dise\~ne un compensador de atraso de fase, \ie
 \[
@@ -69,6 +85,11 @@ G_C(s) \; = \; K \, \frac{s+z}{s+p},
 \qquad \text{donde } 0 < p < z,
 \]
 tal que \emph{(i)} en circuito abierto el sistema tenga 45\deg de margen de fase y \emph{(ii)} en circuito cerrado el sistema tenga 1\% de error en estado estable ante una entrada escal\'on. 
+
+\emph{Soluci\'on:} Para el error en estado estable especificado requerimos que la constante de error de posici\'on $K_p = 99 \simeq 100$. Esto implica que la as\'intota de baja frequencia de la funci\'on de transferencia en circuito abierto $G_C(s) G_P(s)$ debe llegar hasta los 40 decibeles. Luego, usando la aplicaci\'on Control System Designer de MATLAB ingresamos la planta y solicitamos el Diagrama de Bode en lazo abierto. Luego ingresamos un polo real y un cero real, asegur\'andonos de que el polo est\'e m\'as cerca del origen que el cero. De aqu\'i en adelante tenemos que experimentar con distinos valores de la locaci\'on del polo, del cero y de la ganancia para poder satisfacer los requerimientos, puesto que no hay una selecci\'on \'unica de par\'ametros. Un dise\~no de compensador que he validado es: 
+\[
+K \; = \; 1187.5 \, \frac{(s+0.259)}{(s+0.0104)}
+\]
 
 \end{problem}
 \fullskip
