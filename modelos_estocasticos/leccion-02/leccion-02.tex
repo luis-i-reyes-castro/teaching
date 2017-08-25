@@ -1,0 +1,60 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{02}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Lecci\'on \numero \\[1ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\halfskip
+
+\input{../../article_compromiso-honor}
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[3 Puntos]} Una empresa est\'a tratando de decidir qu\'e hacer con el software que usa para su operaci\'on principal. Tal como se muestra en el siguiente \'arbol de decisi\'on, \linebreak la empresa puede desarrollar su propio software, comprarlo, o seguir utilizando el mismo que tiene actualmente. Determine la decisi\'on \'optima. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.5\textwidth]{problema_arbol-decision.jpg}
+\end{figure}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[3 Puntos]} Considere el siguiente modelo de litigio en cortes estadounidenses, el cual es basado en un modelo publicado en la p\'agina web \emph{Settlement Perspectives} del abogado John DeGroot en un art\'iculo titulado ``Decision Tree Analysis in Litigation: The Basics'' y publicado el 4 de enero del 2009. El modelo especifica un \'arbol de probabilidad que representa los diferentes escenarios de un litigio desde el punto de vista de la parte acusadora. Con esto en mente, calcule la ganancia esperada de la parte acusadora. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{problema_arbol-recompensas.jpg}
+\end{figure}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+Una empresa est\'a contemplando el lanzamiento de un nuevo producto. Si el producto tiene \'exito, lo cual se cree que ocurrir\'a con una probabilidad del 65\%, la empresa lograr\'a acumular alrededor de \$60,000 d\'olares en ganancias; en cambio, si el producto fracasa, la empresa perder\'a alrededor de \$40,000. Se sobre-entiende que la empresa tambi\'en puede optar por no lanzar el producto. Usted se dedica a organizar \emph{focus groups} para evaluar nuevos productos, los cuales predicen correctamente el \'exito o fracaso de un nuevo producto el 90\% de las veces. Actualmente, usted cobrar\'ia unos \$1,200 por evaluar el nuevo producto de la empresa antes mencionada. 
+
+Con esto en mente, complete las siguientes actividades: 
+\begin{itemize}
+\item \textbf{[4 Puntos]} Suponiendo que usted le ofrece sus servicios al gerente de la empresa, modele el problema de decisi\'on del gerente como un \'arbol. 
+\item \textbf{[4 Puntos]} Calcule la utilidad esperada de la empresa y describa la pol\'itica \'optima. 
+\end{itemize}
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
