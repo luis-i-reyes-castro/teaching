@@ -194,7 +194,7 @@ Con todas las probabilidades calculadas podemos ahora construir el \'arbol de de
 
 \end{itemize}
 
-Ahora realizamos nuestra primera iteraci\'on de programaci\'on din\'amica: 
+Primera iteraci\'on de programaci\'on din\'amica: 
 \begin{itemize}
 
 \item Decisi\'on: No contratar el focus group
@@ -202,8 +202,7 @@ Ahora realizamos nuestra primera iteraci\'on de programaci\'on din\'amica:
 \item Decisi\'on: Lanzar el producto
 \[
 \Exp(\text{Utilidad}) \; = \;
-(0.65)(\$60,000) + (0.35)(-\$40,000) \; = \;
-\$25,000
+(0.65)(+\$60,000) + (0.35)(-\$40,000) \; = \; +\$25,000
 \]
 \item Decisi\'on: No lanzar el producto
 \[
@@ -219,8 +218,7 @@ Ahora realizamos nuestra primera iteraci\'on de programaci\'on din\'amica:
 \item Decisi\'on: Lanzar el producto
 \[
 \Exp(\text{Utilidad}) \; = \;
-(0.65)(\$60,000) + (0.35)(-\$40,000) \; = \;
-\$25,000
+(0.94)(+\$58,800) + (0.06)(-\$41,200) \; = \; +\$52,800
 \]
 \item Decisi\'on: No lanzar el producto
 \[
@@ -233,8 +231,7 @@ Ahora realizamos nuestra primera iteraci\'on de programaci\'on din\'amica:
 \item Decisi\'on: Lanzar el producto
 \[
 \Exp(\text{Utilidad}) \; = \;
-(0.65)(\$60,000) + (0.35)(-\$40,000) \; = \;
-\$25,000
+(0.17)(+\$58,800) + (0.83)(-\$41,200) \; = \; -\$24,200
 \]
 \item Decisi\'on: No lanzar el producto
 \[
@@ -245,6 +242,45 @@ Ahora realizamos nuestra primera iteraci\'on de programaci\'on din\'amica:
 
 \end{itemize}
 
+Segunda iteraci\'on de programaci\'on din\'amica: 
+\begin{itemize}
+
+\item Decisi\'on: No contratar el focus group y lanzar el producto
+\[
+\Exp(\text{Utilidad}) \; = \; +\$25,000
+\]
+
+\item Decisi\'on: Contratar el focus group
+\begin{itemize}
+\item Escenario con probabilidad $\Pr(Y=1) = 0.62$ : Focus group predice \'exito y se lanza el producto
+\[
+\Exp(\text{Utilidad}) \; = \; +\$52,800
+\]
+\item Escenario con probabilidad $\Pr(Y=0) = 0.38$ : Focus group predice fracaso y no se lanza el producto
+\[
+\Exp(
+\text{Utilidad} \; = \; -\$1,200
+\]
+\end{itemize}
+
+\end{itemize}
+
+Tercera iteraci\'on de programaci\'on din\'amica: 
+\begin{itemize}
+
+\item Decisi\'on: No contratar el focus group y lanzar el producto
+\[
+\Exp(\text{Utilidad}) \; = \; +\$25,000
+\]
+
+\item Decisi\'on: Contratar el focus group y lanzar el producto si el focus group predice \'exito (caso contrario, no lanzar el producto)
+\[
+\Exp(\text{Utilidad}) \; = \; +\$32,280
+\]
+
+\end{itemize}
+
+En conclusi\'on, la pol\'itica \'optima, la cual tiene una utilidad esperada de $+\$32,280$ es: \linebreak ``Contratar el focus group y lanzar el producto si el focus group predice \'exito; caso contrario, no lanzar el producto.'' 
 
 \end{problem}
 \vspace{\baselineskip}
