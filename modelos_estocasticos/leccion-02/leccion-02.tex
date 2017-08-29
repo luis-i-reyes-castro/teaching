@@ -65,6 +65,23 @@ En conclusi\'on, la decisi\'on \'optima es comprar el software.
 \includegraphics[width=0.9\textwidth]{problema_arbol-recompensas.jpg}
 \end{figure}
 
+\emph{Soluci\'on:} Procedemos por etapas: 
+\begin{enumerate}
+\item Evaluamos la utilidad del nodo `Veredict for Plaintiff': 
+\[
+(0.1)(\$200,000) + (0.8)(\$300,000) + (0.1)(\$500,000) \; = \; \$310,000
+\]
+\item Evaluamos la utilidad del nodo `Summary Judgement Denied': 
+\[
+(0.5)(\$120,000) + (0.5)(\$310,000) \; = \; \$215,000
+\]
+\item Evaluamos la utilidad del nodo `If No Settlement': 
+\[
+(0.6)(\$30,000) + (0.4)(\$215,000) \; = \; \$104,000
+\]
+\end{enumerate}
+En conclusi\'on, la ganancia esperada de la parte acusadora es de \$104,000. 
+
 \end{problem}
 \vspace{\baselineskip}
 
@@ -77,6 +94,157 @@ Con esto en mente, complete las siguientes actividades:
 \item \textbf{[4 Puntos]} Suponiendo que usted le ofrece sus servicios al gerente de la empresa, modele el problema de decisi\'on del gerente como un \'arbol. 
 \item \textbf{[4 Puntos]} Calcule la utilidad esperada de la empresa y describa la pol\'itica \'optima. 
 \end{itemize}
+
+\emph{Soluci\'on:} Definimos las siguientes variables aleatorias: 
+\begin{itemize}
+\item $X \in \{ 0, 1\}$ denota si el producto fracasa o es exitoso
+\item $Y \in \{ 0, 1\}$ denota si el focus group predice \'exito o fracaso
+\end{itemize}
+Empezamos calculando las probabilidades posteriores:
+\begin{align*}
+\Pr(Y=1) \;
+& = \; \Pr(X=1) \cdot \Pr(Y=1|X=1)
++ \Pr(X=0) \cdot \Pr(Y=1|X=0) \\
+& = \; (0.65)(0.90) + (0.35)(0.10) \; = \; 0.62 \\
+\Longrightarrow \; \Pr(Y=0) \; & = \; 0.38
+\end{align*}
+Luego calculamos las probabilidades priores condicionales en las posteriores: 
+\begin{itemize}
+\item Para el caso cuando el focus group predice \'exito, tenemos: 
+\begin{align*}
+\Pr( X=1 \mid Y=1 ) \;
+& = \; \frac{ \Pr(X=1) \cdot \Pr( Y=1 \mid X=1 ) }{\Pr(Y=1)} \\[1ex]
+& = \; \frac{ (0.65)(0.90) }{(0.62)} \; = \; 0.94 \\[1ex]
+\Longrightarrow \; \Pr( X=0 \mid Y=1 ) \;
+& = \; 0.06
+\end{align*}
+\item Para el caso cuando el focus group predice fracaso, tenemos: 
+\begin{align*}
+\Pr( X=1 \mid Y=0 ) \;
+& = \; \frac{ \Pr(X=1) \cdot \Pr( Y=0 \mid X=1 ) }{\Pr(Y=0)} \\[1ex]
+& = \; \frac{ (0.65)(0.10) }{(0.38)} \; = \; 0.17 \\[1ex]
+\Longrightarrow \; \Pr( X=0 \mid Y=0 ) \;
+& = \; 0.83
+\end{align*}
+\end{itemize}
+
+Con todas las probabilidades calculadas podemos ahora construir el \'arbol de decisi\'on: 
+\begin{itemize}
+
+\item Decisi\'on: No contratar el focus group
+\begin{itemize}
+\item Decisi\'on: Lanzar el producto
+\begin{itemize}
+\item Escenario con probabilidad $\Pr(X=1) = 0.65$ : Producto es exitoso
+\[
+\text{Utilidad} \; = \; +\$60,000
+\]
+\item Escenario con probabilidad $\Pr(X=0) = 0.35$ : Producto fracasa
+\[
+\text{Utilidad} \; = \; -\$40,000
+\]
+\end{itemize}
+\item Decisi\'on: No lanzar el producto
+\[
+\text{Utilidad} \; = \; \$0
+\]
+\end{itemize}
+
+\item Decisi\'on: Contratar el focus group
+\begin{itemize}
+
+\item Escenario con probabilidad $\Pr(Y=1) = 0.62$ : Focus group predice \'exito
+\begin{itemize}
+\item Decisi\'on: Lanzar el producto
+\begin{itemize}
+\item Escenario con probabilidad $\Pr( X=1 \mid Y=1 ) = 0.94$ : Producto es exitoso
+\[
+\text{Utilidad} \; = \; +\$58,800
+\]
+\item Escenario con probabilidad $\Pr( X=0 \mid Y=1 ) = 0.06$ : Producto fracasa
+\[
+\text{Utilidad} \; = \; -\$41,200
+\]
+\end{itemize}
+\item Decisi\'on: No lanzar el producto
+\[
+\text{Utilidad} \; = \; -\$1,200
+\]
+\end{itemize}
+
+\item Escenario con probabilidad $\Pr(Y=0) = 0.38$ : Focus group predice fracaso.
+\begin{itemize}
+\item Decisi\'on: Lanzar el producto
+\begin{itemize}
+\item Escenario con probabilidad $\Pr( X=1 \mid Y=0 ) = 0.17$ : Producto es exitoso
+\[
+\text{Utilidad} \; = \; +\$58,800
+\]
+\item Escenario con probabilidad $\Pr( X=0 \mid Y=0 ) = 0.83$ : Producto fracasa
+\[
+\text{Utilidad} \; = \; -\$41,200
+\]
+\end{itemize}
+\item Decisi\'on: No lanzar el producto
+\[
+\text{Utilidad} \; = \; -\$1,200
+\]
+\end{itemize}
+\end{itemize}
+
+\end{itemize}
+
+Ahora realizamos nuestra primera iteraci\'on de programaci\'on din\'amica: 
+\begin{itemize}
+
+\item Decisi\'on: No contratar el focus group
+\begin{itemize}
+\item Decisi\'on: Lanzar el producto
+\[
+\Exp(\text{Utilidad}) \; = \;
+(0.65)(\$60,000) + (0.35)(-\$40,000) \; = \;
+\$25,000
+\]
+\item Decisi\'on: No lanzar el producto
+\[
+\text{Utilidad} \; = \; \$0
+\]
+\end{itemize}
+
+\item Decisi\'on: Contratar el focus group
+\begin{itemize}
+
+\item Escenario con probabilidad $\Pr(Y=1) = 0.62$ : Focus group predice \'exito
+\begin{itemize}
+\item Decisi\'on: Lanzar el producto
+\[
+\Exp(\text{Utilidad}) \; = \;
+(0.65)(\$60,000) + (0.35)(-\$40,000) \; = \;
+\$25,000
+\]
+\item Decisi\'on: No lanzar el producto
+\[
+\text{Utilidad} \; = \; -\$1,200
+\]
+\end{itemize}
+
+\item Escenario con probabilidad $\Pr(Y=0) = 0.38$ : Focus group predice fracaso.
+\begin{itemize}
+\item Decisi\'on: Lanzar el producto
+\[
+\Exp(\text{Utilidad}) \; = \;
+(0.65)(\$60,000) + (0.35)(-\$40,000) \; = \;
+\$25,000
+\]
+\item Decisi\'on: No lanzar el producto
+\[
+\text{Utilidad} \; = \; -\$1,200
+\]
+\end{itemize}
+\end{itemize}
+
+\end{itemize}
+
 
 \end{problem}
 \vspace{\baselineskip}
