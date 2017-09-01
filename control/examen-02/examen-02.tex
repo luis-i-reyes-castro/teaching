@@ -30,10 +30,43 @@
 
 Complete las siguientes actividades: 
 \begin{itemize}
-\item \textbf{[2 Puntos]} Determine la veracidad o falsedad del siguiente enunciado: El margen de ganancia es no mayor a 15 decibeles, \ie $G_M \leq 15 \text{ dB}$. 
-\item \textbf{[2 Puntos]} Determine la veracidad o falsedad del siguiente enunciado: El margen de fase es no menor de 40\deg, \ie $\phi_M \geq 40\deg \text{ dB}$. 
-\item \textbf{[2 Puntos]} Determine la veracidad o falsedad del siguiente enunciado: El ancho de banda del sistema es no mayor a 4 rad/s, \ie $\omega_{BW} \leq 4$ rad/s. 
-\item \textbf{[4 Puntos]} Encuentre la funci\'on de transferencia del sistema. 
+\item \textbf{[2 Puntos]} Determine la veracidad o falsedad del siguiente enunciado: El margen de ganancia es no mayor a 15 decibeles, \ie $G_M \leq 15 \text{ dB}$. \\ \emph{Soluci\'on:} Falso, el margen de ganancia no existe porque no existe ninguna frecuencia $\omega$ para la cual $\phi(\omega) = -180\deg$. 
+\item \textbf{[2 Puntos]} Determine la veracidad o falsedad del siguiente enunciado: El margen de fase es no menor de 40\deg, \ie $\phi_M \geq 40\deg \text{ dB}$. \\ \emph{Soluci\'on:} Falso, pues es claro de la figura que cuando $M(\omega) = 0$ dB es el caso que $\phi(\omega) \leq -160\deg$, lo que implica que $\phi_M \leq 20\deg$. 
+\item \textbf{[2 Puntos]} Estime el ancho de banda del sistema. \\ \emph{Soluci\'on:} Dado que la as\'intota de baja frecuencia tiene un valor de 20 dB, para estimar el ancho de banda buscamos la frecuencia $\omega_{BW}$ para la cual $M(\omega_{BW}) = 20 \text{ dB} - 3 \text{ dB} = 17 \text{ dB}$. En particular, $\omega_{BW} \approx 4.5$ rad/s. 
+\item \textbf{[4 Puntos]} Encuentre la funci\'on de transferencia del sistema. \\ \emph{Soluci\'on:} Dado que la as\'intota de baja frecuencia tiene un valor de 20 dB, y que la m\'axima magnitud es de 35 dB, reconocemos que la magnitud del pico es de unos 15 dB, \iec
+\[
+M_p \; = \; 15 \text{ dB} \; = \; 5.62
+\]
+Adicionalmente: 
+\[
+M_p \; = \; \frac{1}{ 2 \zeta \, \sqrt{1 - \zeta^2}}
+\quad \Longrightarrow \quad
+4 \zeta^2 ( 1 - \zeta^2 ) \; = \; M_p^{-1}
+\quad \Longrightarrow \quad
+\zeta \approx 0.089
+\]
+Adem\'as, reconociendo que la frecuencia pico $\omega_p \approx 3$ rad/s tenemos que: 
+\[
+\omega_p \; = \; \omega_n \, \sqrt{1 - 2 \zeta^2}
+\quad \Longrightarrow \quad
+\omega_n \; = \; \frac{\omega_p}{\sqrt{1 - 2 \zeta^2}}
+\; = \; 3.012 \text{ rad/s}
+\]
+Finalmente, si expresamos la funci\'on de transferencia como
+\[
+G(s) \; = \; \frac{K}{s^2 + 2 \zeta \omega_n s + \omega_n^2}
+\]
+entonces para la as\'intota de baja frecuencia tenemos: 
+\[
+20 \text{ dB} \; = \; 10 \; = \; \frac{K}{\omega_n^2}
+\quad \Longrightarrow \quad
+K \; = \; 91.44
+\]
+En conclusi\'on: 
+\[
+G(s) \; = \; \frac{91.44}{s^2 + 0.536 s + 9.144}
+\]
+
 \end{itemize}
 
 \end{problem}
@@ -49,6 +82,41 @@ Encuentre valores para los par\'ametros $K$, $z$ y $p$ de tal manera que su as\'
 
 \emph{Sugerencia:} Para escribir la ecuaci\'on asociada con el \'ultimo requerimiento recuerde que cuando la fase es de $-45\deg$ la parte real de $G( j \omega )$ es igual al negativo de su parte imaginaria. 
 
+\emph{Soluci\'on:} Para la as\'intota de baja frecuencia tenemos: 
+\[
+\lim_{\omega \rightarrow 0} \, G( j\omega )
+\; = \; \frac{K \, z}{p} \; = \; 30 \text{ dB}
+\; = \; 31.6 \quad \Longrightarrow \quad
+K \, z \; = \; 31.6 \, p
+\]
+Con respecto a la as\'intota de alta frecuencia, tenemos: 
+\begin{align*}
+G( j\omega ) \;
+& = \; K \, \frac{z + j\omega}{p + j\omega} \cdot \frac{(p-j\omega)}{(p-j\omega)}
+\; = \; K \, \frac{(zp + \omega^2) + j \omega (p-z)}{p^2 + \omega^2} \\[2ex]
+\Longrightarrow \;
+\lim_{\omega \rightarrow \infty} \, G( j\omega ) \;
+& = \; \lim_{\omega \rightarrow \infty} \, K \, \frac{(zp + \omega^2) + j \omega (p-z)}{p^2 + \omega^2} \cdot \frac{(1/\omega^2)}{(1/\omega^2)} \; = \; -10 \text{ dB} \; = \; 0.316 \\[2ex]
+\Longrightarrow \; K \; & = \; 0.316
+\end{align*}
+Adicionalmente, para la condici\'on de fase, obtenemos: 
+\[
+G(10j) \; = \; K \, \frac{(zp + 100) + 10j(p-z)}{p^2 + 100} \quad \Longrightarrow \quad
+zp + 100 \; = \; 10(z-p)
+\]
+Finalmente, combinando las tres ecuaciones anteriores vemos que: 
+\[
+K \, z \; = \; 31.6 \, p
+\quad \Longrightarrow \quad
+z = 100 \, p
+\quad \Longrightarrow \quad
+p \; = \; 0.0102
+\]
+En conclusi\'on, el compensador debe ser de la forma: 
+\[
+G_C(s) \; = \; 0.316 \, \frac{(s+1.02)}{(s+0.0102)}
+\]
+
 \end{problem}
 \vspace{\baselineskip}
 
@@ -59,6 +127,16 @@ Encuentre valores para los par\'ametros $K$, $z$ y $p$ de tal manera que su as\'
 \centering
 \includegraphics[width=0.68\textwidth]{prob_espacio-estados.jpg}
 \end{figure}
+
+\emph{Soluci\'on:} Las ecuaciones de movimiento de los bloques de masa son: 
+\begin{align*}
+4 \, \ddot{x}_1(t) \;
+& = \; -6 \, x_1(t) + 2 \, ( \, \dot{x}_2(t) - \dot{x}_1(t) \, ) \\
+4 \, \ddot{x}_2(t) \;
+& = \; f(t) -2 \, \dot{x}_2(t) - 2 \, ( \, \dot{x}_2(t) - \dot{x}_1(t) \, ) + 6 \, ( x_3(t) - x_2(t) ) \\
+4 \, \ddot{x}_3(t) \;
+& = \; -6 \, ( \, x_3(t) - x_2(t) \, ) - 2 \, \dot{x}_3(t)
+\end{align*}
 
 \end{problem}
 \vspace{\baselineskip}
