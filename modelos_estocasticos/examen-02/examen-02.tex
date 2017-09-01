@@ -1,0 +1,98 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{02}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Examen \numero \\[1ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\halfskip
+
+\input{../../macros-espanol}
+\input{../../article_compromiso-honor}
+\halfskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[6 Puntos]} La compa\~n\'ia 6M tiene un torno como pieza central de trabajo. Los trabajos llegan seg\'un un proceso Poisson con tasa media de dos por d\'ia y el tiempo de procesado de cada trabajo tiene distribuci\'on exponencial con media de seis horas. Como los trabajos son grandes se utiliza una bodega localizada a cierta distancia de la m\'aquina para almacenar los trabajos en espera. Sin embargo, para ahorrar tiempo al moverlos el gerente de producci\'on propone adecuar espacio junto al torno para tres trabajos. De esta manera, siempre se utilizar\'ia primero el nuevo espacio para almacenamiento, y de haber m\'as de tres trabajos en espera se pondr\'ian los trabajos excedentes en la bodega. Con esta propuesta, qu\'e porcentaje del tiempo ser\'a necesario utilizar el nuevo espacio pero no la bodega? 
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[4 Puntos]} El Security \& Trust Bank tiene cuatro cajeros para atender a sus clientes, los cuales llegan seg\'un un proceso de arribo Poisson. En vista de que el negocio est\'a en crecimiento la gerencia pronostica que la tasa de arribo ser\'a de 3.5 clientes por minuto dentro de un a\~no. El tiempo de transacciones entre el cajero y el cliente tiene distribuci\'on exponencial con media de un minuto. La gerencia ha establecido los siguientes lineamientos para lograr un nivel de servicio satisfactorio: 
+\begin{itemize}
+\item El n\'umero promedio de clientes en cola no debe exceder dos. 
+\item El tiempo promedio de espera en cola no debe exceder los cinco minutos. 
+\end{itemize}
+
+Con esto en mente, determine si el siguiente a\~no el banco pod\'ra cumplir con sus lineamientos de nivel de servicio. 
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[6 Puntos]} Considere el siguiente modelo de su desempe\~no en este examen. El nivel de entendimiento que usted tiene de esta materia se clasifica en muy satisfactorio (MS), satisfactorio (S) e insatisfactorio (I). Usted puede obtener una calificaci\'on alta (C1), moderada (C2), aceptable (C3) o inaceptable (C4). La siguiente tabla provee las probabilidades de su calificaci\'on condicional en su nivel de entendimiento. 
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{c|c|c|c|c|}
+\cline{2-5}
+ & \multicolumn{4}{c|}{\textbf{Probabilidad Condicional de Calificaci\'on}} \\ \hline
+\multicolumn{1}{|c|}{\textbf{Entendimiento}} & $\Pr( Y=C1 \mid X)$ & $\Pr( Y=C2 \mid X)$ & $\Pr( Y=C3 \mid X)$ & $\Pr( Y=C4 \mid X)$ \\ \hline
+\multicolumn{1}{|c|}{$X=MS$} & 0.35 & 0.25 & 0.25 & 0.15 \\ \hline
+\multicolumn{1}{|c|}{$X=S$} & 0.22 & 0.38 & 0.24 & 0.16 \\ \hline
+\multicolumn{1}{|c|}{$X=I$} & 0.12 & 0.18 & 0.28 & 0.42 \\ \hline
+\end{tabular}
+\end{table}
+
+Suponiendo que su nivel de entiendimiento est\'a uniformement distribuido, \ie que
+\[
+\Pr(X=MS) \; = \; \Pr(X=S) \; = \; \Pr(X=I) \; = \; 1/3 \, ,
+\]
+calcule la distribuci\'on de su nivel de entendimiento condicional en su calificaci\'on. 
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[4 Puntos]} Una Cadena de Markov tiene la siguiente matriz de transici\'on: 
+\[
+\vec{P} \; = \; \left[
+\begin{array}{cccc}
+0.2 & 0.8 & 0 & 0 \\
+0 & 0 & 0.6 & 0.4 \\
+0.8 & 0 & 0.2 & 0 \\
+0.6 & 0 & 0.4 & 0
+\end{array} \right]
+\]
+
+Suponga que se acumulan recompensas en cada estado de acuerdo a la siguiente tabla: 
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Estado} & 1 & 2 & 3 & 4 \\ \hline
+\textbf{Recompensa} & +2 & 0 & +4 & $-1$ \\ \hline
+\end{tabular}
+\end{table}
+
+Para un factor de descuento $\gamma = 0.95$ encuentre el Valor Actual Neto (VAN) de la recompensa total esperada suponiendo que la cadena arranca del estado uno. 
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
