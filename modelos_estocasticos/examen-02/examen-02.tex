@@ -26,6 +26,13 @@
 \begin{problem}
 \textbf{[6 Puntos]} La compa\~n\'ia 6M tiene un torno como pieza central de trabajo. Los trabajos llegan seg\'un un proceso Poisson con tasa media de dos por d\'ia y el tiempo de procesado de cada trabajo tiene distribuci\'on exponencial con media de seis horas. Como los trabajos son grandes se utiliza una bodega localizada a cierta distancia de la m\'aquina para almacenar los trabajos en espera. Sin embargo, para ahorrar tiempo al moverlos el gerente de producci\'on propone adecuar espacio junto al torno para tres trabajos. De esta manera, siempre se utilizar\'ia primero el nuevo espacio para almacenamiento, y de haber m\'as de tres trabajos en espera se pondr\'ian los trabajos excedentes en la bodega. Con esta propuesta, qu\'e porcentaje del tiempo ser\'a necesario utilizar el nuevo espacio pero no la bodega? 
 
+\emph{Soluci\'on:} Modelamos este sistema como una cola $M/M/1$ con tasa de arribo $\lambda = 2$ por d\'ia y tasa de servicio $\mu = 4$ por d\'ia, lo que resulta en un factor de utilizaci\'on $\rho = \lambda / \mu = 0.5$. Entonces, el porcentaje del tiempo que ser\'a necesario utilizar el nuevo espacio pero no la bodega es la probabilidad en estado estable del evento de que el n\'umero de clientes en cola sea menor o igual a tres, la cual es igual a la probabilidad de que el n\'umero de clientes en el sistema sea menor o igual a cuatro (puesto que $s=1$). \Iec 
+\[
+\sum_{n=0}^4 P_n \; = \;
+\sum_{n=0}^4 ( 1 - \rho ) \, \rho^n \; = \;
+0.96875
+\]
+
 \end{problem}
 \vspace{\baselineskip}
 
@@ -39,19 +46,32 @@
 
 Con esto en mente, determine si el siguiente a\~no el banco pod\'ra cumplir con sus lineamientos de nivel de servicio. 
 
+\emph{Soluci\'on:} Modelamos este sistema como una cola $M/M/4$ con tasa de arribo $\lambda = 3.5$ por minuto y tasa de servicio $\mu = 1$ por minuto, lo que resulta en un factor de utilizaci\'on $\rho = \lambda / \mu = 0.875$. Para estas m\'etricas, tenemos: 
+\begin{align*}
+& P_0 \; = \;
+\left[ \; \left( \;
+\sum_{n=0}^{s-1} \frac{(\lambda/\mu)^n}{n!} \right)
++ \frac{(\lambda/\mu)^s}{s!(1-\rho)} \; \right]^{-1} \; = \; 
+\left( \, \frac{853}{48} + \frac{2401}{48} \, \right)^{-1} \; = \; 0.01475 \\[2ex]
+& \Longrightarrow \; L_q \; = \; 
+P_0 \, \frac{(\lambda/\mu)^s \, \rho}{ s! \, (1-\rho)^2 } \; = \; 5.165 \qquad \Longrightarrow
+\; W_q \; = \; \frac{L_q}{\lambda} \; = \; 1.476 \text{ min}
+\end{align*}
+Consecuentemente, el siguiente a\~no el banco no podr\'a cumplir con sus lineamientos de nivel de servicio actuales. 
+
 \end{problem}
 \vspace{\baselineskip}
 
 % -----------------------------------------------------------------
 \begin{problem}
-\textbf{[6 Puntos]} Considere el siguiente modelo de su desempe\~no en este examen. El nivel de entendimiento que usted tiene de esta materia se clasifica en muy satisfactorio (MS), satisfactorio (S) e insatisfactorio (I). Usted puede obtener una calificaci\'on alta (C1), moderada (C2), aceptable (C3) o inaceptable (C4). La siguiente tabla provee las probabilidades de su calificaci\'on condicional en su nivel de entendimiento. 
+\textbf{[6 Puntos]} Considere el siguiente modelo de su desempe\~no en este examen. El nivel de entendimiento que usted tiene de esta materia se clasifica en muy satisfactorio ($MS$), satisfactorio ($S$) e insatisfactorio ($I$). Usted puede obtener una calificaci\'on alta ($C_1$), moderada ($C_2$), aceptable ($C_3$) o inaceptable ($C_4$). La siguiente tabla provee las probabilidades de su calificaci\'on condicional en su nivel de entendimiento. 
 
 \begin{table}[htb]
 \centering
 \begin{tabular}{c|c|c|c|c|}
 \cline{2-5}
  & \multicolumn{4}{c|}{\textbf{Probabilidad Condicional de Calificaci\'on}} \\ \hline
-\multicolumn{1}{|c|}{\textbf{Entendimiento}} & $\Pr( Y=C1 \mid X)$ & $\Pr( Y=C2 \mid X)$ & $\Pr( Y=C3 \mid X)$ & $\Pr( Y=C4 \mid X)$ \\ \hline
+\multicolumn{1}{|c|}{\textbf{Entendimiento}} & $\Pr( Y=C_1 \mid X)$ & $\Pr( Y=C_2 \mid X)$ & $\Pr( Y=C_3 \mid X)$ & $\Pr( Y=C_4 \mid X)$ \\ \hline
 \multicolumn{1}{|c|}{$X=MS$} & 0.35 & 0.25 & 0.25 & 0.15 \\ \hline
 \multicolumn{1}{|c|}{$X=S$} & 0.22 & 0.38 & 0.24 & 0.16 \\ \hline
 \multicolumn{1}{|c|}{$X=I$} & 0.12 & 0.18 & 0.28 & 0.42 \\ \hline
@@ -63,6 +83,41 @@ Suponiendo que su nivel de entiendimiento est\'a uniformement distribuido, \ie q
 \Pr(X=MS) \; = \; \Pr(X=S) \; = \; \Pr(X=I) \; = \; 1/3 \, ,
 \]
 calcule la distribuci\'on de su nivel de entendimiento condicional en su calificaci\'on. 
+
+\emph{Soluci\'on:} Primero calculamos las probabilidades de las calificaciones: 
+\begin{align*}
+\forall \, C_i \; \colon \; \Pr( \, Y = C_i \, ) \;
+& = \; \Pr( \, X=MS \, )
+\cdot \Pr( \, Y= C_i \mid X=MS \, ) \\
+& + \; \Pr( \, X=S \, )
+\cdot \Pr( \, Y= C_i \mid X=S \, ) \\
+& + \; \Pr( \, X=I \, )
+\cdot \Pr( \, Y= C_i \mid X=I \, ) \\[2ex]
+& \Longrightarrow \; \Pr( \, Y = C_1 \, ) \; = \; 0.230 \\
+& \quad \quad \, \; \Pr( \, Y = C_2 \, ) \; = \; 0.270 \\
+& \quad \quad \, \; \Pr( \, Y = C_3 \, ) \; = \; 0.257 \\
+& \quad \quad \, \; \Pr( \, Y = C_4 \, ) \; = \; 0.243
+\end{align*}
+Finalmente calculamos las probabilidades de los niveles de entendimiento condicionales en las calificaciones utilizando el Teorema de Bayes: 
+\[
+\forall \, C_i, \, \forall \, \text{Nivel} \; \colon \;
+\Pr( \, X = \text{Nivel} \mid Y = C_i \, ) \; = \;
+\frac{ \Pr( \, X = \text{Nivel} \, ) \cdot \Pr( \, Y = C_i \mid X = \text{Nivel} \, )}{ \Pr( \, Y = C_i \, ) }
+\]
+
+Los resultados se muestran en la siguiente tabla. 
+\begin{table}[H]
+\centering
+\begin{tabular}{c|c|c|c|}
+\cline{2-4}
+ & \multicolumn{3}{c|}{\textbf{Probabilidad Condicional de Entendimiento}} \\ \hline
+\multicolumn{1}{|c|}{\textbf{Calificaci\'on}} & $\Pr( X=MS \mid Y)$ & $\Pr( X=S \mid Y)$ & $\Pr( X=I \mid Y)$ \\ \hline
+\multicolumn{1}{|c|}{$Y=C_1$} & 0.507 & 0.319 & 0.174 \\ \hline
+\multicolumn{1}{|c|}{$Y=C_2$} & 0.309 & 0.469 & 0.222 \\ \hline
+\multicolumn{1}{|c|}{$Y=C_3$} & 0.325 & 0.312 & 0.364 \\ \hline
+\multicolumn{1}{|c|}{$Y=C_4$} & 0.205 & 0.219 & 0.575 \\ \hline
+\end{tabular}
+\end{table}
 
 \end{problem}
 \vspace{\baselineskip}
@@ -85,12 +140,41 @@ Suponga que se acumulan recompensas en cada estado de acuerdo a la siguiente tab
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
-\textbf{Estado} & 1 & 2 & 3 & 4 \\ \hline
-\textbf{Recompensa} & +2 & 0 & +4 & $-1$ \\ \hline
+\textbf{Estado:} $i$ & 1 & 2 & 3 & 4 \\ \hline
+\textbf{Recompensa:} $R(i)$ & +2 & 0 & +4 & $-1$ \\ \hline
 \end{tabular}
 \end{table}
 
 Para un factor de descuento $\gamma = 0.95$ encuentre el Valor Actual Neto (VAN) de la recompensa total esperada suponiendo que la cadena arranca del estado uno. 
+
+\emph{Soluci\'on:} Para cada estado $i$ denotaremos al valor actual neto de la recompensa recibida si se arranca desde ese estado como $V(i)$. Entonces: 
+\[
+\forall \, \text{estado } i \; \colon \;
+V(i) \; = \; R(i)
+\; + \; \gamma \sum_{\text{estados } j} P(i,j) \, V(j)
+\]
+M\'as precisamente, las ecuaciones de valor de los estados son: 
+\begin{align*}
+V(1) \;
+& = \; +2 + 0.95 \, ( \, 0.2 \, V(1) + 0.8 \, V(2) \, ) \\
+V(2) \;
+& = \; +0 + 0.95 \, ( \, 0.6 \, V(3) + 0.4 \, V(4) \, ) \\
+V(3) \;
+& = \; +4 + 0.95 \, ( \, 0.8 \, V(1) + 0.2 \, V(3) \, ) \\
+V(4) \;
+& = \; -1 + 0.95 \, ( \, 0.6 \, V(1) + 0.4 \, V(3) \, )
+\end{align*}
+Resolviendo este sistema de ecuaciones lineales encontramos que: 
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Estado:} $i$ & 1 & 2 & 3 & 4 \\ \hline
+\textbf{Valor:} $V(i)$ & $+32.308$ & $+31.802$ & $+35.252$ & $+30.811$ \\ \hline
+\end{tabular}
+\end{table}
+
+Consecuentemente, el Valor Actual Neto (VAN) de la recompensa total esperada suponiendo que la cadena arranca del estado uno es $+32.308$ unidades. 
 
 \end{problem}
 \vspace{\baselineskip}
