@@ -104,6 +104,54 @@ Condicionalmiento:
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
+Variable Aleatoria Bernoulli: 
+\begin{itemize}
+\item La variable aleatoria $\Bernoulli(p)$ representa la ocurrencia o no ocurrencia \linebreak de alg\'un evento de inter\'es que sucede con probabilidad $p$, \eg el resultado de lanzar una moneda sesgada. 
+\item Si $X \sim \Bernoulli(p)$ entonces su distribucion es: 
+\[
+\Pr( \, X = 0 \, ) \, = 1 - p \qquad \qquad \qquad
+\Pr( \, X = 0 \, ) \, = p
+\]
+\item Adicionalmente, su valor esperado y varianza son: 
+\[
+\Exp[X] \, = \, p \qquad \qquad \qquad
+\var(X) \, = \, p \, (1-p)
+\]
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Variable Aleatoria Binomial: 
+\begin{itemize}
+\item La variable aleatoria $\Binomial(n,p)$ representa el n\'umero de ensayos exitosos en un experimento que involucra $n$ ensayos independientes donde uno de los cuales tiene \'exito con probabilidad $p$. 
+\item Alternativamente, puede ser reconocida como la suma de variables aleatorias Bernoulli independientes e id\'enticamente distrib\'idas. \Ie si $X_1, \dots, X_n$ son variables i.i.d. con distribuci\'on $\Bernoulli(p)$ entonces: 
+\[
+Z = X_1 + \cdots + X_n \qquad \Longrightarrow \qquad
+Z \sim \Binomial(n,p)
+\]
+\framebreak
+\item Si $Z \sim \Binomial(n,p)$ entonces su distribucion es: 
+\[
+\forall \, k \in \{ \, 0, \, 1, \, \dots, \, n \} \; \colon \;
+\Pr( \, Z = k \, ) \; = \; {n \choose k} p^k \, (1-p)^k
+\]
+\item Adicionalmente, su valor esperado y varianza son: 
+\[
+\Exp[X] \, = \, n \, p \qquad \qquad \qquad
+\var(X) \, = \, n \, p \, (1-p)
+\]
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
 Variable Aleatoria Geom\'etrica:
 \begin{itemize}
 \item Tenemos dos tipos, denotadas $\Geo(p)_0$ y $\Geo(p)_1$. 
@@ -136,6 +184,48 @@ Variable Aleatoria Geom\'etrica:
 \]
 \end{itemize}
 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Variable Aleatoria Exponencial: 
+\begin{itemize}
+\item La variable aleatoria $\Exponential(\lambda)$ es com\'unmente utilizada para modelar los tiempos entre arribos o eventos de inter\'es en un proceso estoc\'astico en tiempo continuo. 
+\item Si $X \sim \Exponential(\lambda)$ entonces su distribucion es: 
+\[
+\forall \, t \geq 0 \; \colon \;
+f_X(t) \; = \; \lambda \, e^{ -\lambda t}
+\]
+\item Adicionalmente, su valor esperado y varianza son: 
+\[
+\Exp[X] \, = \, \frac{1}{\lambda} \qquad \qquad \qquad
+\var(X) \, = \, \frac{1}{\lambda^2}
+\]
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Variable Aleatoria Poisson: 
+\begin{itemize}
+\item La variable aleatoria $\Poisson(\mu)$ es com\'unmente utilizada para modelar el n\'umero de arribos o eventos de inter\'es en un proceso estoc\'astico a lo largo de un intervalo de tiempo. 
+\item Si $X \sim \Poisson(\mu)$ entonces su distribucion es: 
+\[
+\forall \, k \geq 0 \; \colon \;
+\Pr( \, X = k \, ) \; = \; \frac{\lambda^k \, e^{-\lambda} }{k!}
+\]
+\item Adicionalmente, su valor esperado y varianza son: 
+\[
+\Exp[X] \, = \, \mu \qquad \qquad \qquad
+\var(X) \, = \, \mu
+\]
 \end{itemize}
 
 \end{frame}
