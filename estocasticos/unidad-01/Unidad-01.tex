@@ -219,63 +219,10 @@ f_X(t) \; = \; \lambda \, e^{ -\lambda t}
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-\underline{Problema - H\&L 17.4-3:}
+\underline{Ejercicio - H\&L Problema 17.4-3:}
 
 El tiempo que requiere un mec\'anico para reparar una m\'aquina tiene una distribuci\'on exponencial con media de 4 horas. Sin embargo, una herramienta especial reducir\'ia esta media a 2 horas. Si el mec\'anico repara una m\'aquina en menos de 2 horas, se le pagan
 \$100; de otra manera se le pagan \$80. Determine el aumento esperado en el pago del mec\'anico si usa esta herramienta especial. 
-
-\end{frame}
-
-% -----------------------------------------------------------------
-\begin{frame}[allowframebreaks]
-\frametitle{\insertsection}
-
-\underline{Resoluci\'on:}
-\begin{itemize}
-\item Si denotamos a $X$ como el tiempo que demora el mec\'anico en arreglar una m\'aquina actualmente entonces: 
-\[
-X \sim \Exponential( \lambda = 0.25 )
-\]
-\item Pago del mec\'anico actualmente:
-\begin{itemize}
-\item Si $0 \leq X \leq 2$ gana \$100, lo cual sucede con probabilidad: 
-\[
-\int_{t=0}^2 \lambda \, e^{ -\lambda \, t } dt \; = \;
-\int_{t=0}^2 0.25 \, e^{ -0.25 \, t } dt \; = \; 0.393469
-\]
-\item Si $X > 2$ gana \$80, lo cual sucede con probabilidad:
-\[
-1 - 0.393469 = 0.606531
-\]
-\framebreak
-\item Consecuentemente el pago esperado es: 
-\[
-\$100 \, (0.393469) + \$80 \, (0.606531) \, = \, \$87.87
-\]
-\end{itemize}
-\item Luego, con la nueva m\'aquina tenemos que: 
-\[
-X \sim \Exponential( \lambda = 0.5 )
-\]
-\item Pago del mec\'anico con la nueva  m\'aquina: 
-\begin{itemize}
-\item Si $0 \leq X \leq 2$ gana \$100, lo cual sucede con probabilidad: 
-\[
-\int_{t=0}^2 \lambda \, e^{ -\lambda \, t } dt \; = \;
-\int_{t=0}^2 0.50 \, e^{ -0.50 \, t } dt \; = \; 0.632121
-\]
-\framebreak
-\item Si $X > 2$ gana \$80, lo cual sucede con probabilidad:
-\[
-1 - 0.632121 = 0.367879
-\]
-\item Consecuentemente el pago esperado es: 
-\[
-\$100 \, (0.632121) + \$80 \, (0.367879) \, = \, \$92.64
-\]
-\end{itemize}
-\item Finalmente, el aumente en el pago del mec\'anico gracias a que usa la nueva m\'aquina es de \$4.67. 
-\end{itemize}
 
 \end{frame}
 
@@ -476,6 +423,45 @@ t \, = \, X_1 + \cdots + X_i
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
+\underline{Ejercicio - H\&L Problema 17.4-2:}
+
+Los trabajos que deben realizarse en una m\'aquina espec\'ifica llegan de acuerdo con un proceso de entradas de Poisson con tasa media de 2 por hora. Suponga que la m\'aquina se descompone y su reparaci\'on tardar\'a 1 hora. Cu\'al es la probabilidad de que el n\'umero de trabajos que lleguen durante este tiempo sea: 
+\begin{itemize}
+\item Cero?
+\item Dos?
+\item Cinco o m\'as?
+\end{itemize}
+
+\framebreak
+
+\underline{Ejercicio - Taha Problema 18.3A-7:}
+
+Ann y Jim, dos empleados en un restaurante de comida r\'apida, efect\'uan el siguiente juego mientras esperan que lleguen clientes: Jim le paga a Ann 2 centavos si el siguiente cliente no llega dentro de 1 minuto; de lo contrario, \linebreak Ann le paga a Jim 2 centavos. Determine la ganancia promedio de Jim en un periodo de 8 horas. El tiempo entre llegadas es exponencial con media de 1.5 minutos. 
+
+\framebreak
+
+\underline{Ejercicio - Taha Problema 18.3A-10:}
+
+Un cliente que llega a un restaurante de comida r\'apida McBurger dentro de 4 minutos del cliente inmediatamente anterior recibir\'a 10\% de descuento. \linebreak Si el tiempo entre llegadas es de entre 4 y 5 minutos, el descuento es de 6\%. \linebreak Si el tiempo entre llegadas es de m'as de 5 minutos, el cliente obtiene 2\% de descuento. El tiempo entre llegadas es exponencial con una media de 6 minutos. 
+
+\framebreak
+
+\underline{Ejercicio - Taha Problema 18.3A-12:}
+
+La U de A opera dos l\'ineas de autobuses en el campus: roja y verde. La l\'inea roja presta servicio al norte del campus, y la verde al sur del campus, con una estaci\'on de transferencia que une las dos rutas. Los autobuses verdes llegan al azar (tiempo entre llegadas exponencial) a la estaci\'on de transferencia cada 10 minutos. Los autobuses rojos tambi\'en lo hacen al azar cada 7 minutos. 
+
+Con esto en mente: 
+\begin{itemize}
+\item Cu\'al es la distribuci\'on del tiempo de espera de un estudiante que llega en la l\'inea roja para abordar la l\'inea verde? 
+\item Cu\'al es la distribuci\'on del tiempo de espera de un estudiante que llega en la l\'inea verde para abordar la l\'inea roja? 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
 \textbf{Combinaci\'on de Procesos Poisson:}
 \begin{itemize}
 \item Supongamos que tenemos dos procesos independientes. 
@@ -510,6 +496,34 @@ t \, = \, X_1 + \cdots + X_i
 \item El segundo proceso ser\'a un proceso Poisson con par\'ametro $\lambda \, (1-p)$. 
 \end{itemize}
 \end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\underline{Ejercicio - H\&L Problema 17.4-5:}
+
+Un sistema de colas tiene tres servidores con tiempos de servicio esperados de 30, 20 y 15 minutos. Los tiempos de servicio tienen una distribuci\'on exponencial. Cada servidor ha estado ocupado con el cliente actual durante 10 minutos. 
+
+Determine el tiempo esperado que falta para la siguiente terminaci\'on de un servicio. 
+
+\framebreak
+
+\underline{Ejercicio - H\&L Problema 17.4-6:}
+
+Considere un sistema de colas con dos tipos de clientes. Los clientes tipo 1 llegan de acuerdo con un proceso de Poisson a una tasa media de 5 por hora, mientras que los clientes tipo 2 llegan de acuerdo a un proceso de Poisson a una tasa media de 5 por hora. El sistema tiene dos servidores, que atienden a ambos tipos de clientes. Para los dos tipos el tiempo de servicio tiene una distribuci\'on exponencial con media de 10 minutos. El servicio es tipo primero en entrar, primero en salir. 
+
+Cu\'al es la distribuci\'on (y su media) del tiempo entre llegadas consecutivas de clientes de cualquier tipo?
+
+\framebreak
+
+\underline{Ejercicio:}
+
+El call center de una empresa de servicios al consumidor recibe en promedio, $\lambda_1 = 11.9$ llamadas por hora para Servicio al Cliente y $\lambda_2 = 21.4$ llamadas por hora para Servicio T\'ecnico. De los clientes que llaman para Servicio al Cliente el $p_{12} = 5.3\%$ es referido a Servicio T\'ecnico, mientras que de los clientes que llaman a Servicio T\'ecnico el $p_{21} = 17.6\%$ es referido a Servicio al Cliente.
+
+Con esto en mente, calcule el n\'umero promedio de clientes por hora que debe atender el departamento de Servicio al Cliente y el deparatamento de \linebreak Servicio T\'ecnico. 
 
 \end{frame}
 
