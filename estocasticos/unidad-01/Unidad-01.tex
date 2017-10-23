@@ -571,7 +571,7 @@ Una \textbf{Cadena de Markov} es un modelo matem\'atico de un proceso estoc\'ast
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsubsection}
 
-\textbf{H\&L, Secci\'on 16.1 - Ejemplo de Clima:}
+\underline{Ejercicio - H\&L Secci\'on 16.1 (Ejemplo del Clima):}
 
 El clima en el pueblo de Centerville puede cambiar con rapidez de un d\'ia a otro. Sin embargo, las posibilidades de tener clima seco (sin lluvia) ma\~nana es de alguna forma mayor si hoy est\'a seco, es decir, si no llueve. En particular, \linebreak la probabilidad de que ma\~nana este seco es de 0.8 si hoy est\'a seco, pero \linebreak es de solo 0.6 si hoy llueve. Estas probabilidades no cambian si se considera \linebreak la informaci\'on acerca del clima en los d\'ias anteriores a hoy. 
 
@@ -600,7 +600,7 @@ Matriz de transici\'on:
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsubsection}
 
-\textbf{H\&L, Secci\'on 16.1 - Ejemplo en Manejo de Inventario:}
+\underline{Ejercicio - H\&L Secci\'on 16.1 (Ejemplo de Inventarios):}
 
 La tienda de fotograf\'ia de Dave se admministra semanalmente y est\'a abierta al p\'ublico desde el lunes en la ma\~nana hasta el s\'abado en la noche. Dave tiene en almac\'en un modelo especial de c\'amara que se vende relativamente bien. \linebreak Sean $D_1, \, D_2, \, D_3, \dots$ las demandas semanales de la c\'amara en unidades, \linebreak \ie el n\'umero de unidades que se vender\'ian si el inventario fuere inagotable. \linebreak M\'as precisamente, suponga que las demandas $D_t$ son variables aleatorias i.i.d. \linebreak que siguen una distribuci\'on Poisson con par\'ametro $\lambda = 1$. 
 
@@ -651,10 +651,10 @@ Matriz de transici\'on:
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsubsection}
 
-Definici\'on Formal: 
+\textbf{Definici\'on Formal:}
 \begin{itemize}
 \item Es una secuencia de variables aleatorias discretas $X_0, \, X_1, \, X_2, \, X_3, \, \dots$ \linebreak donde para cada \'indice de tiempo discreto $t$ la variable aleatoria $X_t$ \linebreak es el estado del proceso en el tiempo $t$. 
-\item Tiene la \textbf{Propiedad Markoviana}, \ie que para cualquier historia de estados que culmina en el estado actual $x_0, \, x_1, \, \dots, \, x_t$ y para cualquier posible \linebreak estado futuro $x_{t+1}$ es el caso que: 
+\item Tiene la \underline{Propiedad Markoviana}, \ie que para cualquier historia de estados que culmina en el estado actual $x_0, \, x_1, \, \dots, \, x_t$ y para cualquier posible \linebreak estado futuro $x_{t+1}$ es el caso que: 
 \begin{align*}
 & \Pr( \, X_{t+1} = x_{t+1} \mid 
 X_{0} = x_{0}, \, X_{1} = x_{1}, \, \dots, \, x_{t} = x_{t} \, ) \\[1ex]
@@ -875,6 +875,8 @@ Algunos resultados para cadenas con \textbf{m\'as de una clase recurrente:}
 
 \end{frame}
 
+\end{document}
+
 % =================================================================
 \section{Cadenas de Markov de Tiempo Continuo}
 
@@ -935,5 +937,3 @@ C\'alculo de la Distribuci\'on en Estado Estable:
 \end{enumerate}
 
 \end{frame}
-
-\end{document}
