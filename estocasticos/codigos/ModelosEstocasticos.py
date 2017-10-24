@@ -131,9 +131,9 @@ class CadenaDeMarkov :
     """
 
     # Miembros
-    estados  = [] # lista de estados
-    n        = 0  # numero de estados
-    matriz_P = np.array([]) # matriz de transicion
+    estados     = [] # lista de estados
+    num_estados = 0  # numero de estados
+    matriz_P    = np.array([]) # matriz de transicion
 
     def __init__( self, estados, matriz_transicion) :
         """
@@ -146,9 +146,9 @@ class CadenaDeMarkov :
         """
 
         # Copia los datos ingresados
-        self.estados  = estados
-        self.n        = len(estados)
-        self.matrix_P = matriz_transicion
+        self.estados     = estados
+        self.num_estados = len(estados)
+        self.matrix_P    = matriz_transicion
 
         # Verifica que el parametro estados sea una lista no-vacia
         if not isinstance( estados, list) :
@@ -161,16 +161,16 @@ class CadenaDeMarkov :
             raise ValueError( 'Matriz de transicion debe ser un arreglo numpy' )
 
         # Verifica que la matriz de transicion tenga tamano n-por-n
-        tamano_correcto = ( self.n, self.n)
+        tamano_correcto = ( self.num_estados, self.num_estados)
         if not np.shape( matriz_transicion) == tamano_correcto :
             raise ValueError( 'Matriz de transicion debe ser un arreglo numpy ' +
                               'de tamano ' + str(tamano_correcto) )
         # Verifica cada fila de la matriz de transicion
-        for fila in range(self.n) :
+        for fila in range( self.num_estados) :
             # avisa si alguna entrada es negativa
             cols_malas = matriz_transicion[fila,:] < 0.0
             if np.any( cols_malas) :
-                todas_cols = np.arange(self.n)
+                todas_cols = np.arange( self.num_estados)
                 cols_malas = todas_cols[cols_malas]
                 raise ValueError( 'Matriz de transicion tiene entradas negativas ' +
                                   'en la fila ' + str(fila) + ' columnas ' +
@@ -222,7 +222,7 @@ class CadenaDeMarkov :
             raise ValueError( 'Provea un estado o distribucion inicial' )
 
         # Si inicio es el indice del estado inicial solo lo copiamos
-        if isinstance( inicio, int) and 0 <= inicio < self.n :
+        if isinstance( inicio, int) and 0 <= inicio < self.num_estados :
             X[-1] = inicio
 
         # Si inicio no es una lista, tupla o vector entonces busca el indice
@@ -237,14 +237,14 @@ class CadenaDeMarkov :
         # lo utilizamos para muestrear el estado inicial
         else :
             inicio = np.array(inicio)
-            tamano_correcto = ( self.n,)
+            tamano_correcto = ( self.num_estados,)
             if not np.shape(inicio) == tamano_correcto :
                 raise ValueError( 'Parametro inicio debe ser un arreglo ' +
                                   'de tamano ' + str(tamano_correcto) )
             if np.any( inicio < 0.0 ) or abs( np.sum(inicio) - 1.0 ) > 1e-8 :
                 raise ValueError( 'Parametro inicio debe ser un vector de ' +
                                   'probabilidades' )
-            X[-1] = np.random.choice( self.n, p = inicio)
+            X[-1] = np.random.choice( self.num_estados, p = inicio)
 
         # Para cada paso...
         for t in range(num_pasos) :
@@ -252,7 +252,7 @@ class CadenaDeMarkov :
             # estado anterior
             prob_transicion = self.matrix_P[ X[t-1], :]
             # Muestrea el indice del estado actual
-            X[t] = np.random.choice( self.n, p = prob_transicion)
+            X[t] = np.random.choice( self.num_estados, p = prob_transicion)
 
         # Construye la secuencia de estados visitados
         estados_visitados = [ self.estados[ X[t] ] for t in range(num_pasos) ]
@@ -287,7 +287,7 @@ class CadenaDeMarkov :
                               'un diccionario.' )
 
         # Costruye el vector de distribucion inicial a partir del diccionario
-        pi_t = np.zeros( shape = ( self.n) )
+        pi_t = np.zeros( shape = ( self.num_estados) )
         for estado in distribucion_inicial :
             if not estado in self.estados :
                 raise ValueError ( 'Entrada \'' + str(estado) + '\' del parametro ' +
@@ -310,7 +310,7 @@ class CadenaDeMarkov :
 
         # Formatea la distribucion final como un diccionario y la retorna
         distribucion_final = { estado : 0.0 for estado in self.estados }
-        for i in range(self.n) :
+        for i in range( self.num_estados) :
             distribucion_final[ self.estados[i] ] = pi_t[i]
 
         return distribucion_final
@@ -325,9 +325,9 @@ class CadenaDeMarkov :
         """
 
         # Declara la matriz del lado izquierdo A = P' - I
-        matriz_A = self.matrix_P.transpose() - np.identity( self.n)
+        matriz_A = self.matrix_P.transpose() - np.identity( self.num_estados)
         # Declara el vector del lado derecho b = 0
-        vector_b = np.zeros( shape = ( self.n) )
+        vector_b = np.zeros( shape = ( self.num_estados) )
 
         # Reemplaza la ultima fila de matriz_A con unos
         matriz_A[ -1, :] = 1.0
@@ -343,7 +343,7 @@ class CadenaDeMarkov :
 
         # Construye el diccionario de la distribucion
         pi_estrella = {}
-        for i in range(self.n) :
+        for i in range( self.num_estados) :
             pi_estrella[ self.estados[i] ] = vector_pi[i]
 
         return pi_estrella
@@ -386,16 +386,16 @@ class CadenaDeMarkov :
 
         # Si el estado final se espefica como un indice no hacemos nada;
         # caso contrario buscamos el indice del estado
-        if not isinstance( estado, int) or not ( 0 <= estado < self.n ) :
+        if not isinstance( estado, int) or not ( 0 <= estado < self.num_estados ) :
             try :
                 estado = int( self.estados.index(estado) )
             except Exception :
                 raise ValueError( 'Estado \'' + str(estado) + '\' no existe' )
 
         # Declara la matriz del lado izquierdo A = I - P
-        matriz_A = np.identity( self.n) - self.matrix_P
+        matriz_A = np.identity( self.num_estados) - self.matrix_P
         # Declara el vector del lado derecho b = 1
-        vector_b = np.ones( shape = ( self.n) )
+        vector_b = np.ones( shape = ( self.num_estados) )
 
         # Reemplaza la fila de la matriz A y la entrada del vector b asociada con
         # el estado final de tal manera que la ecuacion asociada con esa fila es
@@ -432,9 +432,9 @@ class CadenaDeMarkov :
         """
 
         # Declara la matriz del lado izquierdo A = I - factor_descuento * P
-        matriz_A = np.identity( self.n) - factor_descuento * self.matrix_P
+        matriz_A = np.identity( self.num_estados) - factor_descuento * self.matrix_P
         # Declara el vector del lado derecho b = funcion_recompensa
-        vector_b = np.ones( shape = ( self.n) )
+        vector_b = np.ones( shape = ( self.num_estados) )
         for ( i, estado) in enumerate(self.estados) :
             vector_b[i] = funcion_recompensa[estado]
 
