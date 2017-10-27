@@ -651,31 +651,157 @@ Matriz de transici\'on:
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsubsection}
 
-\textbf{Definici\'on Formal:}
+\underline{Ejercicio - H\&L Secci\'on 16.2 (Ejemplo de Acciones 1):}
+
+En un mercado de valores existe una acci\'on que solo puede subir o bajar de precio. Si la acci\'on subi\'o hoy, la probabilidad de que suba ma\~nana es de 0.7. \linebreak En cambio, si la acci\'on baj\'o hoy, la probabilidad de que suba ma\~nana es de \linebreak solo 0.5. 
+
+Modele el comportamiento de esta acci\'on como una Cadena de Markov. 
+
+\framebreak
+
+\underline{Ejercicio - H\&L Secci\'on 16.2 (Ejemplo de Acciones 2):}
+
+Suponga ahora que el modelo del mercado de acciones se cambia de manera que el precio de la acci\'on ma\~nana depende del precio de ayer y de hoy. En particular, si la acci\'on subi\'o los dos d\'ias, ayer y hoy, la probabilidad de que suba ma\~nana es de 0.9. Si la acci\'on baj\'o ayer pero hoy subi\'o, la probabilidad de que ma\~nana suba es de 0.6. Si la acci\'on subi\'o ayer pero hoy baj\'o, la probabilidad de que ma\~nana suba es de 0.5. Por \'ultimo, si baj\'o durante estos dos d\'ias, la probabilidad de que ma\~nana suba es de 0.3. 
+
+Modele el comportamiento de esta acci\'on como una Cadena de Markov. 
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+\underline{Ejercicio:}
+
+Un operador de servicios de telefon\'ia celular est\'a en proceso de instalar una antena en un barrio promedio, donde se puede esperar que la antena reciba un paquete de datos para su transmisi\'on durante cada ciclo (\eg durante cada milisegundo) con probabilidad $\lambda \in (0.99,1)$. Para poder satisfacer esta demanda se instal\'o un buffer con capacidad para $M$ paquetes de datos junto con $n$ transmisores que operan en canales independientes pero ruidosos; en particular, cada transmisor \linebreak que es encargado con el env\'io de un paquete logra transmitirlo exitosamente con probabilidad $\mu \in (0.94,0.98)$. Cuando una transmisi\'on fracasa se mantiene al paquete en el buffer y se reintenta la transmisi\'on en el siguiente per\'iodo. 
+
+Cada ciclo de operaci\'on, digamos el \tavo ciclo, avanza de la siguiente manera: 
+\begin{enumerate}
+\item Se empieza el ciclo con $X_{t-1}$ paquetes en el b\'uffer. 
+\framebreak
+\item Si el buffer no est\'a lleno, se recibe un nuevo paquete con probabilidad $\lambda$, \linebreak de tal manera que el nuevo n\'umero de paquetes en el buffer es: 
+\[
+\min \; \{ \; X_{t-1} + D_t \, , \; M \, \} \, ,
+\qquad \text{donde } D_t \sim \Bernoulli(\lambda)
+\]
+\item Los transmisores intentan enviar cuantos paquetes puedan. Si hay $n$ paquetes o m\'as en el buffer, entonces cada uno de los transmisores es asignado a un \'unico paquete, y cada transmisor logra enviar su paquete con \'exito con probabilidad $\mu$, independiente de los otros. Si hay menos de $n$ paquetes en \linebreak el buffer se opera de la misma manera, pero en este caso habr\'a uno o m\'as transmisores a los que no ser\'a necesario asignarles paquetes en este ciclo. 
+\end{enumerate}
+
+Con todo esto en mente, construya un modelo de Cadena de Markov de este proceso para el caso particular cuando $M = 5$ y $n = 3$. En particular, explique cuales son los estados y liste todas las probabilidades de transici\'on positivas. 
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+\textbf{Definici\'on Formal de una Cadena de Markov:}
 \begin{itemize}
-\item Es una secuencia de variables aleatorias discretas $X_0, \, X_1, \, X_2, \, X_3, \, \dots$ \linebreak donde para cada \'indice de tiempo discreto $t$ la variable aleatoria $X_t$ \linebreak es el estado del proceso en el tiempo $t$. 
-\item Tiene la \underline{Propiedad Markoviana}, \ie que para cualquier historia de estados que culmina en el estado actual $x_0, \, x_1, \, \dots, \, x_t$ y para cualquier posible \linebreak estado futuro $x_{t+1}$ es el caso que: 
-\begin{align*}
-& \Pr( \, X_{t+1} = x_{t+1} \mid 
-X_{0} = x_{0}, \, X_{1} = x_{1}, \, \dots, \, x_{t} = x_{t} \, ) \\[1ex]
-& = \, \Pr( \, X_{t+1} = x_{t+1} \mid X_{t} = x_{t} \, )
-\end{align*}
-\fullcut
-\halfcut
-\begin{itemize}
-\item Observe adem\'as que por definici\'on de la matriz de transici\'on $\vec{P}$ : 
+\item Es una secuencia de variables aleatorias discretas $X_0, \, X_1, \, X_2, \, \dots, \, X_t, \, \dots$ \linebreak donde para cada \'indice de tiempo discreto $t$ la variable aleatoria $X_t$ \linebreak es el estado del proceso en el tiempo $t$. 
+\item Tiene la \underline{Propiedad Markoviana}, \ie que la distribuci\'on del siguiente estado solo depende en el estado actual: 
+\[
+\Pr( \, X_{t+1} \mid X_{0}, \, X_{1}, \, \dots, \, X_t \, ) \; = \;
+\Pr( \, X_{t+1} \mid X_{t} \, )
+\]
+\item En este contexto la matriz de transici\'on $\vec{P}$ se define como : 
 \[
 \vec{P}(i,j) \, = \,
 \Pr( \, X_{t+1} = j \mid X_{t} = i \, )
 \]
 \end{itemize}
 
+\end{frame}
+
+% =================================================================
+\subsection{Estados Transitorios y Recurrentes}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+Algunas definiciones:
+\begin{itemize}
+\item Un \textbf{camino} desde el estado $i$ hasta el estado $j$ es una secuencia finita de estados que empieza en el estado $i$ y termina en el estado $j$ donde cada transici\'on entre estados a lo largo del camino tiene probabilidad positiva. 
+\item El estado $i$ puede \textbf{alcanzar} al estado $j$ si existe al menos un camino \linebreak desde $i$ hasta $j$. 
+\item Un par de estados $i,j$ se \textbf{comunican} si el estado $i$ puede alcanzar al \linebreak estado $j$ y vice-versa. 
+\item Un estado $i$ es \textbf{transitorio} si puede alcanzar otro estado $j$ tal que tal que \linebreak el estado $i$ no puede ser alcanzado desde el estado $j$. 
+\item Un estado $i$ es \textbf{recurrente} si no es transitorio. 
+\begin{itemize}
+\item Toda cadena de Markov tiene al menos un estado recurrente. 
+\end{itemize}
+\framebreak
+\item Un estado $i$ es \textbf{absorbente} si es recurrente y adem\'as no puede ser abandonado una vez que ocurre. 
+\item Un subconjunto de estados es una \textbf{clase recurrente} si:
+\begin{itemize}
+\item Todos sus estados son recurrentes. 
+\item Todo par de estados en la clase se comunican. 
+\end{itemize}
+\item Un estado $i$ tiene \textbf{per\'iodo $k$} si todo camino de retorno al estado tiene una longitud igual al alg\'un m\'ultiplo de $k$. M\'as formalmente:
+\[
+k \, = \, \text{MCD} \{ \, n \geq 1 \colon \Pr( \, X_n = i \mid X_0 = i \, ) > 0 \, \}
+\]
+Adem\'as, si $k = 1$ entonces decimos que el estado es \textbf{aperi\'odico}. 
+\item Una cadena es \textbf{aperi\'odica} si tiene al menos un estado aperi\'odico. 
+\framebreak
+\item Decimos que una cadena es \textbf{irreducible} o es una \textbf{uni-cadena} si: 
+\begin{itemize}
+\item Es aperi\'odica. 
+\item Todos sus estados pertenecen a una \'unica clase recurrente. 
+\end{itemize}
+\end{itemize}
+\fullskip
+
+Algunos resultados generales:
+\begin{itemize}
+\item Si una cadena es aperi\'odica entonces tiene al menos una distribuci\'on en estado estable; caso contrario, la cadena no puede tener ninguna \linebreak distribuci\'on en estado estable. 
+\item Para el caso de cadenas aperi\'odicas, sin importar si existe una o m\'as distribuciones en estado estable, todas las distribuciones en estado estable \linebreak le asignan cero probabilidad a los estados transitorios. 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+Algunos resultados para cadenas con \textbf{una sola clase recurrente:}
+\begin{itemize}
+\item La distribuci\'on en estado estable existe, es \'unica, y no depende de la distribuci\'on del estado inicial. 
+\item Todo estado recurrente tiene probabilidad en estado estable positiva. 
+\end{itemize}
+\fullskip
+
+Algunos resultados para cadenas con \textbf{m\'as de una clase recurrente:}
+\begin{itemize}
+\item La distribuci\'on en estado estable existe pero no es \'unica y depende de la distribuci\'on del estado inicial. 
+\item Todo estado recurrente que puede ser alcanzado desde el estado inicial \linebreak tiene probabilidad en estado estable positiva, la cual puede ser computada por propagaci\'on de distribuciones. 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+\textbf{Ejercicio en Clase:}
+\begin{itemize}
+\item H\&L Problema 16.5-4
+\item H\&L Problema 16.5-1
+\end{itemize}
+\fullskip
+
+\textbf{Ejercicio en Clase:}
+\begin{itemize}
+\item H\&L Problema 16.4-1
+\item H\&L Problema 16.4-2
+\item H\&L Problema 16.4-3
+\item H\&L Problema 16.4-4
+\item H\&L Problema 16.4-5
 \end{itemize}
 
 \end{frame}
 
 % =================================================================
-\subsection{Distribuci\'on en Estado Estable}
+\subsection{Distribuci\'on Estacionaria}
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
@@ -783,95 +909,6 @@ C\'alculo de la Distribuci\'on en Estado Estable:
 \item Resolvemos el sistema de ecuaciones lineales resultante, el cual tiene \linebreak $n$ inc\'ognitas y $n$ ecuaciones linealmente independientes. 
 
 \end{enumerate}
-
-\end{frame}
-
-% =================================================================
-\subsection{Estados Transitorios y Recurrentes}
-
-% -----------------------------------------------------------------
-\begin{frame}[allowframebreaks]
-\frametitle{\insertsubsection}
-
-Algunas definiciones:
-\begin{itemize}
-\item Un \textbf{camino} desde el estado $i$ hasta el estado $j$ es una secuencia finita de estados que empieza en el estado $i$ y termina en el estado $j$ donde cada transici\'on entre estados a lo largo del camino tiene probabilidad positiva. 
-\item El estado $i$ puede \textbf{alcanzar} al estado $j$ si existe al menos un camino \linebreak desde $i$ hasta $j$. 
-\item Un par de estados $i,j$ se \textbf{comunican} si el estado $i$ puede alcanzar al \linebreak estado $j$ y vice-versa. 
-\item Un estado $i$ es \textbf{transitorio} si puede alcanzar otro estado $j$ tal que tal que \linebreak el estado $i$ no puede ser alcanzado desde el estado $j$. 
-\item Un estado $i$ es \textbf{recurrente} si no es transitorio. 
-\begin{itemize}
-\item Toda cadena de Markov tiene al menos un estado recurrente. 
-\end{itemize}
-\framebreak
-\item Un estado $i$ es \textbf{absorbente} si es recurrente y adem\'as no puede ser abandonado una vez que ocurre. 
-\item Un subconjunto de estados es una \textbf{clase recurrente} si:
-\begin{itemize}
-\item Todos sus estados son recurrentes. 
-\item Todo par de estados en la clase se comunican. 
-\end{itemize}
-\item Un estado $i$ tiene \textbf{per\'iodo $k$} si todo camino de retorno al estado tiene una longitud igual al alg\'un m\'ultiplo de $k$. M\'as formalmente:
-\[
-k \, = \, \text{MCD} \{ \, n \geq 1 \colon \Pr( \, X_n = i \mid X_0 = i \, ) > 0 \, \}
-\]
-Adem\'as, si $k = 1$ entonces decimos que el estado es \textbf{aperi\'odico}. 
-\item Una cadena es \textbf{aperi\'odica} si tiene al menos un estado aperi\'odico. 
-\framebreak
-\item Decimos que una cadena es \textbf{irreducible} o es una \textbf{uni-cadena} si: 
-\begin{itemize}
-\item Es aperi\'odica. 
-\item Todos sus estados pertenecen a una \'unica clase recurrente. 
-\end{itemize}
-\end{itemize}
-\fullskip
-
-Algunos resultados generales:
-\begin{itemize}
-\item Si una cadena es aperi\'odica entonces tiene al menos una distribuci\'on en estado estable; caso contrario, la cadena no puede tener ninguna \linebreak distribuci\'on en estado estable. 
-\item Para el caso de cadenas aperi\'odicas, sin importar si existe una o m\'as distribuciones en estado estable, todas las distribuciones en estado estable \linebreak le asignan cero probabilidad a los estados transitorios. 
-\end{itemize}
-
-\end{frame}
-
-% -----------------------------------------------------------------
-\begin{frame}[allowframebreaks]
-\frametitle{\insertsubsection}
-
-Algunos resultados para cadenas con \textbf{una sola clase recurrente:}
-\begin{itemize}
-\item La distribuci\'on en estado estable existe, es \'unica, y no depende de la distribuci\'on del estado inicial. 
-\item Todo estado recurrente tiene probabilidad en estado estable positiva. 
-\end{itemize}
-\fullskip
-
-Algunos resultados para cadenas con \textbf{m\'as de una clase recurrente:}
-\begin{itemize}
-\item La distribuci\'on en estado estable existe pero no es \'unica y depende de la distribuci\'on del estado inicial. 
-\item Todo estado recurrente que puede ser alcanzado desde el estado inicial \linebreak tiene probabilidad en estado estable positiva, la cual puede ser computada por propagaci\'on de distribuciones. 
-\end{itemize}
-
-
-\end{frame}
-
-% -----------------------------------------------------------------
-\begin{frame}[allowframebreaks]
-\frametitle{\insertsubsection}
-
-\textbf{Ejercicio en Clase:}
-\begin{itemize}
-\item H\&L Problema 16.5-4
-\item H\&L Problema 16.5-1
-\end{itemize}
-\fullskip
-
-\textbf{Ejercicio en Clase:}
-\begin{itemize}
-\item H\&L Problema 16.4-1
-\item H\&L Problema 16.4-2
-\item H\&L Problema 16.4-3
-\item H\&L Problema 16.4-4
-\item H\&L Problema 16.4-5
-\end{itemize}
 
 \end{frame}
 
