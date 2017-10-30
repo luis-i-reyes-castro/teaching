@@ -743,7 +743,7 @@ k \, = \, \text{MCD} \{ \, n \geq 1 \colon \Pr( \, X_n = i \mid X_0 = i \, ) > 0
 Adem\'as, si $k = 1$ entonces decimos que el estado es \textbf{aperi\'odico}. 
 \item Una cadena es \textbf{aperi\'odica} si tiene al menos un estado aperi\'odico. 
 \framebreak
-\item Decimos que una cadena es \textbf{irreducible} o es una \textbf{uni-cadena} si: 
+\item Decimos que una Cadena de Markov es \textbf{irreducible}, es \textbf{erg\'odica}, o que es una \textbf{uni-cadena} si: 
 \begin{itemize}
 \item Es aperi\'odica. 
 \item Todos sus estados pertenecen a una \'unica clase recurrente. 
@@ -751,45 +751,13 @@ Adem\'as, si $k = 1$ entonces decimos que el estado es \textbf{aperi\'odico}.
 \end{itemize}
 \fullskip
 
-Algunos resultados generales:
-\begin{itemize}
-\item Si una cadena es aperi\'odica entonces tiene al menos una distribuci\'on en estado estable; caso contrario, la cadena no puede tener ninguna \linebreak distribuci\'on en estado estable. 
-\item Para el caso de cadenas aperi\'odicas, sin importar si existe una o m\'as distribuciones en estado estable, todas las distribuciones en estado estable \linebreak le asignan cero probabilidad a los estados transitorios. 
-\end{itemize}
-
 \end{frame}
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsubsection}
 
-Algunos resultados para cadenas con \textbf{una sola clase recurrente:}
-\begin{itemize}
-\item La distribuci\'on en estado estable existe, es \'unica, y no depende de la distribuci\'on del estado inicial. 
-\item Todo estado recurrente tiene probabilidad en estado estable positiva. 
-\end{itemize}
-\fullskip
-
-Algunos resultados para cadenas con \textbf{m\'as de una clase recurrente:}
-\begin{itemize}
-\item La distribuci\'on en estado estable existe pero no es \'unica y depende de la distribuci\'on del estado inicial. 
-\item Todo estado recurrente que puede ser alcanzado desde el estado inicial \linebreak tiene probabilidad en estado estable positiva, la cual puede ser computada por propagaci\'on de distribuciones. 
-\end{itemize}
-
-\end{frame}
-
-% -----------------------------------------------------------------
-\begin{frame}[allowframebreaks]
-\frametitle{\insertsubsection}
-
-\textbf{Ejercicio en Clase:}
-\begin{itemize}
-\item H\&L Problema 16.5-4
-\item H\&L Problema 16.5-1
-\end{itemize}
-\fullskip
-
-\textbf{Ejercicio en Clase:}
+\underline{Ejercicios:}
 \begin{itemize}
 \item H\&L Problema 16.4-1
 \item H\&L Problema 16.4-2
@@ -863,30 +831,40 @@ Propagaci\'on de la Distribuci\'on Inicial:
 \[
 \vec{\pi_{t+1}'} \, = \, \vec{\pi_t'} \, \vec{P}
 \]
-\end{itemize}
-\framebreak
-
-\begin{itemize}
-\item Usando inducci\'on matem\'atica, es f\'acil ver que: 
+Y usando inducci\'on matem\'atica, es f\'acil ver que: 
 \[
 \forall t \geq 1 \colon \;
 \vec{\pi_t'} \, = \, \vec{\pi_0'} \, \vec{P}^t
 \]
-\item Adem\'as, si la Cadena de Markov no tiene ciclos determin\'isicos entonces \linebreak sin importar la distribuci\'on inicial $\vec{\pi_0}$ es el caso que la distribuci\'on del \linebreak estado actual $\vec{\pi_t}$ converge a una \'unica distribuci\'on $\vec{\pi^*}$, conocida como la distribuci\'on en estado estable o estacionaria de la cadena. \Iec 
+\end{itemize}
+\framebreak
+
+\begin{itemize}
+\item Si la Cadena de Markov es irreducible entonces sin importar la distribuci\'on inicial $\vec{\pi_0}$ es el caso que la distribuci\'on del estado actual $\vec{\pi_t}$ converge a una \'unica distribuci\'on $\vec{\pi^*}$, conocida como la distribuci\'on estacionaria o la distribuci\'on en estado estable. \Iec 
 \[
-\exists! \, \vec{\pi^*} \in \Re^n \colon \;
+\exists! \, \vec{\pi^*} \in \Pr^n, \; \forall \, \vec{\pi_0} \in \Pr^n \; \colon \;
 \lim_{ t \rightarrow \infty } \vec{\pi_t} \; = \;
 \vec{\pi^*}
+\]
+En este caso la distribuci\'on estacionaria tambi\'en nos provee de la fracci\'on del tiempo que la cadena visita cada estado. En particular, si para cada estado $i$ denotamos a $N_t(i)$ como el n\'umero aleatorio de visitas a ese estado desde el comienzo del proceso hasta el tiempo $t$ tenemos que: 
+\[
+\Pr \left( \;
+\forall \, i \, \colon \, \lim_{ t \rightarrow \infty } \frac{N_t(i)}{t} \; = \; \pi^*(i) \; \right) \; = \; 1
 \]
 \end{itemize}
 \framebreak
 
 \begin{itemize}
-\item Finalmente, si la distribuci\'on en estado estable (estacionaria) existe \linebreak entonces dicha distribuci\'on es invariante: 
+\item Adem\'as, si la distribuci\'on estacionaria existe entonces es invariante: 
 \[
 \vec{(\pi^*)'} \, = \, \vec{(\pi^*)'} \, \vec{P}
 \]
-\item Esto implica que si la distribuci\'on del estado inicial es igual a la distribuci\'on estacionaria, \ie que si $X_0 \sim \vec{\pi^*}$, entonces la distribuci\'on del primer estado es igual a la distribuci\'on estacionaria, \ie que $X_1 \sim \vec{\pi^*}$, lo que a su vez implica que la distribuci\'on del segundo estado es igual a la distribuci\'on estacionaria, \ie que $X_2 \sim \vec{\pi^*}$, y asi sucesivamente. 
+Esto implica que si la distribuci\'on del estado inicial de la cadena es igual a \linebreak la distribuci\'on estacionaria, \ie que si $X_0 \sim \vec{\pi^*}$, entonces:
+\begin{itemize}
+\item La distribuci\'on del primer estado es igual a la distribuci\'on estacionaria, \ie $X_1 \sim \vec{\pi^*}$. 
+\item La distribuci\'on del segundo estado es igual a la distribuci\'on estacionaria, \ie $X_2 \sim \vec{\pi^*}$. 
+\item Y as\'i sucesivamente....
+\end{itemize}
 \end{itemize}
 
 \end{frame}
@@ -909,6 +887,44 @@ C\'alculo de la Distribuci\'on en Estado Estable:
 \item Resolvemos el sistema de ecuaciones lineales resultante, el cual tiene \linebreak $n$ inc\'ognitas y $n$ ecuaciones linealmente independientes. 
 
 \end{enumerate}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+Algunos resultados generales:
+\begin{itemize}
+\item Si una cadena es aperi\'odica entonces tiene al menos una distribuci\'on en estado estable; caso contrario, la cadena no puede tener ninguna \linebreak distribuci\'on en estado estable. 
+\item Para el caso de cadenas aperi\'odicas, sin importar si existe una o m\'as distribuciones en estado estable, todas las distribuciones en estado estable \linebreak le asignan cero probabilidad a los estados transitorios. 
+\end{itemize}
+
+Algunos resultados para cadenas con \textbf{una sola clase recurrente:}
+\begin{itemize}
+\item La distribuci\'on en estado estable existe, es \'unica, y no depende de la distribuci\'on del estado inicial. 
+\item Todo estado recurrente tiene probabilidad en estado estable positiva. 
+\end{itemize}
+\framebreak
+
+Algunos resultados para cadenas con \textbf{m\'as de una clase recurrente:}
+\begin{itemize}
+\item La distribuci\'on en estado estable existe pero no es \'unica y depende de la distribuci\'on del estado inicial. 
+\item Todo estado recurrente que puede ser alcanzado desde el estado inicial \linebreak tiene probabilidad en estado estable positiva, la cual puede ser computada por propagaci\'on de distribuciones. 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+\textbf{Ejercicio en Clase:}
+\begin{itemize}
+\item H\&L Problema 16.5-1
+\item H\&L Problema 16.5-4
+\end{itemize}
+\fullskip
 
 \end{frame}
 
