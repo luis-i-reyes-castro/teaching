@@ -17,9 +17,9 @@ class ProcesoBernoulli :
     """
 
     # Miembros:
-    p = None # parametro
+    parametro = None # parametro
 
-    def __init__( self, p, modo = 'AND') :
+    def __init__( self, argumento, modo = 'AND') :
         """
         Constructor
 
@@ -32,17 +32,17 @@ class ProcesoBernoulli :
         @param modo: Modo de combinacion (de ser aplicable): 'AND', 'OR'
         """
 
-        if not isinstance( p, ( float, list, tuple) ) :
+        if not isinstance( argumento, ( float, list, tuple) ) :
             raise ValueError( 'Parametro p debe ser una probabilidad o una ' +
                               'lista o tupla de procesos Bernoulli' )
 
-        elif isinstance( p, float) :
-            if not ( 0 < p < 1 ) :
+        elif isinstance( argumento, float) :
+            if not ( 0 < argumento < 1 ) :
                 raise ValueError( 'Instanciar un proceso independiente requiere ' +
                                   'que el parametro p sea un decimal ' +
                                   'en el intervalo abierto (0,1)' )
             else :
-                self.p = p
+                self.parametro = argumento
 
         else :
             self.combina( p, modo)
@@ -62,9 +62,9 @@ class ProcesoBernoulli :
 
         # Calcula el parametro del nuevo proceso
         if modo == 'AND' :
-            self.p = np.prod( parametros )
+            self.parametro = np.prod( parametros )
         elif modo == 'OR' :
-            self.p = 1.0 - np.prod( 1.0 - parametros )
+            self.parametro = 1.0 - np.prod( 1.0 - parametros )
         else :
             raise ValueError( 'Modo invalido, opciones validas son: AND, XOR' )
 
@@ -96,7 +96,7 @@ class ProcesoBernoulli :
         # Instancia cada nuevo proceso con su parametro correcto
         procesos = []
         for ( i, _) in enumerate(probabilidades) :
-            nuevo_proceso = ProcesoBernoulli( probabilidades[i] * self.p )
+            nuevo_proceso = ProcesoBernoulli( probabilidades[i] * self.parametro )
             procesos.append( nuevo_proceso )
 
         return procesos
@@ -115,7 +115,7 @@ class ProcesoBernoulli :
         # Muestrea num_pasos variables aleatorias Uniforme(0,1)
         U = np.random.random_sample(num_pasos)
         # Genera variables Bernoulli usando las variables uniformes
-        X = np.where( U < self.p, 0, 1)
+        X = np.where( U < self.parametro, 0, 1)
 
         # Computa el vector de frecuencias
         frequencia = np.zeros( shape = (2,) )
