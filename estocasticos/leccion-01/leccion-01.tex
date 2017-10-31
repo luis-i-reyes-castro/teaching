@@ -1,0 +1,51 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{01}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Lecci\'on \numero \\[2ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino II \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{(2 Puntos)} La U de A opera dos l\'ineas de autobuses en el campus. \linebreak La l\'inea roja presta servicio al norte del campus, mientras que la l\'inea verde presta servicio \linebreak al sur del campus. Una estaci\'on de transferencia conecta las dos l\'ineas. Los autobuses verdes llegan a la estaci\'on de transferencia de acuerdo a un proceso Poisson con tiempo medio entre arribos de 10 minutos. Los autobuses rojos tienen medio entre arribos de 7 minutos. 
+\begin{enumerate}[label=\alph*)]
+\item Cu\'al es la probabilidad de que al menos un autobus de cada una de las dos l\'ineas se detengan en la estaci\'on durante un intervalo de 5 minutos?
+\item Un estudiante cuyo dormitorio est\'a cerca de la estaci\'on tiene clase en 10 minutos. Cualquiera de los autobuses lo lleva al edificio del sal\'on de clases. El viaje requiere 5 minutos, despu\'es de lo cual el estudiante camina durante aproximadamente 3 minutos para llegar al sal\'on. Cu\'al es la probabilidad de que el estudiante llegue a tiempo a clase?
+\end{enumerate}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+En la Rep\'ublica del Banano los servidores p\'ublicos son conocidos por ser bastante corruptos. De hecho, es tan rampante la corrupci\'on en ese pa\'is que la publicaci\'on de esc\'andalos puede ser muy bien modelada como un proceso Poisson con media de seis al a\~no. M\'as a\'un, est\'a tan bien documentada y estudiada la historia de la corrupci\'on en ese pa\'is que se sabe lo siguiente: 
+\begin{itemize}
+\item La Fiscal\'ia de cada nuevo gobierno no hace el menor esfuerzo por cumplir sus funciones hasta que el tercer o cuarto esc\'andalo de corrupci\'on es expuesto por la prensa. La mitad de las veces la Fiscal\'ia espera hasta el tercer esc\'andalo y la otra hasta el cuarto. 
+\item Como regla general, los pobladores del pa\'is destituyen a su gobierno si durante cualquier par de a\~nos consecutivos se publican m\'as de diez esc\'andalos por a\~no. Obviamente en el caso de que los dos \'ultimos a\~nos sean escandalosos el gobierno no ser\'a destitu\'ido pues sigue inmediatamente una elecci\'on popular. 
+\end{itemize}
+
+Asumiendo que un nuevo gobierno acaba de ser elegido y de tomar el poder: 
+\begin{enumerate}[label=\alph*)]
+\item \textbf{(2 Puntos)} Cu\'al es la probabilidad de que para el final del primer a\~no la nueva Fiscal\'ia se haya visto obligada a actuar ante el n\'umero de esc\'andalos publicados?
+\item \textbf{(2 Puntos)} Con qu\'e probabilidad completar\'a el gobierno su mandato de 4 a\~nos?
+\end{enumerate}
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
