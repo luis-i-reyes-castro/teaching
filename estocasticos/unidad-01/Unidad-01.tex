@@ -859,10 +859,10 @@ En este caso la distribuci\'on estacionaria tambi\'en nos provee de la fracci\'o
 \vec{(\pi^*)'} \, = \, \vec{(\pi^*)'} \, \vec{P}
 \]
 Esto implica que si la distribuci\'on del estado inicial de la cadena es igual a \linebreak la distribuci\'on estacionaria, \ie que si $X_0 \sim \vec{\pi^*}$, entonces la distribuci\'on de todo estado ser\'a igual a la distribuci\'on estacionaria, \ie para todo $t \geq 1$ \linebreak es el caso que $X_t \sim \vec{\pi^*}$. 
-\item La ecuaci\'on matricial anterior, cuando se la escribe como un sistema de ecuaciones, es conocido como las \textbf{Ecuaciones de Balance} de la cadena: 
+\item La ecuaci\'on matricial anterior, cuando se la escribe como un sistema de ecuaciones escalares, es conocido como las \textbf{Ecuaciones de Balance}: 
 \[
-\forall \, \text{estado } i \colon \, \vec{\pi^*}(i) \; = \; 
-\sum_{\text{estados }x} \vec{\pi^*}(x) \, \vec{P}(x,i) 
+\forall \, \text{estado } x \colon \, \vec{\pi^*}(x) \; = \; 
+\sum_{\text{estados }i} \vec{\pi^*}(i) \, \vec{P}(i,x) 
 \]
 N\'otese que las ecuaciones de balance no son linealmente independientes, \linebreak lo que significa que siempre existir\'a una ecuaci\'on redundante. 
 \end{itemize}
@@ -875,17 +875,17 @@ N\'otese que las ecuaciones de balance no son linealmente independientes, \lineb
 
 C\'alculo de la Distribuci\'on en Estado Estable: 
 \begin{enumerate}
-\item Escribimos una ecuaci\'on para cada uno de los $n$ estados: 
+\item Descartamos todos los estados transitorios. 
+\item Escribimos una ecuaci\'on de balance para cada estado recurrente: 
 \[
-\forall \, \text{estado } i \colon \, \vec{\pi^*}(i) \; = \; 
-\sum_{\text{estados }x} \vec{\pi^*}(x) \, \vec{P}(x,i) 
+\forall \, \text{estado } x \colon \, \vec{\pi^*}(x) \; = \; 
+\sum_{\text{estados }i} \vec{\pi^*}(i) \, \vec{P}(i,x) 
 \]
-\item Desechamos arbitrariamente una de las $n$ ecuaciones anteriores y la reemplazamos por: 
+\item Desechamos arbitrariamente una de las ecuaciones anteriores y la reemplazamos por: 
 \[
-\sum_{\text{estados } i } \vec{\pi^*}(i) \; = \; 1
+\sum_{\text{estados } x} \vec{\pi^*}(x) \; = \; 1
 \]
-\item Resolvemos el sistema de ecuaciones lineales resultante, el cual tiene \linebreak $n$ inc\'ognitas y $n$ ecuaciones linealmente independientes. 
-
+\item Resolvemos el sistema de ecuaciones lineales resultante. 
 \end{enumerate}
 
 \end{frame}
@@ -920,11 +920,6 @@ Algunos resultados para cadenas con \textbf{m\'as de una clase recurrente:}
 \frametitle{\insertsubsection}
 
 \textbf{Ejercicio en Clase:}
-\begin{itemize}
-\item H\&L Problema 16.5-1
-\item H\&L Problema 16.5-4
-\end{itemize}
-\fullskip
 
 \end{frame}
 
