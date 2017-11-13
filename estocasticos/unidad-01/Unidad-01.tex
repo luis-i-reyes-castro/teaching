@@ -894,23 +894,17 @@ C\'alculo de la Distribuci\'on en Estado Estable:
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsubsection}
 
-Algunos resultados generales:
+Algunos resultados de existencia y unicidad: 
 \begin{itemize}
-\item Si una cadena es aperi\'odica entonces tiene al menos una distribuci\'on en estado estable; caso contrario, la cadena no puede tener ninguna \linebreak distribuci\'on en estado estable. 
-\item Para el caso de cadenas aperi\'odicas, sin importar si existe una o m\'as distribuciones en estado estable, todas las distribuciones en estado estable \linebreak le asignan cero probabilidad a los estados transitorios. 
+\item Toda cadena aperi\'odica tiene al menos una distribuci\'on estacionaria, \linebreak pero ninguna cadena peri\'odica puede tener una distribuci\'on estacionaria. 
+\item En toda cadena aperi\'odica, todas las distribuciones estacionarias le asignan cero probabilidad a cada uno de los estados transitorios. 
+\item Si una cadena es erg\'odica entonces su distribuci\'on estacionaria existe, \linebreak es \'unica, y no depende de la distribuci\'on del estado inicial. 
+\item Si una cadena es aperi\'odica pero tiene m\'as de una clase recurrente: 
+\begin{itemize}
+\item Su distribuci\'on estacionaria existe pero no es \'unica y depende de la distribuci\'on del estado inicial. 
+\item Todo estado recurrente que puede ser alcanzado desde el estado inicial tiene probabilidad estacionaria estrictamente positiva. 
 \end{itemize}
 
-Algunos resultados para cadenas con \textbf{una sola clase recurrente:}
-\begin{itemize}
-\item La distribuci\'on en estado estable existe, es \'unica, y no depende de la distribuci\'on del estado inicial. 
-\item Todo estado recurrente tiene probabilidad en estado estable positiva. 
-\end{itemize}
-\framebreak
-
-Algunos resultados para cadenas con \textbf{m\'as de una clase recurrente:}
-\begin{itemize}
-\item La distribuci\'on en estado estable existe pero no es \'unica y depende de la distribuci\'on del estado inicial. 
-\item Todo estado recurrente que puede ser alcanzado desde el estado inicial \linebreak tiene probabilidad en estado estable positiva, la cual puede ser computada por propagaci\'on de distribuciones. 
 \end{itemize}
 
 \end{frame}
@@ -920,6 +914,55 @@ Algunos resultados para cadenas con \textbf{m\'as de una clase recurrente:}
 \frametitle{\insertsubsection}
 
 \textbf{Ejercicio en Clase:}
+
+Carlos es un aficionado del f\'utbol local que apoya a Barcelona o Emelec dependiendo de cual de los dos equipos haya ganado el \'ultimo partido. \linebreak Cuando Barcelona gana un partido, la probabilidad de que vuelva a ganar es \linebreak del 60\%. En cambio, cuando Emelec gana la probabilidad de que vuelva a ganar es del 50\%. 
+
+Modele el comportamiento de Carlos como una Cadena de Markov y encuentre la fracci\'on del tiempo que \'el apoya a cada equipo. 
+
+\framebreak
+
+\textbf{Ejercicio en Clase:}
+
+Una m\'aquina caprichosa tiene el siguiente comportamiento: 
+\begin{itemize}
+\item Si la m\'aquina termina el d\'ia en buen estado, la misma terminar\'a el siguiente d\'ia en buen estado con probabilidad $p$. Caso contrario terminar\'a averiada. 
+\item Si la m\'aquina termina el d\'ia averiada entonces los t\'ecnicos se tomar\'an todo el siguiente d\'ia para intentar arreglarla. Con probabilidad $q$ lograr\'an arreglar la m\'aquina; caso contrario, tendr\'an que volverlo a intentar el siguiente d\'ia. 
+\end{itemize}
+
+Con todo esto en mente, construya un modelo de Cadena de Markov del comporamiento de esta m\'aquina y calcule el porcentaje del tiempo que la m\'aquina estar\'a operativa y averiada como funci\'on de $p$ y $q$. 
+
+\framebreak
+
+\textbf{Ejercicio en Clase:}
+
+Usualmente las Cadenas de Markov no son modelos suficientemente complejos como para representar el comportamiento humano, puesto que nuestros cerebros no tienen la Propiedad Markoviana, \ie tenemos memoria. A\'un asi, podemos usar cadenas de Markov para modelar a personas err\'aticas, impredecibles y posiblemente irracionales. Por ejemplo, considere el siguiente modelo de la presidencia de Donald Trump, donde los estados son: 
+\begin{enumerate}
+\item Hablar de como gan\'o las elecciones obteniendo la mayor\'ia de los colegios electorales, \linebreak a pesar de haber perdido el voto popular por m\'as de dos millones de votos. 
+\item Defenderse del esc\'andalo de Russia. 
+\item Insistir en construir una pared en la frontera sur con M\'exico. 
+\framebreak
+
+\item Hablar de los acuerdos de comerciales que dice que renegociar\'a (\eg NAFTA) y que dice que ser\'an ventajosos para su pa\'is. 
+\item Pelearse con celebridades en Twitter. 
+\end{enumerate}
+\fullskip
+
+La matriz de transici\'on para este modelo es: 
+\[
+\vec{P} \; = \; 
+\left[
+\begin{array}{ccccc}
+0.5 & 0 & 0.25 & 0.25 & 0 \\
+0 & 0.6 & 0 & 0 & 0.4 \\
+0 & 1 & 0 & 0 & 0 \\
+0.9 & 0.1 & 0 & 0 & 0 \\
+0 & 0.3 & 0.3 & 0 & 0.4
+\end{array}
+\right]
+\]
+\halfskip
+
+Con esto en mente, calcule la fracci\'on del tiempo a largo plazo que Donald Trump dedicar\'a a cada una de sus actividades. 
 
 \end{frame}
 
