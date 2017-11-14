@@ -29,27 +29,114 @@
 
 % -----------------------------------------------------------------
 \begin{problem}
-Un fabricante tiene una m\'aquina complicada. Al comienzo de cada d\'ia si la m\'aquina est\'a operativa entonces con probabilidad $p$ la misma se descompondr\'a durante el d\'ia y los t\'ecinos ser\'an llamados para arreglarla al d\'ia siguiente. Suponiendo que los t\'ecnicos siempre se toman dos d\'ias para arreglar la m\'aquina, modele esta situaci\'on
+\label{prob:maquina-caprichosa}
+Un fabricante tiene una m\'aquina complicada. Al comienzo de cada d\'ia que la m\'aquina est\'a operativa el riesgo de que la misma se desconponga es $p$. Cuando la m\'aquina se descompone se llama inmediatamente a la agencia de mantenimiento para agendar una visita para el d\'ia siguiente. Desafortunadamente para el fabricante, la visita de la agencia dura \linebreak dos d\'ias y cuesta $\alpha$ d\'olares diarios. Cada visita sucede de la siguiente manera: 
+\begin{itemize}
+\item Supongamos que la m\'aquina empieza la ma\~nana del d\'ia $t$ operativa y que durante ese d\'ia la misma se descompone un par de horas antes del final de la jornada. El fabricante entonces llama a la agencia de mantenimiento para agendar una visita. 
+\item La ma\~nana del d\'ia $t+1$ llegan los t\'ecnicos de la agencia y empiezan a trabajar en la m\'aquina. Trabajan todo el d\'ia. 
+\item La ma\~nana del d\'ia $t+2$ los t\'ecnicos de la agencia contin\'uan su trabajo y le entregan la m\'aquina operativa al fabricante para el final de la jornada. 
+\item La ma\~nana del d\'ia $t+3$ la m\'aquina est\'a operativa nuevamente, aunque se puede descomponer como siempre. 
+\end{itemize}
 
-En el problema anterior, suponga que el fabricante tiene una m\'aquina de repuesto que utiliza solamente cuando la m\'aquina principal est\'a descompuesta. Similar al caso de la m\'aquina principal, si al comienzo de cualquier d\'ia la m\'aquina de repuesto est\'a operativa entonces con probabilidad $q$ se descompondr\'a durante el d\'ia y los t\'ecnicos ser\'an llamados a repararla al d\'ia siguiente. Nuevamente, los t\'ecnicos se tomar\'an dos d\'ias en arreglar la m\'aquina. Modele esta nueva situaci\'on como una cadena de Markov y construya la matriz de transici\'on en funci\'on de $p$ y $q$. No necesita bosquejar el grafo de la cadena ni calcular probabilidades en estado estable. 
+Con esto en mente: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{1 Punto:} Modele la situaci\'on descrita como una Cadena de Markov con tres estados. \linebreak En particular, presente el grafo de la cadena en funci\'on de $p$. 
+\item \textbf{6 Puntos:} Escriba las ecuaciones de balance y encuentre la distribuci\'on estacionaria. 
+\item \textbf{3 Puntos:} Calcule: 
+\begin{itemize}
+\item El porcentaje del tiempo que la m\'aquina opera toda la jornada sin problemas. 
+\item El porcentaje del tiempo que la m\'aquina empieza el d\'ia operativa pero se descompone durante alg\'un momento de la jornada. 
+\item El porcentaje del tiempo que la m\'aquina recibe mantenimiento. 
+\end{itemize}
+\item \textbf{1 Punto:} Encuentre el costo diario esperado de mantenimiento de la m\'aquina. 
+\end{enumerate}
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{(9 Puntos)} En el Problema \ref{prob:maquina-caprichosa}, suponga que el fabricante tiene una m\'aquina de repuesto que utiliza solamente cuando la m\'aquina principal est\'a descompuesta. Como en el caso de la m\'aquina principal, si al comienzo de cualquier d\'ia la m\'aquina de repuesto est\'a operativa entonces con probabilidad $q$ se descompondr\'a durante el d\'ia y los t\'ecnicos ser\'an llamados a repararla al d\'ia siguiente. Nuevamente, los t\'ecnicos se tomar\'an dos d\'ias en arreglar la m\'aquina, aunque ellos no interfieren con los t\'ecnicos de la m\'aquina principal (y vice-versa). Modele esta nueva situaci\'on como una cadena de Markov con nueve estados y construya la matriz de transici\'on en funci\'on de $p$ y $q$. No necesita bosquejar el grafo de la cadena ni calcular probabilidades en estado estable. 
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem} Considere una m\'aquina similar a la del Problema \ref{prob:maquina-caprichosa} pero cuyo mantenimiento requiere visitas de $k$ d\'ias. Para este modelo: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{1 Punto:} Modele la situaci\'on descrita como una Cadena de Markov con $k+1$ estados. \linebreak En particular, presente el grafo de la cadena en funci\'on de $p$ y $k$. 
+\item \textbf{4 Puntos:} Escriba las ecuaciones de balance y encuentre la distribuci\'on estacionaria. 
+\item \textbf{2 Puntos:} Calcule: 
+\begin{itemize}
+\item El porcentaje del tiempo que la m\'aquina opera toda la jornada sin problemas. 
+\item El costo diario esperado de mantenimiento de la m\'aquina. 
+\end{itemize}
+
+\end{enumerate}
 
 \end{problem}
 \vspace{\baselineskip}
 
 % -----------------------------------------------------------------
 \begin{problem}
+Suponga que usted ha sido encargado con del manejo del inventario de algunos productos no-perecederos en un supermercado que abre todos los d\'ias a sus clientes por la misma cantidad de tiempo. Para mantener una consistencia en el manejo de inventario a trav\'es de los varios productos que se venden en el supermercado, el gerente ha dispuesto que todos los inventarios se controlen mediante pol\'iticas de punto de reposici\'on. 
 
-\end{problem}
-\vspace{\baselineskip}
+M\'as precisamente, al final de cada d\'ia se cuenta el inventario del producto y si este es menor o igual a $I_{rep}$ unidades se hace un pedido de reposici\'on por $Q_{rep}$ unidades al proveedor, el cual es entregado por el mismo al comienzo del siguiente d\'ia antes de la hora de apertura de la tienda; caso contrario, no se hace un pedido de reposici\'on. F\'ijese que bajo estas suposiciones el m\'aximo inventario posible es:
+\[
+I_{max} \, = \, I_{rep} + Q_{rep}
+\]
+Adicionalmente,como es de costumbre en este campo de estudio, usted hace la suposici\'on simplificatoria que las demandas del producto $D_1, \, D_2, \, \dots$ constituyen una secuencia de variables aleatorias i.i.d. con distribuci\'on Poisson con par\'ametro $\lambda$. M\'as a\'un, si para cada d\'ia $t$ denotamos a $I_t$ como el inventario a la hora de apertura de la tienda del \tavo d\'ia, a $D_t$ como la demanda del d\'ia, \ie la cantidad que se vender\'ia ese d\'ia si el inventario fuere inagotable, a $R_t$ como la cantidad repuesta entre la noche del \tavo d\'ia y la hora de apertura del \tMavo d\'ia, tenemos que:
+\[
+I_{t+1} \, = \, \max \{ \, 0, \, I_t - D_t \, \} + R_t \, ; \qquad
+R_t \, = \, 
+\begin{cases}
+Q_{rep}, & \text{si } 0 \leq I_t \leq I_{rep} \, ; \\
+0, & \text{caso contrario;}
+\end{cases}
+\]
 
-% -----------------------------------------------------------------
-\begin{problem}
+Con todo esto en mente, para cada problema de manejo de inventario con demanda $\lambda$ y pol\'itica de punto de reposici\'on $(I_{rep},Q_{rep})$ podemos construir una Cadena de Markov con \linebreak $n = I_{max} + 1$ estados (cada uno asociado a un nivel de inventario). 
 
-\end{problem}
-\vspace{\baselineskip}
+\textbf{Primera Actividad (8 Puntos)}
 
-% -----------------------------------------------------------------
-\begin{problem}
+Construya la matriz de transici\'on para el problema para cada uno de los siguientes casos: 
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Caso}           & $\bm{\lambda}$ & $\bm{I_{rep}}$ & $\bm{Q_{rep}}$ \\ \hline
+Producto 1 - Pol\'itica A & 0.8 & 1  & 1                  \\ \hline
+Producto 1 - Pol\'itica B & 0.8 & 2  & 1                  \\ \hline
+Producto 2 - Pol\'itica A & 1.5 & 1  & 3                  \\ \hline
+Producto 2 - Pol\'itica B & 1.5 & 2  & 2                  \\ \hline
+\end{tabular}
+\end{table}
+
+Por favor presente sus matrices como tablas con los decimales redondeados a tres d\'igitos. 
+
+\textbf{Segunda Actividad (4 Puntos)}
+
+Calcule la distribuci\'on en estado estable para cada uno de los cuatro casos de la actividad anterior. Por favor presente sus resultados en dos tablas separados, una para cada producto, de tal manera que se pueda apreciar la influencia de la pol\'itica de manejo de inventario sobre la distribuci\'on estacionaria de la cadena. 
+
+\textbf{Tercera Actividad (4 Puntos)}
+
+Para comparar las pol\'iticas necesitamos una funci\'on de utilidad. En nuestro caso, la funci\'on de utilidad ser\'a la diferencia entre la ganancia por ventas y el costo de retenci\'on de la mercader\'ia, puesto que el supermercado gana $u$ d\'olares por unidad de producto vendida pero afronta un costo de $c$ d\'olares por unidad de producto en inventario. 
+
+El n\'umero esperado de unidades de un producto que se venden depende del nivel de inventario. En particular, si para un d\'ia $t$ y un nivel de inventario $I_t$ denotamos al n\'umero esperado de unidades que se vender\'an ese d\'ia como $v(I_t)$ podemos ver que: 
+\[
+v(I_t) \; = \; (0) \, \Pr( D_t = 0 ) + (1) \, \Pr( D_t = 1 ) + \cdots + (I_t) \, \Pr( D_t \geq I_t )
+\]
+Entonces la utilidad diaria esperada de un nivel de inventario $I \in \{ \, 0, \, 1, \, \dots, \, I_{max} \, \}$ se calcula de la siguiente manera: 
+\[
+\text{Utilidad}(I) \, = \, u \cdot v(I) - c \cdot I
+\]
+Con esto en mente, es evidente que podemos evaluar el desempe\~no de una pol\'itica $\alpha$ ponderando las utilidades de los niveles de inventario por la distribuci\'on estacionaria: 
+\[
+\text{Utilidad} \, (\alpha) \; = \; 
+\sum_{ I = 0 }^{I_{max}} \pi^*_{\alpha}(I) \cdot \text{Utilidad}(I)
+\]
+
+Finalmente, suponiendo que el Producto A produce una ganancia de $u =$ \$7.25 por unidad y tiene un costo de retenci\'on por unidad por d\'ia de $c =$ \$0.16, calcule la utilidad de cada una de las dos pol\'iticas propuestas e indique cu\'al de las dos es mejor. Luego repita el ejercicio para el Producto B suponiendo que $u =$ \$2.55 y que $c =$ \$0.10. 
 
 \end{problem}
 \vspace{\baselineskip}
