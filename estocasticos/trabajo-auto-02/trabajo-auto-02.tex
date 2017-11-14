@@ -143,26 +143,64 @@ Finalmente, suponiendo que el Producto A produce una ganancia de $u =$ \$7.25 po
 
 % -----------------------------------------------------------------
 \begin{problem}
+Considere un conjunto de instalaciones industriales vigiladas por robots como se muestra en la figura de abajo. En cada instalaci\'on, el robot empieza en un \'area aleatoria y hace transiciones a otras \'areas adjacentes (o a la misma \'area) con probabilidad uniforme. 
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/prob_robot-vigilante.eps_tex}
+\end{figure}
+\halfskip
+
+\textbf{Primera Actividad (4 Puntos)}
+
+Para las dos instalaciones mostradas en la figura, calcule la frecuencia de visitas a las \'areas $A_{ij}$ \linebreak en el largo plazo y pres\'entelas en tablas de cuatro filas y cinco columnas. Adicionalmente, indique cu\'ales son las \'areas m\'as seguras y las \'areas m\'as vulnerables. 
+
+\emph{Sugerencia:} Recuerde el truco mostrado en el \href{https://www.youtube.com/watch?v=63HHmjlh794&list=PLhfK9LVRQ8ywzGXyQDIvH4_XBIcrPp89r}{video de \emph{PBS Infinite Series} en YouTube} que el instructor explic\'o en clase. 
+\halfskip
+
+\textbf{Segunda Actividad (4 Puntos)}
+
+Empezando con la pol\'itica aleatoria uniforme, modifique las probabilidades de transici\'on del robot del tal manera que a largo plazo todas las \'areas $A_{ij}$ sean visitadas con la misma frecuencia. En particular, para cada instalaci\'on presente el grafo de la nueva cadena. 
+
+\emph{Sugerencia:} Imite el truco explicado por el instructor que consist\'ia en disponer el mismo n\'umero de `robots virtuales' en cada \'area y luego elegir probablidades de transici\'on en cada estado que cumplan con las ecuaciones de balance. 
+
+\emph{Nota:} Esta \'ultima actividad no tiene una respuesta correcta \'unica. 
 
 \end{problem}
 \vspace{\baselineskip}
 
 % -----------------------------------------------------------------
 \begin{problem}
+Un inversionista de riesgo se encuentra evaluando varias nuevas empresas, para lo cual las ha clasificado de la siguiente manera: 
+\begin{itemize}
+\item Las empresas rango $A$ son las mejores. Cada trimestre una empresa rango $A$ logra volverse totalmente rentable con probablidad del 20\%, se mantiene en el mismo rango con probabilidad del 50\% y desciende de rango con probabilidad del 30\%. 
+\item Las empresas rango $B$ son las segundas mejores. Cada trimestre una empresa rango $B$ \linebreak asciende a rango $A$ con probabilidad del 25\%, se mantiene en el mismo rango con probabilidad del 55\% y desciende de rango con probabilidad del 20\%. 
+\item Las empresas rango $C$ son las problem\'aticas. Cada trimestre una empresa rango $C$ asciende a rango $B$ con probabilidad del 30\%, se mantiene en el mismo rango con probabilidad del 50\% y quiebra con probabilidad del 20\%. 
+\end{itemize}
 
-\end{problem}
-\vspace{\baselineskip}
-
-% -----------------------------------------------------------------
-\begin{problem}
-
-\end{problem}
-\vspace{\baselineskip}
-
-% -----------------------------------------------------------------
-\begin{problem}
+Con esto en mente, complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{2 Puntos:} Modele el sistema de clasificaci\'on de empresas del inversionista como una Cadena de Markov con cinco estados. En particular, provea el grafo de la cadena. 
+\item \textbf{2 Puntos:} Provea un \'analisis de estados de la cadena, indicando estados transitorios, estados recurrentes, clases recurrentes, estados absorbentes (si los hay), periodicidad y ergodicidad (\ie si es o no irreducible). 
+\item \textbf{3 Puntos:} Para cada rango de empresa, calcule la probabilidad de que una empresa de ese rango eventualmente \textit{(i)} logre volverse totalmente rentable o \textit{(ii)} quiebre. 
+\item \textbf{3 Puntos:} Para cada rango de empresa, calcule el tiempo esperado que transcurre desde que una empresa entra en ese rango hasta que la empresa logra volverse totalmente rentable o quiebra. 
+\item \textbf{3 Puntos:} Suponga que el inversionista compra 400 acciones de empresas rango $A$ a \linebreak \$2 cada una y 400 acciones de empresas rango $B$ a \$1.25 cada una. Suponiendo que el inversionista puede vender las acciones de una empresa que logra ser totalmente rentable en \$5 cada una, y que el valor de una acci\'on de pierde totalmente cuando su respectiva empresa quiebra, es este plan de inversi\'on rentable? 
+\end{enumerate}
 
 \end{problem}
 \vspace{\baselineskip}
 
 \end{document}
+
+% -----------------------------------------------------------------
+\begin{problem}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+
+\end{problem}
+\vspace{\baselineskip}
