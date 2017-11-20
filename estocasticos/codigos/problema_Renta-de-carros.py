@@ -25,5 +25,9 @@ pi_2 = cadena.propaga_distribucion( dist_inicial, 2)
 # Calcula el numero esperado de carros en cada ciudad
 num_carros = { estado : 400 * pi_2[estado] for estado in S }
 
+# Computa la distribucion estacionaria
+pi_estrella = cadena.distribucion_estacionaria()
+num_carros_estacionaria = { estado : 400 * pi_estrella[estado] for estado in S }
+
 # Computa el tiempo esperado de primer paso hacia Atlanta
-tiempo_retorno = cadena.tiempo_esperado_de_primer_paso( 'Atlanta')
+tiempo_retorno = cadena.tiempo_esperado_de_primer_paso( 'Chicago')
