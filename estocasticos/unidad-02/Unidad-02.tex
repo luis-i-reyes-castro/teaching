@@ -1,0 +1,134 @@
+% =================================================================
+\documentclass[ 10pt, xcolor = dvipsnames]{beamer}
+\usepackage{ beamerthemesplit, lmodern}
+\usetheme{Madrid}
+\usecolortheme[named=Brown]{structure}
+\useinnertheme{rectangles}
+\setbeamertemplate{frametitle continuation}{}
+\beamertemplatenavigationsymbolsempty
+\usepackage{../../macros-general}
+\usepackage{../../macros-beamer}
+\input{../../beamer_section-slides}
+
+% =================================================================
+\newcommand{\shorttitle}{Modelos Estoc\'asticos - Unidad 02}
+\title[\shorttitle]{Modelos Estoc\'asticos para Manufactura y Servicios (INDG-1008): \textbf{Unidad 02} }
+\author[L. I. Reyes Castro]{Luis I. Reyes Castro}
+\institute[ESPOL]{\normalsize Escuela Superior Polit\'ecnica del Litoral (ESPOL) \\ Guayaquil - Ecuador}
+\date[2017-T1]{2017 - Primer T\'ermino}
+
+% -----------------------------------------------------------------
+\begin{document}
+\input{../../beamer_table-contents}
+\input{../../macros-espanol}
+
+
+% =================================================================
+\section{Cadenas de Markov en Tiempo Continuo}
+
+% =================================================================
+\subsection{Modelamiento}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+Una \textbf{Cadena de Markov de Tiempo Continuo} es un modelo matem\'atico de un proceso estoc\'astico en tiempo continuo constitu\'ido por: 
+\begin{itemize}
+\item Conjunto finito de $n$ estados, donde cada estado es una representaci\'on de una posible situaci\'on de inter\'es. 
+\item Matriz de tasas de transici\'on $\vec{Q} \in \Re^{n \times n}$, donde: 
+\begin{itemize}
+\item Para todo estado $i$ suponemos que $\vec{Q}(i,i) = 0$
+\item Para todo estado $i$ definimos a la tasa del salida de ese estado como: 
+\[
+\vec{Q}(i) \; \define \; \sum_{ 1 \leq j \leq n } \vec{Q}(i,j)
+\]
+\fullcut
+\item Para cada par de estados $i,j$: 
+\[
+\vec{P}(i,j) \; = \; 
+\Pr \, ( \, \text{siguiente estado sea } j \mid \text{estado actual es } i \, ) \; = \; 
+\frac{ \vec{Q}(i,j) }{ \; \vec{Q}(i) \; }
+\]
+\framebreak
+\item Cada vez que la cadena ingresa a un estado $i$ la duraci\'on del intervalo \linebreak durante el cual la cadena permanece en ese estado, denotado $T_i$, es una variable aleatoria con distribuci\'on exponencial. M\'as precisamente: 
+\[
+T_i \, \sim \, \Exponential \, ( \, \vec{Q}(i) \, )
+\]
+
+\item Observe adem\'as que para cualquier estado $i$ la sumatoria de las tasas de transici\'on $\vec{Q}(i,j)$ es positiva pero generalmente diferente de uno. 
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+\underline{Ejemplo:}
+
+Un taller tiene dos m\'aquinas id\'enticas en operaci\'on continua excepto cuando se descomponen. Como lo hacen con bastante frecuencia, el taller dispone de un t\'ecnico contratado a tiempo completo para repararlas cuando es necesario. \linebreak El tiempo que se requiere para reparar una m\'aquina tiene distribuci\'on exponencial con media de 0.5 d\'ias. Una vez que se termina la reparaci\'on, el tiempo que transcurre hasta la siguiente descompostura tiene distribuci\'on exponencial con media de un 1.0 d\'ias. Estas distribuciones son independientes. 
+
+Modele la situaci\'on descrita como una Cadena de Markov en Tiempo Continuo. 
+
+\end{frame}
+
+% =================================================================
+\subsection{Distribuci\'on Estacionaria}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+C\'alculo de la Distribuci\'on en Estado Estable: 
+\begin{enumerate}
+\item Descartamos todos los estados transitorios. 
+\item Escribimos una ecuaci\'on de balance para cada uno de los $n$ estados: 
+\[
+\forall \, \text{estado } x \colon \, \vec{\pi}(x) \, \vec{Q}(x) \; = \; 
+\sum_{\text{estados }i} \vec{\pi}(i) \, \vec{Q}(i,x) 
+\]
+\item Desechamos arbitrariamente una de las $n$ ecuaciones anteriores y la reemplazamos por: 
+\[
+\sum_{\text{estados }x} \vec{\pi}(x) \; = \; 1
+\]
+\item Resolvemos el sistema de ecuaciones lineales resultante, el cual tiene \linebreak $n$ inc\'ognitas y $n$ ecuaciones linealmente independientes. 
+
+\end{enumerate}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+\underline{Ejemplo:}
+
+Un taller tiene dos m\'aquinas id\'enticas en operaci\'on continua excepto cuando se descomponen. Como lo hacen con bastante frecuencia, el taller dispone de un t\'ecnico contratado a tiempo completo para repararlas cuando es necesario. \linebreak El tiempo que se requiere para reparar una m\'aquina tiene distribuci\'on exponencial con media de 0.5 d\'ias. Una vez que se termina la reparaci\'on, el tiempo que transcurre hasta la siguiente descompostura tiene distribuci\'on exponencial con media de un 1.0 d\'ias. Estas distribuciones son independientes. 
+
+Calcule el porcentaje del tiempo que el taller tiene:
+\begin{itemize}
+\item Las dos m\'aquinas operativas. 
+\item Una m\'aquina operativa y una descompuesta. 
+\item Las dos m\'aquinas descompuestas. 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+\underline{Ejemplo - Modelo M/M/1:}
+
+Un sistema de colas cuenta con un \'unico servidor cuyo tiempo de servicio est\'a exponencialmente distribu\'ido con una tasa de $\mu$ por hora. Asumiendo que los clientes llegan de acuerdo a un proceso Poisson con tasa de arribo de $\lambda$ por hora, encuentre: 
+\begin{itemize}
+\item Las condiciones sobre $\mu$ y $\lambda$ para que exista una distribuci\'on estacionaria. 
+\item La distribuci\'on estacionaria en funci\'on de $\mu$ y $\lambda$. 
+\end{itemize}
+
+
+\end{frame}
+
+\end{document}
