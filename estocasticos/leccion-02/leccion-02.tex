@@ -1,0 +1,79 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{02}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Lecci\'on \numero \\[2ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino II \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{(5 Puntos)}
+Suponga que usted ha sido encargado con del manejo del inventario de algunos productos no-perecederos en un supermercado. Para mantener una consistencia en el manejo de inventario a trav\'es de los varios productos que se venden, el gerente ha dispuesto que todos los inventarios se controlen mediante pol\'iticas de punto de reposici\'on. 
+
+M\'as precisamente, al final de cada d\'ia se cuenta el inventario del producto y si este es menor o igual a $I_{rep}$ unidades se hace un pedido de reposici\'on por $Q_{rep}$ unidades al proveedor, el cual es entregado por el mismo al comienzo del siguiente d\'ia antes de la hora de apertura de la tienda; caso contrario, no se hace un pedido de reposici\'on. F\'ijese que bajo estas suposiciones el m\'aximo inventario posible es:
+\[
+I_{max} \, = \, I_{rep} + Q_{rep}
+\]
+Adicionalmente,como es de costumbre en este campo de estudio, usted hace la suposici\'on simplificatoria que las demandas del producto $D_1, \, D_2, \, \dots$ constituyen una secuencia de variables aleatorias i.i.d. con distribuci\'on Poisson con par\'ametro $\lambda$. M\'as a\'un, si para cada d\'ia $t$ denotamos a $I_t$ como el inventario a la hora de apertura de la tienda del \tavo d\'ia, a $D_t$ como la demanda del d\'ia, \ie la cantidad que se vender\'ia ese d\'ia si el inventario fuere inagotable, a $R_t$ como la cantidad repuesta entre la noche del \tavo d\'ia y la hora de apertura del \tMavo d\'ia, tenemos que:
+\[
+I_{t+1} \, = \, \max \{ \, 0, \, I_t - D_t \, \} + R_t \, ; \qquad
+R_t \, = \, 
+\begin{cases}
+Q_{rep}, & \text{si } 0 \leq I_t \leq I_{rep} \, ; \\
+0, & \text{caso contrario;}
+\end{cases}
+\]
+
+Con todo esto en mente, para cada problema de manejo de inventario con demanda $\lambda$ y pol\'itica de punto de reposici\'on $(I_{rep},Q_{rep})$ podemos construir una Cadena de Markov con \linebreak $n = I_{max} + 1$ estados (cada uno asociado a un nivel de inventario). 
+
+Construya la matriz de transici\'on para el problema para cada uno de los siguientes casos: 
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Caso}           & $\bm{\lambda}$ & $\bm{I_{rep}}$ & $\bm{Q_{rep}}$ \\ \hline
+Producto 1 & 0.8 & 1  & 2                  \\ \hline
+Producto 2 & 1.5 & 2  & 2                  \\ \hline
+\end{tabular}
+\end{table}
+
+Por favor presente sus matrices como tablas con los decimales redondeados a tres d\'igitos. 
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+Un inversionista de riesgo se encuentra evaluando varias nuevas empresas, para lo cual las ha clasificado de la siguiente manera: 
+\begin{itemize}
+\item Las empresas rango $A$ son las mejores. Cada trimestre una empresa rango $A$ logra volverse totalmente rentable con probablidad del 20\%, se mantiene en el mismo rango con probabilidad del 50\% y desciende de rango con probabilidad del 30\%. 
+\item Las empresas rango $B$ son las segundas mejores. Cada trimestre una empresa rango $B$ \linebreak asciende a rango $A$ con probabilidad del 25\%, se mantiene en el mismo rango con probabilidad del 55\% y desciende de rango con probabilidad del 20\%. 
+\item Las empresas rango $C$ son las problem\'aticas. Cada trimestre una empresa rango $C$ asciende a rango $B$ con probabilidad del 30\%, se mantiene en el mismo rango con probabilidad del 50\% y quiebra con probabilidad del 20\%. 
+\end{itemize}
+
+Con esto en mente, complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{1 Punto:} Modele el sistema de clasificaci\'on de empresas del inversionista como una Cadena de Markov con cinco estados. En particular, provea el grafo de la cadena. 
+\item \textbf{3 Puntos:} Para cada rango de empresa, calcule la probabilidad de que una empresa de ese rango eventualmente \textit{(i)} logre volverse totalmente rentable o \textit{(ii)} quiebre. 
+\item \textbf{3 Puntos:} Para cada rango de empresa, calcule el tiempo esperado que transcurre desde que una empresa entra en ese rango hasta que la empresa logra volverse totalmente rentable o quiebra. 
+\end{enumerate}
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
