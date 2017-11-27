@@ -1,0 +1,83 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{01}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Examen \numero \\[2ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino II \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\label{prob:maquina-caprichosa}
+Un fabricante tiene una m\'aquina complicada. Al comienzo de cada d\'ia que la m\'aquina est\'a operativa el riesgo de que la misma se desconponga es $p$. Cuando la m\'aquina se descompone se llama inmediatamente a la agencia de mantenimiento para agendar una visita para el d\'ia siguiente. Desafortunadamente para el fabricante, la visita de la agencia dura \linebreak $k$ d\'ias y cuesta $\alpha$ d\'olares diarios. Cada visita sucede de la siguiente manera: 
+\begin{itemize}
+\item Supongamos que la m\'aquina empieza la ma\~nana del d\'ia $t$ operativa y que durante ese d\'ia la misma se descompone un par de horas antes del final de la jornada. El fabricante entonces llama a la agencia de mantenimiento para agendar una visita. 
+\item La ma\~nana del d\'ia $t+1$ llegan los t\'ecnicos de la agencia y empiezan a trabajar en la m\'aquina. Trabajan todo el d\'ia. 
+\item Los d\'ias $t+2$, $t+3$, $\dots$, $t+k-1$, los t\'ecnicos de la agencia contin\'uan su trabajo. 
+\item La ma\~nana del d\'ia $t+k$ los t\'ecnicos de la agencia contin\'uan su trabajo y le entregan la m\'aquina operativa al fabricante para el final de la jornada. 
+\item La ma\~nana del d\'ia $t+k+1$ la m\'aquina est\'a operativa nuevamente, aunque se puede descomponer como siempre. 
+\end{itemize}
+
+Con esto en mente: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{2 Puntos:} Modele la situaci\'on descrita como una Cadena de Markov. En particular, presente el grafo de la cadena en funci\'on de $p$ y $k$. 
+\item \textbf{3 Puntos:} Calcule: 
+\begin{itemize}
+\item El porcentaje del tiempo que la m\'aquina opera toda la jornada sin problemas. 
+\item El porcentaje del tiempo que la m\'aquina empieza el d\'ia operativa pero se descompone durante alg\'un momento de la jornada. 
+\item El porcentaje del tiempo que la m\'aquina recibe mantenimiento. 
+\end{itemize}
+\end{enumerate}
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Un transmisor digital tiene un \emph{buffer} con capacidad para tres paquetes. \linebreak En cada ciclo que empieza con al menos un paquete en el buffer el transmisor intenta enviar un paquete. El paquete es enviado con \'exito con probabilidad $p$, caso contrario ser\'a necesario re-intentar el env\'io en el siguiente per\'iodo. Adem\'as, en cada ciclo que empieza con dos o menos paquetes el transmisor recibe un nuevo paquete con probabilidad $q$. 
+
+Con esto en mente: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{4 Puntos:} Represente este modelo como una Cadena de Markov con cuatro estados. \linebreak En particular, provea el grafo de la cadena. 
+\item \textbf{3 Puntos:} Suponiendo que $p = 0.9$ y $q = 0.6$, encuentre el n\'umero de ciclos esperado hasta que el sistema est\'a vac\'io (\ie tiene cero paquetes en el buffer) cuando empieza con el buffer lleno. 
+\end{enumerate}
+
+\emph{Clarificaci\'on:} Suponga que en cada ciclo primero se intenta enviar un paquete, si hay al menos uno en el buffer, y luego se receptan nuevos paquetes si hay espacio en el buffer. 
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Considere el siguiente modelo de una acci\'on de un proyecto inmobiliario: 
+\begin{itemize}
+\item El proyecto empieza en el estado $A$, en el cual genera utilidades de \$200 mensuales. \linebreak El proyecto avanza al estado $B$ con probabilidad del 40\% y permanece en el mismo estado con probabilidad del 60\%. 
+\item Una vez que el proyecto alcanza el estado $B$ genera \$400 mensuales. En este estado el proyecto avanza al estado $C$ con probabilidad del 30\% y permanece en el mismo estado con probabilidad del 70\%. 
+\item En el estado $C$ el proyecto genera \$700 mensuales. El proyecto regresa al estado $B$ con probabilidad del 50\% y permanece en el mismo estado con probabilidad del 50\%. 
+\end{itemize}
+
+Con esto en mente: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{1.5 Puntos:} Represente este modelo como una Cadena de Markov con tres estados. \linebreak En particular, provea el grafo de la cadena. 
+\item \textbf{3 Puntos:} Suponiendo que la tasa de inter\'es es del $r = 5\%$, escriba las ecuaciones de Valor Actual Neto Esperado (VAN-E). 
+\item \textbf{1.5 Puntos:} Resuelva las ecuaciones anteriores y reporte el Valor Actual Neto Esperado (VAN-E) de una acci\'on de este proyecto. 
+\end{enumerate}
+
+\end{problem}
+\fullskip
+
+\end{document}
