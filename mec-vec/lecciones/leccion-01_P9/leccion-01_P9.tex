@@ -22,16 +22,64 @@
 % =============================================
 \begin{problem}
 Para la armadura mostrada en la siguiente figura:
-\begin{enumerate}[label=\textbf{\alph*)}]
-\item \textbf{3 Puntos:} Encuentre las reacciones el $A$ y $D$. 
-\item \textbf{4 Puntos:} Escriba las ocho ecuaciones asociadas con los cuatro nodos de la armadura, denotando compresi\'on con signo positivo y tensi\'on con signo negativo. 
-\item \textbf{2 Puntos:} Calcule la fuerza interna en cada eslab\'on. 
-\end{enumerate}
 
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.56\textwidth]{prob-armadura.jpg}
 \end{figure}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{3 Puntos:} Encuentre las reacciones en $A$ y $D$. \\[1ex] \emph{Soluci\'on:}
+\begin{align*}
+\sum F_x \; \colon \; & A_x \; = \; 0 \text{ kips} \\[1ex]
+\sum F_y \; \colon \; & A_y + D_y \; = \; 21.6 \\[1ex]
+\sum M_A \; \colon \; & +22.5 \cdot ( D_y - 10.8 ) - 57.5 \cdot (10.8) \; = \; 0 \\[1ex]
+& \Longrightarrow \; D_y \; = \; +38.4 \text{ kips},
+\; A_y \; = \; -16.8 \text{ kips}
+\end{align*}
+\item \textbf{4 Puntos:} Escriba las ocho ecuaciones asociadas con los cuatro nodos de la armadura, denotando compresi\'on con signo positivo y tensi\'on con signo negativo. \\[1ex] \emph{Soluci\'on:} Primero definimos: 
+\[
+\theta_{AD} \; = \; \arctan( 12 / 22.5 ) \; = \; 28.07\deg \qquad \qquad
+\theta_{CD} \; = \; \arctan( 12 / 35 ) \; = \; 18.92\deg
+\]
+Nodo $A$: 
+\begin{align*}
+\sum F_x \; \colon \; & -F_{AB} -F_{AD} \, \cos(\theta_{AD}) \; = \; 0 \\[1ex]
+\sum F_y \; \colon \; & +F_{AD} \, \sin(\theta_{AD}) \; = \; +16.8
+\end{align*}
+Nodo $B$: 
+\begin{align*}
+\sum F_x \; \colon \; & +F_{AB} -F_{BC} \; = \; 0 \\[1ex]
+\sum F_y \; \colon \; & +F_{BD} \; = \; +10.8
+\end{align*}
+Nodo $C$: 
+\begin{align*}
+\sum F_x \; \colon \; & +F_{BC} + F_{CD} \, \cos(\theta_{CD}) \; = \; 0 \\[1ex]
+\sum F_y \; \colon \; & +F_{CD} \, \sin(\theta_{CD}) \; = \; +10.8
+\end{align*}
+Nodo $D$: 
+\begin{align*}
+\sum F_x \; \colon \; & +F_{AD} \, \cos(\theta_{AD}) - F_{CD} \, \cos(\theta_{CD}) \; = \; 0 \\[1ex]
+\sum F_y \; \colon \; & -F_{AD} \, \sin(\theta_{AD}) - F_{BD} - F_{CD} \, \sin(\theta_{CD}) \; = \; -38.4
+\end{align*}
+
+\item \textbf{2 Puntos:} Calcule la fuerza interna en cada eslab\'on. \\[1ex] \emph{Soluci\'on:} Primero, del Nodo $A$ obtenemos: 
+\[
+F_{AD} \; = \; +35.7 \text{ kips}
+\qquad \Longrightarrow \qquad
+F_{AB} \; = \; -31.5 \text{ kips}
+\]
+Luego, del Nodo $B$ obtenemos: 
+\[
+F_{BC} \; = \; -31.5 \text{ kips}
+\qquad \qquad
+F_{BD} \; = \; +10.8 \text{ kips}
+\]
+Finalmente, del Nodo $C$ obtenemos: 
+\[
+F_{CD} \; = \; +33.3 \text{ kips}
+\]
+\end{enumerate}
 
 \end{problem}
 \fullskip
@@ -39,16 +87,50 @@ Para la armadura mostrada en la siguiente figura:
 % =============================================
 \begin{problem}
 Para el armaz\'on mostrado en la siguiente figura:
-\begin{enumerate}[label=\textbf{\alph*)}]
-\item \textbf{2 Puntos:} Bosqueje los diagramas de cuerpo libre correspondientes. 
-\item \textbf{2 Puntos:} Calcule la fuerza que la barra $AFC$ ejerce sobre la barra $BCDE$ en $C$. 
-\item \textbf{2 Puntos:} Calcule las reacciones en $A$ y $B$. 
-\end{enumerate}
 
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.28\textwidth]{prob-armazon.jpg}
 \end{figure}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{2 Puntos:} Bosqueje los diagramas de cuerpo libre correspondientes. \\[1ex] \emph{Soluci\'on:}
+\begin{itemize}
+\item Cuerpo $AFC$: 
+\begin{align*}
+\sum F_x \; \colon \; & A_x - C_x \; = \; 0 \\[1ex]
+\sum F_y \; \colon \; & A_y - C_y \; = \; 0 \\[1ex]
+\sum M_A \; \colon \; & -5 \cdot C_x -10 \cdot C_y \; = 0
+\end{align*}
+\item Cuerpo $BCDE$: 
+\begin{align*}
+\sum F_x \; \colon \; & B_x + C_x \; = \; 0 \\[1ex]
+\sum F_y \; \colon \; & B_y + C_y \; = \; 100 \\[1ex]
+\sum M_B \; \colon \; & +5 \cdot C_x - 4 \cdot 100 \; = 0
+\end{align*}
+\end{itemize}
+
+\item \textbf{2 Puntos:} Calcule la fuerza que la barra $AFC$ ejerce sobre la barra $BCDE$ en $C$. \\[1ex] \emph{Soluci\'on:} Resolviendo en el cuerpo $BCDE$ la sumatoria de momentos en $B$ para $C_x$ obtenemos: 
+\[
+C_x \; = \; +80 \text{ lb}
+\]
+Finalmente, resolviendo en el cuerpo $AFC$ la sumatoria de momentos en $A$ para $C_y$ obtenemos: 
+\[
+C_y \; = \; -40 \text{ lb}
+\]
+
+\item \textbf{2 Puntos:} Calcule las reacciones en $A$ y $B$. \\[1ex] \emph{Soluci\'on:} De las sumatorias de fuerzas en el cuerpo $AFC$ obtenemos: 
+\[
+A_x \; = \; C_x \; = \; +80 \text{ lb}, \qquad \qquad
+A_y \; = \; C_y \; = \; -40 \text{ lb}
+\]
+Luego, de las sumatorias de fuerzas en el cuerpo $BCDE$ obtenemos: 
+\[
+B_x \; = \; -C_x \; = \; -80 \text{ lb}, \qquad \qquad
+B_y \; = \; 100 - C_y \; = \; +140 \text{ lb}
+\]
+
+\end{enumerate}
 
 \end{problem}
 \fullskip
