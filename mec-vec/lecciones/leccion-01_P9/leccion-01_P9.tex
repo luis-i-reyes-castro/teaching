@@ -144,22 +144,140 @@ B_y \; = \; 100 - C_y \; = \; +140 \text{ lb}
 \includegraphics[width=0.42\textwidth]{prob-vigas.jpg}
 \end{figure}
 
+\emph{Soluci\'on:} Empezamos con las reacciones: 
+\begin{align*}
+\sum F_x \; \colon \; & C_x \; = \; 0 \text{ kN} \\[1ex]
+\sum F_y \; \colon \; & A_y + C_y \; = \; 12 \\[1ex]
+\sum M_A \; \colon \;
+& -(1/2)(2)(4^2) - (3.2)(4) + 4 \, C_y \; = \; 0 \\[1ex]
+& \Longrightarrow \;
+C_y \; = \; +7.2 \text{ kN}, \qquad
+A_y \; = \; +4.8 \text{ kN}
+\end{align*}
+
+Para la secci\'on donde $x \in [ \, 0, \, 3.2]$ :
+\begin{align*}
+\sum F_x \; \colon \; & F(x) \; = \; 0 \text{ kN} \\[1ex]
+\sum F_y \; \colon \;
+& +4.8 - 2 \, x - V(x) \; = \; 0
+\quad \Longrightarrow \;
+V(x) \; = \; -2 \, x + 4.8 \text{ kN} \\[1ex]
+& \; \Longrightarrow \;
+M(x) \; = \; M(0) + \int_{0}^x (-2 \, x + 4.8) \, dx
+\; = \; - x^2 + 4.8 \, x \text{ kN-m} \\[1ex]
+& \; \Longrightarrow \;
+M(3.2) \; = \; +5.12 \text{ kN-m}
+\end{align*}
+
+Para la secci\'on donde $x \in [ \, 3.2, \, 4]$ :
+\begin{align*}
+\sum F_x \; \colon \; & F(x) \; = \; 0 \text{ kN} \\[1ex]
+\sum F_y \; \colon \;
+& +4.8 - 2 \, x - 4 - V(x) \; = \; 0
+\quad \Longrightarrow \;
+V(x) \; = \; -2 \, x + 0.8 \text{ kN} \\[1ex]
+& \; \Longrightarrow \;
+M(x) \; = \; M(3.2) + \int_{3.2}^x (-2 \, x + 0.8) \, dx \\[1ex]
+& = \; +5.12 - x^2 + 0.8 \, x + 7.68 \; = \;
+- x^2 + 0.8 \, x + 12.8 \text{ kN-m} 
+\end{align*}
+
+En conclusi\'on: 
+\begin{itemize}
+\item Fuerza cortante: 
+\[
+V(x) \; = \;
+\begin{dcases}
+-2 \, x + 4.8 \text{ kN},
+& \text{para todo } x \in [ \, 0, \, 3.2] \\
+-2 \, x + 0.8 \text{ kN},
+& \text{para todo } x \in [ \, 3.2, \, 4] \\
+\end{dcases}
+\]
+\item Momento flector: 
+\[
+M(x) \; = \;
+\begin{dcases}
+- x^2 + 4.8 \, x \text{ kN-m},
+& \text{para todo } x \in [ \, 0, \, 3.2] \\
+- x^2 + 0.8 \, x + 12.8 \text{ kN-m} ,
+& \text{para todo } x \in [ \, 3.2, \, 4] \\
+\end{dcases}
+\]
+\end{itemize}
+
 \end{problem}
 \fullskip
 
 % =============================================
 \begin{problem}
 El oleoducto mostrado en la siguiente figura est\'a soportado cada 6 ft mediante suspensores verticales fijos a un cable como se muestra en la figura. Debido al peso combinado del ducto y su contenido, cada suspensor experimenta una tensi\'on de 400 lb. Si se sabe que $d_C = 12$ ft, determine: 
-\begin{enumerate}[label=\textbf{\alph*)}]
-\item \textbf{3 Puntos:} La altura $d_B$. 
-\item \textbf{2 Puntos:} Las alturas $d_D$ y $d_E$. 
-\item \textbf{2 Puntos:} La tensi\'on m\'axima en el cable. 
-\end{enumerate}
 
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.52\textwidth]{prob-cables.jpg}
 \end{figure}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{3 Puntos:} La altura $d_B$. \emph{Nota:} Por favor ignore las cargas en $A$ y $F$. \\[1ex] \emph{Soluci\'on:} Primero consideramos el cable completo y sumamos momentos: 
+\begin{align*}
+\sum M_F \; \colon \;
+& +(6+12+18+24)(400) + 5 \, A_x - 30 \, A_y \; = \; 0 \\[1ex]
+& \Longrightarrow \;
+A_x - 6 \, A_y + 4800 \; = \; 0
+\; \Longrightarrow \;
+A_x \; = \; 6 \, A_y - 4800 \; = \; 0
+\end{align*}
+Luego consideramos la secci\'on $ABC$ y sumamos momentos: 
+\begin{align*}
+\sum M_C \; \colon \;
+& +6(400) -7 \, A_x - 12 \, A_y \; = \; 0 \\[1ex]
+& \Longrightarrow \; 7 \, A_x + 12 \, A_y - 2400 \; = \; 0 \\[1ex]
+& \Longrightarrow \;
+A_x \; = -800 \text{ lb}, \quad A_y \; = \; +666.7 \text{ lb}
+\end{align*}
+Finalmente, consideramos la secci\'on $AB$ y sumamos momentos: 
+\begin{align*}
+\sum M_B \; \colon \;
+& +( d_B - 5 )(800) - (6)(666.7) \; = \; 0 \\[1ex]
+& \Longrightarrow \;
+d_B \; = \; 10.0 \text{ ft}
+\end{align*}
+
+\item \textbf{2 Puntos:} Las alturas $d_D$ y $d_E$. \\[1ex] \emph{Soluci\'on:} Considerando la secci\'on $ABCD$ tenemos: 
+\begin{align*}
+\sum M_D \; \colon \;
+& +(6+12)(400) + ( d_D - 5)(800) - (18)(667.7) \; = \; 0 \\[1ex]
+& \Longrightarrow \;
+d_D \; = \; 11.0 \text{ ft}
+\end{align*}
+Luego, considerando la secci\'on $ABCDE$ tenemos: 
+\begin{align*}
+\sum M_E \; \colon \;
+& +(6+12+18)(400) + ( d_E - 5)(800) - (24)(667.7) \; = \; 0 \\[1ex]
+& \Longrightarrow \;
+d_E \; = \; 7.0 \text{ ft}
+\end{align*}
+
+\item \textbf{2 Puntos:} La tensi\'on m\'axima en el cable. \\[1ex] \emph{Soluci\'on:} N\'otese que: 
+\begin{itemize}
+\item En el segmento $AB$ el cable desciende de 5 ft a 10 ft, \ie 5 ft. 
+\item En el segmento $BC$ el cable desciende de 10 ft a 12 ft, \ie 2 ft. 
+\item En el segmento $CD$ el cable asciende de 12 ft a 11 ft, \ie 1 ft. 
+\item En el segmento $DE$ el cable asciende de 11 ft a 7 ft, \ie 4 ft. 
+\item En el segmento $EF$ el cable asciende de 7 ft a 0 ft, \ie 7 ft. 
+\end{itemize}
+Consecuentemente, la m\'axima tensi\'on en la cuerda se encuentra en el segmento $EF$ y es igual en magnitud a la reacci\'on en $F$. De esta manera, sumando fuerzas en todo el cable obtenemos: 
+\begin{align*}
+\sum F_x \; \colon \; & -800 + F_x \; = \; 0 \quad
+\Longrightarrow \; F_x \; = \; +800 \text{ lb} \\[1ex]
+\sum F_y \; \colon \; & +666.7 + F_y \; = \; 1600 \quad
+\Longrightarrow \; F_y \; = \; +933.3 \text{ lb} \\[1ex]
+& \Longrightarrow \;
+T_{max} \; = \; \sqrt{F_x^2 + F_y^2} \; = \; 1229.25 \text{ lb}
+\end{align*}
+
+\end{enumerate}
 
 \end{problem}
 \fullskip
