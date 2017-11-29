@@ -6,6 +6,7 @@
 % Number of the handout, quiz, exam, etc.
 \newcommand{\numero}{01}
 \setcounter{numero}{\numero}
+\graphicspath{{./figures/}}
 
 % -----------------------------------------------------------------
 \begin{document}
@@ -34,7 +35,14 @@ Un fabricante tiene una m\'aquina complicada. Al comienzo de cada d\'ia que la m
 
 Con esto en mente: 
 \begin{enumerate}[label=\textbf{\alph*)}]
-\item \textbf{2 Puntos:} Modele la situaci\'on descrita como una Cadena de Markov. En particular, presente el grafo de la cadena en funci\'on de $p$ y $k$. 
+\item \textbf{2 Puntos:} Modele la situaci\'on descrita como una Cadena de Markov. En particular, presente el grafo de la cadena en funci\'on de $p$ y $k$. \\[1ex] \emph{Soluci\'on:}
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/prob-maquina-complicada.eps_tex}
+\end{figure}
+
 \item \textbf{3 Puntos:} Calcule: 
 \begin{itemize}
 \item El porcentaje del tiempo que la m\'aquina opera toda la jornada sin problemas. 
