@@ -35,7 +35,7 @@ Un fabricante tiene una m\'aquina complicada. Al comienzo de cada d\'ia que la m
 
 Con esto en mente: 
 \begin{enumerate}[label=\textbf{\alph*)}]
-\item \textbf{2 Puntos:} Modele la situaci\'on descrita como una Cadena de Markov. En particular, presente el grafo de la cadena en funci\'on de $p$ y $k$. \\[1ex] \emph{Soluci\'on:}
+\item \textbf{2 Puntos:} Modele la situaci\'on descrita como una Cadena de Markov. En particular, presente el grafo de la cadena en funci\'on de $p$ y $k$. \\[1ex] \emph{Soluci\'on:} Observe la siguiente figura. 
 
 \begin{figure}[htb]
 \centering
@@ -49,6 +49,49 @@ Con esto en mente:
 \item El porcentaje del tiempo que la m\'aquina empieza el d\'ia operativa pero se descompone durante alg\'un momento de la jornada. 
 \item El porcentaje del tiempo que la m\'aquina recibe mantenimiento. 
 \end{itemize}
+
+\emph{Soluci\'on:} Primero necesitamos calcular la distribuci\'on estacionaria de la cadena, para lo cual escribimos la ecuaciones de estado: 
+\begin{align*}
+\pi_0 \; & = \; (1-p) \, \pi_0 + \pi_k \\
+\pi_1 \; & = \; p \, \pi_0 \\
+\pi_2 \; & = \; \pi_1 \\
+& \vdots \\
+\pi_{k} \; & = \; \pi_{k-1}
+\end{align*}
+Reconociendo el patr\'on que emerge para los estados 1 al $k$ tenemos: 
+\[
+\forall \, i \in \{ 1, \dots, k\} \; \colon \;
+\pi_i \; = \; p \, \pi_0
+\]
+Recordando que las probabilidades de toda distribuci\'on suman a uno tenemos: 
+\begin{align*}
+\sum_{i=0}^k \pi_i \; = \; 1 \quad
+& \Longrightarrow \; (1-p) \, \pi_0 + p \, \pi_0 + \sum_{i=1}^k p \, \pi_0 \; = \; 1 \\[1ex]
+& \Longrightarrow \; \pi_0 \, ( \, 1 + k \, p \, ) \; = \; 1
+\quad \Longrightarrow \;
+\pi_0 \; = \; \frac{1}{ 1 + k \, p }
+\end{align*}
+Consecuentemente: 
+\[
+\forall \, i \in \{ 1, \dots, k\} \; \colon \;
+\pi_i \; = \; \frac{p}{ 1 + k \, p }
+\]
+De esta manera: 
+\begin{itemize}
+\item El porcentaje del tiempo que la m\'aquina opera toda la jornada sin problemas es:
+\[
+\pi_0 \, (1-p) \; = \; \frac{1-p}{ 1 + k \, p }
+\]
+\item El porcentaje del tiempo que la m\'aquina empieza el d\'ia operativa pero se descompone durante alg\'un momento de la jornada es:
+\[
+\pi_0 \, p \; = \; \frac{p}{ 1 + k \, p }
+\]
+\item El porcentaje del tiempo que la m\'aquina recibe mantenimiento es:
+\[
+\sum_{i=1}^k \pi_i \; = \; \frac{ k \, p }{ 1 + k \, p }
+\]
+\end{itemize}
+
 \end{enumerate}
 
 \end{problem}
@@ -58,13 +101,40 @@ Con esto en mente:
 \begin{problem}
 Un transmisor digital tiene un \emph{buffer} con capacidad para tres paquetes. \linebreak En cada ciclo que empieza con al menos un paquete en el buffer el transmisor intenta enviar un paquete. El paquete es enviado con \'exito con probabilidad $p$, caso contrario ser\'a necesario re-intentar el env\'io en el siguiente per\'iodo. Adem\'as, en cada ciclo que empieza con dos o menos paquetes el transmisor recibe un nuevo paquete con probabilidad $q$. 
 
+\emph{Clarificaci\'on:} Suponga que en cada ciclo primero se intenta enviar un paquete, si hay al menos uno en el buffer, y luego se receptan nuevos paquetes si hay espacio en el buffer. 
+
 Con esto en mente: 
 \begin{enumerate}[label=\textbf{\alph*)}]
-\item \textbf{4 Puntos:} Represente este modelo como una Cadena de Markov con cuatro estados. \linebreak En particular, provea el grafo de la cadena. 
-\item \textbf{3 Puntos:} Suponiendo que $p = 0.9$ y $q = 0.6$, encuentre el n\'umero de ciclos esperado hasta que el sistema est\'a vac\'io (\ie tiene cero paquetes en el buffer) cuando empieza con el buffer lleno. 
-\end{enumerate}
+\item \textbf{4 Puntos:} Represente este modelo como una Cadena de Markov con cuatro estados. \linebreak En particular, provea el grafo de la cadena. \\[1ex] \emph{Soluci\'on:} Observe la siguiente figura, donde $\bar{p} \define 1-p$ y $\bar{q} \define 1-q$. 
 
-\emph{Clarificaci\'on:} Suponga que en cada ciclo primero se intenta enviar un paquete, si hay al menos uno en el buffer, y luego se receptan nuevos paquetes si hay espacio en el buffer. 
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/prob-transmisor-buffer.eps_tex}
+\end{figure}
+
+\item \textbf{3 Puntos:} Suponiendo que $p = 0.9$ y $q = 0.6$, encuentre el n\'umero de ciclos esperado hasta que el sistema est\'a vac\'io (\ie tiene cero paquetes en el buffer) cuando empieza con el buffer lleno. \\[1ex] \emph{Soluci\'on:} En la siguiente figura se muestra la cadena para los valores $p = 0.9$ y $q = 0.6$. En esta cadena nosotros buscamos encontrar el tiempo de la primera visita al estado cero. En particular, si para cada estado $i \in \{ 1, 2, 3 \}$ denotamos a $T_i$ como el tiempo esperado de primera visita al estado cero desde desde el estado $i$, tenemos: 
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/prob-transmisor-buffer-valores.eps_tex}
+\end{figure}
+
+\begin{align*}
+T_1 \; & = \; 1 + 0.58 \, T_1 + 0.06 \, T_2 \\
+T_2 \; & = \; 1 + 0.36 \, T_1 + 0.58 \, T_2 + 0.06 \, T_3 \\
+T_3 \; & = \; 1 + 0.36 \, T_2 + 0.64 \, T_3
+\end{align*}
+Resolviendo las ecuaciones simult\'aneamente obtenemos: 
+\begin{align*}
+T_1 \; & = \; 3.32 \\
+T_2 \; & = \; 6.56 \\
+T_3 \; & = \; 9.34
+\end{align*}
+Consecuentemente, cuando el sistema empieza con el buffer lleno el tiempo esperado hasta la primera vez que el buffer este vac\'io es de 9.34 ciclos. 
+
+\end{enumerate}
 
 \end{problem}
 \fullskip
@@ -80,9 +150,32 @@ Considere el siguiente modelo de una acci\'on de un proyecto inmobiliario:
 
 Con esto en mente: 
 \begin{enumerate}[label=\textbf{\alph*)}]
-\item \textbf{1.5 Puntos:} Represente este modelo como una Cadena de Markov con tres estados. \linebreak En particular, provea el grafo de la cadena. 
-\item \textbf{3 Puntos:} Suponiendo que la tasa de inter\'es es del $r = 5\%$, escriba las ecuaciones de Valor Actual Neto Esperado (VAN-E). 
-\item \textbf{1.5 Puntos:} Resuelva las ecuaciones anteriores y reporte el Valor Actual Neto Esperado (VAN-E) de una acci\'on de este proyecto. 
+\item \textbf{1.5 Puntos:} Represente este modelo como una Cadena de Markov con tres estados. \linebreak En particular, provea el grafo de la cadena. \\[1ex] \emph{Soluci\'on:} 
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/prob-proyecto-inmobiliario.eps_tex}
+\end{figure}
+
+\item \textbf{3 Puntos:} Suponiendo que la tasa de inter\'es es del $r = 5\%$, escriba las ecuaciones de Valor Actual Neto Esperado (VAN-E).  \\[1ex] \emph{Soluci\'on:} Para esa tasa de inter\'es el factor de descuento es: 
+\[
+\gamma \; = \; \frac{1}{1 + r} \; = \; 0.9524
+\]
+Ahora, si para cada estado $i$ denotamos a $v_i$ como el valor actual neto de empezar a recolectar recompensas desde ese estado, tenemos:
+\begin{align*}
+v_A \; & = \; 200 + 0.9524 \, ( \, 0.6 \, v_A + 0.4 \, v_B \, ) \\
+v_B \; & = \; 400 + 0.9524 \, ( \, 0.7 \, v_B + 0.3 \, v_C \, ) \\
+v_C \; & = \; 700 + 0.9524 \, ( \, 0.5 \, v_B + 0.5 \, v_C \, )
+\end{align*}
+
+\item \textbf{1.5 Puntos:} Resuelva las ecuaciones anteriores y reporte el Valor Actual Neto Esperado (VAN-E) de una acci\'on de este proyecto. \\[1ex] \emph{Soluci\'on:} Resolviendo las ecuaciones simult\'aneamente obtenemos: 
+\begin{align*}
+v_A \; & = \; \$9914 \\
+v_B \; & = \; \$10628 \\
+v_C \; & = \; \$10998
+\end{align*}
+Dado que el proyecto necesariamente empieza en el estado $A$, concluimos que el VAN-E de una acci\'on del proyecto es de \$9914. 
 \end{enumerate}
 
 \end{problem}
