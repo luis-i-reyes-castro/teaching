@@ -86,6 +86,13 @@ F_{FJ} = +18.45 \text{ kips}
 % =============================================
 \begin{problem}
 Para el armaz\'on mostrado en la siguiente figura (lado derecho):
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.56\textwidth]{prob-armadura.jpg} \qquad
+\includegraphics[width=0.32\textwidth]{prob-armazon.jpg}
+\end{figure}
+
 \begin{enumerate}[label=\textbf{\alph*)}]
 \item \textbf{2 Puntos:} Bosqueje los diagramas de cuerpo libre de las barras $ABC$ y $DEF$. \\[1ex] \emph{Soluci\'on:} Definiendo $\theta = \arctan( 15 / 20 ) = 36.87\deg$, tenemos: 
 \begin{itemize}
@@ -134,39 +141,113 @@ F_y \; = \; +300 \text{ lb}
 
 \end{enumerate}
 
-\begin{figure}[htb]
-\centering
-\includegraphics[width=0.56\textwidth]{prob-armadura.jpg} \qquad
-\includegraphics[width=0.32\textwidth]{prob-armazon.jpg}
-\end{figure}
-
 \end{problem}
 \fullskip
 
 % =============================================
 \begin{problem}
 Una barra delgada $AB$ de peso $W$ se une a los bloques $A$ y $B$ que se mueven libremente sobre las gu\'ias como se muestra en la siguiente figura. El resorte, que tiene una constante $k$, se encuentra sin deformar cuando $\theta = 0\deg$. 
-\begin{enumerate}[label=\textbf{\alph*)}]
-\item \textbf{3 Puntos:} Sin tomar en cuenta el peso de los bloques, encuentre una ecuaci\'on en t\'erminos de $W$, $k$, $l$ y $\theta$ que se cumpla cuando la barra est\'a en equilibrio. 
-\item \textbf{3 Puntos:} Determine el valor de $\theta$ cuando $W = 75$ lb, $l = 30$ in y $k = 3$ lb/in. 
-\end{enumerate}
 
-\begin{figure}[htb]
+\begin{figure}[hb]
 \centering
 \includegraphics[width=0.42\textwidth]{prob-equilibrio.jpg}
 \end{figure}
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{3 Puntos:} Sin tomar en cuenta el peso de los bloques, encuentre una ecuaci\'on en t\'erminos de $W$, $k$, $l$ y $\theta$ que se cumpla cuando la barra est\'a en equilibrio. \\[1ex] \emph{Soluci\'on:} Primero expresamos la deformaci\'on del resorte como funci\'on de $\theta$. Para esto nos fijamos que cuando el resorte se encuentra sin deformar la distancia desde la esquina hasta el punto $A$ es $\ell$, pero cuando el resorte se encuentra deformado la distancia de la esquina hasta el punto $A$ es $\ell \, \cos(\theta)$. Consecuentemente, la fuerza del resorte es: 
+\[
+f(\theta) \; = \; k \, [ \ell - \ell \, \cos(\theta) ] \; = \; k \, \ell \, [ 1 - \cos(\theta) ]
+\]
+Entonces, bosquejando el diagrama de cuerpo libre tenemos: 
+\begin{align*}
+\sum F_x \; \colon \;
+& +B_x - f(\theta) \; = \; 0 \; \Longrightarrow \; B_x \; = \; f(\theta) \\[1ex]
+\sum F_y \; \colon \;
+& +A_y - W \; = \; 0 \; \Longrightarrow \; A_y \; = \; W \\[1ex]
+\sum M_A \; \colon \;
+& +\ell \, \sin(\theta) \, f(\theta) - (1/2) \, \ell \, \cos(\theta) \, W \; = 0 \\[1ex]
+& \Longrightarrow \; 2 \, \tan(\theta) \, f(\theta) \; = \; W \; \Longrightarrow \;
+2 \, k \, \ell \, \tan(\theta) \, [ \, 1 - \cos(\theta) \, ] \; = \; W
+\end{align*}
+
+\item \textbf{3 Puntos:} Determine el valor de $\theta$ cuando $W = 75$ lb, $l = 30$ in y $k = 3$ lb/in. \\[1ex] \emph{Soluci\'on:} Este literal queda cancelado puesto que la ecuaci\'on 
+\[
+2 \, k \, \ell \, \tan(\theta) \, [ \, 1 - \cos(\theta) \, ] \; = \; W
+\]
+no es f\'acil de resolver algebraicamente. De todas maneras, la soluci\'on es $\theta = 49.7\deg$. 
+
+\end{enumerate}
 
 \end{problem}
 \fullskip
 
 % =============================================
 \begin{problem}
-\textbf{4 Puntos:} Para la viga mostrada en la siguiente figura encuentre la fuerza cortante $V(x)$ y el momento flector $M(x)$ como funci\'on de la posici\'on $x \in [0,4]$. 
+\textbf{4 Puntos:} Para la viga mostrada en la siguiente figura encuentre la fuerza cortante $V(x)$ y el momento flector $M(x)$ como funci\'on de la posici\'on $x \in [0,8]$. 
 
 \begin{figure}[htb]
 \centering
 \includegraphics[width=0.36\textwidth]{prob-vigas.jpg}
 \end{figure}
+
+\emph{Soluci\'on:} Empezamos con las reacciones: 
+\begin{align*}
+\sum F_x \; \colon \; & A_x \; = \; 0 \text{ lb} \\[1ex]
+\sum F_y \; \colon \; & A_y + B_y \; = \; 2700 \\[1ex]
+\sum M_A \; \colon \;
+& - \int_0^8 300 \, x \, dx \; - \; (4)(300) \; + \; 8 \, B_y \; = \; 0 \\[1ex]
+& \Longrightarrow \; 8 \, B_y \; = \; (1/2)(300)(8^2) + (4)(300) \\[1ex]
+& \Longrightarrow \; B_y \; = \; 1350 \text{ lb}, \; A_y \; = \; 1350 \text{ lb}
+\end{align*}
+
+Para la secci\'on donde $x \in [ \, 0, \, 6]$ :
+\begin{align*}
+\sum F_x \; \colon \; & F(x) \; = \; 0 \text{ lb} \\[1ex]
+\sum F_y \; \colon \;
+& +1350 - 300 \, x - V(x) \; = \; 0
+\; \Longrightarrow \;
+V(x) \; = \; -300 \, x + 1350 \text{ lb} \\[1ex]
+& \; \Longrightarrow \;
+M(x) \; = \; M(0) + \int_{0}^x ( -300 \, x + 1350) \, dx
+\; = \; - 150 \, x^2 + 1350 \, x \text{ lb-in}
+\end{align*}
+
+Para la secci\'on donde $x \in [ \, 6, \, 4]$ :
+\begin{align*}
+\sum F_x \; \colon \; & F(x) \; = \; 0 \text{ lb} \\[1ex]
+\sum F_y \; \colon \;
+& +1350 - 300 \, x - 300 - V(x) \; = \; 0
+\quad \Longrightarrow \;
+V(x) \; = \; -300 \, x + 1050 \text{ lb} \\[1ex]
+\sum M_x \; \colon \;
+& +M(x) - 1350 \, x + \int_0^x 300 \, x \, dx + 300 \, (x-4) \; = \; 0 \\[1ex]
+& \Longrightarrow \;
+M(x) \; = \; - 150 \, x^2 + 1050 \, x + 1200 \text{ lb}
+\end{align*}
+
+En conclusi\'on: 
+\begin{itemize}
+\item Fuerza cortante: 
+\[
+V(x) \; = \;
+\begin{dcases}
+-300 \, x + 1350 \text{ lb} ,
+& \text{para todo } x \in [ \, 0, \, 6] \\
+-300 \, x + 1050 \text{ lb} ,
+& \text{para todo } x \in [ \, 6, \, 8] \\
+\end{dcases}
+\]
+\item Momento flector: 
+\[
+M(x) \; = \;
+\begin{dcases}
+- 150 \, x^2 + 1350 \, x \text{ lb-in} ,
+& \text{para todo } x \in [ \, 0, \, 6] \\
+- 150 \, x^2 + 1050 \, x + 1200 \text{ lb} ,
+& \text{para todo } x \in [ \, 6, \, 8] \\
+\end{dcases}
+\]
+\end{itemize}
 
 \end{problem}
 \fullskip
