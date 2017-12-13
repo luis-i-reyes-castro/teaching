@@ -8,7 +8,7 @@
 \beamertemplatenavigationsymbolsempty
 \usepackage{../../macros-general}
 \usepackage{../../macros-beamer}
-\input{../../beamer_section-slides}
+\graphicspath{{./figures/}}
 
 % =================================================================
 \newcommand{\shorttitle}{Modelos Estoc\'asticos - Unidad 02}
@@ -20,8 +20,81 @@
 % -----------------------------------------------------------------
 \begin{document}
 \input{../../beamer_table-contents}
+\input{../../beamer_section-slides}
 \input{../../macros-espanol}
 
+% =================================================================
+\section{Nociones B\'asicas de Sistemas de Colas}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\textbf{Actores Principales:}
+\begin{itemize}
+\item \underline{Clientes:} Aquellos que desean el servicio que ofrece el sistema. En nuestros modelos sus actividades son: 
+\begin{itemize}
+\item Arribar al sistema, y esperar en cola de ser necesario. 
+\item Ser servido, y abandonar el sistema una vez servido. 
+\end{itemize}
+\item \underline{Servidores:} Aquellos que proveen a los clientes el servicio que ofrece el sistema. En nuestros modelos sus actividades son: 
+\begin{itemize}
+\item Esperar el arribo de clientes para servirlos, \ie no hacer nada. 
+\item Servir clientes. 
+\end{itemize}
+\end{itemize}
+\framebreak
+
+\textbf{Disciplina de Servicio:}
+\begin{itemize}
+\item Solamente consideraremos sistemas de colas FIFO \emph{(First-In, First-Out)}, \ie sistemas donde todos los clientes son considerados id\'enticos y se los atiende en order de llegada. 
+\item Si un cliente arriba al sistema y hay al menos un servidor esperando clientes, entonces el nuevo cliente no necesitar\'a esperar en cola y empezar\'a a ser servido inmediatamente. 
+\item Si un cliente arriba al sistema y todos los servidores est\'an ocupados con otros clientes que arribaron anteriormente, entonces el nuevo cliente necesitar\'a tomar el \'ultimo puesto en la cola y esperar para poder ser servido. 
+\end{itemize}
+\framebreak
+
+\textbf{M\'etricas de Desempe\~no:}
+\begin{itemize}
+\item $\boldsymbol{L \, \colon}$ N\'umero esperado de clientes en el sistema. 
+\begin{itemize}
+\item Incluye a los clientes en servicio y en cola. 
+\end{itemize}
+\item $\boldsymbol{L_q \, \colon}$ N\'umero esperado de clientes en cola. 
+\begin{itemize}
+\item No incluye a los clientes en servicio. 
+\end{itemize}
+\item $\boldsymbol{W \, \colon}$ Tiempo esperado (promedio) de espera en el sistema por cliente. 
+\begin{itemize}
+\item Incluye el tiempo de espera en cola y el tiempo de servicio. 
+\end{itemize}
+\item $\boldsymbol{W_q \, \colon}$ Tiempo esperado (promedio) de espera en el cola por cliente. 
+\begin{itemize}
+\item No incluye el tiempo de servicio. 
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\textbf{Teorema - Ley de Little :}
+
+Para todo sistema de colas que recibe clientes a una tasa de $\lambda$ por per\'iodo, \linebreak es el caso que: 
+\[
+L \; = \; \lambda \, W \qquad \qquad \qquad
+L_q \; = \; \lambda \, W_q
+\]
+
+N\'otese que este teorema no requiere que el proceso de arribo sea Poisson, \ie \linebreak no requiere que los tiempos entre arribos est\'en exponencialmente distribu\'idos. \linebreak De hecho, si suponemos que la variable aleatoria $X$ representa la distribuci\'on del tiempo entre arribos al sistema de colas, tenemos que: 
+\[
+\lambda \; = \; \frac{1}{\Exp[X]}
+\]
+
+%Finalmente, si la tasa de arribo depende del estado del sistema entonces podemos aplicar el teorema promediando las tasas de arribo por la distribuci\'on estacionaria del sistema. 
+
+\end{frame}
 
 % =================================================================
 \section{Cadenas de Markov en Tiempo Continuo}
@@ -74,6 +147,66 @@ Modele la situaci\'on descrita como una Cadena de Markov en Tiempo Continuo.
 
 \end{frame}
 
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+\underline{Ejemplo: Modelo M/M/1}
+
+Un sistema de colas cuenta con un \'unico servidor cuyo tiempo de servicio est\'a exponencialmente distribu\'ido con una tasa de $\mu$ por hora. Asumiendo que los clientes arriban de acuerdo a un proceso Poisson con tasa de $\lambda$ por hora, modele este sistema de colas como una Cadena de Markov en Tiempo Continuo. 
+
+\fullskip
+
+\underline{Ejemplo: Modelo M/M/2}
+
+Un sistema de colas cuenta con dos servidores id\'enticos cuyos tiempos de servicio est\'an exponencialmente distribu\'idos con una tasa de $\mu$ por hora. Asumiendo nuevamente que los clientes arriban de acuerdo a un proceso Poisson con tasa \linebreak de $\lambda$ por hora, modele este sistema de colas como una Cadena de Markov en \linebreak Tiempo Continuo. 
+
+\framebreak
+
+Cadena de Markov para el Modelo M/M/1: 
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.75\columnwidth}
+\input{figures/modelo-MM1.eps_tex}
+\end{figure}
+
+Cadena de Markov para el Modelo M/M/2: 
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.75\columnwidth}
+\input{figures/modelo-MM2.eps_tex}
+\end{figure}
+
+\framebreak
+
+\underline{Ejemplo: Modelo M/M/3}
+
+Un sistema de colas cuenta con tres servidores id\'enticos cuyos tiempos de servicio est\'an exponencialmente distribu\'idos con una tasa de $\mu$ por hora. Asumiendo que los clientes arriban de acuerdo a un proceso Poisson con tasa de $\lambda$ por hora, modele este sistema de colas como una Cadena de Markov en \linebreak Tiempo Continuo. 
+
+\fullskip
+
+\underline{Ejemplo: Modelo M/M/4}
+
+Un sistema de colas cuenta con cuatro servidores id\'enticos cuyos tiempos de servicio est\'an exponencialmente distribu\'idos con una tasa de $\mu$ por hora. Asumiendo que los clientes arriban de acuerdo a un proceso Poisson con tasa \linebreak de $\lambda$ por hora, modele este sistema de colas como una Cadena de Markov en Tiempo Continuo. 
+
+\framebreak
+
+Cadena de Markov para el Modelo M/M/3: 
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.75\columnwidth}
+\input{figures/modelo-MM3.eps_tex}
+\end{figure}
+
+Cadena de Markov para el Modelo M/M/4: 
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.75\columnwidth}
+\input{figures/modelo-MM4.eps_tex}
+\end{figure}
+
+\end{frame}
+
 % =================================================================
 \subsection{Distribuci\'on Estacionaria}
 
@@ -120,14 +253,43 @@ Calcule el porcentaje del tiempo que el taller tiene:
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsubsection}
 
-\underline{Ejemplo - Modelo M/M/1:}
+\underline{Ejemplo: Modelo M/M/1}
 
-Un sistema de colas cuenta con un \'unico servidor cuyo tiempo de servicio est\'a exponencialmente distribu\'ido con una tasa de $\mu$ por hora. Asumiendo que los clientes llegan de acuerdo a un proceso Poisson con tasa de arribo de $\lambda$ por hora, encuentre: 
+Un sistema de colas cuenta con un \'unico servidor cuyo tiempo de servicio est\'a exponencialmente distribu\'ido con una tasa de $\mu$ por hora. Los clientes arriban de acuerdo a un proceso Poisson con tasa de $\lambda$ por hora. 
+
+Definiendo a la tasa de utilizaci\'on 
+\[
+\rho \; \define \; \frac{\lambda}{\mu}
+\]
+encuentre: 
+
 \begin{itemize}
-\item Las condiciones sobre $\mu$ y $\lambda$ para que exista una distribuci\'on estacionaria. 
-\item La distribuci\'on estacionaria en funci\'on de $\mu$ y $\lambda$. 
+\item La condici\'on que deben cumplir $\lambda$ y $\mu$, o equivalentemente $\rho$, para que \linebreak exista una distribuci\'on estacionaria del sistema. 
+\item La distribuci\'on estacionaria en funci\'on de $\rho$. 
+\item El n\'umero esperado de clientes en el sistema y en cola en funci\'on de $\rho$. 
 \end{itemize}
 
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+\underline{Ejemplo: Modelo M/M/2}
+
+Un sistema de colas cuenta con dos servidores id\'enticos cuyos tiempos de servicio est\'an exponencialmente distribu\'idos con una tasa de $\mu$ por hora. Los clientes arriban de acuerdo a un proceso Poisson con tasa de $\lambda$ por hora. 
+
+Definiendo a la tasa de utilizaci\'on 
+\[
+\rho \; \define \; \frac{\lambda}{2\mu}
+\]
+encuentre: 
+
+\begin{itemize}
+\item La condici\'on que deben cumplir $\lambda$ y $\mu$, o equivalentemente $\rho$, para que \linebreak exista una distribuci\'on estacionaria del sistema. 
+\item La distribuci\'on estacionaria en funci\'on de $\rho$. 
+\item El n\'umero esperado de clientes en el sistema y en cola en funci\'on de $\rho$. 
+\end{itemize}
 
 \end{frame}
 
