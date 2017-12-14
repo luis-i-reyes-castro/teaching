@@ -1,0 +1,137 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+\graphicspath{{./figures/}}
+% Uncomment the following line if you need to write Python code
+% \usepackage{minted}
+
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{03}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Trabajo Aut\'onomo \numero \\[1ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino II \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+%\input{../../article_compromiso-honor}
+\halfskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Considere la variante del modelo M/M/1 mostrada en la siguiente figura, donde la tasa de arribo decae harm\'onicamente con el n\'umero de clientes en el sistema. 
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/modelo-MM1-harmonico.eps_tex}
+\end{figure}
+\halfskip
+
+Tomando $\rho = \lambda \, / \, \mu$ como es usual, complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{3 Puntos:} Encuentre la probabilidad estacionaria de los estados uno, dos y tres en funci\'on de $\rho$ y de la probabilidad estacionaria del estado cero, \ie exprese $\pi_1$, $\pi_2$ y $\pi_3$ en funci\'on de $\rho$ y $\pi_0$. 
+\item \textbf{2 Puntos:} Demuestre que si existe alg\'un $n \geq 1$ tal que
+\[
+\forall \, k \in \{ \, 1, \, \dots, \, n \, \} \; \colon \;
+\pi_k \; = \; \frac{ \rho^k \, \pi_0 }{k!}
+\]
+entonces es el caso que: 
+\[
+\pi_{n+1} \; = \; \frac{ \rho^{n+1} \, \pi_0 }{(n+1)!}
+\]
+\item \textbf{1 Punto:} Existe alguna condici\'on sobre $\rho$ (aparte de ser positivo) que se debe cumplir para que el sistema tenga una distribuci\'on estacionaria? 
+\item \textbf{1 Punto:} Calcule la distribuci\'on estacionaria del sistema, en los casos cuando existe, como funci\'on de $\rho$ y $k$. 
+\item \textbf{2 Puntos:} Calcule las m\'etricas de desempe\~no $L$ y $L_q$. 
+\item \textbf{2 Puntos:} Calcule la tasa de arribo promedio
+\[
+\bar{\lambda} \; = \; \sum_{k=0}^{\infty} \lambda_{k} \, \pi_k
+\]
+junto con las m\'etricas de desempe\~no $W$ y $W_q$. 
+\end{enumerate}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+\label{prob:MM1-harmonico-prima}
+Considere la variante del modelo M/M/1 mostrada en la siguiente figura, donde la tasa de arribo decae harm\'onicamente con el n\'umero de clientes en cola. Tomando $\rho = \lambda \, / \, \mu$ como es usual, complete las siguientes actividades: 
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/modelo-MM1-harmonico-prima.eps_tex}
+\end{figure}
+\halfskip
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{3 Puntos:} Calcule la distribuci\'on estacionaria del sistema, en los casos cuando existe, como funci\'on de $\rho$ y $k$. 
+\item \textbf{2 Puntos:} Calcule las m\'etricas de desempe\~no $L$ y $L_q$. 
+\item \textbf{2 Puntos:} Calcule la tasa de arribo promedio
+\[
+\bar{\lambda} \; = \; \sum_{k=0}^{\infty} \lambda_{k} \, \pi_k
+\]
+junto con las m\'etricas de desempe\~no $W$ y $W_q$. 
+\end{enumerate}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[7 Puntos]} Considere la siguiente variante del modelo M/M/1, donde $p \in (0,1)$ y la tasa de arribo decae geom\'etricamente con el n\'umero de clientes en el sistema. Tomando $\rho = \lambda \, / \, \mu$, complete las mismas tres actividades del Problema \ref{prob:MM1-harmonico-prima}. 
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/modelo-MM1-geometrico.eps_tex}
+\end{figure}
+\halfskip
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[7 Puntos]} Considere la siguiente variante del modelo M/M/1, donde $p \in (0,1)$ y la tasa de arribo decae geom\'etricamente con el n\'umero de clientes en cola. Tomando $\rho = \lambda \, / \, \mu$, complete las mismas tres actividades del Problema \ref{prob:MM1-harmonico-prima}. 
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/modelo-MM1-geometrico-prima.eps_tex}
+\end{figure}
+\halfskip
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
+
+% -----------------------------------------------------------------
+\begin{problem}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+
+\end{problem}
+\vspace{\baselineskip}
