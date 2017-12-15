@@ -116,19 +116,48 @@ junto con las m\'etricas de desempe\~no $W$ y $W_q$.
 \end{problem}
 \vspace{\baselineskip}
 
+% -----------------------------------------------------------------
+\begin{problem}
+Considere la siguiente variante del modelo M/M/1 para una aplicaci\'on en telecomunicaciones digitales. En este modelo, cada vez que el sistema se vac\'ia, \ie que se queda sin paquetes que transmitir, se activa un reloj exponencial con par\'ametro $\alpha$ por milisegundo. Si no llega un nuevo paquete antes del primer tick del reloj entonces el sistema entra en modo de enfriamiento, el cual tiene una duraci\'on exponencial con media de $\beta$ milisegundos. Cuando el sistema est\'a en modo de enfriamiento todos los paquetes que arriban son rechazados. 
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/modelo-MM1-enfriamiento.eps_tex}
+\end{figure}
+\halfskip
+
+Tomando $\rho = \lambda \, / \, \mu$ como es usual, complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{3 Puntos:} Calcule la distribuci\'on estacionaria del sistema, en los casos cuando existe, como funci\'on de $\alpha$, $\beta$, $\rho$, y $k$. 
+\item \textbf{2 Puntos:} Calcule las m\'etricas de desempe\~no $L$ y $L_q$, $W$ y $W_q$. 
+\item \textbf{1 Punto:} Calcule el n\'umero esperado de paquetes rechazados por milisegundo. 
+\end{enumerate}
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+Considere la siguiente variante del modelo M/M/2. En este modelo un \'unico servidor atiene a los clientes en pares a una tasa de $\mu$ por per\'iodo, pero no puede atender clientes de manera individual, \eg si el sistema est\'a vac\'io y llega un cliente, se debe esperar hasta la llegada del siguiente cliente para empezar el servicio. 
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/modelo-MM1-tandem.eps_tex}
+\end{figure}
+\halfskip
+
+Tomando $\rho = \lambda \, / \, \mu$ como es usual, complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{3 Puntos:} Calcule la distribuci\'on estacionaria del sistema, en los casos cuando existe, como funci\'on de $\rho$, y $k$. 
+\item \textbf{2 Puntos:} Calcule las m\'etricas de desempe\~no $L$ y $L_q$, $W$ y $W_q$. 
+\end{enumerate}
+
+\end{problem}
+\vspace{\baselineskip}
+
 \end{document}
-
-% -----------------------------------------------------------------
-\begin{problem}
-
-\end{problem}
-\vspace{\baselineskip}
-
-% -----------------------------------------------------------------
-\begin{problem}
-
-\end{problem}
-\vspace{\baselineskip}
 
 % -----------------------------------------------------------------
 \begin{problem}
