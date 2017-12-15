@@ -254,9 +254,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="335.92232"
-     inkscape:cy="-32.019386"
+     inkscape:zoom="2.8"
+     inkscape:cx="419.63227"
+     inkscape:cy="34.248807"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -264,7 +264,7 @@
      inkscape:window-width="1301"
      inkscape:window-height="744"
      inkscape:window-x="65"
-     inkscape:window-y="326"
+     inkscape:window-y="24"
      inkscape:window-maximized="1"
      inkscape:snap-grids="false"
      inkscape:snap-bbox="true"
@@ -288,7 +288,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -349,14 +349,14 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.2545166px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="142.61871"
-       y="621.18732"
+       y="618.23145"
        id="text3576"
        sodipodi:linespacing="125%"
        transform="scale(0.61603762,1.6232775)"><tspan
          sodipodi:role="line"
          id="tspan3578"
          x="142.61871"
-         y="621.18732">$\mu$</tspan></text>
+         y="618.23145">$\mu$</tspan></text>
     <text
        transform="scale(0.61603762,1.6232775)"
        sodipodi:linespacing="125%"
@@ -527,11 +527,11 @@
        transform="scale(0.61603762,1.6232775)"
        sodipodi:linespacing="125%"
        id="text16718"
-       y="621.18732"
+       y="618.23145"
        x="268.42273"
        style="font-style:normal;font-weight:normal;font-size:10.2545166px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
-         y="621.18732"
+         y="618.23145"
          x="268.42273"
          id="tspan16720"
          sodipodi:role="line">$\mu$</tspan></text>
@@ -551,35 +551,35 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.2545166px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="384.95087"
-       y="621.18732"
+       y="618.23145"
        id="text16726"
        sodipodi:linespacing="125%"
        transform="scale(0.61603762,1.6232775)"><tspan
          sodipodi:role="line"
          id="tspan16728"
          x="384.95087"
-         y="621.18732">$\mu$</tspan></text>
+         y="618.23145">$\mu$</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.2545166px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="483.35422"
+       x="491.34805"
        y="585.37048"
        id="text16730"
        sodipodi:linespacing="125%"
        transform="scale(0.61603762,1.6232775)"><tspan
          sodipodi:role="line"
          id="tspan16732"
-         x="483.35422"
+         x="491.34805"
          y="585.37048">$\lambda \, / \, 4$</tspan></text>
     <text
        transform="scale(0.61603762,1.6232775)"
        sodipodi:linespacing="125%"
        id="text16734"
-       y="621.18732"
+       y="618.23145"
        x="499.16003"
        style="font-style:normal;font-weight:normal;font-size:10.2545166px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
-         y="621.18732"
+         y="618.23145"
          x="499.16003"
          id="tspan16736"
          sodipodi:role="line">$\mu$</tspan></text>
@@ -599,13 +599,13 @@
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:10.2545166px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="630.76147"
-       y="621.18732"
+       y="618.23145"
        id="text16742"
        sodipodi:linespacing="125%"
        transform="scale(0.61603762,1.6232775)"><tspan
          sodipodi:role="line"
          id="tspan16744"
          x="630.76147"
-         y="621.18732">$\mu$</tspan></text>
+         y="618.23145">$\mu$</tspan></text>
   </g>
 </svg>

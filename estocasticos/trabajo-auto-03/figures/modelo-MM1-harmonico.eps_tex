@@ -52,19 +52,19 @@
     \put(0,0){\includegraphics[width=\unitlength]{modelo-MM1-harmonico.eps}}%
     \put(0.10813027,0.1458049){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0}}}%
     \put(0.17052877,0.20428685){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda$}}}%
-    \put(0.17571699,0.08800553){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
+    \put(0.17571699,0.09760193){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
     \put(0.84842405,0.15439643){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\cdots$}}}%
     \put(0.25738031,0.1458049){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{1}}}%
     \put(0.40663035,0.1458049){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{2}}}%
     \put(0.55588039,0.1458049){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{3}}}%
     \put(0.70513043,0.1458049){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{4}}}%
-    \put(0.30886127,0.20428686){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda \, / \, 2$}}}%
-    \put(0.330717,0.08800553){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
-    \put(0.45481447,0.20428686){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda \, / \, 3$}}}%
-    \put(0.47428843,0.08800553){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
-    \put(0.59552876,0.20428686){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda \, / \, 4$}}}%
-    \put(0.61500272,0.08800553){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
-    \put(0.7576716,0.20428686){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda \, / \, 5$}}}%
-    \put(0.7771456,0.08800553){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
+    \put(0.30886127,0.20428685){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda \, / \, 2$}}}%
+    \put(0.330717,0.09760193){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
+    \put(0.45481448,0.20428685){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda \, / \, 3$}}}%
+    \put(0.47428843,0.09760193){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
+    \put(0.60537777,0.20428686){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda \, / \, 4$}}}%
+    \put(0.61500272,0.09760193){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
+    \put(0.7576716,0.20428685){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda \, / \, 5$}}}%
+    \put(0.7771456,0.09760193){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
   \end{picture}%
 \endgroup%
