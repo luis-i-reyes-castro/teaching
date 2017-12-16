@@ -183,6 +183,28 @@ Considere la variante del modelo M/M/1 mostrada en la siguiente figura, donde la
 \end{problem}
 \fullskip
 
+% -----------------------------------------------------------------
+\begin{problem}
+\label{prob:arribo-geometrico-prima}
+Considere el siguiente modelo de un transmisor digital defectuoso. El sistema tiene un \'unico servidor que logra transmisiones exitosas a una tasa de $\mu$ por per\'iodo, y los paquetes llegan de acuerdo a un proceso Poisson con tasa de $\lambda$ por per\'iodo. El defecto del sistema yace en el hecho de que cuando alcanza su capacidad $C$ entra en un ``estado de estr\'es''. En dicho estado, el arribo de uno o m\'as paquetes desata un error interno que provoca que el sistema se re-inicie, \ie que el sistema descarte todos sus paquetes y empiece a operar como si acabara ser encendido. 
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/modelo-MM1C-reset.eps_tex}
+\end{figure}
+\halfskip
+
+Tomando $\rho = \lambda \, / \, \mu$ como es usual, complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{3 Puntos:} Calcule la distribuci\'on estacionaria del sistema en funci\'on de $\rho$, $C$, y $k$. 
+\item \textbf{2 Puntos:} Calcule las m\'etricas de desempe\~no $L$ y $L_q$, $W$ y $W_q$. 
+\item \textbf{1 Punto:} Calcule el n\'umero esperado de paquetes descartados por per\'iodo. 
+\end{enumerate}
+
+\end{problem}
+\fullskip
+
 \end{document}
 
 % -----------------------------------------------------------------

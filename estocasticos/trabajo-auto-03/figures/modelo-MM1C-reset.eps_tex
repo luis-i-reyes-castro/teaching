@@ -1,0 +1,71 @@
+%% Creator: Inkscape inkscape 0.91, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'modelo-MM1C-reset.eps' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{400bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.3)%
+    \put(0,0){\includegraphics[width=\unitlength]{modelo-MM1C-reset.eps}}%
+    \put(0.06425277,0.09380485){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0}}}%
+    \put(0.12665127,0.14828775){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda$}}}%
+    \put(0.13183948,0.0416492){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
+    \put(0.21350281,0.09380485){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{1}}}%
+    \put(0.36275285,0.09380485){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{2}}}%
+    \put(0.69961612,0.093874){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$C-1$}}}%
+    \put(0.8911613,0.09436285){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$C$}}}%
+    \put(0.27306501,0.14626737){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda$}}}%
+    \put(0.28683951,0.0416492){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
+    \put(0.42608928,0.14828775){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda$}}}%
+    \put(0.43041094,0.0416492){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
+    \put(0.80058969,0.14828775){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda$}}}%
+    \put(0.80491135,0.0416492){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
+    \put(0.62571303,0.14828775){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda$}}}%
+    \put(0.63912617,0.0416492){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu$}}}%
+    \put(0.51830575,0.09839733){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\cdots$}}}%
+    \put(0.84646562,0.21397738){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\lambda$}}}%
+  \end{picture}%
+\endgroup%
