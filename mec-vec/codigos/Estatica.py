@@ -15,7 +15,7 @@ class Armadura2D :
     """
 
     def __init__( self, nodos, miembros, perno, patin, tipo_patin,
-                  cargas, densidad_miembros = 0.0 ) :
+                  cargas, peso_miembros_por_unidad_longitud = 0.0 ) :
 
         self.nodos      = list( nodos.keys() )
         self.nodos.sort()
@@ -70,19 +70,22 @@ class Armadura2D :
                 else :
                     self.mat_A[ fila + 0, col] = 1.0
 
-            vecinos = self.nodos_vecinos( nodo)
+            vecinos       = self.nodos_vecinos( nodo)
+            peso_miembros = 0.0
             for ( j, nodo_vecino) in enumerate( vecinos) :
-                print( '\t' + 'Procesando vecino:', nodo_vecino)
+                print( '\t' + 'Procesando miembro ' + nodo + '-' + nodo_vecino + ':' )
                 col  = self.incognitas[ ( nodo, nodo_vecino) ]
                 vec  = self.vector_unitario( nodo_vecino, nodo)
-                print( '\t\t' + 'direccion de la fuerza:', vec)
+                print( '\t\t' + 'Direccion de la fuerza:', vec)
                 self.mat_A[ fila + 0, col] = vec[0]
                 self.mat_A[ fila + 1, col] = vec[1]
+                peso_miembros += 0.5 * self.longitud_miembro( nodo, nodo_vecino) \
+                              * peso_miembros_por_unidad_longitud
 
             if nodo in cargas :
-                print( '\t' + 'Procesando carga:', cargas[nodo])
+                print( '\t' + 'Procesando carga: ' + str(np.array(cargas[nodo])) )
                 self.vec_b[ fila + 0 ] = -cargas[nodo][0]
-                self.vec_b[ fila + 1 ] = -cargas[nodo][1]
+                self.vec_b[ fila + 1 ] = -cargas[nodo][1] + peso_miembros
 
         print( 'Listo!' )
         return
@@ -105,6 +108,13 @@ class Armadura2D :
         delta_pos = pos_f - pos_i
 
         return ( 1.0 / np.linalg.norm(delta_pos) ) * delta_pos
+
+    def longitud_miembro( self, nodo_i, nodo_f) :
+
+        pos_i = np.array( self.pos_nodos[nodo_i] )
+        pos_f = np.array( self.pos_nodos[nodo_f] )
+
+        return np.linalg.norm( pos_f - pos_i )
 
 
     def resuelve( self, grafica = False) :
