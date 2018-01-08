@@ -1,0 +1,125 @@
+% =================================================================
+\documentclass[ 10pt, xcolor = dvipsnames]{beamer}
+\usepackage{ beamerthemesplit, lmodern}
+\usetheme{Madrid}
+\usecolortheme[named=Brown]{structure}
+\useinnertheme{rectangles}
+\setbeamertemplate{frametitle continuation}{}
+\beamertemplatenavigationsymbolsempty
+\usepackage{../../macros-general}
+\usepackage{../../macros-beamer}
+%\graphicspath{{./figures/}}
+
+% =================================================================
+\newcommand{\shorttitle}{Modelos Estoc\'asticos - Unidad 02}
+\title[\shorttitle]{Modelos Estoc\'asticos para Manufactura y Servicios (INDG-1008): \textbf{Unidad 02} }
+\author[L. I. Reyes Castro]{Luis I. Reyes Castro}
+\institute[ESPOL]{\normalsize Escuela Superior Polit\'ecnica del Litoral (ESPOL) \\ Guayaquil - Ecuador}
+\date[2017-T1]{2017 - Primer T\'ermino}
+
+% -----------------------------------------------------------------
+\begin{document}
+\input{../../beamer_table-contents}
+\input{../../beamer_section-slides}
+\input{../../macros-espanol}
+
+% =================================================================
+\section{\'Arboles de Decisi\'on}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\end{frame}
+
+% =================================================================
+\section{Inferencia Bayesiana (Experimentaci\'on)}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Como motivaci\'on, empecemos considerando la \textbf{Paradoja del Test}. 
+\begin{itemize}
+\item Un raro tipo de c\'ancer ha sido descubierto hace poco. Se estima que el 0.00001\% de la poblaci\'on es gen\'eticamente vulnerable a este c\'ancer. 
+\item Un test para comprobar la vulnerabilidad gen\'etica a este nuevo tipo de c\'ancer acaba de ser desarrollado. El desempe\~no del test es como sigue: 
+\begin{itemize}
+\item Si el paciente es gen\'eticamente vulnerable, el test arroja resultado positivo \linebreak el 98\% de las veces. 
+\item Si el paciente no es vulnerable, el test arroja resultado negativo el 94\% \linebreak de las veces. 
+\end{itemize}
+\item Usted se acaba de hacer el test, y el resultado fue positivo. Cu\'al es la probabilidad de que usted realmente sea gen\'eticamente vulnerable? 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\textbf{Problema Prototipo:}
+\begin{itemize}
+\item Dos variables aleatorias: 
+\begin{itemize}
+\item Una variable aleatoria $X$ que representa la categor\'ia real pero desconocida. Usualmente decimos que $X$ es la variable no observada. 
+\item Una variable aleatoria $Y$ que representa el resultado de un test o clasificador que depende probabilisticamente en $X$. Usualmente decimos que $Y$ es la variable observada. 
+\end{itemize}
+\item Se nos provee la distribuci\'on de la variable no observada $X$. \Iec
+\[
+\forall \, x \in \support(X) \; \colon \; \Pr( \, X = x \, )
+\]
+\fullcut
+\halfcut
+\begin{itemize}
+\item Usualmente se la denomina \emph{distribuci\'on a priori}. 
+\end{itemize}
+\framebreak
+
+\item Tambi\'en se nos provee la distribuci\'on de la variable observada $Y$ condicional en la variable no observada $X$. \Iec
+\[
+\forall \, x \in \support(X), \;
+\forall \, y \in \support(Y) \; \colon \; \Pr( \, Y = y \mid X = x \, )
+\]
+\fullcut
+\halfcut
+\begin{itemize}
+\item En el contexto de clasificadores, usualmente conocemos a esta distribuci\'on como la \emph{matriz de confusi\'on}. 
+\end{itemize}
+\halfskip
+
+\item Nuestro objetivo es calcular la distribuci\'on de la variable no observada $X$ condicional en la variable observada $Y$. \Ie 
+\[
+\forall \, x \in \support(X), \;
+\forall \, y \in \support(Y) \; \colon \; \Pr( \, X = x \mid Y = y \, )
+\]
+\fullcut
+\halfcut
+\begin{itemize}
+\item Usualmente se la denomina \emph{distribuci\'on posterior predictiva}. 
+\end{itemize}
+\framebreak
+
+\item Para lograr nuestro objetivo generalmente necesitamos calcular con anterioridad la distribuci\'on marginal de la variable observada $Y$. \Ie 
+\[
+\forall \, y \in \support(Y) \; \colon \; \Pr( Y = y \, )
+\]
+\fullcut
+\halfcut
+\begin{itemize}
+\item Usualmente se la denomina \emph{distribuci\'on posterior}. 
+\end{itemize}
+\item Una vez calculada...
+
+\end{itemize}
+
+\end{frame}
+
+% =================================================================
+\section{\'Arboles de Decisi\'on con Experimentaci\'on}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\end{frame}
+
+\end{document}
