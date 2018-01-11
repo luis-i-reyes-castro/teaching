@@ -1,0 +1,68 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../../macros-general}
+\usepackage{../../../macros-article}
+\graphicspath{{./figures/}}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{01}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\begin{center}
+\Large Mec\'anica Vectorial (MECG-1001): Pr\'actica \numero \\[2ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino II \qquad
+\textbf{Instructor:} Luis I. Reyes Castro \qquad
+\textbf{Paralelos:} 08-09
+\end{center}
+\fullskip
+
+\textbf{Descripci\'on:} En esta pr\'actica usted dise\~nar\'a armaduras haciendo uso de la clase \texttt{Armadura2D} del m\'odulo \texttt{Estatica} para facilitar el an\'alisis. 
+\halfskip
+
+\textbf{Modo de Participaci\'on:} Individual o en parejas. 
+\halfskip
+
+\textbf{Modo de Calificaci\'on:} Cada problema tiene un valor de 10 puntos. Los puntos son asignados de la siguiente manera: 
+\begin{itemize}
+\item Los primeros 6 puntos son otorgados por presentar un dise\~no v\'alido que cumpla con todas las especificaciones y restricciones. 
+\item Los \'ultimos 4 puntos dependen del desempe\~no de su armadura propuesta comparado con el de sus otros compa\~neros. La m\'etrica de desempe\~no de su armadura se calcula como el m\'aximo entre \textit{(i)} la m\'axima compresi\'on en los miembros y \textit{(ii)} la m\'axima tensi\'on en los miembros. La m\'etrica de desempe\~no de su paralelo es el promedio de las m\'etricas de desempe\~no de cada grupo de estudiantes en el paralelo. Por esta raz\'on, los \'ultimos cuatro puntos se asignan de la siguiente manera: 
+\begin{itemize}
+\item Si su desempe\~no es menor al de su paralelo por m\'as de 1.5 desviaciones est\'andar, usted recibe 0 puntos. 
+\item Si su desempe\~no es menor al de su paralelo por entre 1.5 y 0.5 desviaciones est\'andar, usted recibe 1 punto. 
+\item Si su desempe\~no es menor al de su paralelo por no m\'as de 0.5 desviaciones est\'andar, usted recibe 2 puntos. 
+\item Si su desempe\~no es igual al de su paralelo, o si es mayor al de su paralelo por no m\'as de 0.75 desviaciones est\'andar, usted recibe 3 puntos. 
+\item Si su desempe\~no es mayor al de su paralelo por m\'as de 0.75 desviaciones est\'andar, usted recibe 4 puntos. 
+\end{itemize}
+
+\end{itemize}
+\halfskip
+
+\newpage
+
+% =============================================
+\begin{problem}
+
+Dise\~ne una armadura para la propuesta de puente peatonal mostrada en la siguiente figura. En la misma, el origen de $(x,y)$ est\'a localizado en el extremo inferior izquierdo, y cada unidad de espacio de la parrilla tiene 0.50 metros. Los puntos azules indican las localizaciones del soporte empernado y del pat\'in. Cada carga mostrada equivale al peso promedio de un ser humano (75 kg). Necesariamente debe haber un nodo en cada carga, y no se permite localizar nodos en ninguno de los puntos dentro del \'area amarilla. Suponga que el peso espec\'ifico de los miembros es de 2.5 kilogramos por metro, y lleve a cabo todos sus c\'alculos en unidades de kilogramos-fuerza. 
+\fullskip
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/problema-puente-01.eps_tex}
+\end{figure}
+\halfskip
+
+\end{problem}
+\fullskip
+
+% =============================================
+%\begin{problem}
+%
+%\end{problem}
+%\fullskip
+
+\end{document}
