@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
 """
-Ejemplo del uso del modula Estatica, clase Armadura2D.
-@author: Luis I. Reyes Castro
+Ejemplos del uso de la clase Armadura2D. Las armaduras son tomadas del texto
+"Mecanica Vectorial - Estatica" de Beer & Johnson (9ED).
 
+@author: Luis I. Reyes Castro
 """
 
 from Estatica import Armadura2D
@@ -28,18 +30,25 @@ miembros = [ ('A','B'), ('A','C'),
              ('F','G'), ('F','H'),
              ('G','H') ]
 
-# Declaramos las locaciones del perno, del patin, y de las cargas
-perno      = 'A'
-patin      = 'H'
-tipo_patin = 'Horizontal'
-cargas     = { 'A' : ( 0., -300.),
-               'B' : ( 0., -600.),
-               'D' : ( 0., -600.),
-               'F' : ( 0., -600.),
-               'H' : ( 0., -300.) }
+# Declaramos las locaciones del soporte empernado y del patin
+soporte_empernado = 'A'
+patin             = 'H'
+tipo_patin        = 'Horizontal'
+
+# Declaramos el diccionario de cargas externas
+cargas = { 'A' : ( 0., -300.),
+           'B' : ( 0., -600.),
+           'D' : ( 0., -600.),
+           'F' : ( 0., -600.),
+           'H' : ( 0., -300.) }
 
 # Construimos un objeto de la la clase armadura
-armadura = Armadura2D( nodos, miembros, perno, patin, tipo_patin, cargas)
+armadura = Armadura2D( nodos,
+                       miembros,
+                       soporte_empernado,
+                       patin,
+                       tipo_patin,
+                       cargas )
 # Ordenamos al objeto resolver el modelo y mostrar la solucion
 armadura.resuelve()
 armadura.imprime_solucion()
@@ -65,17 +74,24 @@ miembros = [ ('A','B'), ('A','E'),
              ('E','F'),
              ('F','G') ]
 
-# Declaramos las locaciones del perno, del patin, y de las cargas
-perno      = 'A'
-patin      = 'E'
-tipo_patin = 'Pared'
-cargas     = { 'A' : ( 0., -12.5),
-               'B' : ( 0., -12.5),
-               'C' : ( 0., -12.5),
-               'D' : ( 0., -12.5) }
+# Declaramos las locaciones del soporte empernado y del patin
+soporte_empernado = 'A'
+patin             = 'E'
+tipo_patin        = 'Pared'
+
+# Declaramos el diccionario de cargas externas
+cargas = { 'A' : ( 0., -12.5),
+           'B' : ( 0., -12.5),
+           'C' : ( 0., -12.5),
+           'D' : ( 0., -12.5) }
 
 # Construimos un objeto de la la clase armadura
-armadura = Armadura2D( nodos, miembros, perno, patin, tipo_patin, cargas)
+armadura = Armadura2D( nodos,
+                       miembros,
+                       soporte_empernado,
+                       patin,
+                       tipo_patin,
+                       cargas )
 # Ordenamos al objeto resolver el modelo y mostrar la solucion
 armadura.resuelve()
 armadura.imprime_solucion()

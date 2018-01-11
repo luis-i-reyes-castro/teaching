@@ -1,9 +1,36 @@
-#!/usr/bin/env python3
 """
-Estatica: Este archivo contiene algunas clases para modelar y analizar
-estructuras estaticamente determinables.
+Estatica: Este archivo contiene una clase para modelar y analizar armaduras
+estaticamente determinables.
 
 @author: Luis I. Reyes-Castro.
+
+COPYRIGHT
+
+All contributions by Luis I. Reyes-Castro:
+Copyright (c) 2018, Luis Ignacio Reyes Castro.
+All rights reserved.
+
+LICENSE
+
+The MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 """
 
 import numpy as np
@@ -11,11 +38,19 @@ import matplotlib.pyplot as plt
 
 class Armadura2D :
     """
-    Modela y resuelve Armaduras en 2D
+    Modela, resuelve y grafica Armaduras en 2D
+
+    Esta clase permite modelar armaduras estaticamente determinables en 2D
+    que esten fijadas al suelo por un soporte empernado y un patin.
     """
 
-    def __init__( self, nodos, miembros, perno, patin, tipo_patin,
-                  cargas, peso_miembros_por_unidad_longitud = 0.0 ) :
+    def __init__( self, nodos,
+                        miembros,
+                        soporte_empernado,
+                        patin,
+                        tipo_patin,
+                        cargas,
+                        peso_miembros_por_unidad_longitud = 0.0 ) :
 
         self.nodos      = list( nodos.keys() )
         self.nodos.sort()
@@ -24,7 +59,7 @@ class Armadura2D :
         self.miembros   = miembros
         self.m          = len( self.miembros)
 
-        # Verifica que el tipo de patin
+        # Verifica el tipo de patin ingresado
         if not tipo_patin in [ 'Horizontal', 'Pared'] :
             print( 'Error: No se entiende el tipo de patin!' )
             return
@@ -57,7 +92,7 @@ class Armadura2D :
 
             fila = self.ecuaciones[nodo]
 
-            if nodo == perno :
+            if nodo == soporte_empernado :
                 col = self.incognitas['Perno_x']
                 self.mat_A[ fila + 0, col] = 1.0
                 col = self.incognitas['Perno_y']
@@ -89,33 +124,6 @@ class Armadura2D :
 
         print( 'Listo!' )
         return
-
-    def nodos_vecinos( self, nodo) :
-
-        vecinos = []
-        for miembro in self.miembros :
-            if miembro[0] == nodo :
-                vecinos.append( miembro[1] )
-            elif miembro[1] == nodo :
-                vecinos.append( miembro[0] )
-
-        return vecinos
-
-    def vector_unitario( self, nodo_i, nodo_f) :
-
-        pos_i     = np.array( self.pos_nodos[nodo_i] )
-        pos_f     = np.array( self.pos_nodos[nodo_f] )
-        delta_pos = pos_f - pos_i
-
-        return ( 1.0 / np.linalg.norm(delta_pos) ) * delta_pos
-
-    def longitud_miembro( self, nodo_i, nodo_f) :
-
-        pos_i = np.array( self.pos_nodos[nodo_i] )
-        pos_f = np.array( self.pos_nodos[nodo_f] )
-
-        return np.linalg.norm( pos_f - pos_i )
-
 
     def resuelve( self, grafica = False) :
 
@@ -153,7 +161,9 @@ class Armadura2D :
 
         return
 
-    def grafica_solucion( self, tamano_nodos = 8, ancho_miembros = 3.0) :
+    def grafica_solucion( self, tamano_figura_en_pulgadas = 8,
+                                tamano_nodos = 8,
+                                ancho_miembros = 3.0 ) :
 
         fuerza_max = np.max( np.abs( self.x) )
 
@@ -167,8 +177,9 @@ class Armadura2D :
         y_min = min(nodos_y) - 0.1 * delta_y
         y_max = max(nodos_y) + 0.1 * delta_y
 
-
-        plt.figure( figsize = ( 10, 5), dpi = 90)
+        tamano_figura = ( tamano_figura_en_pulgadas,
+                          tamano_figura_en_pulgadas )
+        plt.figure( figsize = tamano_figura, dpi = 90)
         plt.axis( 'square' )
         plt.xlim( ( x_min, x_max) )
         plt.ylim( ( y_min, y_max) )
@@ -200,3 +211,29 @@ class Armadura2D :
         plt.show()
 
         return
+
+    def nodos_vecinos( self, nodo) :
+
+        vecinos = []
+        for miembro in self.miembros :
+            if miembro[0] == nodo :
+                vecinos.append( miembro[1] )
+            elif miembro[1] == nodo :
+                vecinos.append( miembro[0] )
+
+        return vecinos
+
+    def vector_unitario( self, nodo_i, nodo_f) :
+
+        pos_i     = np.array( self.pos_nodos[nodo_i] )
+        pos_f     = np.array( self.pos_nodos[nodo_f] )
+        delta_pos = pos_f - pos_i
+
+        return ( 1.0 / np.linalg.norm(delta_pos) ) * delta_pos
+
+    def longitud_miembro( self, nodo_i, nodo_f) :
+
+        pos_i = np.array( self.pos_nodos[nodo_i] )
+        pos_f = np.array( self.pos_nodos[nodo_f] )
+
+        return np.linalg.norm( pos_f - pos_i )
