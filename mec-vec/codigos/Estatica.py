@@ -50,7 +50,7 @@ class Armadura2D :
                         patin,
                         tipo_patin,
                         cargas,
-                        peso_miembros_por_unidad_longitud = 0.0,
+                        peso_especifico_miembros = 0.0,
                         verboso = False ) :
 
         self.nodos      = list( nodos.keys() )
@@ -110,6 +110,7 @@ class Armadura2D :
 
             vecinos       = self.nodos_vecinos( nodo)
             peso_miembros = 0.0
+
             for ( j, nodo_vecino) in enumerate( vecinos) :
 
                 if verboso :
@@ -122,8 +123,10 @@ class Armadura2D :
                     print( '\t\t' + 'Direccion de la fuerza:', vec)
                 self.mat_A[ fila + 0, col] = vec[0]
                 self.mat_A[ fila + 1, col] = vec[1]
-                peso_miembros += 0.5 * self.longitud_miembro( nodo, nodo_vecino) \
-                              * peso_miembros_por_unidad_longitud
+
+                peso_miembros += \
+                0.5 * peso_especifico_miembros \
+                    * self.longitud_miembro( nodo, nodo_vecino)
 
             if nodo in cargas :
                 if verboso :
