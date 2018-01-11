@@ -50,7 +50,8 @@ class Armadura2D :
                         patin,
                         tipo_patin,
                         cargas,
-                        peso_miembros_por_unidad_longitud = 0.0 ) :
+                        peso_miembros_por_unidad_longitud = 0.0,
+                        verboso = False ) :
 
         self.nodos      = list( nodos.keys() )
         self.nodos.sort()
@@ -61,7 +62,8 @@ class Armadura2D :
 
         # Verifica el tipo de patin ingresado
         if not tipo_patin in [ 'Horizontal', 'Pared'] :
-            print( 'Error: No se entiende el tipo de patin!' )
+            raise ValueError( 'No se entiende el tipo de patin! ' +
+            'Opciones validas son \'Horizontal\' y \'Pared\'.' )
             return
 
         # Verifica que la armadura sea estaticamente determinable
@@ -88,7 +90,8 @@ class Armadura2D :
         # Poblamos la matriz A y el vector b
         for ( i, nodo) in enumerate( self.nodos) :
 
-            print( 'Nodo actual:', nodo)
+            if verboso :
+                print( 'Nodo actual:', nodo)
 
             fila = self.ecuaciones[nodo]
 
@@ -108,24 +111,31 @@ class Armadura2D :
             vecinos       = self.nodos_vecinos( nodo)
             peso_miembros = 0.0
             for ( j, nodo_vecino) in enumerate( vecinos) :
-                print( '\t' + 'Procesando miembro ' + nodo + '-' + nodo_vecino + ':' )
+
+                if verboso :
+                    print( '\t' + 'Procesando miembro ' +
+                           nodo + '-' + nodo_vecino + ':' )
                 col  = self.incognitas[ ( nodo, nodo_vecino) ]
                 vec  = self.vector_unitario( nodo_vecino, nodo)
-                print( '\t\t' + 'Direccion de la fuerza:', vec)
+
+                if verboso :
+                    print( '\t\t' + 'Direccion de la fuerza:', vec)
                 self.mat_A[ fila + 0, col] = vec[0]
                 self.mat_A[ fila + 1, col] = vec[1]
                 peso_miembros += 0.5 * self.longitud_miembro( nodo, nodo_vecino) \
                               * peso_miembros_por_unidad_longitud
 
             if nodo in cargas :
-                print( '\t' + 'Procesando carga: ' + str(np.array(cargas[nodo])) )
+                if verboso :
+                    print( '\t' + 'Procesando carga: ' +
+                           str( np.array(cargas[nodo]) ) )
                 self.vec_b[ fila + 0 ] = -cargas[nodo][0]
                 self.vec_b[ fila + 1 ] = -cargas[nodo][1] + peso_miembros
 
         print( 'Listo!' )
         return
 
-    def resuelve( self, grafica = False) :
+    def resuelve( self) :
 
         print( 'RESOLVIENDO ARMADURA...' )
         self.x = np.linalg.solve( self.mat_A, self.vec_b)
@@ -158,6 +168,50 @@ class Armadura2D :
             elif self.fuerzas[miembro] < 0 :
                 signo = 'tension'
             print( nom_miembro, magnitud, signo)
+
+        max_com = 0.0
+        max_ten = 0.0
+        for miembro in self.miembros :
+            if self.fuerzas[miembro] > max_com :
+                max_com = self.fuerzas[miembro]
+            if self.fuerzas[miembro] < max_ten :
+                max_ten = self.fuerzas[miembro]
+
+        miembros_max_com = []
+        miembros_max_ten = []
+        for miembro in self.miembros :
+            if abs( self.fuerzas[miembro] - max_com ) < 1E-5 :
+                miembros_max_com.append( miembro )
+            if abs( self.fuerzas[miembro] - max_ten ) < 1E-5 :
+                miembros_max_ten.append( miembro )
+
+        print( 'MIEMBROS CRITICOS:' )
+
+        mensaje = '\t' + 'Maxima compresion esta en '
+        if len(miembros_max_com) == 1 :
+            mensaje += 'el Miembro ' \
+            + miembros_max_com[0][0] + '-' + miembros_max_com[0][1]
+        elif len(miembros_max_com) > 1 :
+            mensaje += 'los Miembros '
+            for miembro in miembros_max_com :
+                mensaje += miembro[0] + '-' + miembro[1] + ', '
+            mensaje = mensaje[:-2]
+
+        print(mensaje)
+        print( '\t\t' + 'Magnitud:', abs(max_com) )
+
+        mensaje = '\t' + 'Maxima tension esta en '
+        if len(miembros_max_ten) == 1 :
+            mensaje += 'el Miembro ' \
+            + miembros_max_ten[0][0] + '-' + miembros_max_ten[0][1]
+        elif len(miembros_max_ten) > 1 :
+            mensaje += 'los Miembros '
+            for miembro in miembros_max_ten :
+                mensaje += miembro[0] + '-' + miembro[1] + ', '
+            mensaje = mensaje[:-2]
+
+        print(mensaje)
+        print( '\t\t' + 'Magnitud:', abs(max_ten) )
 
         return
 
