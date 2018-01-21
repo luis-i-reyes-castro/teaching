@@ -29,40 +29,52 @@
 \textbf{Modo de Calificaci\'on:} Cada problema tiene un valor de 10 puntos. Los puntos son asignados de la siguiente manera: 
 \begin{itemize}
 \item Los primeros 6 puntos son otorgados por presentar un dise\~no v\'alido que cumpla con todas las especificaciones y restricciones. 
-\item Los \'ultimos 4 puntos dependen del desempe\~no de su armadura propuesta comparado con el de sus otros compa\~neros. La m\'etrica de desempe\~no de su armadura se calcula como el m\'aximo entre \textit{(i)} la m\'axima compresi\'on en los miembros y \textit{(ii)} la m\'axima tensi\'on en los miembros. La m\'etrica de desempe\~no de su paralelo es el promedio de las m\'etricas de desempe\~no de cada grupo de estudiantes en el paralelo. Por esta raz\'on, los \'ultimos cuatro puntos se asignan de la siguiente manera: 
+\item Los \'ultimos 4 puntos dependen del desempe\~no de su armadura propuesta comparado con el de sus otros compa\~neros. La m\'etrica de desempe\~no de su armadura se calcula como el m\'aximo entre \textit{(i)} la m\'axima compresi\'on en los miembros y \textit{(ii)} la m\'axima tensi\'on en los miembros. Consecuentemente, al dise\~nar su armadura usted deber\'a tratar de que su m\'etrica de desempe\~no sea del menor valor posible. 
+
+La m\'etrica de desempe\~no de su paralelo es el promedio de las m\'etricas de desempe\~no de cada grupo de estudiantes en el paralelo. Por esta raz\'on, los \'ultimos cuatro puntos se asignan de la siguiente manera: 
 \begin{itemize}
-\item Si su desempe\~no es menor al de su paralelo por m\'as de 1.5 desviaciones est\'andar, usted recibe 0 puntos. 
-\item Si su desempe\~no es menor al de su paralelo por entre 1.5 y 0.5 desviaciones est\'andar, usted recibe 1 punto. 
-\item Si su desempe\~no es menor al de su paralelo por no m\'as de 0.5 desviaciones est\'andar, usted recibe 2 puntos. 
-\item Si su desempe\~no es igual al de su paralelo, o si es mayor al de su paralelo por no m\'as de 0.75 desviaciones est\'andar, usted recibe 3 puntos. 
-\item Si su desempe\~no es mayor al de su paralelo por m\'as de 0.75 desviaciones est\'andar, usted recibe 4 puntos. 
+\item Si su desempe\~no es peor al de su paralelo por m\'as de 1.5 desviaciones est\'andar, usted recibe 0 puntos. 
+\item Si su desempe\~no es peor al de su paralelo por entre 1.5 y 0.5 desviaciones est\'andar, usted recibe 1 punto. 
+\item Si su desempe\~no es peor al de su paralelo por no m\'as de 0.5 desviaciones est\'andar, usted recibe 2 puntos. 
+\item Si su desempe\~no es igual al de su paralelo, o si es mejor que el de su paralelo por no m\'as de 0.75 desviaciones est\'andar, usted recibe 3 puntos. 
+\item Si su desempe\~no es mejor que el de su paralelo por m\'as de 0.75 desviaciones est\'andar, usted recibe 4 puntos. 
 \end{itemize}
 
 \end{itemize}
-\halfskip
-
+\fullskip
 \newpage
 
 % =============================================
 \begin{problem}
 
-Dise\~ne una armadura para la propuesta de puente peatonal mostrada en la siguiente figura. En la misma, el origen de $(x,y)$ est\'a localizado en el extremo inferior izquierdo, y cada unidad de espacio de la parrilla tiene 0.50 metros. Los puntos azules indican las localizaciones del soporte empernado y del pat\'in. Cada carga mostrada equivale al peso promedio de un ser humano (75 kg). Necesariamente debe haber un nodo en cada carga, y no se permite localizar nodos en ninguno de los puntos dentro del \'area amarilla. Suponga que el peso espec\'ifico de los miembros es de 2.5 kilogramos por metro, y lleve a cabo todos sus c\'alculos en unidades de kilogramos-fuerza. 
+Dise\~ne una armadura para la propuesta de puente peatonal mostrada en la siguiente figura. En la misma, los puntos azules indican las localizaciones del soporte empernado y del pat\'in, cada unidad de espacio de la rejilla tiene 0.50 metros, y el origen $(x,y)$ est\'a localizado en el punto azul izquierdo. Cada carga mostrada equivale al peso promedio de un ser humano (75 kg), y no se permite localizar nodos en ninguno de los puntos dentro del \'area amarilla. Suponga que el peso espec\'ifico de los miembros es de 16 kilogramos por metro, y lleve a cabo todos sus c\'alculos en unidades de kilogramos-fuerza. 
 \fullskip
 
 \begin{figure}[htb]
 \centering
-\def\svgwidth{0.9\columnwidth}
+\def\svgwidth{0.8\columnwidth}
 \input{figures/problema-puente-01.eps_tex}
 \end{figure}
 \halfskip
 
 \end{problem}
 \fullskip
+\newpage
 
 % =============================================
-%\begin{problem}
-%
-%\end{problem}
-%\fullskip
+\begin{problem}
+
+Dise\~ne una armadura para soportar el radar y las bater\'ias anti-a\'ereas de un nuevo modelo de destructor que est\'a siendo dise\~nado para alg\'un pa\'is desarrollado que puede darse el lujo de mandarse a hacer un barco de guerra en vez de tener que comprar maquinaria b\'elica de segunda mano a otros pa\'ises, tal como se muestra en la siguiente figura. En la misma, los puntos azules indican las localizaciones del soporte empernado y del pat\'in, cada unidad de espacio de la rejilla tiene 1.0 metros, y el origen $(x,y)$ est\'a localizado en el punto azul izquierdo. El radar se localiza sobre la parte central del barco, tiene un peso de 1500 kgs que se distribuye sobre tres pernos. En cambio, las bater\'ias anti-a\'ereas se localizan en los flancos del buque; cada bater\'ia tiene un peso de 800 kgs que se distribuye sobre dos pernos. No se permite localizar nodos en ninguno de los puntos dentro del \'area transversal del barco, \ie dentro del \'area gris. Suponga que el peso espec\'ifico de los miembros es de 5.0 kilogramos por metro, y lleve a cabo todos sus c\'alculos en unidades de kilogramos-fuerza. 
+\fullskip
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.5\columnwidth}
+\input{figures/problema-barco-01.eps_tex}
+\end{figure}
+\halfskip
+
+\end{problem}
+\fullskip
 
 \end{document}
