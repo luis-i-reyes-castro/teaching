@@ -1,5 +1,7 @@
 """
-Ejemplo del Robot Vigilante
+Implementacion de la Cadena de Markov del Ejemplo del Robot Vigilante.
+
+Geometria del movimiento del robot:
 
 ===================================
 ===================================

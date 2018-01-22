@@ -1,7 +1,9 @@
 """
-@author: Luis I. Reyes Castro
+Implementacion de la Cadena de Markov del Problema de la Agencia de Renta
+de Automoviles, encontrado en el Problema 17.4A-8 del texto de
+Hamdy A. Taha (9ED).
 
-Problema 17.4A-8 del texto de Taha: Problema de la Agencia de Renta de Carros
+@author: Luis I. Reyes Castro
 
 """
 

@@ -1,7 +1,8 @@
 """
-@author: Luis I. Reyes Castro
+Implementacion de la Cadena de Markov del Problema de los Exconvictos,
+encontrado en el Problema 17.4A-3 del texto de Hamdy A. Taha (9ED).
 
-Problema 17.4A-3 del texto de Taha: Problema de los Exconvictos
+@author: Luis I. Reyes Castro
 
 """
 

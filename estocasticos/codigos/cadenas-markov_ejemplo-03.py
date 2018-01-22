@@ -1,7 +1,8 @@
 """
-@author: Luis I. Reyes Castro
+Implementacion de la Cadena de Markov del Ejemplo Satirico sobre la
+Administracion del 45avo presidente de los Estados Unidos, Donald J. Trump.
 
-Problema de Donald Trump
+@author: Luis I. Reyes Castro
 
 """
 
@@ -19,5 +20,6 @@ P = np.array( [ [ 0.5, 0,   0.25, 0.25, 0   ],
 
 # Crea una nuevo objeto que representa una Cadena de Markov
 cadena = CadenaDeMarkov( S, P)
+
 # Computa la distribucion estacionaria (i.e. en estado estable) de la cadena
 pi_estrella = cadena.distribucion_estacionaria()

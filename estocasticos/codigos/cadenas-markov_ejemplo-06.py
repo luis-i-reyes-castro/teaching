@@ -1,7 +1,8 @@
 """
-@author: Luis I. Reyes Castro
+Implementacion de la Cadena de Markov del Ejemplo del Vendedor que Recorre
+Guayaquil, Quito y Cuenca, Recolectando Recompensas a una Tasa Descontada.
 
-Problema del Vendedor que Viaja entre GYE-UIO-CUE
+@author: Luis I. Reyes Castro
 
 """
 

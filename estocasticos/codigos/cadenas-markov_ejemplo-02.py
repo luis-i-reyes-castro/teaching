@@ -1,7 +1,8 @@
 """
-@author: Luis I. Reyes Castro
+Implementacion de la Cadena de Markov del Problema de Inventarios de Dave,
+encontrado en la Seccion 16.1 del texto de Hillier & Lieberman (9ED).
 
-Problema de Manejo de Inventario de Dave
+@author: Luis I. Reyes Castro
 
 """
 
