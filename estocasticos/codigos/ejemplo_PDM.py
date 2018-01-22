@@ -19,48 +19,49 @@ def CadenaDeMarkovInducida( accion_e1 = 'Nada',
     S = [ 0, 1, 2, 3]
     P = np.zeros( shape = (4,4) )
     # Declaramos el diccionario de costo promedio por estado
-    costo = { estado : 0.0 for estado in S }
+    C = { estado : 0.0 for estado in S }
 
     # Estado 0
     P[0,:] = [ 0.0, 7.0/8, 1.0/16, 1.0/16]
+    C[0]   = 0.0
 
     # Estado 1
     if accion_e1 == 'Nada' :
         P[1,:] = [ 0.0, 3.0/4, 1.0/8, 1.0/8]
-        costo[1] = 1000.0
+        C[1]   = 1000.0
     elif accion_e1 == 'Remplazo':
         P[1,:] = [ 1.0, 0.0, 0.0, 0.0]
-        costo[1] = 6000.0
+        C[1]   = 6000.0
 
     # Estado 2
     if accion_e2 == 'Nada' :
         P[2,:] = [ 0.0, 0.0, 1.0/2, 1.0/2]
-        costo[2] = 3000.0
+        C[2]   = 3000.0
     elif accion_e2 == 'Reparacion-general' :
         P[2,:] = [ 0.0, 1.0, 0.0, 0.0]
-        costo[2] = 4000.0
+        C[2]   = 4000.0
     elif accion_e2 == 'Remplazo' :
         P[2,:] = [ 1.0, 0.0, 0.0, 0.0]
-        costo[2] = 6000.0
+        C[2]   = 6000.0
 
     # Estado 3
     P[3,:] = [ 1.0, 0.0, 0.0, 0.0]
-    costo[3] = 6000.0
+    C[3]   = 6000.0
 
-    return ( S, P, costo)
+    return ( S, P, C)
 
 # Escogemos una politica
 accion_e1 = 'Nada'
 accion_e2 = 'Reparacion-general'
 # Construimos la Cadena de Markov inducida por la politica
-( S, P, costo) = CadenaDeMarkovInducida( accion_e1, accion_e2)
-cadena         = CadenaDeMarkov( S, P)
+( S, P, C) = CadenaDeMarkovInducida( accion_e1, accion_e2)
+cadena     = CadenaDeMarkov( S, P)
 
 # Calculamos el costo promedio que incurre la politica escogida
 pi_estrella    = cadena.distribucion_estacionaria()
 costo_politica = 0.0
 for estado in S :
-    costo_politica += pi_estrella[estado] * costo[estado]
+    costo_politica += pi_estrella[estado] * C[estado]
 
 # Imprimimos la politica y su costo promedio
 print( 'POLITICA' )
