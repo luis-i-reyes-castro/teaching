@@ -242,7 +242,7 @@ class CadenaDeMarkov :
 
         @param estado Estado hacia el cual nos interesa calcular el tiempo
                       esperado de primera visita. Puede ser ingresado
-                      como un estado como un indice de estado.
+                      como un estado o como un indice de estado.
 
         @return Si la cadena es ergodica, el tiempo esperado de primera visita
                 desde cada estado hacia el estado especificado,
@@ -257,7 +257,7 @@ class CadenaDeMarkov :
             raise ValueError( 'Parametro estado no se entiende!' )
 
         # Construye la matriz P_menos_estado
-        P_menos_estado = self.P
+        P_menos_estado = self.P.copy()
         P_menos_estado[ :, estado] = 0.0
         # Declara la matriz del lado izquierdo A = I - P
         matriz_A = np.identity( self.n) - P_menos_estado
@@ -279,6 +279,54 @@ class CadenaDeMarkov :
 
         return tiempo_primera_visita
 
+    def valor_acumulado_hasta_primera_visita( self, valor_por_estado, estado) :
+        """
+        Si la cadena es ergodica, computa el valor esperado del
+        valor acumulado desde cada estado hasta el estado espeficicado.
+
+        @param valor_por_estado Diccionario de estados a valores reales.
+        @param estado Estado hacia el cual nos interesa calcular el valor
+                      acumulado hasta la primera visita. Puede ser ingresado
+                      como un estado o como un indice de estado.
+
+        @return Si la cadena es ergodica, el valor esperado del valor acumulado
+                desde cada estado hacia el estado especificado,
+                como un diccionario; caso contrario, se imprime un mensaje
+                indicando que la cadena no es ergodica y se retorna None.
+        """
+
+        # Leemos el estado ingresado
+        if estado in self.S :
+            estado = int( self.S.index(estado) )
+        elif not ( isinstance( estado, int) and 0 <= estado < self.n ) :
+            raise ValueError( 'Parametro estado no se entiende!' )
+
+        # Construye la matriz P_menos_estado
+        P_menos_estado = self.P.copy()
+        P_menos_estado[ :, estado] = 0.0
+        # Declara la matriz del lado izquierdo A = I - P
+        matriz_A = np.identity( self.n) - P_menos_estado
+
+        # Declara el vector del lado derecho b = valor_por_estado
+        vector_b = np.zeros( shape = ( self.n) )
+        for ( i, estado) in enumerate(self.S) :
+            vector_b[i] += valor_por_estado[estado]
+
+        # Computa el vector de valores esperados resolviendo el sistema
+        # A * vector_VAPV = b
+        try :
+            vector_VAPV = np.linalg.solve( matriz_A, vector_b)
+        except np.linalg.LinAlgError :
+            print( 'Esta cadena no es ergodica!' )
+            return None
+
+        # Construye el diccionario de valores acumulados
+        valor_acumulado = {}
+        for ( i, estado) in enumerate(self.S) :
+            valor_acumulado[estado] = vector_VAPV[i]
+
+        return valor_acumulado
+
     def valor_actual_neto( self, valor_por_estado, factor_descuento) :
         """
         Si la cadena es ergodica, computa el valor esperado del
@@ -288,26 +336,29 @@ class CadenaDeMarkov :
         @param factor_descuento Factor de descuento.
 
         @return Si la cadena es ergodica, el valor esperado del valor
-        actual neto a ser recolectado desde cada estado, como un diccionario.
+        actual neto (VAN) a ser recolectado desde cada estado,
+        como un diccionario.
         """
 
         # Declara la matriz del lado izquierdo A = I - factor_descuento * P
         matriz_A = np.identity( self.n) - factor_descuento * self.P
-        # Declara el vector del lado derecho b = funcion_recompensa
-        vector_b = np.ones( shape = ( self.n) )
-        for ( i, estado) in enumerate(self.S) :
-            vector_b[i] = valor_por_estado[estado]
 
-        # Computa la funcion de valor resolviendo el sistema A * vector_V = b
+        # Declara el vector del lado derecho b = valor_por_estado
+        vector_b = np.zeros( shape = ( self.n) )
+        for ( i, estado) in enumerate(self.S) :
+            vector_b[i] += valor_por_estado[estado]
+
+        # Computa el vector de valores esperados resolviendo el sistema
+        # A * vector_VAN = b
         try :
-            vector_V = np.linalg.solve( matriz_A, vector_b)
+            vector_VAN = np.linalg.solve( matriz_A, vector_b)
         except np.linalg.LinAlgError :
             print( 'Esta cadena no es ergodica!' )
             return None
 
-        # Construye el diccionario asociado con la funcion de valor
+        # Construye el diccionario de valores esperados
         valor_actual_neto = {}
         for ( i, estado) in enumerate(self.S) :
-            valor_actual_neto[estado] = vector_V[i]
+            valor_actual_neto[estado] = vector_VAN[i]
 
         return valor_actual_neto
