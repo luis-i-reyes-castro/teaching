@@ -18,5 +18,6 @@ P = np.array( [ [ 0.08, 0.18, 0.37, 0.37 ],
 
 # Crea una nuevo objeto que representa una Cadena de Markov
 cadena = CadenaDeMarkov( S, P)
-# Computa la distribucion estacionaria (i.e. en estado estable) de la cadena
+
+# Computa la distribucion estacionaria
 pi_estrella = cadena.distribucion_estacionaria()

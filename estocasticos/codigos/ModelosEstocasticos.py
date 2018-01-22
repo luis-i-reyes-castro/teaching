@@ -1,139 +1,19 @@
 """
+Implementaciones de los modelos vistos en mi curso de Modelos Estocasticos
+para Manufactura y Servicios (INDG-1008).
+
 @author Luis I. Reyes Castro, M.Sc.
         Facultad de Ingenieria en Mecanica y Ciencias de la Produccion (FIMCP)
         Escuela Superior Politecnica del Litoral
-
-Implementaciones de los modelos vistos en mi curso de Modelos Estocasticos
-para Manufactura y Servicios (INDG-1008).
 
 """
 
 import numpy as np
 
-# -------------------------------------------------------------------------------------
-class ProcesoBernoulli :
-    """
-    Implementa las principales funciones de un proceso Bernoulli.
-    """
-
-    # Miembros:
-    parametro = None # parametro
-
-    def __init__( self, argumento, modo = 'AND') :
-        """
-        Constructor
-
-        @param p: Parametro del proceso o lista o tupla de proceso a combinar.
-                  - Si p es un decimal en (0,1) entonces se instancia un
-                    proceso Bernoulli independiente con ese parametro.
-                  - Si p es una lista o tupla de procesos Bernoulli entonces se
-                    instancia la combinacion de esos procesos de acuerdo al
-                    parametro modo.
-        @param modo: Modo de combinacion (de ser aplicable): 'AND', 'OR'
-        """
-
-        if not isinstance( argumento, ( float, list, tuple) ) :
-            raise ValueError( 'Parametro p debe ser una probabilidad o una ' +
-                              'lista o tupla de procesos Bernoulli' )
-
-        elif isinstance( argumento, float) :
-            if not ( 0 < argumento < 1 ) :
-                raise ValueError( 'Instanciar un proceso independiente requiere ' +
-                                  'que el parametro p sea un decimal ' +
-                                  'en el intervalo abierto (0,1)' )
-            else :
-                self.parametro = argumento
-
-        else :
-            self.combina( p, modo)
-
-        return
-
-    def combina( self, procesos, modo) :
-
-        # Verifica que cada objeto en procesos sea un proceso Bernoulli
-        for proceso in procesos :
-            if not isinstance( proceso, ProcesoBernoulli) :
-                raise ValueError( 'Lista o tupla de procesos tiene al menos una ' +
-                                  'entrada que no es de la clase ProcesoBernoulli' )
-
-        # Extrae los parametros de los procesos en la lista
-        parametros = np.array( [ proceso.p for proceso in procesos ] )
-
-        # Calcula el parametro del nuevo proceso
-        if modo == 'AND' :
-            self.parametro = np.prod( parametros )
-        elif modo == 'OR' :
-            self.parametro = 1.0 - np.prod( 1.0 - parametros )
-        else :
-            raise ValueError( 'Modo invalido, opciones validas son: AND, XOR' )
-
-        return
-
-    def divide( self, probabilidades) :
-        """
-        Divide al proceso de acuerdo al vector de probabilidades ingresado
-
-        @param probabilidades: Vector de probabilidades de los n procesos
-
-        @return Lista de los n procesos Bernoulli resultantes, donde n es la
-                longitud del vector de probabilidades ingresado
-        """
-
-        # Verifica que el vector de probabilidades sea valido
-        if not isinstance( probabilidades, ( list, tuple, np.ndarray) ) :
-            raise ValueError( 'Parametro inicio debe ser una lista, tupla ' +
-                              'o vector numpy' )
-
-        # Verifica que la distribucion sea un vector de tamano n
-        probabilidades = np.array( probabilidades).flatten()
-        if np.any( probabilidades < 0.0 ) \
-        or abs( np.sum(probabilidades) - 1.0 ) > 1e-8 :
-            raise ValueError( 'Parametro inicio debe ser una lista, tupla o ' +
-                              'vector de probabilidades, i.e. sus entradas ' +
-                              'deben ser no-negativas y sumar a uno')
-
-        # Instancia cada nuevo proceso con su parametro correcto
-        procesos = []
-        for ( i, _) in enumerate(probabilidades) :
-            nuevo_proceso = ProcesoBernoulli( probabilidades[i] * self.parametro )
-            procesos.append( nuevo_proceso )
-
-        return procesos
-
-    def muestrea( self, num_pasos) :
-        """
-        Muestrea aleatoriamente del proceso por un numero de pasos deseado
-
-        @param num_pasos: Numero de pasos a muestrear
-
-        @return Una 2-tupla conteniendo en su primera entrada los indices de
-                los estados muestreados y en su segunda entrada las frecuencias
-                de los estados ocurridos
-        """
-
-        # Muestrea num_pasos variables aleatorias Uniforme(0,1)
-        U = np.random.random_sample(num_pasos)
-        # Genera variables Bernoulli usando las variables uniformes
-        X = np.where( U < self.parametro, 0, 1)
-
-        # Computa el vector de frecuencias
-        frequencia = np.zeros( shape = (2,) )
-        frequencia[1] = 1.0 * sum(X) / num_pasos
-        frequencia[0] = 1 - frequencia[1]
-
-        return ( X, frequencia)
-
-# -------------------------------------------------------------------------------------
 class CadenaDeMarkov :
     """
     Implementa las principales funciones de una Cadena de Markov.
     """
-
-    # Miembros
-    estados     = [] # lista de estados
-    num_estados = 0  # numero de estados
-    matriz_P    = np.array([]) # matriz de transicion
 
     def __init__( self, estados, matriz_transicion) :
         """
@@ -146,9 +26,9 @@ class CadenaDeMarkov :
         """
 
         # Copia los datos ingresados
-        self.estados     = estados
-        self.num_estados = len(estados)
-        self.matrix_P    = matriz_transicion
+        self.S = estados
+        self.n = len(estados)
+        self.P = matriz_transicion
 
         # Verifica que el parametro estados sea una lista no-vacia
         if not isinstance( estados, list) :
@@ -161,20 +41,24 @@ class CadenaDeMarkov :
             raise ValueError( 'Matriz de transicion debe ser un arreglo numpy' )
 
         # Verifica que la matriz de transicion tenga tamano n-por-n
-        tamano_correcto = ( self.num_estados, self.num_estados)
+        tamano_correcto = ( self.n, self.n)
         if not np.shape( matriz_transicion) == tamano_correcto :
             raise ValueError( 'Matriz de transicion debe ser un arreglo numpy ' +
                               'de tamano ' + str(tamano_correcto) )
-        # Verifica cada fila de la matriz de transicion
-        for fila in range( self.num_estados) :
+
+        # Verifica que cada fila de la matriz de transicion corresponda a
+        # una distribucion valida
+        for fila in range( self.n) :
+
             # avisa si alguna entrada es negativa
             cols_malas = matriz_transicion[fila,:] < 0.0
             if np.any( cols_malas) :
-                todas_cols = np.arange( self.num_estados)
+                todas_cols = np.arange( self.n)
                 cols_malas = todas_cols[cols_malas]
                 raise ValueError( 'Matriz de transicion tiene entradas negativas ' +
                                   'en la fila ' + str(fila) + ' columnas ' +
                                   tuple(cols_malas) )
+
             # avisa si la suma de las  entradas es diferente de uno
             suma_entradas = np.sum( matriz_transicion[fila,:] )
             if abs( suma_entradas - 1.0 ) > 1E-8 :
@@ -192,7 +76,7 @@ class CadenaDeMarkov :
         como arreglo numpy.
         """
 
-        return { 'estados' : self.estados, 'matriz_transicion' : self.matrix_P }
+        return { 'estados' : self.S, 'matriz_transicion' : self.P }
 
     def muestrea( self, inicio, num_pasos) :
         """
@@ -200,16 +84,16 @@ class CadenaDeMarkov :
 
         @param inicio: Inicio de la secuencia. Puede ser un estado, el indice de
                        un estado, o una distribucion del estado inicial.
-                       Si es un estado debe encontrarse en la lista de estados,
-                       caso contrario se arrojara un error. Si es el indice de
-                       un estado debe ser un entero entre cero y n-1.
-                       Si es una distribucion debe ser un arreglo de
-                       tamano (n,) que sea un vector de probabilidad.
+                       Si es un estado debe encontrarse en la lista de estados.
+                       Si es el indice de un estado debe ser un entero entre
+                       cero y n-1. Si es una distribucion debe ser un
+                       diccionario de estados a probabilidades, aunque puede
+                       ser disperso, i.e. solo se requiere especificar
+                       los estados con probabilidades estrictamente positivas.
         @param num_pasos: Numero de pasos a muestrear.
 
-        @return Una 3-tupla que contiene en su primera entrada la secuencia de
-                estados muestreada, en su segunda entrada la lista de indices
-                de los mismos estados, y en su tercera entrada el diccionario de
+        @return Una 2-tupla que contiene en su primera entrada la secuencia de
+                estados muestreada y en su segunda entrada el diccionario de
                 frecuencias de visitas a estados de la muestra.
         """
 
@@ -217,63 +101,53 @@ class CadenaDeMarkov :
         # alocaciones de memoria durante el muestreo
         X = [ 0 for t in range(num_pasos) ]
 
-        # Verifica que se haya provisto un estado o distribucion inicial
-        if inicio is None :
-            raise ValueError( 'Provea un estado o distribucion inicial' )
+        # Si inicio es un estado entonces obtenemos su indice
+        if inicio in self.S :
+            X[-1] = int( self.S.index(inicio) )
 
         # Si inicio es el indice del estado inicial solo lo copiamos
-        if isinstance( inicio, int) and 0 <= inicio < self.num_estados :
+        elif isinstance( inicio, int) and 0 <= inicio < self.n :
             X[-1] = inicio
 
-        # Si inicio no es una lista, tupla o vector entonces busca el indice
-        # del estado inicio, si existe; caso contrario avisa
-        elif not isinstance( inicio, ( list, tuple, np.ndarray) ) :
-            try :
-                X[-1] = int( self.estados.index(inicio) )
-            except Exception :
-                raise ValueError( 'Estado \'' + str(inicio) + '\' no existe' )
-
-        # Si inicio es un vector de probabilidades iniciales entonces
-        # lo utilizamos para muestrear el estado inicial
+        # Si inicio es un diccionario de probabilidades entonces muestreamos
+        # el estado inicial
+        elif isinstance( inicio, dict) :
+            pi_0 = np.zeros( shape = ( self.n,) )
+            for ( i, estado) in self.S :
+                if estado in inicio :
+                    pi_0[i] += inicio[estado]
+            if np.any( pi_0 < 0.0 ) or abs( np.sum(pi_0) - 1.0 ) > 1E-6 :
+                raise ValueError( 'Parametro inicio no representa una ' +
+                                  'distribucion valida!' )
+            X[-1] = np.random.choice( self.n, p = pi_0)
         else :
-            inicio = np.array(inicio)
-            tamano_correcto = ( self.num_estados,)
-            if not np.shape(inicio) == tamano_correcto :
-                raise ValueError( 'Parametro inicio debe ser un arreglo ' +
-                                  'de tamano ' + str(tamano_correcto) )
-            if np.any( inicio < 0.0 ) or abs( np.sum(inicio) - 1.0 ) > 1e-8 :
-                raise ValueError( 'Parametro inicio debe ser un vector de ' +
-                                  'probabilidades' )
-            X[-1] = np.random.choice( self.num_estados, p = inicio)
+            raise ValueError( 'Parametro inicio no se entiende!' )
 
         # Para cada paso...
         for t in range(num_pasos) :
             # Extrae la fila de la matriz de transicion asociada con el
             # estado anterior
-            prob_transicion = self.matrix_P[ X[t-1], :]
+            prob_transicion = self.P[ X[t-1], :]
             # Muestrea el indice del estado actual
-            X[t] = np.random.choice( self.num_estados, p = prob_transicion)
+            X[t] = np.random.choice( self.n, p = prob_transicion)
 
         # Construye la secuencia de estados visitados
-        estados_visitados = [ self.estados[ X[t] ] for t in range(num_pasos) ]
+        estados_visitados = [ self.S[ X[t] ] for t in range(num_pasos) ]
 
         # Construye el diccionario de frecuencias de visitas a estados
-        frequencias = { estado : 0.0 for estado in self.estados }
-
-        for estado_visitado in estados_visitados :
-            frequencias[estado_visitado] += 1.0
-
-        for estado in frequencias :
-            frequencias[estado] /= num_pasos
+        frequencias = { estado : 0.0 for estado in self.S }
+        for estado in estados_visitados :
+            frequencias[estado] += 1.0 / num_pasos
 
         return ( estados_visitados, frequencias)
 
-    def propaga_distribucion( self, distribucion_inicial, num_pasos) :
+    def propaga_distribucion( self, inicio, num_pasos) :
         """
         Propaga la distribucion del estado inicial
 
-        @param distribucion_inicial: Distribucion del estado inicial como un
-                       diccionario disperso, i.e. solo se requiere especificar
+        @param inicio: Distribucion del estado inicial como un diccionario de
+                       estados a probabilidades. Puede ser un diccionario
+                       disperso, i.e. solo se requiere especificar
                        los estados con probabilidades estrictamente positivas.
         @param num_pasos: Numero de pasos a propagar.
 
@@ -281,53 +155,44 @@ class CadenaDeMarkov :
                 es la probabilidad en el periodo t de estar en el estado i.
         """
 
-        # Verifica que la distribucion sea un diccionario
-        if not isinstance( distribucion_inicial, dict ) :
-            raise ValueError( 'Parametro distribucion_inicial debe ser ' +
-                              'un diccionario.' )
-
         # Costruye el vector de distribucion inicial a partir del diccionario
-        pi_t = np.zeros( shape = ( self.num_estados) )
-        for estado in distribucion_inicial :
-            if not estado in self.estados :
-                raise ValueError ( 'Entrada \'' + str(estado) + '\' del parametro ' +
-                                   'distribucion_inicial no es un estado' )
-            else :
-                indice_estado = self.estados.index( estado)
-                pi_t[indice_estado] = distribucion_inicial[estado]
-
-        # Verifica el vector de distribucion inicial
-        if np.any( pi_t < 0.0 ) or abs( np.sum(pi_t) - 1.0 ) > 1e-8 :
-            raise ValueError( 'Parametro distribucion_inicial no representa una ' +
-                              'distribucion valida porque alguna entrada ' +
-                              'es negativa o porque sus entradas no suman a uno.' )
+        if isinstance( inicio, dict ) :
+            pi_t = np.zeros( shape = ( self.n,) )
+            for ( i, estado) in enumerate(self.S) :
+                if estado in inicio :
+                    pi_t[i] += inicio[estado]
+            if np.any( pi_t < 0.0 ) or abs( np.sum(pi_t) - 1.0 ) > 1E-6 :
+                raise ValueError( 'Parametro inicio no representa una ' +
+                                  'distribucion valida!' )
+        else :
+            raise ValueError( 'Parametro inicio debe ser un diccionario!' )
 
         # Para cada iteracion...
         for t in range(num_pasos) :
             # Computa la distribucion actual de acuerdo a la recursion:
             # pi_t+1' = pi_t' * P
-            pi_t = np.dot( pi_t, self.matrix_P).flatten()
+            pi_t = np.dot( pi_t, self.P).flatten()
 
         # Formatea la distribucion final como un diccionario y la retorna
-        distribucion_final = { estado : 0.0 for estado in self.estados }
-        for i in range( self.num_estados) :
-            distribucion_final[ self.estados[i] ] = pi_t[i]
+        pi_t_diccionario = { estado : 0.0 for estado in self.S }
+        for ( i, estado) in enumerate(self.S) :
+            pi_t_diccionario[estado] = pi_t[i]
 
-        return distribucion_final
+        return pi_t_diccionario
 
     def distribucion_estacionaria( self) :
         """
-        Computa la distribucion estacionaria de la cadena (si la cadena es ergodica)
+        Si la cadena es ergodica, computa la distribucion estacionaria.
 
-        @return La distribucion estacionaria de la cadena como un diccionario,
-                si la cadena es ergodica; caso contrario, se imprime un mensaje
+        @return Si la cadena es ergodica, la distribucion estacionaria
+                como un diccionario; caso contrario, se imprime un mensaje
                 indicando que la cadena no es ergodica y se retorna None.
         """
 
         # Declara la matriz del lado izquierdo A = P' - I
-        matriz_A = self.matrix_P.transpose() - np.identity( self.num_estados)
+        matriz_A = self.P.transpose() - np.identity( self.n)
         # Declara el vector del lado derecho b = 0
-        vector_b = np.zeros( shape = ( self.num_estados) )
+        vector_b = np.zeros( shape = ( self.n,) )
 
         # Reemplaza la ultima fila de matriz_A con unos
         matriz_A[ -1, :] = 1.0
@@ -341,68 +206,63 @@ class CadenaDeMarkov :
             print( 'Esta cadena no es ergodica!' )
             return None
 
-        # Construye el diccionario de la distribucion
+        # Construye el diccionario de la distribucion estacionaria
         pi_estrella = {}
-        for i in range( self.num_estados) :
-            pi_estrella[ self.estados[i] ] = vector_pi[i]
+        for ( i, estado) in enumerate(self.S) :
+            pi_estrella[estado] = vector_pi[i]
 
         return pi_estrella
 
     def tiempo_esperado_de_retorno( self) :
         """
-        Computa el tiempo esperado de retorno para cada estado
+        Si la cadena es ergodica, computa la el tiempo esperado de retorno
+        a cada estado.
 
-        @return El tiempo esperado de retorno a cada estado como un diccionario,
-                si la cadena es ergodica; caso contrario, se imprime un mensaje
+        @return Si la cadena es ergodica, el tiempo esperado de retorno a
+                cada estado como un diccionario; caso contrario, se imprime
+                un mensaje indicando que la cadena no es ergodica y
+                se retorna None.
+        """
+
+        tiempo_retorno = {}
+        pi_estrella     = self.distribucion_estacionaria()
+
+        for estado in self.S :
+            if pi_estrella[estado] > 1E-6 :
+                tiempo_retorno[estado] = 1.0 / pi_estrella[estado]
+            else :
+                tiempo_retorno[estado] = np.Inf
+
+        return tiempo_retorno
+
+    def tiempo_esperado_de_primera_visita( self, estado) :
+        """
+        Si la cadena es ergodica, computa el tiempo esperado de primera visita
+        desde cada estado hasta el estado espeficicado.
+
+        @param estado Estado hacia el cual nos interesa calcular el tiempo
+                      esperado de primera visita. Puede ser ingresado
+                      como un estado como un indice de estado.
+
+        @return Si la cadena es ergodica, el tiempo esperado de primera visita
+                desde cada estado hacia el estado especificado,
+                como un diccionario; caso contrario, se imprime un mensaje
                 indicando que la cadena no es ergodica y se retorna None.
         """
 
-        tiempo_esperado = {}
-        pi_estrella     = self.distribucion_estacionaria()
+        # Leemos el estado ingresado
+        if estado in self.S :
+            estado = int( self.S.index(estado) )
+        elif not ( isinstance( estado, int) and 0 <= estado < self.n ) :
+            raise ValueError( 'Parametro estado no se entiende!' )
 
-        for estado in pi_estrella :
-            tiempo_esperado[estado] = 1.0 / pi_estrella[estado]
-
-        return tiempo_esperado
-
-    def tiempo_esperado_de_primer_paso( self, estado) :
-        """
-        Computa el tiempo esperado de primer paso desde cada estado hasta
-        el estado espeficicado
-
-        @param estado Estado hacia el cual nos interesa calcular el tiempo esperado
-                      de primer paso. Puede ser un estado o un indice de estado.
-
-        @return El tiempo esperado de primer paso desde cada estado hacia el
-                estado especificado como un diccionario, si la cadena es ergodica;
-                caso contrario, se imprime un mensaje indicando que la cadena
-                no es ergodica y se retorna None.
-        """
-
-        # Verifica que se haya provisto un estado final
-        if estado is None :
-            raise ValueError( 'Provea un estado hacia el cual desea calcular ' +
-                              'el tiempo esperado de primer paso.' )
-
-        # Si el estado final se espefica como un indice no hacemos nada;
-        # caso contrario buscamos el indice del estado
-        if not isinstance( estado, int) or not ( 0 <= estado < self.num_estados ) :
-            try :
-                estado = int( self.estados.index(estado) )
-            except Exception :
-                raise ValueError( 'Estado \'' + str(estado) + '\' no existe' )
-
+        # Construye la matriz P_menos_estado
+        P_menos_estado = self.P
+        P_menos_estado[ :, estado] = 0.0
         # Declara la matriz del lado izquierdo A = I - P
-        matriz_A = np.identity( self.num_estados) - self.matrix_P
+        matriz_A = np.identity( self.n) - P_menos_estado
         # Declara el vector del lado derecho b = 1
-        vector_b = np.ones( shape = ( self.num_estados) )
-
-        # Reemplaza la fila de la matriz A y la entrada del vector b asociada con
-        # el estado final de tal manera que la ecuacion asociada con esa fila es
-        # 1.0 * T_{estado_final} = 0
-        matriz_A[ estado, :]      = 0.0
-        matriz_A[ estado, estado] = 1.0
-        vector_b[ estado]         = 0.0
+        vector_b = np.ones( shape = ( self.n) )
 
         # Computa los tiempos esperados de primer paso para cada estado
         # resolviendo el sistema A * vector_T = b
@@ -412,31 +272,31 @@ class CadenaDeMarkov :
             print( 'Esta cadena no es ergodica!' )
             return None
 
-        # Construye el diccionario de tiempos esperados de primer paso
-        tiempo_esperado = {}
-        for ( i, estado) in enumerate(self.estados) :
-            tiempo_esperado[estado] = vector_T[i]
+        # Construye el diccionario de tiempos esperados de primera visita
+        tiempo_primera_visita = {}
+        for ( i, estado) in enumerate(self.S) :
+            tiempo_primera_visita[estado] = vector_T[i]
 
-        return tiempo_esperado
+        return tiempo_primera_visita
 
-    def funcion_de_valor( self, funcion_recompensa, factor_descuento) :
+    def valor_actual_neto( self, valor_por_estado, factor_descuento) :
         """
-        Computa la funcion de valor por estado de acuerdo a la funcion de recompensa
-        ingresada y el factor de descuento.
+        Si la cadena es ergodica, computa el valor esperado del
+        valor actual neto (VAN) a ser recolectad desde cada estado.
 
-        @param funcion_recompensa Funcion de recompensa por estado como
-               un diccionario de estados a valores.
+        @param valor_por_estado Diccionario de estados a valores reales.
         @param factor_descuento Factor de descuento.
 
-        @return La funcion de valor como un diccionario de estados a valores.
+        @return Si la cadena es ergodica, el valor esperado del valor
+        actual neto a ser recolectado desde cada estado, como un diccionario.
         """
 
         # Declara la matriz del lado izquierdo A = I - factor_descuento * P
-        matriz_A = np.identity( self.num_estados) - factor_descuento * self.matrix_P
+        matriz_A = np.identity( self.n) - factor_descuento * self.P
         # Declara el vector del lado derecho b = funcion_recompensa
-        vector_b = np.ones( shape = ( self.num_estados) )
-        for ( i, estado) in enumerate(self.estados) :
-            vector_b[i] = funcion_recompensa[estado]
+        vector_b = np.ones( shape = ( self.n) )
+        for ( i, estado) in enumerate(self.S) :
+            vector_b[i] = valor_por_estado[estado]
 
         # Computa la funcion de valor resolviendo el sistema A * vector_V = b
         try :
@@ -446,8 +306,8 @@ class CadenaDeMarkov :
             return None
 
         # Construye el diccionario asociado con la funcion de valor
-        funcion_de_valor = {}
-        for ( i, estado) in enumerate(self.estados) :
-            funcion_de_valor[estado] = vector_V[i]
+        valor_actual_neto = {}
+        for ( i, estado) in enumerate(self.S) :
+            valor_actual_neto[estado] = vector_V[i]
 
-        return funcion_de_valor
+        return valor_actual_neto

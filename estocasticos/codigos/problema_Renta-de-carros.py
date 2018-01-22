@@ -21,13 +21,15 @@ cadena = CadenaDeMarkov( S, P)
 
 # Propaga la distribucion inicial dos pasos
 dist_inicial = { estado : 0.25 for estado in S }
-pi_2 = cadena.propaga_distribucion( dist_inicial, 2)
+pi_2         = cadena.propaga_distribucion( dist_inicial, 2)
 # Calcula el numero esperado de carros en cada ciudad
 num_carros = { estado : 400 * pi_2[estado] for estado in S }
 
 # Computa la distribucion estacionaria
 pi_estrella = cadena.distribucion_estacionaria()
-num_carros_estacionaria = { estado : 400 * pi_estrella[estado] for estado in S }
+num_carros  = { estado : 400 * pi_estrella[estado] for estado in S }
 
+# Computa el tiempo esperado de retorno a cada estado
+tiempo_retorno = cadena.tiempo_esperado_de_retorno()
 # Computa el tiempo esperado de primer paso hacia Atlanta
-tiempo_retorno = cadena.tiempo_esperado_de_primer_paso( 'Chicago')
+tiempo_primera_visita = cadena.tiempo_esperado_de_primera_visita( 'Chicago')
