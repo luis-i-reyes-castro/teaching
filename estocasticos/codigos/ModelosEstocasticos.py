@@ -49,8 +49,7 @@ class CadenaDeMarkov :
         # Verifica que cada fila de la matriz de transicion corresponda a
         # una distribucion valida
         for fila in range( self.n) :
-
-            # avisa si alguna entrada es negativa
+            # Avisa si alguna entrada es negativa
             cols_malas = matriz_transicion[fila,:] < 0.0
             if np.any( cols_malas) :
                 todas_cols = np.arange( self.n)
@@ -58,8 +57,7 @@ class CadenaDeMarkov :
                 raise ValueError( 'Matriz de transicion tiene entradas negativas ' +
                                   'en la fila ' + str(fila) + ' columnas ' +
                                   tuple(cols_malas) )
-
-            # avisa si la suma de las  entradas es diferente de uno
+            # Avisa si la suma de las  entradas es diferente de uno
             suma_entradas = np.sum( matriz_transicion[fila,:] )
             if abs( suma_entradas - 1.0 ) > 1E-8 :
                 raise Warning( 'Matriz de transicion tiene fuga o exceso de ' +
@@ -197,7 +195,7 @@ class CadenaDeMarkov :
         # Reemplaza la ultima fila de matriz_A con unos
         matriz_A[ -1, :] = 1.0
         # Reemplaza la ultima entrada de vector_b con uno
-        vector_b[-1] = 1.0
+        vector_b[ -1]    = 1.0
 
         # Computa la distribucion estacionaria
         try :
@@ -363,6 +361,107 @@ class CadenaDeMarkov :
 
         return valor_actual_neto
 
+class CadenaDeMarkovEnTiempoContinuo :
+    """
+    Implementa las principales funciones de una Cadena de Markov en
+    Tiempo Continuo.
+    """
+
+    def __init__( self, estados, matriz_transicion) :
+        """
+        Constructor
+
+        @param estados: Lista de estados, donde cada estado es representado por
+                        una cadena de caracteres (i.e. un tipo string).
+        @param matriz_P: Matriz de transicion. Debe ser un arreglo numpy
+                         de tamano (n,n), donde n es el numero de estados.
+        """
+
+        # Copia los datos ingresados
+        self.S = estados
+        self.n = len(estados)
+        self.Q = matriz_transicion
+
+        # Verifica que el parametro estados sea una lista no-vacia
+        if not isinstance( estados, list) :
+            raise ValueError( 'Parametro estados debe ser una lista' )
+        if len(estados) < 2 :
+            raise ValueError( 'Numero de estados debe ser al menos dos' )
+
+        # Verifica que el parametro matriz de transicion sea un arreglo numpy
+        if not isinstance( self.Q, np.ndarray) :
+            raise ValueError( 'Matriz de transicion debe ser un arreglo numpy' )
+
+        # Verifica que la matriz de transicion tenga tamano n-por-n
+        tamano_correcto = ( self.n, self.n)
+        if not np.shape( self.Q) == tamano_correcto :
+            raise ValueError( 'Matriz de transicion debe ser un arreglo numpy ' +
+                              'de tamano ' + str(tamano_correcto) )
+
+        # Valida cada fila (estado) de la matriz de transicion
+        for fila in range( self.n) :
+            # Avisa si alguna entrada es negativa
+            cols_malas = self.Q[fila,:] < 0.0
+            if np.any( cols_malas) :
+                todas_cols = np.arange( self.n)
+                cols_malas = todas_cols[cols_malas]
+                raise ValueError( 'Matriz de transicion tiene entradas negativas ' +
+                                  'en la fila ' + str(fila) + ' columnas ' +
+                                  tuple(cols_malas) )
+            # Avisa si el estado tiene una transicion a si mismo
+            if np.abs( self.Q[fila,fila] ) > 1E-6 :
+                raise ValueError( 'Matriz de transicion tiene un valor ' +
+                                  'diferente de cero en su entrada diagonal ' +
+                                  str( tuple(fila,fila) ) )
+
+        return
+
+    def contenidos( self) :
+        """
+        Retorna los contenidos como un diccionario.
+
+        @return Diccionario que contiene dos entradas: 'estados' contiene una
+        lista de los estados, 'matriz_transicion' contiene la matriz de transicion
+        como arreglo numpy.
+        """
+
+        return { 'estados' : self.S, 'matriz_transicion' : self.Q }
+
+    def distribucion_estacionaria( self) :
+        """
+        Si la cadena es ergodica, computa la distribucion estacionaria.
+
+        @return Si la cadena es ergodica, la distribucion estacionaria
+                como un diccionario; caso contrario, se imprime un mensaje
+                indicando que la cadena no es ergodica y se retorna None.
+        """
+
+        # Declara la matriz Q diagonal
+        matriz_Q_diagonal = np.diag( np.sum( self.Q, axis = 1) )
+        # Declara la matriz del lado izquierdo A = Q' - Q_diagonal
+        matriz_A = self.Q.transpose() - matriz_Q_diagonal
+        # Declara el vector del lado derecho b = 0
+        vector_b = np.zeros( shape = ( self.n,) )
+
+        # Reemplaza la ultima fila de matriz_A con unos
+        matriz_A[ -1, :] = 1.0
+        # Reemplaza la ultima entrada de vector_b con uno
+        vector_b[ -1]    = 1.0
+
+        # Computa la distribucion estacionaria
+        try :
+            vector_pi = np.linalg.solve( matriz_A, vector_b)
+        except np.linalg.LinAlgError :
+            print( 'Esta cadena no es ergodica!' )
+            return None
+
+        # Construye el diccionario de la distribucion estacionaria
+        pi_estrella = {}
+        for ( i, estado) in enumerate(self.S) :
+            pi_estrella[estado] = vector_pi[i]
+
+        return pi_estrella
+
 class ProcesoDeDecisionMarkoviano :
     """
     Implementa las principales funciones de un Proceso de Decision Markoviano.
@@ -394,50 +493,4 @@ class ProcesoDeDecisionMarkoviano :
         self.T = transiciones
         self.V = valores
 
-        # Verifica que el parametro estados sea una lista no-vacia
-        if not isinstance( estados, list) :
-            raise ValueError( 'Parametro estados debe ser una lista' )
-        if len(estados) < 2 :
-            raise ValueError( 'Numero de estados debe ser al menos dos' )
-
-        # Verifica que el parametro matriz de transicion sea un arreglo numpy
-        if not isinstance( matriz_transicion, np.ndarray) :
-            raise ValueError( 'Matriz de transicion debe ser un arreglo numpy' )
-
-        # Verifica que la matriz de transicion tenga tamano n-por-n
-        tamano_correcto = ( self.n, self.n)
-        if not np.shape( matriz_transicion) == tamano_correcto :
-            raise ValueError( 'Matriz de transicion debe ser un arreglo numpy ' +
-                              'de tamano ' + str(tamano_correcto) )
-
-        # Verifica que cada fila de la matriz de transicion corresponda a
-        # una distribucion valida
-        for fila in range( self.n) :
-
-            # avisa si alguna entrada es negativa
-            cols_malas = matriz_transicion[fila,:] < 0.0
-            if np.any( cols_malas) :
-                todas_cols = np.arange( self.n)
-                cols_malas = todas_cols[cols_malas]
-                raise ValueError( 'Matriz de transicion tiene entradas negativas ' +
-                                  'en la fila ' + str(fila) + ' columnas ' +
-                                  tuple(cols_malas) )
-
-            # avisa si la suma de las  entradas es diferente de uno
-            suma_entradas = np.sum( matriz_transicion[fila,:] )
-            if abs( suma_entradas - 1.0 ) > 1E-8 :
-                raise Warning( 'Matriz de transicion tiene fuga o exceso de ' +
-                               'probabilidad en la fila ' + str(fila) )
-
         return
-
-    def contenidos( self) :
-        """
-        Retorna los contenidos como un diccionario.
-
-        @return Diccionario que contiene dos entradas: 'estados' contiene una
-        lista de los estados, 'matriz_transicion' contiene la matriz de transicion
-        como arreglo numpy.
-        """
-
-        return { 'estados' : self.S, 'matriz_transicion' : self.P }
