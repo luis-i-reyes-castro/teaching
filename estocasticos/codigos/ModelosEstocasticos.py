@@ -493,4 +493,112 @@ class ProcesoDeDecisionMarkoviano :
         self.T = transiciones
         self.V = valores
 
+        # Para cada estado...
+        for estado in self.S :
+
+            # Verifica que haya al menos una accion disponible
+            if estado not in self.A :
+                raise ValueError( 'No se ha provisto una lista de acciones validas ' +
+                                  'para el estado ' + str(estado) )
+            elif not isinstance( self.A[estado], ( list, tuple)) :
+                raise ValueError( 'Provea una lista o tupla de acciones validas ' +
+                                  'para el estado ' + str(estado) )
+            elif len( self.A[estado] ) == 0 :
+                raise ValueError( 'Provea al menos una accion valida ' +
+                                  'para el estado ' + str(estado) )
+
+            # Verifica las transiciones
+            for accion in self.A[estado] :
+                if ( estado, accion) not in self.T :
+                    raise ValueError( 'Para el estado ' + str(estado) +
+                                      ' se ha provisto la accion ' + str(accion) +
+                                      ' pero no se ha provisto su transicion' )
+                elif not isinstance( self.T[ ( estado, accion) ], dict) :
+                    raise ValueError( 'Para el estado ' + str(estado) +
+                                      ' se ha provisto la accion ' + str(accion) +
+                                      ' pero no se ha provisto un diccionario ' +
+                                      ' que represente la distribucion sobre los ' +
+                                      ' estados sucesores' )
+                else :
+                    prob = 0.0
+                    for estado_sucesor in self.T[ ( estado, accion) ] :
+                        if estado_sucesor not in self.S :
+                            raise ValueError( 'Para el par estado-accion ' +
+                                              str(estado) + '-' + str(accion) +
+                                              ' la transicion al estado ' +
+                                              str(estado_sucesor) + ' es invalida' )
+                        elif self.T[ ( estado, accion) ][ estado_sucesor] < 0.0 :
+                            raise ValueError( 'Para el par estado-accion ' +
+                                              str(estado) + '-' + str(accion) +
+                                              ' la transicion al estado ' +
+                                              str(estado_sucesor) + ' tiene' +
+                                              ' probabilidad negativa' )
+                        else :
+                            prob += self.T[ ( estado, accion) ][ estado_sucesor]
+
+                    if abs( prob - 1.0 ) > 1E-6 :
+                        raise ValueError( 'Para el par estado-accion ' +
+                                          str(estado) + '-' + str(accion) +
+                                          ' el diccionario de probabilidades de' +
+                                          ' transicion no suma a uno' )
+            # Verifica los valores (recompensas o costos) de las transiciones
+            for accion in self.A[estado] :
+                if ( estado, accion) not in self.V :
+                    raise ValueError( 'Para el estado ' + str(estado) +
+                                      ' se ha provisto la accion ' + str(accion) +
+                                      ' pero no se ha provisto su valor' +
+                                      ' (i.e., recompensa o costo)' )
+
+            # Convierte las transiciones de diccionarios a arreglos numpy
+            for accion in self.A[estado] :
+                vector = np.zeros( shape = ( self.n) )
+                for estado_sucesor in self.T[ ( estado, accion) ].keys() :
+                    i = self.S.index(estado_sucesor)
+                    vector[i] = self.T[ ( estado, accion) ][ estado_sucesor]
+                self.T[ ( estado, accion) ] = vector
+
         return
+
+    def verifica_politica( self, politica) :
+
+        if not isinstance( politica, dict) :
+            raise ValueError( 'Politica debe ser ingresada como un diccionario' )
+        else :
+            for estado in self.S :
+                if estado not in politica :
+                    raise ValueError( 'Politica ingresada no asigna ninguna accion ' +
+                                      'al estado ' + str(estado) )
+                elif politica[estado] not in self.A[estado] :
+                    raise ValueError( 'Politica ingresada no asigna una accion ' +
+                                      'valida al estado ' + str(estado) )
+
+        return
+
+    def imprime_politica( self, politica) :
+
+        print( 'POLITICA:' )
+        for estado in self.S :
+            accion = politica[estado]
+            msg = 'Estado: ' + str(estado) + ' --> '
+            msg += 'Accion: ' + str(accion)
+
+        return
+
+    def evalua_politica( self, politica) :
+
+        self.verifica_politica( politica)
+
+        P = np.zeros( shape = ( self.n, self.n) )
+        V = {}
+        for ( i, estado) in self.S :
+            accion = politica[estado]
+            P[i,:] = self.T[ ( estado, accion) ]
+            V[estado] = self.V[ ( estado, accion) ]
+
+        cadena      = CadenaDeMarkov( self.S, P)
+        pi_estrella = cadena.distribucion_estacionaria()
+        valor       =  0.0
+        for estado in self.S :
+            valor += pi_estrella[estado] * V[estado]
+
+        return valor
