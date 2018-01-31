@@ -1,0 +1,43 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+%\graphicspath{{./figures/}}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{04}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Lecci\'on \numero \\[2ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino II \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[16 Puntos]} Suponga que en un futuro cercano una empresa se dedica a transportar pasageros entre sus dos estaciones en Guayaquil y Salinas utilizando carros aut\'onomos. \linebreak La empresa tiene una flota de $N = 7$ carros que oscila entre sus dos estaciones, y cada carro puede ser utilizado no m\'as de una vez al d\'ia. Todas las ma\~nanas, cada cada carro que amanece en la estaci\'on de Guayaquil es utilizado por alg\'un cliente para ir a Salinas con probabilidad igual a $p$. Similarmente, cada cada carro que amanece en la estaci\'on de Salinas es utilizado por alg\'un cliente para ir a Guayaquil con probabilidad $q$. La empresa percibe ingresos de $u$ d\'olares por viaje, sin importar su direcci\'on. 
+
+Puesto que usualmente $p > q$, \ie en promedio m\'as clientes quieren viajar de Guayaquil a Salinas que de Salindas a Guayaquil, la empresa usualmente debe re-balancear su flota, lo cual siempre hace de noche despu\'es de cerrar sus operaciones por el d\'ia. Para esto se ordena a los carros manejarse vac\'ios de una estaci\'on a otra. El costo de cada viaje vac\'io de re-balanceo es de $c$ d\'olares. Por seguridad, un ser humano debe monitorear el viaje de los veh\'iculos en una computadora, por lo que el n\'umero de carros que se re-balancea por noche no puede exceder de $M = 3$. Por esta misma raz\'on, se incurre un costo fijo de $4c$ d\'olares por re-balanceo, sin importar el n\'umero de carros movidos. 
+
+Con todo esto en mente, modele el problema de encontrar una pol\'itica \'optima de re-balanceo como un Proceso de Decisi\'on Markoviano (PDM). 
+
+\emph{Nota:} Suponga que todos los carros aut\'onomos son id\'enticos. De esta manera, usted puede darse cuenta f\'acilmente que los viajes de re-balanceo siempre ser\'an en una sola direcci\'on. 
+
+\emph{Sugerencia:} Para ahorrarse tiempo al describir las probabilidades de transici\'on para cada par estado-acci\'on, por favor utilice la siguiente notaci\'on: 
+\begin{align*}
+\alpha_p^m(k) \; & \define \; \Pr( \, \Binomial(p,m) = k \, ) \\
+\alpha_q^m(k) \; & \define \; \Pr( \, \Binomial(q,m) = k \, )
+\end{align*}
+
+\end{problem}
+\fullskip
+
+\end{document}
