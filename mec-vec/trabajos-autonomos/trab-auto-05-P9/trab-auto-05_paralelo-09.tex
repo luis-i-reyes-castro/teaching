@@ -19,9 +19,6 @@
 \end{center}
 \fullskip
 
-\newcommand{\uvec}[1]{\vec{\hat{#1}}}
-\newcommand{\cross}{\,\vec{\times}\,}
-
 % =============================================
 \begin{problem}
 \textbf{[4 Puntos]} Cada uno de los engranes $A$ y $B$ pesa 20 lbs y tiene un radio de giro de 7.5 in; el engrane $C$ pesa 5 lb y tiene un radio de giro de 3 in. Si un par $M$ de magnitud constante de 50 lb-in se aplica al engrane $C$, determine \textit{(i)} la aceleraci\'on angular del engrane $A$, \linebreak \textit{(ii)} la fuerza tangencial que ejerce el engrane $C$ sobre el engrane $A$.
@@ -64,9 +61,9 @@ Consecuentemente, la sumatoria de torques en el engrane $C$ resulta en:
 -2 \, I_{AB} \left( \frac{r_C}{r_{AB}} \right)^2 \alpha_C \; - \; M
 \; = \; I_C \, \alpha_C \quad
 & \Longrightarrow \;
-\alpha_C \; = \; -572.53 \, \vec{\hat{k}} \; \text{ rad/s\tsup{2}} \\
+\alpha_C \; = \; -572.53 \, \uvec{k} \; \text{ rad/s\tsup{2}} \\
 & \Longrightarrow \;
-\alpha_A \; = \; +229.01 \, \vec{\hat{k}} \; \text{ rad/s\tsup{2}}
+\alpha_A \; = \; +229.01 \, \uvec{k} \; \text{ rad/s\tsup{2}}
 \end{align*}
 Finalmente, la fuerza tangencial deseada es: 
 \[
@@ -86,11 +83,11 @@ F_A \; = \; F_B \; = \; 66.67 \; \text{lbs}
 \includegraphics[width=0.4\textwidth]{problema-2.jpg}
 \end{figure}
 
-\emph{Soluci\'on:} Primero localizamos el centro de masa del ensamble. Para esto ubicamos el origen del sistema de referencia en $C$ y definimos al centro de masa como $\vec{r_G} = r_G \, \vec{\hat{i}}$. Entonces: 
+\emph{Soluci\'on:} Primero localizamos el centro de masa del ensamble. Para esto ubicamos el origen del sistema de referencia en $C$ y definimos al centro de masa como $\vec{r_G} = r_G \, \uvec{i}$. Entonces: 
 \[
 r_G \; = \; \frac{(5)(0) + (1.5)(0.140)}{5+1.5} \; = \;
 0.0323 \; \text{m} \quad \Longrightarrow \quad
-\vec{r_G} \; = \; 0.0323 \, \vec{\hat{i}} \; \text{m}
+\vec{r_G} \; = \; 0.0323 \, \uvec{i} \; \text{m}
 \]
 Despu\'es calculamos su momento de inercia utilizando el Teorema de Steiner: 
 \begin{align*}
@@ -110,7 +107,7 @@ M \, (\vec{a_G})_x \; & = \; C_x \\
 M \, (\vec{a_G})_y \; & = \; C_y - M g \\
 I \, \alpha \; & = \; -r_G \, C_y
 \end{align*}
-Ahora debemos relacionar $\vec{a_G}$ con $\alpha$ utilizando restricciones cinem\'aticas. Recordando que la velocidad angular del ensamble es $\vec{\omega} = -10 \, \vec{\hat{k}}$ rad/s, vemos que: 
+Ahora debemos relacionar $\vec{a_G}$ con $\alpha$ utilizando restricciones cinem\'aticas. Recordando que la velocidad angular del ensamble es $\vec{\omega} = -10 \, \uvec{k}$ rad/s, vemos que: 
 \begin{align*}
 \vec{a_G} \; & = \;
 \vec{a_C} + \vec{\alpha} \cross \vec{r_{CG}} + 

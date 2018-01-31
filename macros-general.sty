@@ -41,7 +41,17 @@
 \renewcommand{\epsilon}{\varepsilon}
 \renewcommand{\hat}[1]{\widehat{#1}}
 \renewcommand{\tilde}[1]{\widetilde{#1}}
+
+% Vectors
 \renewcommand{\vec}[1]{{\boldsymbol{#1}}}
+\newcommand{\uvec}[1]{\vec{\hat{#1}}}
+\newcommand{\cross}{\,\vec{\times}\,}
+\newcommand{\colvec}[2]{
+\left[
+\begin{array}{c}
+#1 \\ #2
+\end{array}
+\right]}
 
 % Optimization & Probability
 \DeclareMathOperator*{\argmax}{arg\,max}
