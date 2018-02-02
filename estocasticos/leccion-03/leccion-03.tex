@@ -67,12 +67,16 @@ Ahora normalizamos para hallar la probabilidad del estado cero:
 \pi_0 \, \sum_{k=0}^7 \rho^k \; = \; 1 \quad \Longrightarrow \quad
 \pi_0 \; = \; \left( \sum_{k=0}^7 \rho^k \right)^{-1}
 \]
+Con esta probabilidad a la mano es f\'acil computar las siguienes, puesto que $\pi_1 = \rho \, \pi_0$ y que para todo $k \geq 2$ es el caso que: 
+\[
+\pi_{k} \; = \; \rho \, \pi_{k-1}
+\]
 Consecuentemente: 
 \begin{table}[htb]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
-\textbf{Estado} $\boldsymbol{i}$ & $\boldsymbol{\pi_i} \; ( \lambda = 10 )$ & $\boldsymbol{\pi_i} \; ( \lambda = 15 )$ & $\boldsymbol{\pi_i} \; ( \lambda = 25 )$ \\ \hline
+\textbf{Estado} $\boldsymbol{k}$ & $\boldsymbol{\pi_k} \; ( \lambda = 10 )$ & $\boldsymbol{\pi_k} \; ( \lambda = 15 )$ & $\boldsymbol{\pi_k} \; ( \lambda = 25 )$ \\ \hline
 0 & 0.502 & 0.278 & 0.050 \\ \hline
 1 & 0.251 & 0.209 & 0.063 \\ \hline
 2 & 0.126 & 0.156 & 0.078 \\ \hline
@@ -85,6 +89,79 @@ Consecuentemente:
 \end{table}
 
 \item \textbf{2 Puntos:} Para cada uno de los tres casos anteriores, eval\'ue si se cumplen o no los requisitos de la FAA. 
+
+\emph{Soluci\'on:} Los requisitos de la FAA se traducen de la siguiente manera: 
+\begin{itemize}
+\item El primer requerimiento equivale a exigir que el n\'umero promedio de clientes en cola sea menor o igual a uno. \Iec
+\[
+\Exp[L_q] \; = \; \Exp[ \, \max \{ \, 0, X_t - 1 \} \, ]
+\; = \; \sum_{k=0}^7 \, \pi_k \, \max \{ 0, k-1 \} \; \leq \; 1
+\]
+\item Como en este caso tenemos un solo servidor, el segundo requerimiento exige que la probabilidad de que el estado del sistema sea menor o igual a cinco debe ser mayor o igual al 95\%. \Iec
+\[
+\pi_0 + \pi_1 + \pi_2 + \pi_3 + \pi_4 + \pi_5 \; \geq \; 0.95
+\qquad
+\Longleftrightarrow
+\qquad
+\pi_6 + \pi_7 \; \leq \; 0.05
+\]
+\item El tercer requerimiento exige que la probabilidad de que cada avi\'on que arriba al espacio a\'ereo del aeropuerto espera no m\'as de $t = 0.5$ horas hasta recibir aprobaci\'on para aterrizaje, \ie hasta recibir servicio. Para esto primero calculamos, para cada estado $k$ del sistema, la probabilidad de que un avi\'on que arriba al sistema en ese estado tenga que esperar no m\'as de $t$ horas para recibir servicio. N\'otese que estas probabilidades solo dependen en el estado y en la tasa de servicio ($\mu = 20$ por hora). En particular, si un cliente arriba cuando el sistema est\'a en un estado $k \geq 1$, la probabilidad de que tenga que esperar m\'as de $t$ horas para recibir servicio es la probabilidad de que una variable Erlang con par\'ametro $\mu$ y $k$ grados de libertad sea menor o igual a $t$. \Iec
+\[
+\Pr( \, W_q \leq t \mid X_t = k \, ) \; = \; 
+\Pr( \, \text{Erlang}(\mu,k) \leq t \, ) \; = \; 
+1 - \sum_{m=0}^{k-1} \frac{ ( \mu t )^k \, e^{-\mu t} }{k!}
+\]
+
+De esta manera, tenemos: 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Estado} $\boldsymbol{k}$ & \textbf{Probabilidad} $\boldsymbol{ \Pr( W_k \leq t)}$ \\ \hline
+0 & 1  \\ \hline
+1 & $\approx$1.000  \\ \hline
+2 & 0.9995  \\ \hline
+3 & 0.9972  \\ \hline
+4 & 0.9896  \\ \hline
+5 & 0.9707  \\ \hline
+6 & 0.9329  \\ \hline
+7 & 0.8698  \\ \hline
+\end{tabular}
+\end{table}
+Con estos datos a la mano, calculamos la probabilidad de que el tiempo de espera no exceda el l\'imite deseado promediando las probabilidades condicionales de arriba por la distribuci\'on estacionaria de la cadena. \Iec
+\begin{align*}
+\Pr( \, W_q \leq t \, ) \;
+& = \;
+\sum_{k=0}^7 \Pr( \, X_t = k \, ) \,
+\Pr( \, W_q \leq t \mid X_t = k \, ) \\
+& = \;
+\sum_{k=0}^7 \pi_k \, \Pr( \, W_q \leq t \mid X_t = k \, )
+\end{align*}
+
+\end{itemize}
+
+Ahora que entendemos los requerimientos en t\'erminos de teor\'ia de colas, analizamos el caso de cada tasa de arribo. 
+\begin{itemize}
+\item Para el caso cuando $\lambda = 10$ por hora, tenemos: 
+\begin{align*}
+& \Exp[L_q] \; = \; 0.473 < 1 \\
+& \pi_6 + \pi_7 \; = \; 0.012 < 0.05 \\
+& \Pr( \, W_q \leq t = 0.5 \, ) \; = \; 0.9989 > 0.99
+\end{align*}
+\item Para el caso cuando $\lambda = 15$ por hora, tenemos: 
+\begin{align*}
+& \Exp[L_q] \; = \; 1.365 > 1 \\
+& \pi_6 + \pi_7 \; = \; 0.082 < 0.05 \\
+& \Pr( \, W_q \leq t = 0.5 \, ) \; = \; 0.9849 < 0.99
+\end{align*}
+\item Para el caso cuando $\lambda = 25$ por hora, tenemos: 
+\begin{align*}
+& \Exp[L_q] \; = \; 3.635 > 1 \\
+& \pi_6 + \pi_7 \; = \; 0.429 > 0.05 \\
+& \Pr( \, W_q \leq t = 0.5 \, ) \; = \; 0.9431 < 0.99
+\end{align*}
+\end{itemize}
+En conclusi\'on, con una sola pista de aterrizaje el aeropuerto satisface los requerimientos de la FAA solo cuando la tasa de arribo es de $\lambda = 10$ aviones por hora. 
 
 \item \textbf{2 Puntos:} Suponga que se construye otra pista de aterrizaje. Recalcule la distribuci\'on estacionaria del sistema para los casos cuando la tasa de arribo es de $\lambda = 10$ por hora, $\lambda = 15$ por hora, y $\lambda = 25$ por hora. 
 
@@ -125,6 +202,10 @@ Ahora normalizamos para hallar la probabilidad del estado cero:
 2 \, \pi_0 \, \sum_{k=1}^7 \rho^k \; = \; 1 \quad \Longrightarrow \quad
 \pi_0 \; = \; \left( 1 + 2 \, \sum_{k=1}^7 \rho^k \right)^{-1}
 \]
+Con esta probabilidad a la mano es f\'acil computar las siguienes, puesto que $\pi_1 = 2 \, \rho \, \pi_0$ y que para todo $k \geq 2$ es el caso que: 
+\[
+\pi_{k} \; = \; \rho \, \pi_{k-1}
+\]
 Consecuentemente: 
 \begin{table}[htb]
 \centering
@@ -137,12 +218,67 @@ Consecuentemente:
 3 & 0.019 & 0.048 & 0.116 \\ \hline
 4 & 0.005 & 0.018 & 0.073 \\ \hline
 5 & 0.001 & 0.007 & 0.045 \\ \hline
-6 & 0.000 & 0.003 & 0.028 \\ \hline
-7 & 0.000 & 0.001 & 0.018 \\ \hline
+6 & $\approx$0.000 & 0.003 & 0.028 \\ \hline
+7 & $\approx$0.000 & 0.001 & 0.018 \\ \hline
 \end{tabular}
 \end{table}
 
 \item \textbf{2 Puntos:} Para cada uno de los tres casos anteriores, eval\'ue si se cumplen o no los requisitos de la FAA. 
+
+\emph{Soluci\'on:} Los requisitos de la FAA se traducen de la siguiente manera: 
+\begin{itemize}
+\item El primer requerimiento equivale a exigir que el n\'umero promedio de clientes en cola sea menor o igual a uno. \Iec
+\[
+\Exp[L_q] \; = \; \Exp[ \, \max \{ \, 0, X_t - 2 \} \, ]
+\; = \; \sum_{k=0}^7 \, \pi_k \, \max \{ 0, k-2 \} \; \leq \; 1
+\]
+\item Como en este caso tenemos dos servidores, el segundo requerimiento exige que la probabilidad de que el estado del sistema sea menor o igual a seis debe ser mayor o igual al 95\%. \Iec
+\[
+\pi_0 + \pi_1 + \pi_2 + \pi_3 + \pi_4 + \pi_5 + \pi_6 \; \geq \; 0.95
+\qquad
+\Longleftrightarrow
+\qquad
+\pi_7 \; \leq \; 0.05
+\]
+\item El tercer requerimiento es igual al caso anterior, excepto que ahora la tasa de servicio efectia es de $2 \mu = 40$ aviones por hora. Con esta nueva tasa, tenemos: 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Estado} $\boldsymbol{k}$ & \textbf{Probabilidad} $\boldsymbol{ \Pr( W_k \leq t)}$ \\ \hline
+0 & 1  \\ \hline
+1 & 1  \\ \hline
+2 & $\approx$ 1.000 \\ \hline
+3 & $\approx$ 1.000 \\ \hline
+4 & $\approx$ 1.000 \\ \hline
+5 & $\approx$ 1.000  \\ \hline
+6 & $\approx$ 1.000  \\ \hline
+7 & 0.9999  \\ \hline
+\end{tabular}
+\end{table}
+N\'otese que sin importar el estado, la probabilidad de que el tiempo de espera no exceda el l\'imite siempre es mayor al 99\%. Consecuentemente, conclu\'imos que sin importar la tasa de arribo, el tercer requerimiento siempre se cumple. 
+\end{itemize}
+
+Ahora que entendemos los requerimientos en t\'erminos de teor\'ia de colas, analizamos el caso de cada tasa de arribo. 
+\begin{itemize}
+\item Para el caso cuando $\lambda = 10$ por hora, tenemos: 
+\begin{align*}
+& \Exp[L_q] \; = \; 0.032 < 1 \\
+& \pi_7 \; = \; 0.000 < 0.05
+\end{align*}
+\item Para el caso cuando $\lambda = 15$ por hora, tenemos: 
+\begin{align*}
+& \Exp[L_q] \; = \; 0.122 < 1 \\
+& \pi_7 \; = \; 0.001 < 0.05
+\end{align*}
+\item Para el caso cuando $\lambda = 25$ por hora, tenemos: 
+\begin{align*}
+& \Exp[L_q] \; = \; 0.599 < 1 \\
+& \pi_7 \; = \; 0.018 < 0.05
+\end{align*}
+\end{itemize}
+En conclusi\'on, con dos pistas de aterrizaje el aeropuerto satisface los requerimientos de la FAA sin importar la tasa de arribo. 
+
 \end{enumerate}
 
 \end{problem}
@@ -150,7 +286,7 @@ Consecuentemente:
 
 % -----------------------------------------------------------------
 \begin{problem}
-\textbf{[8 Puntos]} El lunes, cierta acci\'on cerr\'o a 10 d\'olares. El martes se espera que la acci\'on cierre a 9, 10 u 11 d\'olares, con probabilidades respectivas de 0.3, 0.3 y 0.4. El mi\'ercoles, se espera que la acci\'on cierre 10\% abajo, sin cambio o 10\% arriba del cierre del martes, con las siguientes probabilidades: 
+\textbf{[8 Puntos]} El lunes, cierta acci\'on cerr\'o a 10 d\'olares. El martes se espera que la acci\'on cierre a 9, 10 u 11 d\'olares, con probabilidades respectivas de 0.3, 0.3 y 0.4. El mi\'ercoles, \linebreak se espera que la acci\'on cierre 10\% abajo, sin cambio o 10\% arriba del cierre del martes, con las siguientes probabilidades: 
 
 \begin{figure}[htb]
 \centering
@@ -165,17 +301,16 @@ El martes recibe instrucciones de comprar 100 acciones antes del jueves. Todas l
 \[
 (\$9)(0.3) + (\$10)(0.3) + (\$11)(0.4) \; = \; \$10.10
 \]
-
-Consecuentemente, el costo de la transacci\'on ser\'ia de \$1010. 
+Consecuentemente, el costo esperado de la compra ser\'ia de \$1010. 
 
 En cambio, si se espera hasta el mi\'ercoles, el \'arbol de probabilidad de precios de de cierre es como se muestra en la siguiente fotograf\'ia. 
 
-\begin{figure}[htb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.72\textwidth]{problema-2.jpg}
 \end{figure}
 
-Ahora podamos el \'arbol calculando los costos esperados en los nodos MA-9, MA-10 y MA-11. 
+Podamos el \'arbol calculando los costos esperados en los nodos MA-9, MA-10 y MA-11. 
 \begin{align*}
 & \Exp[\text{MA-9}] \; = \; 
 (\$8.10)(0.4) + (\$9.00)(0.3) + (\$9.90)(0.3)
@@ -184,8 +319,13 @@ Ahora podamos el \'arbol calculando los costos esperados en los nodos MA-9, MA-1
 (\$9.00)(0.2) + (\$10.00)(0.2) + (\$11.00)(0.6)
 \; = \; 10.40 \\
 & \Exp[\text{MA-11}] \; = \; 
-(\$9.90)(0.1) + (\$11.0)(0.2) + (\$12.10)(0.7) \; = \; 
+(\$9.90)(0.1) + (\$11.0)(0.2) + (\$12.10)(0.7) \; = \; \$11.66
 \end{align*}
-
+Finalmente, calculamos el costo esperado del nodo L-10. 
+\[
+\Exp[\text{L-10}] \; = \;
+(\$8.91)(0.3) + (\$10.40)(0.3) + (\$11.66)(0.4) \; = \; \$10.46
+\]
+Vemos as\'i que el costo esperado de la compra en este caso ser\'ia de \$1046, \ie \$36 m\'as de lo que costar\'ia comprarla el martes. Conclu\'imos as\'i que la estrategia \'optima es comprar las acciones el martes. 
 
 \end{document}
