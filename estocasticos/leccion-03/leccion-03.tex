@@ -23,15 +23,125 @@
 
 % -----------------------------------------------------------------
 \begin{problem}
-El aeropuerto internacional de Centerville tiene dos pistas, una solo para despegues y otra solo para aterrizajes. Los aviones llegan al espacio a\'ereo del aeropuerto, el cual tiene una capacidad para $C = 7$ aeronaves, para pedir instrucciones de aterrizaje seg\'un un proceso de Poisson con tasa media de $\lambda$ por hora. El tiempo que se requiere para realizar un aterrizaje despu\'es de la aprobaci\'on tiene distribuci\'on exponencial con media de $\mu = 3$ minutos, proceso que debe estar terminado antes de aprobar otro aterrizaje. Los aviones en espera de pista vuelan en c\'irculos. 
+El aeropuerto internacional de Centerville tiene dos pistas, una solo para despegues y otra solo para aterrizajes. Los aviones llegan al espacio a\'ereo del aeropuerto, el cual tiene una capacidad para $C = 7$ aeronaves, para pedir instrucciones de aterrizaje seg\'un un proceso de Poisson con tasa media de $\lambda$ por hora. El tiempo que se requiere para realizar un aterrizaje despu\'es de la aprobaci\'on tiene distribuci\'on exponencial con media de 3 minutos, proceso que debe estar terminado antes de aprobar otro aterrizaje. Los aviones en espera de pista vuelan en c\'irculos. 
 
 La FAA (Administraci\'on de Aviaci\'on Federal, por sus siglas en ing\'es) tiene varios criterios respecto del nivel seguro de congesti\'on de aviones en espera para aterrizar. Estos criterios dependen de varios factores en cada aeropuerto, como el n\'umero de pistas disponibles. En el caso de Centerville los criterios son \textit{(i)} el n\'umero promedio de aviones en espera no debe exceder de 1, \textit{(ii)} el 95\% del tiempo, el n\'umero real de aviones en espera no debe exceder de 4, y \textit{(iii)} para el 99\% de los aviones, el tiempo que vuelan en c\'irculos antes de aterrizar no debe exceder de 30 minutos. 
 
 Complete las siguientes actividades: 
 \begin{enumerate}[label=\textbf{\alph*)}]
 \item \textbf{2 Puntos:} Calcule la distribuci\'on estacionaria del sistema para los casos cuando la tasa de arribo es de $\lambda = 10$ por hora, $\lambda = 15$ por hora, y $\lambda = 25$ por hora. 
+
+\emph{Soluci\'on:} Primero reconocemos que como solo hay una pista de aterrizaje, este problema corresponde a un modelo M/M/1/7 cuya tasa de servicio por pista es de $\mu = 20$ aeronaves por hora. Luego podemos bosquejar la Cadena de Markov correspondiente, tal como se muestra en la siguiente fotograf\'ia. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.8\textwidth]{problema-1-A.jpg}
+\end{figure}
+
+Para esta cadena, definiendo $\rho \define \lambda / \mu$, tenemos: 
+\begin{align*}
+& \lambda = 10 \quad \Longrightarrow \quad \rho = 0.50 \\
+& \lambda = 15 \quad \Longrightarrow \quad \rho = 0.75 \\
+& \lambda = 25 \quad \Longrightarrow \quad \rho = 1.25
+\end{align*}
+Las ecuaciones de balance son: 
+\begin{align*}
+& E_0 \; \colon \; \lambda \, \pi_0 \; = \; \mu \, \pi_1
+\quad \Longrightarrow \quad
+\pi_1 \; = \; \rho \, \pi_0 \\
+& E_1 \; \colon \; (\lambda + \mu) \, \pi_1
+\; = \; \lambda \, \pi_0 + \mu \, \pi_2
+\quad \Longrightarrow \quad
+\pi_2 \; = \; \rho^2 \, \pi_0 \\
+& E_2 \; \colon \; (\lambda + \mu) \, \pi_2
+\; = \; \lambda \, \pi_1 + \mu \, \pi_3
+\quad \Longrightarrow \quad
+\pi_3 \; = \; \rho^3 \, \pi_0 \\
+& \vdots \\
+& E_k \; \colon \; (\lambda + \mu) \, \pi_{k} \; = \; \lambda \, \pi_{k-1} + \mu \, \pi_{k+1} \quad \Longrightarrow \quad
+\pi_{k+1} \; = \; \rho^{k+1} \, \pi_0 \\
+& \vdots
+\end{align*}
+Ahora normalizamos para hallar la probabilidad del estado cero: 
+\[
+\pi_0 \, \sum_{k=0}^7 \rho^k \; = \; 1 \quad \Longrightarrow \quad
+\pi_0 \; = \; \left( \sum_{k=0}^7 \rho^k \right)^{-1}
+\]
+Consecuentemente: 
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Estado} $\boldsymbol{i}$ & $\boldsymbol{\pi_i} \; ( \lambda = 10 )$ & $\boldsymbol{\pi_i} \; ( \lambda = 15 )$ & $\boldsymbol{\pi_i} \; ( \lambda = 25 )$ \\ \hline
+0 & 0.502 & 0.278 & 0.050 \\ \hline
+1 & 0.251 & 0.209 & 0.063 \\ \hline
+2 & 0.126 & 0.156 & 0.078 \\ \hline
+3 & 0.063 & 0.117 & 0.098 \\ \hline
+4 & 0.031 & 0.088 & 0.122 \\ \hline
+5 & 0.016 & 0.066 & 0.153 \\ \hline
+6 & 0.008 & 0.045 & 0.191 \\ \hline
+7 & 0.004 & 0.037 & 0.238 \\ \hline
+\end{tabular}
+\end{table}
+
 \item \textbf{2 Puntos:} Para cada uno de los tres casos anteriores, eval\'ue si se cumplen o no los requisitos de la FAA. 
+
 \item \textbf{2 Puntos:} Suponga que se construye otra pista de aterrizaje. Recalcule la distribuci\'on estacionaria del sistema para los casos cuando la tasa de arribo es de $\lambda = 10$ por hora, $\lambda = 15$ por hora, y $\lambda = 25$ por hora. 
+
+\emph{Soluci\'on:} Como ahora hay dos pistas de aterrizaje, este problema corresponde a un modelo M/M/2/7 cuya tasa de servicio por pista es de $\mu = 20$ aeronaves por hora. Luego podemos bosquejar la Cadena de Markov correspondiente, tal como se muestra en la siguiente fotograf\'ia. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.8\textwidth]{problema-1-B.jpg}
+\end{figure}
+
+Para esta cadena, definiendo $\rho \define \lambda / ( 2 \mu )$, tenemos: 
+\begin{align*}
+& \lambda = 10 \quad \Longrightarrow \quad \rho = 0.250 \\
+& \lambda = 15 \quad \Longrightarrow \quad \rho = 0.375 \\
+& \lambda = 25 \quad \Longrightarrow \quad \rho = 0.625
+\end{align*}
+Las ecuaciones de balance son: 
+\begin{align*}
+& E_0 \; \colon \; \lambda \, \pi_0 \; = \; \mu \, \pi_1
+\quad \Longrightarrow \quad
+\pi_1 \; = \; 2 \, \rho \, \pi_0 \\
+& E_1 \; \colon \; (\lambda + \mu) \, \pi_1
+\; = \; \lambda \, \pi_0 + 2 \, \mu \, \pi_2
+\quad \Longrightarrow \quad
+\pi_2 \; = \; 2 \, \rho^2 \, \pi_0 \\
+& E_2 \; \colon \; (\lambda + 2 \mu) \, \pi_2
+\; = \; \lambda \, \pi_1 + 2 \, \mu \, \pi_3
+\quad \Longrightarrow \quad
+\pi_3 \; = \; 2 \, \rho^3 \, \pi_0 \\
+& \vdots \\
+& E_k \; \colon \; (\lambda + 2\mu) \, \pi_{k} \; = \; \lambda \, \pi_{k-1} + 2 \, \mu \, \pi_{k+1} \quad \Longrightarrow \quad
+\pi_{k+1} \; = \; 2 \, \rho^{k+1} \, \pi_0 \\
+& \vdots
+\end{align*}
+Ahora normalizamos para hallar la probabilidad del estado cero: 
+\[
+\pi_0 + 
+2 \, \pi_0 \, \sum_{k=1}^7 \rho^k \; = \; 1 \quad \Longrightarrow \quad
+\pi_0 \; = \; \left( 1 + 2 \, \sum_{k=1}^7 \rho^k \right)^{-1}
+\]
+Consecuentemente: 
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Estado} $\boldsymbol{i}$ & $\boldsymbol{\pi_i} \; ( \lambda = 10 )$ & $\boldsymbol{\pi_i} \; ( \lambda = 15 )$ & $\boldsymbol{\pi_i} \; ( \lambda = 25 )$ \\ \hline
+0 & 0.600 & 0.455 & 0.238 \\ \hline
+1 & 0.300 & 0.341 & 0.298 \\ \hline
+2 & 0.075 & 0.128 & 0.186 \\ \hline
+3 & 0.019 & 0.048 & 0.116 \\ \hline
+4 & 0.005 & 0.018 & 0.073 \\ \hline
+5 & 0.001 & 0.007 & 0.045 \\ \hline
+6 & 0.000 & 0.003 & 0.028 \\ \hline
+7 & 0.000 & 0.001 & 0.018 \\ \hline
+\end{tabular}
+\end{table}
+
 \item \textbf{2 Puntos:} Para cada uno de los tres casos anteriores, eval\'ue si se cumplen o no los requisitos de la FAA. 
 \end{enumerate}
 
@@ -50,5 +160,32 @@ Complete las siguientes actividades:
 El martes recibe instrucciones de comprar 100 acciones antes del jueves. Todas las compras se hacen al final del d\'ia, al precio de cierre conocido de ese d\'ia, de manera que sus \'unicas opciones son comprar al final del martes o al final del mi\'ercoles. Usted quiere determinar una estrategia \'optima: comprar el martes o aplazar la compra hasta el mi\'ercoles, dado el precio al cierre del martes, con el fin de minimizar el precio esperado de compra. Desarrolle y eval\'ue un \'arbol de decisi\'on para determinar la estrategia \'optima. 
 \end{problem}
 \fullskip
+
+\emph{Soluci\'on:} En este problema nuestro objetivo es minimizar el costo de compra de las acciones, \ie buscamos comprarlas al menor precio posible. Para esto, primero supongamos que se hace la compra el d\'ia martes. El precio esperado de cierre del martes es: 
+\[
+(\$9)(0.3) + (\$10)(0.3) + (\$11)(0.4) \; = \; \$10.10
+\]
+
+Consecuentemente, el costo de la transacci\'on ser\'ia de \$1010. 
+
+En cambio, si se espera hasta el mi\'ercoles, el \'arbol de probabilidad de precios de de cierre es como se muestra en la siguiente fotograf\'ia. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.72\textwidth]{problema-2.jpg}
+\end{figure}
+
+Ahora podamos el \'arbol calculando los costos esperados en los nodos MA-9, MA-10 y MA-11. 
+\begin{align*}
+& \Exp[\text{MA-9}] \; = \; 
+(\$8.10)(0.4) + (\$9.00)(0.3) + (\$9.90)(0.3)
+\; = \; \$8.91 \\
+& \Exp[\text{MA-10}] \; = \; 
+(\$9.00)(0.2) + (\$10.00)(0.2) + (\$11.00)(0.6)
+\; = \; 10.40 \\
+& \Exp[\text{MA-11}] \; = \; 
+(\$9.90)(0.1) + (\$11.0)(0.2) + (\$12.10)(0.7) \; = \; 
+\end{align*}
+
 
 \end{document}
