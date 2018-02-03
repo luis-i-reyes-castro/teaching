@@ -37,6 +37,110 @@ Con todo esto en mente, modele el problema de encontrar una pol\'itica \'optima 
 \beta(\ell,n) \; & \define \; \Pr( \, \Binomial(q,n) = \ell \, )
 \end{align*}
 
+\emph{Soluci\'on:} Primero reconocemos que el problema tiene seis estados, puesto que la flota es de cinco carros id\'enticos. Estos estados se caracterizan por el n\'umero de carros que terminan el d\'ia de trabajo en cada estaci\'on, de manera que si utilizamos la notaci\'on $(G,S)$ para representar el n\'umero de carros  en las estaciones de Guayaquil y Salinas, respectivamente, vemos que el conjunto de estados es: 
+\[
+S \; = \;
+\{ \,  (5,0), \, (4,1), \, (3,2), \, (2,3), \, (1,4), \, (0,5) \, \}
+\]
+Las acciones son re-balanceos, y pueden ser caracterizadas por el n\'umero de carros enviados en la direcci\'on Guayaquil-Salinas, de manera que un cero indica que no se hace re-balanceo, \linebreak un n\'umero positivo indica que se env\'ian carros de Guayaquil a Salinas, y un n\'umero negativo indica que se env\'ia carros de Salinas a Guayaquil. Las acciones disponibles en cada estado se muestran en la siguiente tabla. 
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c|c|c|c|c|c|}
+\cline{2-6}
+ & \multicolumn{5}{c|}{\textbf{Acci\'on}} \\ \hline
+\multicolumn{1}{|c|}{\textbf{Estado} $\boldsymbol{(G,S)}$} & $+2 $& $+1$ & $\pm 0$ & $-1$ & $-2$ \\ \hline
+\multicolumn{1}{|c|}{$(5,0)$}
+& \checkmark  & \checkmark  & \checkmark  &  &  \\ \hline
+\multicolumn{1}{|c|}{$(4,1)$}
+& \checkmark  & \checkmark  & \checkmark  & \checkmark  &  \\ \hline
+\multicolumn{1}{|c|}{$(3,2)$}
+& \checkmark  & \checkmark  & \checkmark  & \checkmark  & \checkmark \\ \hline
+\multicolumn{1}{|c|}{$(2,3)$}
+& \checkmark  & \checkmark  & \checkmark  & \checkmark  & \checkmark \\ \hline
+\multicolumn{1}{|c|}{$(1,4)$}
+&  & \checkmark  & \checkmark  & \checkmark  & \checkmark \\ \hline
+\multicolumn{1}{|c|}{$(0,5)$}
+&  &  & \checkmark  & \checkmark  & \checkmark \\ \hline
+\end{tabular}
+\end{table}
+
+Ahora consideramos cada estado y cada acci\'on disponible en ese estado: 
+\begin{itemize}
+% -------------------------------------------------------------------
+\item Para el estado $X_t = (5,0)$ :
+\begin{itemize}
+\item Si tomamos la acci\'on $A_t = \pm 0$ el sistema amanece en el estado $(5,0)$. Entonces: 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Estado Sucesor} $\boldsymbol{X_{t+1}}$
+& $\boldsymbol{\Pr( \, X_{t+1} \mid X_t, \, A_t \, )}$ \\ \hline
+$(5,0)$ & $\alpha(0,5)$ \\ \hline
+$(4,1)$ & $\alpha(1,5)$ \\ \hline
+$(3,2)$ & $\alpha(2,5)$ \\ \hline
+$(2,3)$ & $\alpha(3,5)$ \\ \hline
+$(1,4)$ & $\alpha(4,5)$ \\ \hline
+$(0,5)$ & $\alpha(5,5)$ \\ \hline
+\end{tabular}
+\end{table}
+\item Si tomamos la acci\'on $A_t = +1$ el sistema amanece en el estado $(4,1)$. Entonces: 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Estado Sucesor} $\boldsymbol{X_{t+1}}$
+& $\boldsymbol{\Pr( \, X_{t+1} \mid X_t, \, A_t \, )}$ \\ \hline
+$(5,0)$ & $\alpha(0,4) \, \beta(1,1)$ \\ \hline
+$(4,1)$ & $\alpha(0,4) \, \beta(0,1) + \alpha(1,4) \, \beta(1,1)$ \\ \hline
+$(3,2)$ & $\alpha(1,4) \, \beta(0,1) + \alpha(2,4) \, \beta(1,1)$ \\ \hline
+$(2,3)$ & $\alpha(2,4) \, \beta(0,1) + \alpha(3,4) \, \beta(1,1)$ \\ \hline
+$(1,4)$ & $\alpha(3,4) \, \beta(0,1) + \alpha(4,4) \, \beta(1,1)$ \\ \hline
+$(0,5)$ & $\alpha(4,4) \, \beta(0,1)$ \\ \hline
+\end{tabular}
+\end{table}
+\item Si tomamos la acci\'on $A_t = +2$ el sistema amanece en el estado $(3,2)$. Entonces: 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Estado Sucesor} $\boldsymbol{X_{t+1}}$
+& $\boldsymbol{\Pr( \, X_{t+1} \mid X_t, \, A_t \, )}$ \\ \hline
+$(5,0)$ & $\alpha(0,3) \, \beta(2,2)$ \\ \hline
+$(4,1)$ & $\alpha(0,3) \, \beta(1,2) + \alpha(1,3) \, \beta(2,2)$ \\ \hline
+$(3,2)$ & $\alpha(0,3) \, \beta(0,2) + \alpha(1,3) \, \beta(1,2) + \alpha(2,3) \, \beta(2,2)$ \\ \hline
+$(2,3)$ & $\alpha(1,3) \, \beta(0,2) + \alpha(2,3) \, \beta(1,2) + \alpha(3,3) \, \beta(2,2)$ \\ \hline
+$(1,4)$ & $\alpha(2,3) \, \beta(0,2) + \alpha(3,3) \, \beta(1,2)$ \\ \hline
+$(0,5)$ & $\alpha(3,3) \, \beta(0,2)$ \\ \hline
+\end{tabular}
+\end{table}
+\end{itemize}
+% -------------------------------------------------------------------
+\item Para el estado $X_t = (4,1)$ :
+\begin{itemize}
+\item Si tomamos la acci\'on $A_t = \pm 0$ el sistema amanece en el estado $(4,1)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = +1$. 
+\item Si tomamos la acci\'on $A_t = +1$ el sistema amanece en el estado $(3,2)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = +2$. 
+\item Si tomamos la acci\'on $A_t = +2$ el sistema amanece en el estado $(2,3)$. Entonces: 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Estado Sucesor} $\boldsymbol{X_{t+1}}$
+& $\boldsymbol{\Pr( \, X_{t+1} \mid X_t, \, A_t \, )}$ \\ \hline
+$(5,0)$ & $\alpha(0,2) \, \beta(3,3)$ \\ \hline
+$(4,1)$ & $\alpha(0,2) \, \beta(2,3) + \alpha(1,2) \, \beta(3,3)$ \\ \hline
+$(3,2)$ & $\alpha(0,2) \, \beta(1,3) + \alpha(1,2) \, \beta(2,3) + \alpha(2,2) \, \beta(3,3)$ \\ \hline
+$(2,3)$ & $\alpha(0,2) \, \beta(0,3) + \alpha(1,2) \, \beta(1,3) + \alpha(2,2) \, \beta(2,3)$ \\ \hline
+$(1,4)$ & $\alpha(1,2) \, \beta(0,3) + \alpha(2,2) \, \beta(1,3)$ \\ \hline
+$(0,5)$ & $\alpha(2,2) \, \beta(0,3)$ \\ \hline
+\end{tabular}
+\end{table}
+\item Si tomamos la acci\'on $A_t = -1$ el sistema amanece en el estado $(5,0)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = \pm 0$. 
+\end{itemize}
+
+\end{itemize}
+
 \end{problem}
 \fullskip
 
