@@ -39,7 +39,6 @@ Con todo esto en mente, modele el problema de encontrar una pol\'itica \'optima 
 
 \emph{Soluci\'on:} Primero reconocemos que el problema tiene seis estados, puesto que la flota es de cinco carros id\'enticos. Estos estados se caracterizan por el n\'umero de carros que terminan el d\'ia de trabajo en cada estaci\'on, de manera que si utilizamos la notaci\'on $(G,S)$ para representar el n\'umero de carros  en las estaciones de Guayaquil y Salinas, respectivamente, vemos que el conjunto de estados es: 
 \[
-S \; = \;
 \{ \,  (5,0), \, (4,1), \, (3,2), \, (2,3), \, (1,4), \, (0,5) \, \}
 \]
 Las acciones son re-balanceos, y pueden ser caracterizadas por el n\'umero de carros enviados en la direcci\'on Guayaquil-Salinas, de manera que un cero indica que no se hace re-balanceo, \linebreak un n\'umero positivo indica que se env\'ian carros de Guayaquil a Salinas, y un n\'umero negativo indica que se env\'ia carros de Salinas a Guayaquil. Las acciones disponibles en cada estado se muestran en la siguiente tabla. 
@@ -65,7 +64,7 @@ Las acciones son re-balanceos, y pueden ser caracterizadas por el n\'umero de ca
 \end{tabular}
 \end{table}
 
-Ahora consideramos cada estado y cada acci\'on disponible en ese estado: 
+Ahora consideramos cada estado y cada acci\'on disponible en ese estado, y listamos las probabilidades de transici\'on a todos los posibles estados sucesores: 
 \begin{itemize}
 % -------------------------------------------------------------------
 \item Para el estado $X_t = (5,0)$ :
@@ -119,8 +118,8 @@ $(0,5)$ & $\alpha(3,3) \, \beta(0,2)$ \\ \hline
 % -------------------------------------------------------------------
 \item Para el estado $X_t = (4,1)$ :
 \begin{itemize}
-\item Si tomamos la acci\'on $A_t = \pm 0$ el sistema amanece en el estado $(4,1)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = +1$. 
-\item Si tomamos la acci\'on $A_t = +1$ el sistema amanece en el estado $(3,2)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = +2$. 
+\item Si tomamos la acci\'on $A_t = \pm 0$ el sistema amanece en el estado $(4,1)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = +1$. 
+\item Si tomamos la acci\'on $A_t = +1$ el sistema amanece en el estado $(3,2)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = +2$. 
 \item Si tomamos la acci\'on $A_t = +2$ el sistema amanece en el estado $(2,3)$. Entonces: 
 \begin{table}[H]
 \centering
@@ -136,8 +135,167 @@ $(1,4)$ & $\alpha(1,2) \, \beta(0,3) + \alpha(2,2) \, \beta(1,3)$ \\ \hline
 $(0,5)$ & $\alpha(2,2) \, \beta(0,3)$ \\ \hline
 \end{tabular}
 \end{table}
-\item Si tomamos la acci\'on $A_t = -1$ el sistema amanece en el estado $(5,0)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = \pm 0$. 
+\item Si tomamos la acci\'on $A_t = -1$ el sistema amanece en el estado $(5,0)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = \pm 0$. 
 \end{itemize}
+% -------------------------------------------------------------------
+\item Para el estado $X_t = (3,2)$ :
+\begin{itemize}
+\item Si tomamos la acci\'on $A_t = \pm 0$ el sistema amanece en el estado $(3,2)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = +2$. 
+\item Si tomamos la acci\'on $A_t = +1$ el sistema amanece en el estado $(2,3)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (4,1)$ y la acci\'on es $A_t = +2$. 
+\item Si tomamos la acci\'on $A_t = +2$ el sistema amanece en el estado $(1,4)$. Entonces: 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Estado Sucesor} $\boldsymbol{X_{t+1}}$
+& $\boldsymbol{\Pr( \, X_{t+1} \mid X_t, \, A_t \, )}$ \\ \hline
+$(5,0)$ & $\alpha(0,1) \, \beta(4,4)$ \\ \hline
+$(4,1)$ & $\alpha(0,1) \, \beta(3,4) + \alpha(1,1) \, \beta(4,4)$ \\ \hline
+$(3,2)$ & $\alpha(0,1) \, \beta(2,4) + \alpha(1,1) \, \beta(3,4)$ \\ \hline
+$(2,3)$ & $\alpha(0,1) \, \beta(1,4) + \alpha(1,1) \, \beta(2,4)$ \\ \hline
+$(1,4)$ & $\alpha(0,1) \, \beta(0,4) + \alpha(1,1) \, \beta(1,4)$ \\ \hline
+$(0,5)$ & $\alpha(1,1) \, \beta(0,4)$ \\ \hline
+\end{tabular}
+\end{table}
+\item Si tomamos la acci\'on $A_t = -1$ el sistema amanece en el estado $(4,1)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = +1$. 
+\item Si tomamos la acci\'on $A_t = -2$ el sistema amanece en el estado $(5,0)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = \pm 0$. 
+\end{itemize}
+% -------------------------------------------------------------------
+\item Para el estado $X_t = (2,3)$ :
+\begin{itemize}
+\item Si tomamos la acci\'on $A_t = \pm 0$ el sistema amanece en el estado $(2,3)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (4,1)$ y la acci\'on es $A_t = +2$. 
+\item Si tomamos la acci\'on $A_t = +1$ el sistema amanece en el estado $(1,4)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (3,2)$ y la acci\'on es $A_t = +2$. 
+\item Si tomamos la acci\'on $A_t = +2$ el sistema amanece en el estado $(0,5)$. Entonces: 
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Estado Sucesor} $\boldsymbol{X_{t+1}}$
+& $\boldsymbol{\Pr( \, X_{t+1} \mid X_t, \, A_t \, )}$ \\ \hline
+$(5,0)$ & $\beta(5,5)$ \\ \hline
+$(4,1)$ & $\beta(4,5)$ \\ \hline
+$(3,2)$ & $\beta(3,5)$ \\ \hline
+$(2,3)$ & $\beta(2,5)$ \\ \hline
+$(1,4)$ & $\beta(1,5)$ \\ \hline
+$(0,5)$ & $\beta(0,5)$ \\ \hline
+\end{tabular}
+\end{table}
+\item Si tomamos la acci\'on $A_t = -1$ el sistema amanece en el estado $(3,2)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = +2$. 
+\item Si tomamos la acci\'on $A_t = -2$ el sistema amanece en el estado $(4,1)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = +1$. 
+\end{itemize}
+% -------------------------------------------------------------------
+\item Para el estado $X_t = (1,4)$ :
+\begin{itemize}
+\item Si tomamos la acci\'on $A_t = \pm 0$ el sistema amanece en el estado $(1,4)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (3,2)$ y la acci\'on es $A_t = +2$. 
+\item Si tomamos la acci\'on $A_t = +1$ el sistema amanece en el estado $(0,5)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (2,3)$ y la acci\'on es $A_t = +2$. 
+\item Si tomamos la acci\'on $A_t = -1$ el sistema amanece en el estado $(2,3)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (4,1)$ y la acci\'on es $A_t = +2$. 
+\item Si tomamos la acci\'on $A_t = -2$ el sistema amanece en el estado $(3,2)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (5,0)$ y la acci\'on es $A_t = +2$. 
+\end{itemize}
+% -------------------------------------------------------------------
+\item Para el estado $X_t = (0,5)$ :
+\begin{itemize}
+\item Si tomamos la acci\'on $A_t = \pm 0$ el sistema amanece en el estado $(0,5)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (2,3)$ y la acci\'on es $A_t = +2$. 
+\item Si tomamos la acci\'on $A_t = -1$ el sistema amanece en el estado $(1,4)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (3,2)$ y la acci\'on es $A_t = +2$. 
+\item Si tomamos la acci\'on $A_t = -2$ el sistema amanece en el estado $(2,3)$, por lo que la distribuci\'on sobre los estados sucesores es id\'entica a la del caso cuando el estado es $X_t = (4,1)$ y la acci\'on es $A_t = +2$. 
+\end{itemize}
+\end{itemize}
+
+Finalmente, calculamos las utilidades asociadas con cada para estado-acci\'on. Para esto primero reconocemos que si el sistema termina el d\'ia de trabajo en el estado $X_t = (G,S)$ y se decide no haber re-balanceo, \ie la acci\'on es $A_t = \pm 0$, entonces el n\'umero esperado de carros que ser\'an utilizados por los clientes al d\'ia siguiente es $G \, p + S \, q$. Por lo tanto, en este caso tenemos: 
+\[
+\Exp[ \, \text{Utilidad}( \, X_t = (G,S) , \, A_t = \pm 0 ) \, ]
+\; = \; ( \, G \, p + S \, q \, ) \, u
+\]
+En cambio, si el sistema termina el d\'ia en el estado $X_t = (G,S)$ y se decide hacer un re-balanceo, \ie la acci\'on es $A_t = k \neq 0$, el n\'umero esperado de carros que ser\'an utilizados por los clientes al d\'ia siguiente es $(G-k) \, p + (S+k) \, q$. As\'i, para este caso tenemos: 
+\[
+\Exp[ \, \text{Utilidad}( \, X_t = (G,S) , \, A_t = \pm 0 ) \, ]
+\; = \; ( \, (G-k) \, p + (S+k) \, q \, ) \, u - 4c - |k|c
+\]
+Consecuentemente: 
+\begin{itemize}
+% -------------------------------------------------------------------
+\item Para el estado $X_t = (5,0)$ :
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Acci\'on} $\boldsymbol{A_t}$
+& $\boldsymbol{ \Exp[ \, \textbf{Utilidad}( \, X_t, \, A_t ) \, ]}$ \\ \hline
+$\pm 0$ & $5 \, p \, u$ \\ \hline
+$+1$ & $( 4p + q ) \, u - 5c$ \\ \hline
+$+2$ & $( 3p + 2q ) \, u - 6c$ \\ \hline
+\end{tabular}
+\end{table}
+% -------------------------------------------------------------------
+\item Para el estado $X_t = (4,1)$ :
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Acci\'on} $\boldsymbol{A_t}$
+& $\boldsymbol{ \Exp[ \, \textbf{Utilidad}( \, X_t, \, A_t ) \, ]}$ \\ \hline
+$\pm 0$ & $( 4p + q ) \, u$ \\ \hline
+$+1$ & $( 3p + 2q ) \, u - 5c$ \\ \hline
+$+2$ & $( 2p + 3q ) \, u - 6c$ \\ \hline
+$-1$ & $5 \, p \, u - 5c$ \\ \hline
+\end{tabular}
+\end{table}
+% -------------------------------------------------------------------
+\item Para el estado $X_t = (3,2)$ :
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Acci\'on} $\boldsymbol{A_t}$
+& $\boldsymbol{ \Exp[ \, \textbf{Utilidad}( \, X_t, \, A_t ) \, ]}$ \\ \hline
+$\pm 0$ & $( 3p + 2q ) \, u$ \\ \hline
+$+1$ & $( 2p + 3q ) \, u - 5c$ \\ \hline
+$+2$ & $( p + 4q ) \, u - 6c$ \\ \hline
+$-1$ & $( 4p + q ) \, u - 5c$ \\ \hline
+$-2$ & $5 \, p \, u - 6c$ \\ \hline
+\end{tabular}
+\end{table}
+% -------------------------------------------------------------------
+\item Para el estado $X_t = (2,3)$ :
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Acci\'on} $\boldsymbol{A_t}$
+& $\boldsymbol{ \Exp[ \, \textbf{Utilidad}( \, X_t, \, A_t ) \, ]}$ \\ \hline
+$\pm 0$ & $( 2p + 3q ) \, u$ \\ \hline
+$+1$ & $( p + 4q ) \, u - 5c$ \\ \hline
+$+2$ & $5 \, q \, u - 6c$ \\ \hline
+$-1$ & $( 3p + 2q ) \, u - 5c$ \\ \hline
+$-2$ & $( 4p + q ) \, u - 6c$ \\ \hline
+\end{tabular}
+\end{table}
+% -------------------------------------------------------------------
+\item Para el estado $X_t = (1,4)$ :
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Acci\'on} $\boldsymbol{A_t}$
+& $\boldsymbol{ \Exp[ \, \textbf{Utilidad}( \, X_t, \, A_t ) \, ]}$ \\ \hline
+$\pm 0$ & $( p + 4q ) \, u$ \\ \hline
+$+1$ & $5 \, q \, u - 5c$ \\ \hline
+$-1$ & $( 2p + 3q ) \, u - 5c$ \\ \hline
+$-2$ & $( 3p + 2q ) \, u - 6c$ \\ \hline
+\end{tabular}
+\end{table}
+% -------------------------------------------------------------------
+\item Para el estado $X_t = (0,5)$ :
+\begin{table}[H]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Acci\'on} $\boldsymbol{A_t}$
+& $\boldsymbol{ \Exp[ \, \textbf{Utilidad}( \, X_t, \, A_t ) \, ]}$ \\ \hline
+$\pm 0$ & $5 \, q \, u$ \\ \hline
+$-1$ & $( p + 4q ) \, u - 5c$ \\ \hline
+$-2$ & $( 2p + 3q ) \, u - 6c$ \\ \hline
+\end{tabular}
+\end{table}
 
 \end{itemize}
 
