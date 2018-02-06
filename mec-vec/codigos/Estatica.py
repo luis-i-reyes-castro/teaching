@@ -69,8 +69,23 @@ class Armadura2D :
         # Verifica que la armadura sea estaticamente determinable
         if 2 * self.n == self.m + 3 :
             print( 'CONSTRUYENDO ARMADURA...' )
+        elif 2 * self.n < self.m + 3 :
+            raise ValueError( 'Armadura no es estaticamente determinable ' +
+                              'porque tiene demasiados miembros o muy pocos nodos!' )
         else :
-            raise ValueError( 'Armadura no es estaticamente determinable!' )
+            raise ValueError( 'Armadura no es estaticamente determinable ' +
+                              'porque tiene muy pocos miembros o demasiados nodos!' )
+
+        # Elimina miembros repetidos
+        miembros_sin_repeticion = []
+        for miembro in self.miembros :
+            if ( miembro[0], miembro[1]) not in miembros_sin_repeticion and \
+               ( miembro[1], miembro[0]) not in miembros_sin_repeticion :
+                   miembros_sin_repeticion.append(miembro)
+            else :
+                print( 'Advertencia: Obviando miembro ' + str(miembro) +
+                       ' porque esta repetido' )
+        self.miembros = miembros_sin_repeticion
 
         # Declaramos un diccionario de ecuaciones
         self.ecuaciones = {}
