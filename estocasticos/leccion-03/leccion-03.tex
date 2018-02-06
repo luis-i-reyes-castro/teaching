@@ -294,16 +294,14 @@ En conclusi\'on, con dos pistas de aterrizaje el aeropuerto satisface los requer
 \end{figure}
 
 El martes recibe instrucciones de comprar 100 acciones antes del jueves. Todas las compras se hacen al final del d\'ia, al precio de cierre conocido de ese d\'ia, de manera que sus \'unicas opciones son comprar al final del martes o al final del mi\'ercoles. Usted quiere determinar una estrategia \'optima: comprar el martes o aplazar la compra hasta el mi\'ercoles, dado el precio al cierre del martes, con el fin de minimizar el precio esperado de compra. Desarrolle y eval\'ue un \'arbol de decisi\'on para determinar la estrategia \'optima. 
-\end{problem}
-\fullskip
 
-\emph{Soluci\'on:} En este problema nuestro objetivo es minimizar el costo de compra de las acciones, \ie buscamos comprarlas al menor precio posible. Para esto, primero supongamos que se hace la compra el d\'ia martes. El precio esperado de cierre del martes es: 
+\emph{Clarificaci\'on:} Si usted entendi\'o que la decisi\'on de comprar el martes o el mi\'ercoles debe ser tomada de antemano, por favor siga la Soluci\'on A. En cambio, si usted entendi\'o, correctamente, que se puede tomar una decisi\'on el martes dependiendo del precio de la acci\'on al cierre de ese d\'ia, por favor siga la Soluci\'on B. 
+
+\emph{Soluci\'on A:} En este problema nuestro objetivo es minimizar el costo de compra de las acciones, \ie buscamos comprarlas al menor precio posible. Para esto, primero supongamos que se decide de antemano realizar la compra el martes. Entonces el precio esperado es: 
 \[
 (\$9)(0.3) + (\$10)(0.3) + (\$11)(0.4) \; = \; \$10.10
 \]
-Consecuentemente, el costo esperado de la compra ser\'ia de \$1010. 
-
-En cambio, si se espera hasta el mi\'ercoles, el \'arbol de probabilidad de precios de de cierre es como se muestra en la siguiente fotograf\'ia. 
+Consecuentemente, el costo esperado de la compra ser\'ia de \$1010. En cambio, si se decide de antemano hacer la compra el mi\'ercoles, el \'arbol de probabilidad de precios de de cierre es como se muestra en la siguiente fotograf\'ia. 
 
 \begin{figure}[H]
 \centering
@@ -327,5 +325,29 @@ Finalmente, calculamos el costo esperado del nodo L-10.
 (\$8.91)(0.3) + (\$10.40)(0.3) + (\$11.66)(0.4) \; = \; \$10.46
 \]
 Vemos as\'i que el costo esperado de la compra en este caso ser\'ia de \$1046, \ie \$36 m\'as de lo que costar\'ia comprarla el martes. Conclu\'imos as\'i que la estrategia \'optima es comprar las acciones el martes. 
+
+\emph{Soluci\'on B:} Nuevamente, si se decide de antemano que se va a realizar la compra el d\'ia martes, el precio esperado es: 
+\[
+(\$9)(0.3) + (\$10)(0.3) + (\$11)(0.4) \; = \; \$10.10
+\]
+Consecuentemente, el costo esperado de la compra ser\'ia de \$1010. En cambio, considerando cada uno de los posibles precios de cierre del martes, vemos que: 
+\begin{itemize}
+\item Si el precio es de \$9.00 entonces estamos en el nodo MA-9, cuyo precio esperado de cierre el mi\'ercoles es de \$8.91, tal como se calcul\'o anteriormente. En este caso la acci\'on \'optima es esperar hasta el mi\'ercoles. 
+\item Si el precio es de \$10.00 entonces estamos en el nodo MA-10, cuyo precio esperado de cierre el mi\'ercoles es de \$10.40. En este caso la acci\'on \'optima es comprar la acci\'on el mismo martes al precio de \$10.00. 
+\item Si el precio es de \$11.00 entonces estamos en el nodo MA-11, cuyo precio esperado de cierre el mi\'ercoles es de \$11.66. En este caso la acci\'on \'optima es comprar la acci\'on el mismo martes al precio de \$11.00. 
+\end{itemize}
+De esta manera, el precio esperado de compra es: 
+\[
+(\$8.91)(0.3) + (\$10.00)(0.3) + (\$11.00)(0.4) \; = \; \$10.07
+\]
+Vemos as\'i que el costo esperado de la compra en este caso ser\'ia de \$1007, \ie \$3 menos de lo que costar\'ia comprarla el martes sin considerar el precio de cierre. Conclu\'imos as\'i que la estrategia \'optima es: 
+\begin{itemize}
+\item Si el precio de cierre del martes es de \$9.00, esperar hasta el mi\'ercoles para comprar. 
+\item Caso contarrio, \ie si el precio de cierre del martes es de \$10.00 u \$11.00, comprar el mismo martes. 
+\end{itemize}
+
+
+\end{problem}
+\fullskip
 
 \end{document}
