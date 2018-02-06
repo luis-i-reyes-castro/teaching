@@ -28,12 +28,13 @@
 \includegraphics[width=0.4\textwidth]{problema-1.jpg}
 \end{figure}
 
-\emph{Soluci\'on:} Primero calculamos los momentos de inercia: 
+\emph{Soluci\'on:} Primero calculamos los momentos de inercia y el torque externo: 
 \begin{align*}
-& I_{AB} \; = \; (20/32.2) \, (7.5/12)^2 \; = \;
+I_{AB} \; & = \; (20/32.2) \, (7.5/12)^2 \; = \;
 0.2426 \; \text{slug - ft\tsup{2}} \\
-& I_{C} \; = \; (5/32.2) \, (3/12)^2 \; = \;
-0.0097 \; \text{slug - ft\tsup{2}}
+I_{C} \; & = \; (5/32.2) \, (3/12)^2 \; = \;
+0.0097 \; \text{slug - ft\tsup{2}} \\
+\vec{M} \; & = \; -4.167 \; \uvec{k} \; \text{lb-ft}
 \end{align*}
 Luego bosquejamos los diagramas de cuerpo libre (DCL) de los engranes, tal como se muestra en la siguiente fotograf\'ia. 
 \begin{figure}[htb]
@@ -61,13 +62,13 @@ Consecuentemente, la sumatoria de torques en el engrane $C$ resulta en:
 -2 \, I_{AB} \left( \frac{r_C}{r_{AB}} \right)^2 \alpha_C \; - \; M
 \; = \; I_C \, \alpha_C \quad
 & \Longrightarrow \;
-\alpha_C \; = \; -572.53 \, \uvec{k} \; \text{ rad/s\tsup{2}} \\
+\alpha_C \; = \; -47.714 \, \uvec{k} \; \text{ rad/s\tsup{2}} \\
 & \Longrightarrow \;
-\alpha_A \; = \; +229.01 \, \uvec{k} \; \text{ rad/s\tsup{2}}
+\alpha_A \; = \; +19.086 \, \uvec{k} \; \text{ rad/s\tsup{2}}
 \end{align*}
 Finalmente, la fuerza tangencial deseada es: 
 \[
-F_A \; = \; F_B \; = \; 66.67 \; \text{lbs}
+F_A \; = \; F_B \; = \; 5.556 \; \text{lbs}
 \]
 \QED
 

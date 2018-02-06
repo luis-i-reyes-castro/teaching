@@ -31,14 +31,13 @@
 
 \emph{Soluci\'on:} Empezamos tomando datos: 
 \begin{align*}
-m \; & = \; 5 \; \text{kg} \qquad \Longrightarrow \qquad
-m \, g \; = \; 49.05 \; \text{N} \\
+\vec{r_{AB}} \; & = \; ( \, -0.050, \, 0 \, ) \\
+\vec{\omega_{AB}} \; & = \; +52.36 \; \uvec{k} \; \text{rad/s} \\
+\vec{\alpha_{AB}} \; & = \; \vec{0} \; \text{rad/s\tsup{2}} \\
+m \; & = \; 5 \; \text{kg} \\
 I_G \; & = \; (1/12) \, m \, \ell^2 \; = \; 0.026 \; \text{kg-m\tsup{2}} \\
 \vec{r_{BD}} \; & = \; ( \, -0.100, \, -0.2291 \, ) \\
-\vec{r_{GB}} \; & = \; ( \, +0.050, \, +0.1145 \, ) \\
-\vec{r_{GD}} \; & = \; ( \, -0.050, \, -0.1145 \, ) \\
-\vec{r_{AB}} \; & = \; ( \, -0.050, \, 0 \, ) \\
-\vec{\omega_{AB}} \; & = \; +52.36 \; \uvec{k} \; \text{rad/s}
+\vec{r_{BG}} \; & = \; ( \, -0.050, \, -0.1145 \, )
 \end{align*}
 Primero calculamos $\vec{v_B}$ y $\vec{a_B}$. 
 \begin{align*}
@@ -80,28 +79,28 @@ Consecuentemente:
 \Longrightarrow \; 
 \colvec{ (\vec{a_G})_x}{ (\vec{a_G})_y} & =
 \; \colvec{+137.08}{0} +
-\colvec{ +0.2291 \, (-598.34)}{ -0.100 \, (-598.34)} \; \approx \; \colvec{0.0}{+59.8} \; \text{m/s\tsup{2}}
+\colvec{ +0.1145 \, (-598.34)}{ -0.050 \, (-598.34)} \; \approx \; \colvec{+68.57}{+29.92} \; \text{m/s\tsup{2}}
 \end{align*}
 Ahora bosquejamos el diagrama de cuerpo libre (DCL) de la barra $AB$, tal como se muestra en la fotograf\'ia a la derecha de la figura del problema. Las sumatorias de fuerzas y momentos externos son: 
 \begin{align*}
 m \, (\vec{a_G})_x \; & = \; B_x + D_x \\
-& \Longrightarrow \quad 0 \; = \; B_x + D_x
-\quad \Longrightarrow \quad B_x \; = -D_x \\
+& \Longrightarrow \quad 342.85 \; = \; B_x + D_x
+\quad \Longrightarrow \quad B_x \; = 342.85 - D_x \\
 m \, (\vec{a_G})_y \; & = \; B_y - mg \\
 & \Longrightarrow \quad
 B_y \; = \; m \, ( \, (\vec{a_G})_y + g \, )
-\; = \; 348.05 \; \text{N} \\
+\; = \; 198.65 \; \text{N} \\
 I \, \alpha \; & = \; +0.1145 \, ( +D_x - B_x ) + 0.050 \, B_y \\
 & \Longrightarrow \quad
-(0.026)(-598.34) \; = \; +0.1145(+2 D_x) + 0.050 (348.05) \\
+(0.026)(-598.34) \; = \; +0.1145(+2 D_x - 342.85) + 0.050 (348.05) \\
 & \Longrightarrow \quad
-D_x \; = \; -143.93 \; \text{N}
+D_x \; = \; +60.12 \; \text{N}
 \end{align*}
 En conclusi\'on: 
 \[
 \vec{\alpha_{BD}} \; = \; -598.34 \; \uvec{k} \; \text{rad/s\tsup{2}}
 \qquad \qquad \qquad
-\vec{D} \; = \; ( \, -143.93, \, 0 \, ) \; \text{N}
+\vec{D} \; = \; ( \, +60.12, \, 0 \, ) \; \text{N}
 \]
 \QED
 
