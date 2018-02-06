@@ -53,12 +53,33 @@ class Armadura2D :
                         peso_especifico_miembros = 0.0,
                         verboso = False ) :
 
+        # Copia informacion relacionada con los nodos
         self.nodos      = list( nodos.keys() )
         self.nodos.sort()
         self.n          = len( self.nodos)
         self.pos_nodos  = nodos
-        self.miembros   = miembros
-        self.m          = len( self.miembros)
+
+        # Verifica y filtra los miembros (para quitar repetidos)
+        self.miembros = []
+        for miembro in miembros :
+            if ( miembro[0], miembro[1]) not in self.miembros and \
+               ( miembro[1], miembro[0]) not in self.miembros :
+                   if miembro[0] in self.nodos and miembro[1] in self.nodos :
+                       self.miembros.append(miembro)
+                   elif miembro[0] not in self.miembros :
+                       raise ValueError( 'El miembro ' + str(miembro) +
+                                         ' es invalido porque el nodo ' +
+                                         str(miembro[0]) + ' no existe!' )
+                   else :
+                       raise ValueError( 'El miembro ' + str(miembro) +
+                                         ' es invalido porque el nodo ' +
+                                         str(miembro[1]) + ' no existe!' )
+
+            else :
+                print( 'Advertencia: Ignorando miembro ' + str(miembro) +
+                       ' porque esta repetido' )
+        # Cuenta el numero de miembros
+        self.m = len(self.miembros)
 
         # Verifica el tipo de patin ingresado
         if not tipo_patin in [ 'Horizontal', 'Pared'] :
@@ -75,17 +96,6 @@ class Armadura2D :
         else :
             raise ValueError( 'Armadura no es estaticamente determinable ' +
                               'porque tiene muy pocos miembros o demasiados nodos!' )
-
-        # Elimina miembros repetidos
-        miembros_sin_repeticion = []
-        for miembro in self.miembros :
-            if ( miembro[0], miembro[1]) not in miembros_sin_repeticion and \
-               ( miembro[1], miembro[0]) not in miembros_sin_repeticion :
-                   miembros_sin_repeticion.append(miembro)
-            else :
-                print( 'Advertencia: Obviando miembro ' + str(miembro) +
-                       ' porque esta repetido' )
-        self.miembros = miembros_sin_repeticion
 
         # Declaramos un diccionario de ecuaciones
         self.ecuaciones = {}
