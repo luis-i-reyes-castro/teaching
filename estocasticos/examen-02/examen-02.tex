@@ -1,0 +1,81 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{02}
+\setcounter{numero}{\numero}
+\graphicspath{{./figures/}}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Examen \numero \\[2ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino II \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+La sala de emergencias de un peque\~no hospital cuenta con dos doctores, quienes cuentan con sus propios consultorios y quir\'ofanos, adem\'as de cuatro camillas de espera. \linebreak Los pacientes arriban a una tasa promedio de 1.8 por hora y son atendidos por orden de arribo. \linebreak Todo paciente que arriba cuando todas las camillas de espera est\'an ocupadas es enviado directamente a otro hospital. Los tiempos que necesitan los doctores para atender a los pacientes est\'an exponencialmente distribuidos, con un promedio de 40 minutos. Despu\'es de ser atendido, cada paciente es referido a otra \'area de especialidad del hospital o dado de alta. 
+
+Con esto en mente, complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{1 Punto:} Indique, utilizando notaci\'on de Kendall, qu\'e tipo de sistema de cola es este, y bosqueje la Cadena de Markov en Tiempo Continuo correspondiente. 
+\item \textbf{4 Puntos:} Encuentre la distribuci\'on estacionaria del sistema. 
+\item \textbf{2 Puntos:} Calcule el n\'umero promedio de pacientes en cola, junto con el tiempo esperado de espera en cola. 
+\item \textbf{1 Punto:} En el enunciado del problema original, suponga que hubiere cuatro doctores en vez de dos, cada uno con su propio consultorio y quir\'ofano. Indique, utilizando notaci\'on de Kendall, qu\'e tipo de sistema de cola es este, y bosqueje la Cadena de Markov en Tiempo Continuo correspondiente. 
+\item \textbf{1 Punto:} En el enunciado del problema original, suponga que hubiere cinco camillas de espera en vez de cuatro. Indique, utilizando notaci\'on de Kendall, qu\'e tipo de sistema de cola es este, y bosqueje la Cadena de Markov en Tiempo Continuo correspondiente. 
+\end{enumerate}
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[8 Puntos]} El Prof. Reyes entren\'o una red neuronal convolucional para detectar barcos en im\'agenes satelitales, la cual (por falta de imaginaci\'on) bautiz\'o como \emph{BarcoNet}. Este modelo fue entrenado para clasificar im\'agenes de acuerdo a \textit{(i)} la ausencia de barcos, \textit{(ii)} la presencia de barcos de turismo, \textit{(iii)} la presencia de barcos de pesca o \textit{(iv)} la presencia de barcos de guerra. El entrenamiento se llev\'o a cabo utilizando un juego de im\'agnes artificialmente generadas, donde cada una de las clases anteriormente descritas ocurr\'ia con la misma probabilidad. Como resultado del entrenamiento, se obtuvo un modelo de clasificaci\'on con la siguiente matriz de confusi\'on: 
+\begin{table}[htb]
+\centering
+\begin{tabular}{c|c|c|c|c|}
+\cline{2-5}
+ & \multicolumn{4}{c|}{\textbf{Clase Predecida} $\boldsymbol{Y}$} \\ \hline
+\multicolumn{1}{|c|}{\textbf{Clase Real} $\boldsymbol{X}$} & \textbf{Nada} & \textbf{B-Turismo} & \textbf{B-Pesca} & \textbf{B-Guerra} \\ \hline
+\multicolumn{1}{|c|}{\textbf{Nada}} & 0.96 & 0.02 & 0.01 & 0.01 \\ \hline
+\multicolumn{1}{|c|}{\textbf{B-Turismo}} & 0.01 & 0.88 & 0.08 & 0.03 \\ \hline
+\multicolumn{1}{|c|}{\textbf{B-Pesca}} & 0.03 & 0.07 & 0.85 & 0.05 \\ \hline
+\multicolumn{1}{|c|}{\textbf{B-Guerra}} & 0.02 & 0.03 & 0.04 & 0.91 \\ \hline
+\end{tabular}
+\end{table}
+
+Ahora, suponga que \emph{BarcoNet} es probada por la Marina en las Gal\'apagos. Para esto, se llev\'o a cabo un muestreo de im\'agenes satelitales del archipi\'elago, donde se encontr\'o que cada una de las clases aparece con la frencuencia mostrada en la siguiente tabla. 
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Clase Real $\boldsymbol{X}$} & \textbf{Nada} & \textbf{B-Turismo} & \textbf{B-Pesca} & \textbf{B-Guerra} \\ \hline
+\textbf{Frecuencia} & 0.82 & 0.10 & 0.06 & 0.02 \\ \hline
+\end{tabular}
+\end{table}
+
+Con todo esto en mente, calcule la distribuci\'on posterior predictiva de \emph{BarcoNet} con respecto a la distribuci\'on de im\'agenes de las Gal\'apagos. 
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[6 Puntos]} Un acaudalado inversionista tiene una empresa que se dedica a identificar \emph{start-ups} prometedoras. De las empresas que \'el usualmente eval\'ua, se sabe que generalmente solo el 40\% tendr\'a \'exito. Actualmente, el inversionista logra identificar correctamente a empresas exitosas con probabilidad del 80\% y a empresas no-exitosas con probabilidad del 70\%. Cuando \'el acierta, su utilidad asciende a los \$400K, mientras que cuando se equivoca pierde alrededor de \$150K. 
+
+Suponga que un consultor dice poder predecir correctamente el futuro de una empresa con probabilidad del 95\%. Cu\'anto es el m\'aximo honorario por evaluaci\'on que el consultor puede cobrarle al inversionista para que lo contrate? 
+
+\end{problem}
+\fullskip
+
+\end{document}
