@@ -4,6 +4,8 @@
 \usepackage{../../../macros-general}
 \usepackage{../../../macros-article}
 \graphicspath{{./figures/}}
+% Uncomment the following line if you need to write Python code
+% \usepackage{minted}
 % Number of the handout, quiz, exam, etc.
 \newcommand{\numero}{01}
 \setcounter{numero}{\numero}
@@ -20,7 +22,7 @@
 \end{center}
 \fullskip
 
-\textbf{Descripci\'on:} En esta pr\'actica usted dise\~nar\'a armaduras haciendo uso de la clase \texttt{Armadura2D} del m\'odulo \texttt{Estatica} para facilitar el an\'alisis. 
+\textbf{Descripci\'on:} En esta pr\'actica usted dise\~nar\'a armaduras haciendo uso de la clase \texttt{Armadura2D} del m\'odulo \texttt{Estatica} para facilitar el an\'alisis. Dicho m\'odulo puede ser encontrado en el repositorio en GitHub del instructor, dentro del directorio \texttt{mec-vec/codigos/}. Adicionalmente, puede encontrar dos ejemplos trabajados del texto gu\'ia de Beer \& Johnson (9ED) en el archivo \texttt{Ejemplos-Armadura2D.py}. 
 \halfskip
 
 \textbf{Modo de Participaci\'on:} Individual o en parejas. 
@@ -41,7 +43,21 @@ La m\'etrica de desempe\~no de su paralelo es el promedio de las m\'etricas de d
 \end{itemize}
 
 \end{itemize}
+\newpage
+
+% =============================================
+\textbf{Problema 1.0 - Ejemplo:} Dise\~ne una torre para cables de alta tensi\'on de acuerdo a las especificaciones mostradas en la siguiente figura. En la misma, los puntos azules indican las localizaciones del soporte empernado y del pat\'in, cada unidad de espacio de la rejilla tiene 0.50 metros, y el origen $(x,y)$ est\'a localizado en el punto azul izquierdo. Cada carga mostrada equivale al peso promedio de un kil\'ometro de cable (250 kg). Suponga que el peso espec\'ifico de los miembros es de 9.0 kilogramos por metro, y lleve a cabo todos sus c\'alculos en unidades de kilogramos-fuerza. 
 \fullskip
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.3\columnwidth}
+\input{figures/ejemplo.eps_tex}
+\end{figure}
+\halfskip
+
+\emph{Una Soluci\'on al Ejemplo:} V\'ease el archivo \texttt{Reyes-Luis\_Problema-00.py} localizado dentro del directorio \texttt{mec-vec/codigos/} en el repositorio de GitHub del instructor, donde se presenta una armadura con una m\'etrica de desempe\~no de 871.74 kilogramos-fuerza. 
+
 \newpage
 
 % =============================================
@@ -52,13 +68,12 @@ Dise\~ne una armadura para la propuesta de puente peatonal mostrada en la siguie
 
 \begin{figure}[htb]
 \centering
-\def\svgwidth{0.8\columnwidth}
+\def\svgwidth{0.96\columnwidth}
 \input{figures/problema-puente-01.eps_tex}
 \end{figure}
 \halfskip
 
 \end{problem}
-\fullskip
 \newpage
 
 % =============================================
