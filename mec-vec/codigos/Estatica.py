@@ -160,6 +160,12 @@ class Armadura2D :
                 self.vec_b[ fila + 0 ] = -cargas[nodo][0]
                 self.vec_b[ fila + 1 ] = -cargas[nodo][1] + peso_miembros
 
+        # Verificamos que la matriz A tenga rango completo. Si no lo tiene
+        # es porque la armadura no esta completamente restringida, por lo que
+        # en este caso arrojamos un error informativo.
+        if np.linalg.matrix_rank( self.mat_A) != 2 * self.n :
+            raise ValueError( 'Armadura no esta completamente restringida!' )
+
         print( 'Listo!' )
         return
 
