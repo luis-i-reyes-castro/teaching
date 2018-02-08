@@ -29,10 +29,55 @@
 
 Complete las siguientes actividades: 
 \begin{enumerate}[label=\textbf{\alph*)}]
-\item \textbf{3 Puntos:} Encuentre la velocidad angular de la barra $AB$. 
-\item \textbf{2 Puntos:} Encuentre la velocidad en $D$. 
-\item \textbf{3 Puntos:} Encuentre la velocidad angular de la barra $DE$. 
-\item \textbf{2 Puntos:} Encuentre la velocidad en $E$. 
+\item \textbf{3 Puntos:} Encuentre la velocidad angular de la barra $AB$. \\[1ex] \emph{Soluci\'on:} Primero tomamos datos: 
+\begin{align*}
+\vec{v_B} \; & = \; ( \, -0.360, \, 0) \; \text{m/s} \\
+\vec{v_A} \; & = \; ( \, 0, \, +v_A) \; \text{m/s} \\
+\vec{v_E} \; & = \; ( \, +v_E, \, 0 ) \; \text{m/s} \\
+\vec{r_{BA}} \; & = \; ( \, -0.300, \, +0.400 ) \; \text{m} \\
+\vec{r_{BD}} \; & = \; ( \, -0.150, \, +0.200 ) \; \text{m} \\
+\vec{r_{DE}} \; & = \; ( \, +0.400, \, +0.300 ) \; \text{m}
+\end{align*}
+Las velocidades en $A$ y $B$ est\'an relacionadas con la velocidad angular de la barra $AB$ de la siguiente manera:
+\begin{align*}
+& \vec{v_A} \; = \; \vec{v_B} + \vec{\omega_{AB}} \cross \vec{r_{BA}} \\
+& \Longrightarrow \; \colvec{0}{+v_A} \; = \; 
+\colvec{-0.360}{0} +
+\colvec{ -0.400 \, \omega_{AB}}{ -0.300 \, \omega_{AB}} \\
+& \Longrightarrow \;
+0 \; = \; -0.360 - 0.400 \, \omega_{AB} \\
+& \Longrightarrow \;
+\vec{\omega_{AB}} \; = \; -0.75 \, \uvec{k} \; \text{rad/s}
+\end{align*}
+\item \textbf{2 Puntos:} Encuentre la velocidad en $D$. \\[1ex] \emph{Soluci\'on:} Las velocidades en $B$ y $D$ est\'an relacionadas con la velocidad angular de la barra $AB$ de la siguiente manera:
+\begin{align*}
+\vec{v_D} \; 
+& = \; \vec{v_B} + \vec{\omega_{AB}} \cross \vec{r_{BD}} \\
+& = \; \colvec{-0.360}{0} +
+\colvec{ -0.200 \, (-0.75)}{ -0.150 \, (-0.75)} \\
+& = \;
+\colvec{ -0.21}{ +0.1125} \; \text{m/s} \; \equiv \;
+0.2382 \; \text{m/s} \; \measuredangle 151.82\deg
+\end{align*}
+\item \textbf{3 Puntos:} Encuentre la velocidad angular de la barra $DE$. \\[1ex] \emph{Soluci\'on:} Las velocidades en $D$ y $E$ est\'an relacionadas con la velocidad angular de la barra $DE$ de la siguiente manera:
+\begin{align*}
+& \vec{v_E} \; = \; \vec{v_D} + \vec{\omega_{DE}} \cross \vec{r_{DE}} \\
+& \Longrightarrow \; \colvec{+v_E}{0} \; = \; 
+\colvec{-0.21}{+0.1125} +
+\colvec{ -0.300 \, \omega_{DE}}{ +0.400 \, \omega_{DE}} \\
+& \Longrightarrow \;
+0 \; = \; +0.1125 + 0.400 \, \omega_{DE} \\
+& \Longrightarrow \;
+\vec{\omega_{DE}} \; = \; -0.281 \, \uvec{k} \; \text{rad/s}
+\end{align*}
+\item \textbf{2 Puntos:} Encuentre la velocidad en $E$. \\[1ex] \emph{Soluci\'on:} De la expresi\'on anterior tenemos: 
+\begin{align*}
+\vec{v_E} \;
+& = \; \colvec{-0.21}{+0.1125} +
+\colvec{ -0.300 \, (-0.281)}{ +0.400 \, (-0.281)} \\
+& = \; \colvec{-0.1257}{0} \; \text{m/s} \; \equiv \;
+0.1257 \; \text{m/s} \; \measuredangle \pm180\deg
+\end{align*}
 \end{enumerate}
 
 \end{problem}
@@ -49,7 +94,11 @@ Tres barras, cada una con un peso de 8 lb, est\'an soldadas entre si y se encuen
 
 Complete las siguientes actividades: 
 \begin{enumerate}[label=\textbf{\alph*)}]
-\item \textbf{1 Punto:} Encuentre la locaci\'on del centro de masa del ensamble $ABCD$. 
+\item \textbf{1 Punto:} Encuentre la locaci\'on del centro de masa del ensamble $ABCD$. \\[1ex] \emph{Soluci\'on:} Es evidente que como el ensamble es sim\'etrico entonces la coordenada $x$ de su centro de masa es igual a la coordenada $x$ del punto medio de la barra $BC$. Para hallar la coordenada $y$ definimos a $\delta$ como la distancia desde el punto medio de la barra $BC$ hasta el centro de masa del ensamble. Entonces tenemos:
+\[
+\delta \; = \; 
+\frac{(8)(0.0) + 2(8)(7.5/12)}{3(8)} \; = \; 0.4167 \; \text{ft}
+\]
 \item \textbf{2 Puntos:} Encuentre la aceleraci\'on del centro de masa del ensamble $ABCD$ en funci\'on de la aceleraci\'on angular de la barra $BE$. 
 \item \textbf{5 Puntos:} Determine la fuerza en cada eslab\'on inmediatamente despu\'es de que el sistema se suelta desde el reposo. 
 \end{enumerate}
