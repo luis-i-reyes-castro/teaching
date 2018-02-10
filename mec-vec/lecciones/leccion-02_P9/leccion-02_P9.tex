@@ -79,6 +79,7 @@ Las velocidades en $A$ y $B$ est\'an relacionadas con la velocidad angular de la
 0.1257 \; \text{m/s} \; \measuredangle \pm180\deg
 \end{align*}
 \end{enumerate}
+\QED
 
 \end{problem}
 \fullskip
@@ -97,11 +98,66 @@ Complete las siguientes actividades:
 \item \textbf{1 Punto:} Encuentre la locaci\'on del centro de masa del ensamble $ABCD$. \\[1ex] \emph{Soluci\'on:} Es evidente que como el ensamble es sim\'etrico entonces la coordenada $x$ de su centro de masa es igual a la coordenada $x$ del punto medio de la barra $BC$. Para hallar la coordenada $y$ definimos a $\delta$ como la distancia desde el punto medio de la barra $BC$ hasta el centro de masa del ensamble. Entonces tenemos:
 \[
 \delta \; = \; 
-\frac{(8)(0.0) + 2(8)(7.5/12)}{3(8)} \; = \; 0.4167 \; \text{ft}
+\frac{(8)(0.0) + 2(8)(7.5)}{3(8)} \; = \; 5.0 \; \text{in}
+\; = \; 0.4167 \; \text{ft}
 \]
-\item \textbf{2 Puntos:} Encuentre la aceleraci\'on del centro de masa del ensamble $ABCD$ en funci\'on de la aceleraci\'on angular de la barra $BE$. 
-\item \textbf{5 Puntos:} Determine la fuerza en cada eslab\'on inmediatamente despu\'es de que el sistema se suelta desde el reposo. 
+\item \textbf{2 Puntos:} Encuentre la aceleraci\'on del centro de masa del ensamble $ABCD$ en funci\'on de la aceleraci\'on angular de la barra $BE$. \\[1ex]
+\emph{Soluci\'on:} Primero tomamos algunos datos: 
+\begin{align*}
+\vec{\hat{r}_{EB}} \;
+& = \; ( \, +\cos(50\deg), \, +\sin(50\deg) \, ) \\
+\vec{r_{EB}} \;
+& = \; 0.8333 \, \vec{\hat{r}_{EB}} \; \text{ft} \\
+\vec{\omega_{BE}} \; & = \; \vec{0} \; \text{rad/s} \\
+\vec{\alpha_{BE}} \; & = \; \alpha_{BE} \, \uvec{k} \; \text{rad/s\tsup{2}}
+\end{align*}
+Empezamos reconociendo que el ensamble $ABCD$ se encuentra en translaci\'on curvil\'inea, por lo que en todo momento tanto su velocidad angular como su aceleraci\'on angular son exactamente cero. Consecuentemente: 
+\begin{align*}
+\vec{a_G} \; = \; \vec{a_B} \; 
+& = \; \vec{a_E} + \vec{\alpha_{BE}} \cross \vec{r_{EB}} + \vec{\omega_{BE}} \cross ( \vec{\omega_{BE}} \cross \vec{r_{EB}} ) \\
+& = \; \vec{0} + \vec{\alpha_{BE}} \cross \vec{r_{EB}} + \vec{0} \\
+& = \; \colvec{ -0.8333 \, \sin(50\deg) \, \alpha_{BE}}{ +0.8333 \, \cos(50\deg) \, \alpha_{BE}}
+\end{align*}
+
+\item \textbf{5 Puntos:} Determine la fuerza en cada eslab\'on inmediatamente despu\'es de que el sistema se suelta desde el reposo. \\[1ex]
+\emph{Soluci\'on:} Primero tomamos algunos datos: 
+\begin{align*}
+m \;
+& = \; 0.7459 \; \text{slug} \\
+\ell / 2 \;
+& = \; 7.5/12 \; \text{ft} \; = \; 0.625 \; \text{ft}
+\end{align*}
+El diagrama de cuerpo libre (DCL) se muestra en la siguiente fotograf\'ia. 
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.44\textwidth]{problema-02_DCL.jpg}
+\end{figure}
+
+Las sumatorias de fuerzas y torques externos resultan en: 
+\begin{align*}
+m \, (\vec{a_G})_x \;
+& = \; +(F_B + F_C) \, \cos(50\deg) \\
+m \, (\vec{a_G})_y \;
+& = \; +(F_B + F_C) \, \sin(50\deg) - mg \\
+0 \; & = \; + (\ell/2) \, (F_C - F_B) \, \sin(50\deg) + \delta \, (F_B + F_C) \, \cos(50\deg)
+\end{align*}
+De esta manera arribamos al siguiente sistema de tres ecuaciones lineales donde las inc\'ognitas son $\alpha_{BE}$, $F_B$ y $F_C$. 
+\begin{align*}
+-0.6216 \, \sin(50\deg) \, \alpha_{BE} \;
+& = \; +(F_B + F_C) \, \cos(50\deg) \\
++0.6216 \, \cos(50\deg) \, \alpha_{BE} \;
+& = \; +(F_B + F_C) \, \sin(50\deg) - 24 \\
+0 \; & = \; + 0.625 \, (F_C - F_B) \, \sin(50\deg) + 0.4167 \, (F_B + F_C) \, \cos(50\deg)
+\end{align*}
+Resolviendo el sistema, obtenemos: 
+\begin{align*}
+\vec{\alpha_{BE}} \;
+& = \; -24.82 \; \uvec{k} \; \text{rad/s\tsup{2}} \\
+\vec{F_B} & = \; +14.34 \, \vec{\hat{r}_{EB}} \; \text{lb} \\
+\vec{F_C} & = \; +4.050 \, \vec{\hat{r}_{EB}} \; \text{lb}
+\end{align*}
 \end{enumerate}
+\QED
 
 \end{problem}
 \fullskip
@@ -114,6 +170,74 @@ Complete las siguientes actividades:
 \centering
 \includegraphics[width=0.5\textwidth]{problema-03.jpg}
 \end{figure}
+
+\emph{Soluci\'on:} Primero tomamos algunos datos: 
+\begin{align*}
+m \; & = \; 0.2797 \; \text{slug} \\
+I \; & = \; 0.1012 \; \text{slug-ft\tsup{2}} \\
+\ell \; & = \; 2.0833 \; \text{ft} \\
+k \; & = \; 36 \; \text{lb/ft}
+\end{align*}
+Consideraremos que el primer estado del sistema sucede cuando la barra est\'a a $\theta = 50\deg$ y que el segundo estado sucede cuando la barra regresa a $\theta = 0\deg$. Entonces en el segundo estado, tenemos: 
+\begin{align*}
+\vec{\hat{r}_{AG}} \; & = \; ( \, +1, \, 0 ) \\
+\vec{r_{AG}} \; & = \; (\ell/2) \; \vec{\hat{r}_{AG}} \; = \;
+1.0417 \; \vec{\hat{r}_{AG}} \\
+\vec{r_{AB}} \; & = \; \ell \; \vec{\hat{r}_{AG}} \; = \;
+2.0833 \; \vec{\hat{r}_{AG}} \\
+\vec{v_A} \; & = \; ( \, -v_A, \, 0 \, ) \; \text{ft/s} \\
+\vec{v_B} \; & = \; ( \, 0, \, +v_B \, ) \; \text{ft/s}
+\end{align*}
+Ahora, la deflecci\'on del resorte y el cambio de altura como funci\'on de $\theta$ puede ser calculados de la siguiente manera: 
+\begin{align*}
+\Delta x(\theta) \;
+& = \; \ell - \ell \, \cos(\theta) \; = \; 
+2.0833 \, ( 1 - \cos(\theta) ) \; \text{ft} \\
+\Delta h_G(\theta) \;
+& = \; (\ell/2) \, \sin(\theta)
+\; = \; 1.0417 \, \sin(\theta) \; \text{ft}
+\end{align*}
+Tambi\'en podemos observar que las velocidades de $A$ y $B$ se relacionan por medio de la velocidad angular de la barra. Esto implica que: 
+\begin{align*}
+& \vec{v_B} \; = \;
+\vec{v_A} + \vec{\omega} \cross \vec{r_{AB}} \\
+& \Longrightarrow \;
+\colvec{0}{+v_B} \; = \; 
+\colvec{-v_A}{0} + \colvec{0}{ +\ell \, \omega} \\
+& \Longrightarrow \;
+\vec{v_A} \; = \; \vec{0} \; \text{ft/s}
+\end{align*}
+Consecuentemente: 
+\[
+\vec{v_G} \; = \;
+\vec{v_A} + \vec{\omega} \cross \vec{r_{AG}} \; = \;
+\vec{0} + \colvec{0}{ +(\ell/2) \, \omega} \; = \;
+\colvec{0}{ +1.0417 \, \omega} \; \text{ft/s}
+\]
+Es as\'i que la energ\'ia cin\'etica del cuerpo en el segundo estado es: 
+\begin{align*}
+K_2 \; & = \; 
+(1/2) \, m \, v_G^2 + (1/2) \, I \, \omega^2 \\
+& = \; (1/2) \, [ \, (0.2797)(1.0417^2) + 0.1012 \, ] \, \omega^2
+\; = \; 0.2023 \, \omega^2
+\end{align*}
+Con todo esto en mente podemos finalmente aplicar el Principio de Trabajo-Energ\'ia. Puesto que ninguna fuerza externa no-conservativa act\'ua sobre el sistema, la energ\'ia del sistema no puede cambiar entre estados. En el primer estado la energ\'ia total est\'a concentrada en la deflecci\'on del resorte: 
+\[
+E_1 \; = \; (1/2) \, k \, \Delta x(\theta = 50\deg)^2 \; = \;
+13.40 \; \text{lb-ft}
+\]
+En el segundo estado no hay energ\'ia del resorte, sino solamente energ\'ia potencial gravitacional y energ\'ia cin\'etica: 
+\[
+E_2 \; = \; mg \, \Delta h_G(\theta = 50\deg) + K_2 \; = \;
+7.182 + 0.2023 \, \omega^2
+\]
+Igualando las energ\'ias en los dos estados, y fij\'andonos que en el segundo estado la velocidad angular de la barra es contraria al sentido de las manecillas del reloj, tenemos: 
+\[
+\vec{\omega} \; = \; +5.544 \; \uvec{k} \; \text{rad/s}
+\qquad \Longrightarrow \qquad
+\vec{v_B} \; = \; +11.55 \; \uvec{j} \; \text{ft/s}
+\]
+\QED
 
 \end{problem}
 \fullskip
