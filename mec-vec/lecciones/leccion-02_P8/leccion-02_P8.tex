@@ -108,7 +108,7 @@ Igualando las dos expresiones anteriores para la aceleraci\'on en $D$, tenemos:
 & \Longrightarrow \;
 \vec{\alpha_{BD}} \; = \; -4.1754 \; \uvec{k} \; \text{rad/s\tsup{2}}
 \end{align*}
-
+\QED
 
 \end{enumerate}
 
@@ -119,10 +119,57 @@ Igualando las dos expresiones anteriores para la aceleraci\'on en $D$, tenemos:
 \begin{problem}
 \textbf{[6 Puntos]} Dos discos uniformes y dos cilindros est\'an ensamblados de la manera como se muestra en la siguiente figura. El disco $A$ pesa 20 lb y el disco $B$ pesa 12 lb. Si el sistema se suelta desde el reposo, encuentre las aceleraciones angulares de los discos y las aceleraciones translacionales de los cilindros. 
 
-\begin{figure}[htb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.50\textwidth]{problema-02.jpg}
 \end{figure}
+
+\emph{Soluci\'on:} Primero tomamos algunos datos: 
+\begin{align*}
+m_A \; & = \; 0.6216 \; \text{slug} \\
+m_B \; & = \; 0.3730 \; \text{slug} \\
+m_C \; & = \; 0.4662 \; \text{slug} \\
+m_D \; & = \; 0.5595 \; \text{slug} \\
+I_A \; & = \; (1/2) \, m_A \, r_A^2 \; = \; 0.1381 \; \text{slug-ft\tsup{2}} \\
+I_B \; & = \; (1/2) \, m_B \, r_B^2 \; = \; 0.0466 \; \text{slug-ft\tsup{2}}
+\end{align*}
+Ahora, si definimos a las tensiones de la cuerda en los segmentos $AC$, $AB$ y $BD$ como $T_{AC}$, $T_{AB}$ y $T_{BD}$, respectivamente, entonces podemos ver que las sumatorias de torques en las poleas y las sumatorias de fuerzas en los cilindros resultan en: 
+\begin{align*}
+& I_A \, \alpha_A \; = \; +r_A \, ( T_{AC} - T_{AB} ) \\
+& I_B \, \alpha_B \; = \; +r_B \, ( T_{AB} - T_{BD} ) \\
+& m_C \, (\vec{a_C})_y \; = \; +T_{AC} - W_C \\
+& m_D \, (\vec{a_D})_y \; = \; +T_{BD} - W_D
+\end{align*}
+Para simplificar estas ecuaciones reconocemos las siguientes restricciones cinem\'aticas: 
+\begin{align*}
+r_A \, \alpha_A \; & = \; r_B \, \alpha_B
+\quad \Longrightarrow \quad
+\alpha_B \; = \; (4/3) \, \alpha_A \; \text{rad/s\tsup{2}} \\
+(\vec{a_C})_y \; & = \; -r_A \, \alpha_A
+\quad \Longrightarrow \quad
+(\vec{a_C})_y \; = \; -(2/3) \, \alpha_A \; \text{ft/s\tsup{2}} \\
+(\vec{a_D})_y \; & = \; +r_B \, \alpha_B
+\quad \Longrightarrow \quad
+(\vec{a_D})_y \; = \; +(2/3) \, \alpha_A \; \text{ft/s\tsup{2}}
+\end{align*}
+Reemplazando $\alpha_B$, $(\vec{a_C})_y$ y $(\vec{a_D})_y$ en las sumatorias de torques y fuerzas, obtenemos el siguiente sistema de cuatro ecuaciones en las cuatro inc\'ognitas $\alpha_A$, $T_{AC}$, $T_{AB}$ y $T_{BD}$, tal como se muestra a continuaci\'on. 
+\begin{align*}
+& I_A \, \alpha_A \; = \; +(2/3) \, ( T_{AC} - T_{AB} ) \\
+& (4/3) \, I_B \, \alpha_A \; = \; +(1/2) \, ( T_{AB} - T_{BD} ) \\
+& -(2/3) \, m_C \, \alpha_A \; = \; +T_{AC} - W_C \\
+& +(2/3) \, m_D \, \alpha_A \; = \; +T_{BD} - W_D
+\end{align*}
+Resolviendo este sistema para la aceleraci\'on angular de la polea obtenemos: 
+\[
+\vec{\alpha_A} \; = \; -1.724 \; \uvec{k} \; \text{rad/s\tsup{2}}
+\]
+Consecuentemente: 
+\begin{align*}
+\vec{\alpha_B} \; & = \; -2.299 \; \uvec{k} \; \text{rad/s\tsup{2}} \\
+\vec{a_C} \; & = \; +1.149 \; \uvec{j} \; \text{ft/s\tsup{2}} \\
+\vec{a_D} \; & = \; -1.149 \; \uvec{j} \; \text{ft/s\tsup{2}}
+\end{align*}
+\QED
 
 \end{problem}
 \fullskip
@@ -136,6 +183,30 @@ Igualando las dos expresiones anteriores para la aceleraci\'on en $D$, tenemos:
 \includegraphics[width=0.5\textwidth]{problema-03.jpg}
 \end{figure}
 
+\emph{Soluci\'on:} Puesto que el sistema parte del reposo y que no hay cambios en su energ\'ia potencial, vemos que el trabajo externo causado por la fuerza $F = 30$ N al desplazar el centro de masa del sistema $\delta = 0.250$ m debe ser igual a la energ\'ia cin\'etica total del sistema despu\'es del desplazamiento. El trabajo externo es: 
+\[
+\Delta E_{12} \; = \; F \, \delta \; = \; 7.5 \; \text{J}
+\]
+La energ\'ia cin\'etica total es la suma de la energ\'ia cin\'etica translacional de la plataforma con las energ\'ia cin\'eticas translacionales y rotacionales de los discos. Definiendo a $v_P$ como la velocidad de la plataforma, a $v_D$ como la velocidad del centro de masa de cada disco, y a $\omega_D$ como la velocidad angular de cada disco, tenemos: 
+\[
+E_2 \; = \; K_2 \; = \; 
+(1/2) \, m_P \, v_P^2 + (2) \, [ \, (1/2) \, m_D \, v_D^2 + (1/2) \, I_D \, \omega_D^2 \, ]
+\]
+Ahora aplicamos consideraciones cinem\'aticas. Claramente $v_P = v_D$. Adem\'as, por la condici\'on de rodadura tenemos $v_D = r_D \, \omega_D$, por lo que $\omega_D = v_P / r_D$. Recordando tambi\'en que la inercia de cada disco es $I_D \; = \; (1/2) \, m_D \, r_D^2$, la energ\'ia en el segundo estado es: 
+\begin{align*}
+E_2 \;
+& = \; (1/2) \, m_P \, v_P^2 + (2) \, [ \, (1/2) \, m_D \, v_P^2 + (1/2) \, I_D \, ( v_P / r_D )^2 \, ] \\
+& = \; [ \, (1/2) \, m_P + m_D + ( I_D / r_D^2 ) \, ] \, v_P^2 \\
+& = \; [ \, (1/2) \, m_P + (3/2) \, m_D \, ] \, v_P^2 \\
+& = \; 40.5 \, v_P^2
+\end{align*}
+Finalmente, aplicando el Principio Trabajo-Energ\'ia, tenemos que $E_2 = \Delta E_{12}$. Igualando estas dos expresiones y resolviendo para $v_P$ concluimos que: 
+\[
+\vec{v_P} \; = \; +0.4303 \; \uvec{i} \; \text{m/s}
+\; \equiv \; +430.3 \; \uvec{i} \; \text{mm/s}
+\]
+\QED
+
 \end{problem}
 \fullskip
 
@@ -143,15 +214,70 @@ Igualando las dos expresiones anteriores para la aceleraci\'on en $D$, tenemos:
 \begin{problem}
 Dos barras ligeras id\'enticas $AB$ y $BC$ se sueldan entre si para formar un mecanismo en forma de $L$, el cual se presiona contra un resorte en $D$ y se suelta desde la posici\'on indicada, tal como se muestra en la siguiente figura. Se sabe que el \'angulo m\'aximo de rotaci\'on del mecanismo en su movimiento subsecuente es de 90\deg en sentido contrario al de las manecillas del reloj. 
 
-\begin{figure}[htb]
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.4\textwidth]{problema-04.jpg}
 \end{figure}
 
 Complete las siguientes actividades: 
 \begin{enumerate}[label=\textbf{\alph*)}]
-\item \textbf{1 Punto:} Calcule la inercia del ensamble alrededor de $B$. 
-\item \textbf{5 Puntos:} Determine la magnitud de la velocidad angular del mecanismo cuando pasa por la posici\'on en la que la barra $AB$ forma un \'angulo de 30\deg con la horizontal. 
+\item \textbf{1 Punto:} Calcule la inercia del ensamble alrededor de $B$. \\[1ex] \emph{Soluci\'on:} Suponiendo que la masa de cada barra es $m$, tenemos: 
+\[
+I_B \; = \; 
+(2) \, (1/12) \, m \, \ell^2 + (2) \, m \, (\ell/2)^2
+\; = \; (2/3) \, m \, \ell^2
+\; = \; 0.1067 \, (m) \; \text{kg-m\tsup{2}}
+\]
+En cambio, si suponemos que la masa del ensamble es $M$, tenemos: 
+\[
+I_B \; = \; (2/3) \, (M/2) \, \ell^2
+\; = \; (1/3) \, M \, \ell^2
+\; = \; 0.0533 \, (M) \; \text{kg-m\tsup{2}}
+\]
+
+\item \textbf{5 Puntos:} Determine la magnitud de la velocidad angular del mecanismo cuando pasa por la posici\'on en la que la barra $AB$ forma un \'angulo de 30\deg con la horizontal. \\[1ex]
+\emph{Soluci\'on:} Definimos el primer estado como aquel donde la barra $AB$ est\'a en posici\'on vertical, es decir, donde alcanza su \'angulo, y el segundo estado donde la misma barra forma un \'angulo de $\theta = 30\deg$ con la horizontal. Con esto en mente, primero computamos el centro de masa del ensamble con respecto al punto $B$. Por simetr\'ia, es evidente que en la posici\'on mostrada en la figura el centro de masa del ensamble se localiza en el punto $\vec{G_0} = (+\delta,-\delta)$, donde: 
+\[
+\delta \; = \; 
+\frac{(m)(\pm 0) + (m)(+\ell/2)}{2m} \; = \; +0.1 \; \text{m}
+\]
+De este c\'alculo tambi\'en podemos reconocer que punto $B$ siempre se encuentra a una distancia de $r = \delta \sqrt{2}$ m del centro de masa del ensamble. Adicionalmente, podemos observar que en el primer estado la locaci\'on del centro de masa del ensamble es $\vec{G_1} = (+0.1,+0.1)$, mientras que en el segundo estado es: 
+\[
+(\vec{G_2})_y \; = \;
+\frac{ (m)[ (+\ell/2) \sin(30\deg) ] + (m)[ (-\ell/2) \cos(30\deg)] }{2m}
+\; = \; -0.0366 \; \text{m}
+\]
+Vemos as\'i que la altura del centro de masa del ensamble en el primer estado relativo al segundo estado es: 
+\[
+h \; = \; (\vec{G_1})_y - (\vec{G_2})_y
+\; = \; (+0.1) - (-0.0366) \; = \; +0.1366 \; \text{m}
+\]
+Consecuentemente, la energ\'ia del sistema en el primer estado es: 
+\[
+E_1 \; = \; U_1 \; = \; (2m) \, g \, h \; = \; 2.68 \, (m) \; \text{J}
+\]
+Mientras que la energ\'ia del sistema en el segundo estado es: 
+\begin{align*}
+E_2 \; = \; K_2 \;
+& = \;
+(1/2) \, (2m) \, (v_G)^2 + (1/2) \, I_B \, \omega^2 \\
+& = \;
+m \, (v_G)^2 + (1/3) \, m \, \ell^2 \, \omega^2
+\end{align*}
+Ahora, puesto que el ensamble est\'a rotando alrededor del punto $B$ es evidente que $v_G = r \, \omega = \delta \, \sqrt{2} \, \omega$. Esto implica que: 
+\begin{align*}
+E_2 \; = \; K_2 \;
+& = \; [ \, m \, (\delta \sqrt{2})^2 + (1/3) \, m \, \ell^2 \, ] \, \omega^2 \\
+& = \; [ \, 2 \, m \, \delta^2 + (1/3) \, m \, \ell^2 \, ] \, \omega^2
+\; = \; 0.0733 \, (m) \, (\omega^2) \; \text{J}
+\end{align*}
+Finalmente, aplicamos el Principio Trabajo-Energ\'ia. Puesto que nunca act\'uan fuerzas externas no-conservativas, la energ\'ia no puede cambiar entre estados, \ie $E_1 = E_2$. Igualando las dos expresiones vemos que se cancelan las masas de las barras y que la velocidad angular del ensamble es: 
+\[
+\omega \; = \; \pm 6.047 \; \uvec{k} \; \text{rad/s}
+\]
+La direcci\'on exacta depende de si usted consider\'o en ensamble mientras sub\'ia o mientras o bajaba, y por lo tanto es irrelevante. 
+\QED
+
 \end{enumerate}
 
 \end{problem}
