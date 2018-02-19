@@ -1,0 +1,79 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{03}
+\setcounter{numero}{\numero}
+\graphicspath{{./figures/}}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Examen \numero \\[2ex]
+\small \textbf{Semestre:} 2017-2018 T\'ermino II \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\label{prob:maquina-caprichosa}
+Un fabricante tiene una m\'aquina complicada. Al comienzo de cada d\'ia que la m\'aquina est\'a operativa el riesgo de que la misma se desconponga es $p$. Cuando la m\'aquina se descompone se llama inmediatamente a la agencia de mantenimiento para agendar una visita para el d\'ia siguiente. La visita de la agencia dura $k$ d\'ias y cuesta $\alpha$ d\'olares diarios. Durante la visita los t\'ecnicos instalan un repuesto que tiene una vida \'util m\'inima de $m$ d\'ias. Cada visita sucede de la siguiente manera: 
+\begin{itemize}
+\item Supongamos que la m\'aquina empieza la ma\~nana del d\'ia $t$ operativa y que durante ese d\'ia la misma se descompone un par de horas antes del final de la jornada. El fabricante entonces llama a la agencia de mantenimiento para agendar una visita. 
+\item La ma\~nana del d\'ia $t+1$ llegan los t\'ecnicos de la agencia y empiezan a trabajar en la m\'aquina. Trabajan todo el d\'ia. 
+\item Los d\'ias $t+2$, $t+3$, $\dots$, $t+k-1$, los t\'ecnicos de la agencia contin\'uan su trabajo. 
+\item La ma\~nana del d\'ia $t+k$ los t\'ecnicos de la agencia contin\'uan su trabajo y le entregan la m\'aquina operativa al fabricante para el final de la jornada. 
+\item La ma\~nana del d\'ia $t+k+1$ la m\'aquina est\'a operativa nuevamente, y continua as\'i hasta el d\'ia $t+k+m$ gracias al repuesto especial que instalan los t\'ecnicos. 
+\item Al empezar el d\'ia $t+k+m+1$ la m\'aquina puede volverse a descomponer con probabilidad igual a $p$. 
+\end{itemize}
+
+Con esto en mente: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{2 Puntos:} Modele la situaci\'on descrita como una Cadena de Markov. En particular, presente el grafo de la cadena en funci\'on de $p$ y $k$. 
+\item \textbf{3 Puntos:} Calcule: 
+\begin{itemize}
+\item El porcentaje del tiempo que la m\'aquina opera toda la jornada sin problemas. 
+\item El porcentaje del tiempo que la m\'aquina empieza el d\'ia operativa pero se descompone durante alg\'un momento de la jornada. 
+\item El porcentaje del tiempo que la m\'aquina recibe mantenimiento. 
+\end{itemize}
+
+\end{enumerate}
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Un inversionista de riesgo se encuentra evaluando varias nuevas empresas, para lo cual las ha clasificado de la siguiente manera: 
+\begin{itemize}
+\item Las empresas rango $A$ son las mejores. Cada trimestre una empresa rango $A$ logra volverse totalmente rentable con probablidad del 20\%, se mantiene en el mismo rango con probabilidad del 50\% y desciende de rango con probabilidad del 30\%. 
+\item Las empresas rango $B$ son las segundas mejores. Cada trimestre una empresa rango $B$ \linebreak asciende a rango $A$ con probabilidad del 25\%, se mantiene en el mismo rango con probabilidad del 55\% y desciende de rango con probabilidad del 20\%. 
+\item Las empresas rango $C$ son las problem\'aticas. Cada trimestre una empresa rango $C$ asciende a rango $B$ con probabilidad del 30\%, se mantiene en el mismo rango con probabilidad del 50\% y quiebra con probabilidad del 20\%. 
+\end{itemize}
+
+Con esto en mente, complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{1 Punto:} Modele el sistema de clasificaci\'on de empresas del inversionista como una Cadena de Markov con cinco estados. En particular, provea el grafo de la cadena. 
+\item \textbf{3 Puntos:} Suponiendo que cada acci\'on de una empresa rango $A$ genera \$500 mensuales, que cada acci\'on de una empresa rango $B$ genera \$350 mensuales, y que cada acci\'on de una empresa rango $C$ genera \$120 mensuales, encuentre el valor acumulado de una acci\'on de una empresa tipo $A$ desde que se compra la acci\'on hasta que la empresa quiebra o se vuelve completamente rentable. 
+\end{enumerate}
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[6 Puntos]} Un acaudalado inversionista tiene una empresa que se dedica a identificar \emph{start-ups} prometedoras. De las empresas que \'el usualmente eval\'ua, se sabe que generalmente solo el 40\% tendr\'a \'exito. Actualmente, el inversionista logra identificar correctamente a empresas exitosas con probabilidad del 85\% y a empresas no-exitosas con probabilidad del 75\%. Se supone que \'el invierte si pronostica que la empresa ser\'a exitosa; caso contrario no invierte. Cuando invierte y acierta sus ganancias asciended a los \$180K, mientras que cuando invierte y se equivoca sus p\'erdidas usualmente acumulan unos \$40K. 
+
+Suponga que un consultor dice poder predecir correctamente el futuro de una empresa con probabilidad $p$. Si el consultor ofrece sus servicios por un honorario de \$35K, cu\'al es el m\'inimo valor de $p$ que garantiza que lo contrate el inversionista? 
+
+\end{problem}
+\fullskip
+
+\end{document}
