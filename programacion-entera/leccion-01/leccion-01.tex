@@ -1,0 +1,82 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{01}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Programaci\'on Entera (INDG-1019): Lecci\'on \numero \\[2ex]
+\small \textbf{Semestre:} 2018-2019 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[10 puntos]} Una empresa petrolera tiene un pozo en la amazon\'ia ecuatoriana, el cual se encuentra aislado de la red el\'ectrica nacional. Consecuentemente, la empresa alquila generadores el\'ectricos de la cercana ciudad de Tena para suplir su demanda de electricidad, la cual fluctua dependiendo del n\'umero de empleados trabajando en el pozo cada semana. \linebreak La siguiente tabla muestra el n\'umero de generadores que se requerir\'an en el pozo a lo largo del pr\'oximo trimestre. 
+
+\begin{table}[htb]
+\centering
+\label{tab:Problema_Generadores}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Semana}	& \textbf{Generadores Requeridos} \\ \hline
+01 & 3 \\ \hline
+02 & 7 \\ \hline
+03 & 8 \\ \hline
+04 & 6 \\ \hline
+05 & 9 \\ \hline
+06 & 4 \\ \hline
+07 & 3 \\ \hline
+08 & 5 \\ \hline
+09 & 8 \\ \hline
+10 & 9 \\ \hline
+11 & 7 \\ \hline
+12 & 4 \\ \hline
+\end{tabular}
+\end{table}
+
+Aunque los generadores se alquilan a \$328 por unidad por semana, la empresa de transporte por helic\'optero con la que trabaja la petrolera cobra \$1,050 por cada generador cargado desde Tena hasta el pozo, y vice-versa. Adem\'as, n\'otese que la empresa transportista solamente puede garantizar un vuelo al pozo por semana, y que el helic\'optero utilizado puede cargar hasta 4 generadores por vuelo. 
+
+Con todo esto en mente, modele el problema de encontrar un plan \'optimo de alquiler y transporte de generadores como un PL. 
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[10 puntos]} GYE Charter Flights Ltda. es una nueva empresa que ofrece vuelos privados ida y vuelta desde el aeropuerto de Guayaquil. La empresa dispone de varios pilotos certificados para llevar a cabo los vuelos, cuyos n\'umeros var\'ian a lo largo de la semana. La siguiente tabla muestra el n\'umero de pilotos requeridos por d\'ia. 
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\multicolumn{1}{|c|}{\textbf{D\'ia}} & \textbf{\begin{tabular}[c]{@{}c@{}}N\'umero de \\ Pilotos Requeridos\end{tabular}} \\ \hline
+(1) Lunes & 15 \\ \hline
+(2) Martes & 6 \\ \hline
+(3) Mi\'ercoles & 9 \\ \hline
+(4) Jueves & 7 \\ \hline
+(5) Viernes & 11 \\ \hline
+(6) Sabado & 5 \\ \hline
+(7) Domingo & 4 \\ \hline
+\end{tabular}
+\end{table}
+\newpage
+
+Para satisfacer \'estas demandas, la empresa contrata pilotos para laborar cinco d\'ias a la semana en dos tipos de turnos. Los pilotos asignados al primer tipo de turnos laboran cinco d\'ias seguidos y luego descanzan dos d\'ias seguidos. En cambio, los pilotos asignados al segundo tipo de turnos laboran tres d\'ias seguidos, descanzan un d\'ia, luego laboran dos d\'ias consecutivos, y finalmente descanzan un d\'ia. 
+
+Con todo esto en mente, modele el problema de encontrar un plan de contrataci\'on de pilotos de costo m\'inimo para GYE Charter Flights como un PL. 
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
