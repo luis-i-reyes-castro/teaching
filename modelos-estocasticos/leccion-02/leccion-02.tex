@@ -1,0 +1,59 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{02}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Lecci\'on \numero \\[1ex]
+\small \textbf{Semestre:} 2018-2019 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[12 Puntos]} En un supermercado la demanda semanal te\'orica de un art\'iculo, \ie el n\'umero de unidades del art\'iculo que los clientes comprar\'ian semanalmente si hubiera un inventario infinito del art\'iculo, es representada por la variable aleatoria $D$ y obedece la siguiente distribuci\'on: 
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+$\boldsymbol{k}$ & $\boldsymbol{\Pr( D  = k )}$ \\ \hline
+0 & 0.35 \\ \hline
+1 & 0.20 \\ \hline
+2 & 0.20 \\ \hline
+3 & 0.15 \\ \hline
+4 & 0.10 \\ \hline
+\end{tabular}
+\end{table}
+
+El administrador maneja el inventario de este art\'iculo de manera semanal de acuerdo a la siguiente pol\'itica:
+\begin{itemize}
+\item Si hay 0 unidades en inventario, se hace un pedido al proveedor por 4 unidades. 
+\item Si hay 1, 2 o 3 unidades en inventario, se hace un pedido al proveedor por 2 unidades. 
+\item Caso contrario, no se hace un pedido. 
+\end{itemize}
+
+Cada semana, digamos la \tava semana, transcurre de la siguiente manera: 
+\begin{enumerate}
+\item El lunes en la ma\~nana se abre la tienda al p\'ublico, se observa el estado del inventario (denotado $X_t$), y se hace el pedido al proveedor, de ser necesario. 
+\item A lo largo de la semana, el p\'ublico compra el n\'umero de c\'amaras que desea de acuerdo al inventario disponible. 
+\item El s\'abado de noche se cierra la tienda, y justo despues del cierre se reciben las unidades pedidas al proveedor al comienzo de la semana. 
+\end{enumerate}
+
+Con esto en mente, modele el n\'umero de unidades del art\'iculo en inventario (\ie $X_t$) como una Cadena de Markov. 
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
