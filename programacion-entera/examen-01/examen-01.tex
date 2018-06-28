@@ -1,0 +1,123 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{01}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Programaci\'on Entera (INDG-1019): Examen \numero \\[1ex]
+\small \textbf{Semestre:} 2018-2019 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Considere un programa entero que contiene $m \geq 10$ variables binarias
+\[
+x_1, \, x_2, \, x_3, \, \dots, \, x_m \in \{ 0, 1 \}
+\]
+junto con otras variables adicionales. En cada uno de los siguientes literales, se le presentar\'a un conjunto de suposiciones seguido de una regla o preferencia. Exprese cada una de las reglas o preferencias en el lenguaje de la programaci\'on lineal entera mediante la introducci\'on de variables enteras y/o de restricciones lineales. Por favor considere que cada literal es independiente de todos los otros. 
+\begin{enumerate}[label=\alph*)]
+\item \emph{Suposiciones:} $2 \leq n < m$ ; \, $y \in \{ 0, 1\}$. \\
+\emph{Regla o preferencia:} La variable $y = 1$ si y solo si el n\'umero de \'indices $i \in \upto{m}$ tales que $x_i = 1$ es exactamente igual a $n$. 
+
+\item \emph{Suposiciones:} $S \subset \upto{m}$ es un subconjunto de \'indices; \, $w \in \{ 0, 1\}$. \\
+\emph{Regla o preferencia:} La variable $w = 1$ si y solo si para todo \'indice $i \in S$ tenemos $x_i = 1$. 
+
+\item \emph{Suposiciones:} $S, T \subset \upto{m}$ son subconjuntos de \'indices. \\
+\emph{Regla o preferencia:} Si $x_i = 1$ para al menos un \'indice $i \in S$ entonces $x_j = 0$ para todo \'indice $j \in T$, y vice-versa (\ie si $x_j = 1$ para al menos un \'indice $j \in T$ entonces $x_i = 0$ para todo \'indice $i \in S$). 
+
+\item \emph{Suposiciones:} $S, T \subset \upto{m}$ son subconjuntos de \'indices; \, $w \in \{ 0, 1\}$. \\
+\emph{Regla o preferencia:} Si el n\'umero de \'indices $i \in S$ para los cuales $x_i = 1$ es igual o mayor al n\'umero de \'indices $j \in S$ para los cuales $x_j = 1$ entonces $w = 1$. 
+
+\item \emph{Suposiciones:} $S, T \subset \upto{m}$ son subconjuntos de \'indices. \\
+\emph{Regla o preferencia:} Si $x_i = 1$ para al menos dos \'indices $i \in S$ entonces $x_j = 1$ para al menos cuatro \'indices $j \in T$. 
+
+\end{enumerate}
+\QED
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Considere un programa entero que contiene las series temporales de variables binarias $\{x_t\}_{t=1}^T \in \{ 0, 1 \}$, $\{y_t\}_{t=1}^T \in \{ 0, 1 \}$ y $\{z_t\}_{t=1}^T \in \{ 0, 1 \}$, donde $T \geq 10$, junto con otras variables adicionales. En este modelo, las series temporales $\{x_t\}$, $\{y_t\}$ y $\{z_t\}$ representan la ocurrencia o no-ocurrencia de tres tipos diferentes de eventos de inter\'es en un problema de planificaci\'on con un horizonte de $T$ per\'iodos. 
+
+En cada uno de los siguientes literales, se le presentar\'a una regla o preferencia, posiblemente precedida por un conjunto de suposiciones. Exprese cada una de las reglas o preferencias en el lenguaje de la programaci\'on lineal entera mediante la introducci\'on de variables enteras y/o de restricciones lineales. Recuerde que cada literal es independiente de los otros. 
+\begin{enumerate}[label=\alph*)]
+\item \emph{Regla o preferencia:} Si para alg\'un periodo $k \in \upto{T-1}$ tenemos $x_k = 1$ entonces $y_{k+1} = 1$. 
+
+\item \emph{Regla o preferencia:} Existe al menos un periodo $k \in \upto{T-1}$ tal que $x_k = 1$ y $x_{k+1} = 1$. 
+
+\item \emph{Regla o preferencia:} Si para alg\'un periodo $k \in \upto{T-1}$ tenemos $x_k = 1$ entonces $y_{k+\ell} = 1$ para al menos un $\ell \geq 1$. 
+
+\item \emph{Regla o preferencia:} Si para alg\'un periodo $k \in \upto{T-2}$ tenemos $x_k = 1$ y $y_{k+1} = 1$ entonces $z_{k+2} = 1$. 
+
+\item \emph{Regla o preferencia:} Si para alg\'un periodo $k \in \upto{T-1}$ tenemos $x_k = 1$ y $y_{k} = 1$ entonces $z_{k+ \ell} = 1$ para al menos un $\ell \geq 1$. 
+
+\end{enumerate}
+\QED
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Considere un problema de producci\'on y almacenamiento con m\'ultiples per\'iodos y con una estructura de costos decrementales. En particular: 
+\begin{itemize}
+\item El horizonte del problema es de $T$ per\'iodos. 
+\item Los costos de producci\'on por periodo obecen el patr\'on mostrado en la siguiente tabla, donde $c_1 > c_2 > c_3 > \cdots > c_M > 0$. 
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Cantidad M\'inima} & \textbf{Cantidad M\'axima} & \textbf{Costo por Unidad} \\ \hline
+$q_0 = 0$ & $q_1$ & $c_1$ \\ \hline
+$q_1+1$ & $q_2$ & $c_2$ \\ \hline
+$q_2+1$ & $q_3$ & $c_3$ \\ \hline
+$\vdots$ & $\vdots$ & $\vdots$ \\ \hline
+$q_{M-1}+1$ & $q_M$ & $c_M$ \\ \hline
+\end{tabular}
+\end{table}
+
+En general, para cualquier $k \in \upto{m}$, si se producen entre $q_{k-1} + 1$ y $q_k$ unidades se incurre un costo de producci\'on de $c_k$ d\'olares por unidad. 
+
+\item Las demanadas del producto est\'an representadas por la series de tiempo $\{ d_t \}_{t=1}^T$. 
+\item Se tiene una bodega con capacidad para hasta $B$ unidades, y se incurre un costo de almacenamiento por unidad por periodo de $c_{inv}$ d\'olares. 
+
+\end{itemize}
+
+Con esto en mente, modelaremos este problema de producci\'on y almacenamiento como un Programa Lineal Entero. Para esto introducimos las siguientes variables: 
+\begin{itemize}
+\item Para todo $t \in \upto{T}$ y todo $k \in \upto{M}$ la variable binaria $x_{tk}$ indica si en el periodo $t$ se produjeron entre $q_{k-1} + 1$ unidades y $q_k$ unidades. 
+\item Para todo $t \in \upto{T}$ y todo $k \in \upto{M}$ la variable entera $z_{tk}$ indica el n\'umero de unidades producidas en los casos cuando se producen entre $q_{k-1}+1$ y $q_k$ unidades. 
+\item Para todo $t \in \upto{T-1}$ la variable entera $w_t$ indica el n\'umero de unidades puestas en almacenamiento entre el periodo $t-1$ y el periodo $t$. 
+\end{itemize}
+
+Utilizando las variables anteriores, complete las siguientes actividades: 
+\begin{enumerate}[label=\alph*)]
+\item Escriba las restricciones que dictan que en cada periodo $t$ exactamente una de las variables $x_{tk}$ debe tomar el valor uno. 
+\item Escriba las restricciones que dictan que en cada periodo $t$ es el caso que si $x_{tk} = 0$ entonces $z_{tk} = 0$. 
+\item Escriba las restricciones que dictan que en cada periodo $t$ es el caso que si $x_{tk} = 1$ entonces $z_{tk} \geq q_{k-1} + 1$. 
+\item Escriba las restricciones que dictan que en cada periodo $t$ es el caso que si $x_{tk} = 1$ entonces $z_{tk} \leq q_{k}$. 
+\item Escriba una expresi\'on, v\'alida para cada periodo $t$, para el n\'umero de unidades producidas el periodo $t$. 
+\item Escriba las restricciones asociadas con la producci\'on, el almacenamiento y la demanda a lo largo del horizonte de planificaci\'on. 
+\item Escriba una expresi\'on, v\'alida para cada periodo $t$, para el costo de producci\'on incurrido en el periodo $t$. 
+\item Escriba la funci\'on de costo que buscamos minimizar. 
+\end{enumerate}
+\QED
+
+\end{problem}
+\fullskip
+
+\end{document}
