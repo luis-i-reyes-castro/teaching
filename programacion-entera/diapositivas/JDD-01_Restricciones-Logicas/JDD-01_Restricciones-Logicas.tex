@@ -30,7 +30,7 @@
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-Considere un programa entero que contiene $m \geq 10$ variables binarias
+Considere un problema de decisi\'on que contiene $m \geq 10$ variables binarias
 \[
 x_1, \, x_2, \, x_3, \, \dots, \, x_m \in \{ 0, 1 \}
 \]
@@ -192,7 +192,7 @@ m \, y \; \leq \; \sum_{i=1}^m x_i
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-Considere un programa entero que contiene $m \geq 10$ variables binarias
+Considere un problema de decisi\'on que contiene $m \geq 10$ variables binarias
 \[
 x_1, \, x_2, \, x_3, \, \dots, \, x_m \in \{ 0, 1 \}
 \]
@@ -332,9 +332,67 @@ En los siguientes literales suponga que $w \in \{ 0, 1 \}$.
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-\begin{center}
-[ En Desarrollo ]
-\end{center}
+Considere un problema de planificaci\'on sobre $T \geq 10$ per\'iodos que contiene las series temporales de variables binarias $\{ x_t \}_{t=1}^T$ y $\{ y_t \}_{t=1}^T$, junto con otras variables adicionales. En este modelo cada serie temporal est\'a asociada con un evento de inter\'es de tal manera que los unos y ceros de sus variables representan la historia de ocurrencias o no-ocurrencias del evento. 
+
+En los siguientes literales expresaremos una diversidad de reglas temporales utilizando el lenguague de la Programaci\'on Lineal Entera (PLE) mediante la introducci\'on de restricciones lineales de desigualdad y de igualdad. Por favor considere que cada literal es independiente de todos los otros. 
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\begin{itemize}
+\item \emph{Regla:} Eventualmente $x = 1$. \\[1ex]
+\emph{Implementaci\'on:} Introducimos la restricci\'on: 
+\[
+\sum_{t=1}^T x_t \; \geq \; 1
+\]
+
+\item \emph{Regla:} Eventualmente $x = 1$ por dos per\'iodos consecutivos. \\[1ex]
+\emph{Implementaci\'on:}
+\begin{enumerate}
+\item Introducimos el juego de variables binarias $\{ z_t \}_{t=1}^{T-1}$. 
+\item Introducimos dos juegos de restricciones: 
+\begin{align*}
+& \forall \, t \in \upto{T-1} \; \colon \; z_t \leq x_{t} \\
+& \forall \, t \in \upto{T-1} \; \colon \; z_t \leq x_{t+1}
+\end{align*}
+\item Agregamos la restricci\'on: 
+\[
+\sum_{t=1}^{T-1} z_t \; \geq \; 1
+\]
+\end{enumerate}
+
+\item \emph{Regla:} Si $x = 1$ entonces $x = 1$ para todo periodo posterior. \\[1ex]
+\emph{Implementaci\'on:} Introducimos el juego de restricciones: 
+\[
+\forall \, t \in \upto{T-1} \; \colon \; x_t \leq x_{t+1}
+\]
+
+\item \emph{Regla:} Si $x = 1$ entonces $y = 1$ para todo periodo posterior. \\[1ex]
+\emph{Implementaci\'on:} Introducimos el juego de restricciones: 
+\[
+\forall \, t \in \upto{T-1}, \,
+\forall \, \tau \in \upto{T-t} \; \colon \;
+x_t \leq \; y_{t + \tau}
+\]
+\framebreak
+
+\item \emph{Regla:} Si $x = 1$ entonces $y = 1$ despu\'es de $k$ per\'iodos. \\[1ex]
+\emph{Implementaci\'on:} Introducimos el juego de restricciones: 
+\[
+\forall \, t \in \upto{T-k} \; \colon \; x_t \leq y_{t+k}
+\]
+
+\item \emph{Regla:} Si $x = 1$ entonces eventualmente $y = 1$. \\[1ex]
+\emph{Implementaci\'on:} Introducimos el juego de restricciones: 
+\[
+\forall \, t \in \upto{T-1} \; \colon \; x_t \; \leq \;
+\sum_{k = t+1}^T y_t
+\]
+
+\end{itemize}
 
 \end{frame}
 
