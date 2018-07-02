@@ -1,0 +1,341 @@
+% =================================================================
+\documentclass[ 10pt, xcolor = dvipsnames]{beamer}
+\usepackage{ beamerthemesplit, lmodern}
+\usetheme{Madrid}
+\usecolortheme[named=Brown]{structure}
+\useinnertheme{rectangles}
+\setbeamertemplate{frametitle continuation}{}
+\beamertemplatenavigationsymbolsempty
+\usepackage{../../../macros-general}
+\usepackage{../../../macros-beamer}
+%\graphicspath{{./figures/}}
+
+% =================================================================
+\newcommand{\shorttitle}{INDG-1019: Juego de Diapositivas 01}
+\title[\shorttitle]{Programaci\'on Entera para Ingenier\'ia (INDG-1019): \textbf{Juego de Diapositivas 01} }
+\author[L. I. Reyes Castro]{Luis I. Reyes Castro}
+\institute[ESPOL]{\normalsize Escuela Superior Polit\'ecnica del Litoral (ESPOL) \\ Guayaquil - Ecuador}
+\date[2018-T1]{2018 - T\'ermino I}
+
+% -----------------------------------------------------------------
+\begin{document}
+\input{../../../beamer_table-contents}
+\input{../../../beamer_section-slides}
+\input{../../../macros-espanol}
+
+% =================================================================
+\section{Restricciones L\'ogicas y Combinatoriales}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Considere un programa entero que contiene $m \geq 10$ variables binarias
+\[
+x_1, \, x_2, \, x_3, \, \dots, \, x_m \in \{ 0, 1 \}
+\]
+junto con otras variables adicionales. En los siguientes literales expresaremos una diversidad de reglas logicas y combinatoriales utilizando el lenguague de la Programaci\'on Lineal Entera (PLE) mediante la introducci\'on de restricciones lineales de desigualdad y de igualdad. 
+
+Por favor considere que cada literal es independiente de todos los otros. 
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\begin{itemize}
+\item \emph{Regla:} El O-inclusivo (\texttt{OR}) de las variables eval\'ua en uno, \ie se requiere \linebreak que $x_i = 1$ para al menos un \'indice $i$. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on lineal: 
+\[
+\sum_{i=1}^m x_i \; \geq \; 1
+\]
+\item \emph{Regla:} El O-exclusivo (\texttt{XOR}) de las variables eval\'ua en uno, \ie se requiere que $x_i = 1$ para exactamente un \'indice $i$. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on lineal: 
+\[
+\sum_{i=1}^m x_i \; = \; 1
+\]
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Para los siguientes literales suponga que $2 \leq n < m$. 
+\begin{itemize}
+\item \emph{Regla:} $x_i = 1$ al menos $n$ veces. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on lineal: 
+\[
+\sum_{i=1}^n x_i \; \geq \; n
+\]
+\item \emph{Regla:} $x_i = 1$ no m\'as de $n$ veces. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on lineal: 
+\[
+\sum_{i=1}^n x_i \; \leq \; n
+\]
+\item \emph{Regla:} $x_i = 1$ exactamente $n$ veces. \\[1ex] \emph{Implementaci\'on:} Introducimos la siguiente restricci\'on lineal de igualdad: 
+\[
+\sum_{i=1}^n x_i \; = \; n
+\]
+\emph{Implementaci\'on equivalente:} Introducimos el siguiente par de restricciones lineales de desigualdad: 
+\[
+n \; \leq \; \sum_{i=1}^n x_i \; \leq \; n
+\]
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Para los siguiente literales suponga que $y \in \{ 0, 1 \}$ y que $2 \leq n < m$. 
+\begin{itemize}
+\item \emph{Regla:} Si $y = 1$ entonces el O-inclusivo (\texttt{OR}) de las variables eval\'ua en uno. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on lineal: 
+\[
+y \; \leq \; \sum_{i=1}^m x_i
+\]
+\item \emph{Regla:} Si $y = 1$ entonces el O-exclusivo (\texttt{XOR}) de las variables eval\'ua en uno. \\[1ex] \emph{Implementaci\'on:} Introducimos el siguiente par de restricciones lineales: 
+\[
+y \; \leq \; \sum_{i=1}^m x_i \; \leq \; m - (m-1) \, y
+\]
+\framebreak
+
+\item \emph{Regla:} Si $y = 1$ entonces $x_i = 1$ para al menos $n$ \'indices $i$. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on lineal: 
+\[
+n \, y \; \leq \; \sum_{i=1}^m x_i
+\]
+\item \emph{Regla:} Si $y = 1$ entonces $x_i = 1$ para no m\'as de $n$ \'indices $i$. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on lineal: 
+\[
+\sum_{i=1}^m x_i \; \leq \; m - (m-n) \, y
+\]
+\framebreak
+
+\item \emph{Regla:} Si $y = 1$ entonces $x_i = 1$ para exactamente $n$ de los \'indices $i$. \\[1ex] \emph{Implementaci\'on:} Introducimos el siguiente par de restricciones lineales: 
+\[
+n \, y \; \leq \; \sum_{i=1}^m x_i \; \leq \; m - (m-n) \, y
+\]
+\framebreak
+
+\item \emph{Regla:} Si el O-inclusivo (\texttt{OR}) de las variables eval\'ua en uno entonces $y=1$. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on lineal: 
+\[
+\sum_{i=1}^m x_i \; \leq \; m \, y
+\]
+\item \emph{Regla:} Si $x_i = 1$ para al menos $n$ \'indices $i$ entonces $y=1$. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on lineal: 
+\[
+\sum_{i=1}^m x_i \; \leq \; (n-1) + (m-n+1) \, y
+\]
+\framebreak
+
+\item \emph{Regla:} Si $x_i = 1$ para no m\'as de $n$ \'indices $i$ entonces $y=1$. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on lineal: 
+\[
+\sum_{i=1}^m x_i \; \geq \; (n + 1) - (n + 1) \, y
+\]
+\item \emph{Regla:} Si $x_i = 1$ para exactamente $n$ \'indices $i$ entonces $y=1$. \\[1ex] \emph{Implementaci\'on:} Introducimos el par de restricciones lineales: 
+\[
+(n + 1) - (n + 1) \, y \; \leq \;
+\sum_{i=1}^m x_i \; \leq \; (n-1) + (m-n+1) \, y
+\]
+\framebreak
+
+\item \emph{Regla:} $y = 1$ si y solo si $x_i = 1$ para exactamente $n$ de los \'indices $i$. \\[1ex] \emph{Implementaci\'on:}
+\begin{itemize}
+\item Introducimos un par de restricciones que causan que $y = 1$ fuerce a que $x_i = 1$ para exactamente $n$ de los \'indices $i$. 
+\[
+n \, y \; \leq \; \sum_{i=1}^m x_i \; \leq \; m - (m-n) \, y
+\]
+\item Introducimos un par de restricciones que causan que $x_i = 1$ para exactamente $n$ de los \'indices $i$ fuerce a que $y = 1$. 
+\begin{align*}
+& \sum_{i=1}^m x_i \; \leq \; (n - 1) + (m - n + 1) \, y \\
+& \sum_{i=1}^m x_i \; \geq \; (n + 1) - (n + 1) \, y
+\end{align*}
+\end{itemize}
+
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\begin{itemize}
+\item \emph{Regla:} Si $y = 1$ entonces el Y (\texttt{AND}) de las variables eval\'ua en uno. \\[1ex] \emph{Implementaci\'on A:} Introducimos el juego de restricciones lineales: 
+\[
+\forall \, i \in \upto{m} \; \colon \; y \leq x_i
+\]
+\emph{Implementaci\'on B:} Introducimos la restricci\'on lineal: 
+\[
+m \, y \; \leq \; \sum_{i=1}^m x_i
+\]
+
+\emph{Observaci\'on}: Esta vez las dos implementaciones presentadas no son equivalentes. De hecho, desde el punto de vista de la PLE la primera implementaci\'on es m\'as apretada que la segunda. Esto se debe a que las restricciones de la primera implementaci\'on implican la \'unica restricci\'on de la segunda implementaci\'on, pero el reverso no es cierto. 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\begin{itemize}
+\item \emph{Regla:} Si el Y (\texttt{AND}) de las variables eval\'ua en uno entonces $y = 1$. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on: 
+\[
+\sum_{i=1}^m x_i \; \leq \; (m-1) + y
+\]
+\end{itemize}
+
+\end{frame}
+
+% =================================================================
+\section{Restricciones entre Subconjuntos de \'Indices}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Considere un programa entero que contiene $m \geq 10$ variables binarias
+\[
+x_1, \, x_2, \, x_3, \, \dots, \, x_m \in \{ 0, 1 \}
+\]
+junto con otras variables adicionales. En este programa $S$ y $T$ son dos subcojuntos de \'indices de las variables $x_i$ (\ie $S, T \subset \upto{m}$), cuyas cardinalidades se escriben \linebreak como $|S|$ y $|T|$, respectivamente. 
+
+En los siguientes literales expresaremos una diversidad de reglas l\'ogicas y combinatoriales entre las variables cuyos \'indices pertenecen a $S$ y a $T$ utilizando el lenguague de la Programaci\'on Lineal Entera (PLE) mediante la introducci\'on de variables adicionales y de restricciones lineales. 
+
+Por favor considere que cada literal es independiente de todos los otros. 
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\begin{itemize}
+\item \emph{Regla:} Si $x_i = 1$ para alg\'un $i \in S$ entonces $x_j = 0$ para todo $j \in T$. \\[1ex] \emph{Implementaci\'on:}
+\begin{enumerate}
+\item Introducimos las variables binarias $a_S, a_T \in \{ 0, 1 \}$. 
+\item Introducimos un juego de restricciones que fuerza $a_S = 1$ cuando $x_i = 1$ \linebreak para al menos un $i \in S$: 
+\[
+\forall \, i \in S \; \colon \; x_i \leq a_S
+\]
+\item Introducimos un juego de restricciones que fuerza a que $x_j = 0$ para todo $j \in T$ cuando $a_T = 0$. 
+\[
+\forall \, j \in T \; \colon \; x_j \leq a_T
+\]
+\item Introducimos una restricci\'on que fuerza $a_T = 0$ cuando $a_S = 1$: 
+\[
+a_T \leq 1 - a_S
+\]
+\end{enumerate}
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\begin{itemize}
+\item \emph{Regla:} Si $x_i = 1$ para alg\'un $i \in S$ entonces $x_j = 0$ para todo $j \in T$, y vice-versa. \\[1ex] \emph{Implementaci\'on:}
+\begin{enumerate}
+\item Introducimos las variables binarias $a_S, a_T \in \{ 0, 1 \}$. 
+\item Introducimos un juego de restricciones que fuerza $a_S = 1$ cuando $x_i = 1$ \linebreak para al menos un $i \in S$: 
+\[
+\forall \, i \in S \; \colon \; x_i \leq a_S
+\]
+\item Introducimos un juego de restricciones que fuerza $a_T = 1$ cuando $x_j = 1$ \linebreak para al menos un $j \in T$: 
+\[
+\forall \, j \in T \; \colon \; x_j \leq a_T
+\]
+\item Agregamos una restricci\'on que impide que $a_S$ y $a_T$ puedan tomar el valor uno al mismo tiempo: 
+\[
+a_S + a_T \leq 1
+\]
+\end{enumerate}
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\begin{itemize}
+\item \emph{Regla:} Si $x_i = 1$ para alg\'un $i \in S$ entonces $x_j = 1$ para alg\'un $j \in T$. \\[1ex] \emph{Implementaci\'on:}
+\begin{enumerate}
+\item Introducimos las variables binarias $a_S, a_T \in \{ 0, 1 \}$. 
+\item Introducimos un juego de restricciones que fuerza $a_S = 1$ cuando $x_i = 1$ \linebreak para al menos un $i \in S$: 
+\[
+\forall \, i \in S \; \colon \; x_i \leq a_S
+\]
+\item Introducimos una restricci\'on que fuerza $a_T = 1$ cuando $a_S = 1$: 
+\[
+a_S \leq a_T
+\]
+\item Introducimos una restricci\'on que fuerza a que $x_j = 1$ para al menos un $j \in T$ cuando $a_T = 1$. 
+\[
+a_T \; \leq \; \sum_{j \in T} x_j
+\]
+\end{enumerate}
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+En los siguientes literales suponga que $w \in \{ 0, 1 \}$. 
+\begin{itemize}
+\item \emph{Regla:} Si $x_i = 1$ para al menos un \'indice $i \in S$ entonces $w = 1$. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on: 
+\[
+\sum_{i \in S} x_i \; \leq \; |S| \, w
+\]
+\item \emph{Regla:} Si $x_i = 1$ para todo \'indice $i \in S$ entonces $w = 1$. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on: 
+\[
+\sum_{i \in S} x_i \; \leq \; (|S|-1) + w
+\]
+\end{itemize}
+\framebreak
+
+\begin{itemize}
+\item \emph{Regla:} Si $x_i = 1$ para m\'as \'indices $i \in S$ que $i \in T$ entonces $w = 1$. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on: 
+\[
+\sum_{i \in S} x_i \; - \; |S| \, w \; \leq \; \sum_{j \in T} x_j
+\]
+\item \emph{Regla:} Si $x_i = 1$ para al menos un \'indice $i \in S$ y $x_j = 0$ para todo \'indice $j \in T$, o vice-versa, entonces $w = 1$. \\[1ex] \emph{Implementaci\'on:}
+\begin{enumerate}
+\item Introducimos las variables binarias $a_S, a_T \in \{ 0, 1 \}$. 
+\item Introducimos un juego de restricciones que fuerza $a_S = 1$ cuando $x_i = 1$ \linebreak para al menos un $i \in S$: 
+\[
+\forall \, i \in S \; \colon \; x_i \leq a_S
+\]
+\framebreak
+\item Introducimos un juego de restricciones que fuerza $a_T = 1$ cuando $x_j = 1$ \linebreak para al menos un $j \in T$: 
+\[
+\forall \, j \in T \; \colon \; x_j \leq a_T
+\]
+\item Agregamos un par de restricciones que fuerzan a que $w = 1$ cuando $a_S = 1$ y $a_T = 0$ o cuando $a_S = 0$ y $a_T = 1$: 
+\begin{align*}
+& a_S + ( 1 - a_T ) \leq 1 + w \\
+& ( 1 - a_S ) + a_T \leq 1 + w
+\end{align*}
+
+\end{enumerate}
+\end{itemize}
+\framebreak
+
+\end{frame}
+
+% =================================================================
+\section{Restricciones Temporales}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\begin{center}
+[ En Desarrollo ]
+\end{center}
+
+\end{frame}
+
+\end{document}
