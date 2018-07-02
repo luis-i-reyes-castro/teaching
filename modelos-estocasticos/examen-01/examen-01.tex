@@ -1,0 +1,83 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{01}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Examen \numero \\[1ex]
+\small \textbf{Semestre:} 2018-2019 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+La compa\~n\'ia Hit-and-Miss produce art\'iculos en lotes de 150 unidades. Cada art\'iculo producido tiene una probabilidad $p$ de salir defectuoso, independiente de todos los otros. La experiencia indica que el 80\% de los lotes se producen con $p = 0.05$, mientras que el 20\% restante con $p = 0.25$. La f\'abrica incurre un costo de \$100 por cada art\'iculo defectuoso que produce y es eventualmente devuelto por alg\'un distribuidor. Por este motivo, la f\'abrica est\'a considerando el siguiente proceso de doble inspecci\'on: 
+\begin{enumerate}
+\item Un inspecci\'on inicial, a un costo fijo de $Q$ d\'olares por lote. Esta inspecci\'on consiste en elegir uno de los art\'iculos del lote producido, al azar, y revisarlo. Si el art\'iculo es defectuoso, se lo reemplaza ah\'i mismo. 
+\item Una inspecci\'on final, a un costo de \$8 por unidad inspeccionada, que puede ser llevada a cabo despu\'es de la inspecci\'on inicial dependiendo del resultado de la inspecci\'on inicial. Esta inspecci\'on consiste en revisar todos los art\'iculos del lote y reemplazar los defectuosos. 
+\end{enumerate}
+
+Con esto en mente: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item Suponga que hacer la inspecci\'on inicial es racional. Calcule: 
+\begin{enumerate}[label=\textbf{\roman*)}]
+\item Las probabilidades de que $p = 0.05$ y que $p = 0.25$ condicionales en el evento de que el art\'iculo revisado no es defectuoso. 
+\item Las probabilidades de que $p = 0.05$ y que $p = 0.25$ condicionales en el evento de que el art\'iculo revisado es defectuoso. 
+\end{enumerate}
+\item Responda: 
+\begin{enumerate}[label=\textbf{\roman*)}]
+\item Si en la inspecci\'on inicial se encontr\'o que el art\'iculo es defectuoso, es racional realizar la inspecci\'on final? 
+\item Si en la inspecci\'on inicial se encontr\'o que el art\'iculo no es defectuoso, es racional realizar la inspecci\'on final? 
+\end{enumerate}
+\item Encuentre el m\'aximo valor de $Q$ para el cual es racional realizar estas inspecciones. 
+\end{enumerate}
+\QED
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+Un router tiene un buffer con capacidad para $M = 6$ paquetes. Al comienzo de cada ciclo arriban entre cero y dos paquetes, dependiendo del estado del buffer. La siguiente tabla muestra las probabilidades de que arriben diferentes numeros de paquetes por ciclo asumiendo que la capacidad del buffer fuere infinita. Obviamente, los paquetes que arriban y no pueden ser puestos en el buffer son rechazados, y por ende perdidos para siempre. 
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+$\boldsymbol{k}$ & $\boldsymbol{\Pr( R = k )}$ \\ \hline
+0 & 0.15 \\ \hline
+1 & 0.50 \\ \hline
+2 & 0.35 \\ \hline
+\end{tabular}
+\end{table}
+
+Al final de cada ciclo se transmiten entre cero y tres paquetes, dependiendo del estado del buffer. La siguiente tabla muestra las probabilidades de que se transmitan exitosamente diferentes numeros de paquetes por ciclo asumiendo que el buffer estuviere lleno. Obviamente, los paquetes que no logran transmitirse exitosamente se mantienen en el buffer. 
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+$\boldsymbol{k}$ & $\boldsymbol{\Pr( T = k )}$ \\ \hline
+0 & 0.10 \\ \hline
+1 & 0.25 \\ \hline
+2 & 0.40 \\ \hline
+3 & 0.25 \\ \hline
+\end{tabular}
+\end{table}
+
+Con esto en mente, modele este transmisor como una Cadena de Markov. \QED
+
+\end{problem}
+
+\end{document}
