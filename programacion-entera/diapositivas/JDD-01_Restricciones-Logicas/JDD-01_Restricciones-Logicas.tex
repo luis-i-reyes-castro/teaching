@@ -65,19 +65,19 @@ Para los siguientes literales suponga que $2 \leq n < m$.
 \begin{itemize}
 \item \emph{Regla:} $x_i = 1$ al menos $n$ veces. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on lineal: 
 \[
-\sum_{i=1}^n x_i \; \geq \; n
+\sum_{i=1}^m x_i \; \geq \; n
 \]
 \item \emph{Regla:} $x_i = 1$ no m\'as de $n$ veces. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on lineal: 
 \[
-\sum_{i=1}^n x_i \; \leq \; n
+\sum_{i=1}^m x_i \; \leq \; n
 \]
 \item \emph{Regla:} $x_i = 1$ exactamente $n$ veces. \\[1ex] \emph{Implementaci\'on:} Introducimos la siguiente restricci\'on lineal de igualdad: 
 \[
-\sum_{i=1}^n x_i \; = \; n
+\sum_{i=1}^m x_i \; = \; n
 \]
 \emph{Implementaci\'on equivalente:} Introducimos el siguiente par de restricciones lineales de desigualdad: 
 \[
-n \; \leq \; \sum_{i=1}^n x_i \; \leq \; n
+n \; \leq \; \sum_{i=1}^m x_i \; \leq \; n
 \]
 \end{itemize}
 
@@ -167,7 +167,7 @@ n \, y \; \leq \; \sum_{i=1}^m x_i \; \leq \; m - (m-n) \, y
 m \, y \; \leq \; \sum_{i=1}^m x_i
 \]
 
-\emph{Observaci\'on}: Esta vez las dos implementaciones presentadas no son equivalentes. De hecho, desde el punto de vista de la PLE la primera implementaci\'on es m\'as apretada que la segunda. Esto se debe a que las restricciones de la primera implementaci\'on implican la \'unica restricci\'on de la segunda implementaci\'on, pero el reverso no es cierto. 
+%\emph{Observaci\'on}: Esta vez las dos implementaciones presentadas no son equivalentes. De hecho, desde el punto de vista de la PLE la primera implementaci\'on es m\'as apretada que la segunda. Esto se debe a que las restricciones de la primera implementaci\'on implican la \'unica restricci\'on de la segunda implementaci\'on, pero el reverso no es cierto. 
 \end{itemize}
 
 \end{frame}
@@ -299,7 +299,7 @@ En los siguientes literales suponga que $w \in \{ 0, 1 \}$.
 \begin{itemize}
 \item \emph{Regla:} Si $x_i = 1$ para m\'as \'indices $i \in S$ que $i \in T$ entonces $w = 1$. \\[1ex] \emph{Implementaci\'on:} Introducimos la restricci\'on: 
 \[
-\sum_{i \in S} x_i \; - \; |S| \, w \; \leq \; \sum_{j \in T} x_j
+\sum_{i \in S} x_i \; - \; \sum_{j \in T} x_j \; \leq \; |S| \, w
 \]
 \item \emph{Regla:} Si $x_i = 1$ para al menos un \'indice $i \in S$ y $x_j = 0$ para todo \'indice $j \in T$, o vice-versa, entonces $w = 1$. \\[1ex] \emph{Implementaci\'on:}
 \begin{enumerate}
@@ -313,10 +313,11 @@ En los siguientes literales suponga que $w \in \{ 0, 1 \}$.
 \[
 \forall \, j \in T \; \colon \; x_j \leq a_T
 \]
-\item Agregamos un par de restricciones que fuerzan a que $w = 1$ cuando $a_S = 1$ y $a_T = 0$ o cuando $a_S = 0$ y $a_T = 1$: 
+\item Agregamos un par de restricciones que fuerzan a que $w = 1$ cuando $a_S = 1$ y $a_T = 0$, cuando $a_S = 0$ y $a_T = 1$, o cuando $a_S = 0$ y $a_T = 0$: 
 \begin{align*}
 & a_S + ( 1 - a_T ) \leq 1 + w \\
-& ( 1 - a_S ) + a_T \leq 1 + w
+& ( 1 - a_S ) + a_T \leq 1 + w \\
+& ( 1 - a_S ) + ( 1 - a_T ) \leq 1 + w
 \end{align*}
 
 \end{enumerate}
@@ -334,7 +335,9 @@ En los siguientes literales suponga que $w \in \{ 0, 1 \}$.
 
 Considere un problema de planificaci\'on sobre $T \geq 10$ per\'iodos que contiene las series temporales de variables binarias $\{ x_t \}_{t=1}^T$ y $\{ y_t \}_{t=1}^T$, junto con otras variables adicionales. En este modelo cada serie temporal est\'a asociada con un evento de inter\'es de tal manera que los unos y ceros de sus variables representan la historia de ocurrencias o no-ocurrencias del evento. 
 
-En los siguientes literales expresaremos una diversidad de reglas temporales utilizando el lenguague de la Programaci\'on Lineal Entera (PLE) mediante la introducci\'on de restricciones lineales de desigualdad y de igualdad. Por favor considere que cada literal es independiente de todos los otros. 
+En los siguientes literales expresaremos una diversidad de reglas temporales utilizando el lenguague de la Programaci\'on Lineal Entera (PLE) mediante la introducci\'on de variables adicionales y de restricciones lineales de desigualdad y de igualdad. 
+
+Por favor considere que cada literal es independiente de todos los otros. 
 
 \end{frame}
 
