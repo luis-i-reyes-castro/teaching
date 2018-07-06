@@ -1,0 +1,88 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{02}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Programaci\'on Entera (INDG-1019): Taller \numero \\[1ex]
+\small \textbf{Semestre:} 2018-2019 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+El due\~no de un nuevo centro comercial ha recibido ofertas por parte de varias empresas interesadas en alquilar locales comerciales. En particular: 
+\begin{itemize}
+\item El centro comercial tiene $p$ pisos, y cada piso puede albergar hasta $\ell$ locales comerciales. %Para cada \'indice de piso $i \in \upto{m}$ denotamos... 
+\item Existen $m$ empresas diferentes interesados en alquilar locales comerciales en el centro. Para cada empresa $i \in \upto{m}$ y cada piso $j \in \upto{p}$ denotamos al precio ofertado por esa empresa para alquilar un local en ese piso como $u_{ij}$. Las empresas se clasifican de acuerdo a su tipo de negocio: 
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Tipo de Negocio}} & \textbf{S\'imbolo} \\ \hline
+Ropa                                           & RP                 \\ \hline
+Muebles o Electrodom\'esticos                  & ME                 \\ \hline
+Bienes Inmuebles                               & BI                 \\ \hline
+Deportes y Salud                               & DS                 \\ \hline
+Lectura y Arte                                 & LA                 \\ \hline
+Comida                                         & C                  \\ \hline
+Banco (Servicios Bancarios)                    & BK                 \\ \hline
+Servicios al Cliente o T\'ecnicos              & SCT                \\ \hline
+
+
+\end{tabular}
+\end{table}
+
+\end{itemize}
+
+El due\~no del negocio desea maximizar sus ganancias por alquiler de locales comerciales sujeto a las siguiente restricciones: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item En todo piso donde haya tres o m\'as locales de servicios al cliente o t\'ecnicos (SCT) debe haber al menos un banco (BK). 
+\item En todo piso donde haya cinco o m\'as locales de ropa (R) debe haber al menos un local de deportes y salud (DS) y un local de lectura y artes (LA). 
+\item En ning\'un piso pueden haber locales de comida (C) y bancos (BK). 
+\item Todos los locales de comida (C) deben estar concentrados en el mismo piso, el cual pasar\'a a contener la Plaza de Comidas del centro comercial. 
+\item En todo piso donde haya al menos un local de bienes inmuebles (BI) debe haber al menos \textit{(i)} tres locales de muebles o electrodom\'esticos (ME) y un banco, o \textit{(ii)} dos locales de ropa (R) y dos locales de lectura y arte (LA). 
+\end{enumerate}
+
+Con todo esto en mente, escriba el problema de decisi\'on del due\~no del centro comercial como un Programa Lineal Entero (PLE). 
+
+\QED
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+Considere el problema de planificar la operaci\'on de una m\'aquina a lo largo de un horizonte de $T$ per\'iodos. En cada periodo la m\'aquina puede estar ocupada fabricando un lote de alguno de los $m$ productos diferentes que puede producir, puede estar recibiendo mantenimiento, o puede estar sin trabajar. Para representar estas actividades, introducimos tres series temporales de variables binarias: 
+\begin{itemize}
+\item Para cada periodo $t \in \upto{T}$ y cada producto $k \in \upto{m}$ la variable $x_{tk} = 1$ si y solo si en ese periodo la m\'aquina fabric\'o ese producto. 
+\item Para cada periodo $t \in \upto{T}$ la variable $y_t = 1$ si y solo si la m\'aquina recibi\'o mantenimiento durante ese periodo. 
+\item Para cada periodo $t \in \upto{T}$ la variable $z_t = 1$ si y solo si la m\'aquina no trabaj\'o durante ese periodo. 
+\end{itemize}
+
+Con todo esto en mente, escriba las siguientes restricciones temporales en el lenguage de la Progamaci\'on Lineal Entera (PLE). 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item No se permite fabricar el producto 1 por m\'as de dos per\'iodos consecutivos. 
+\item Si se fabrica el producto 1 por dos periodos consecutivos entonces la m\'aquina debe recibir mantenimiento en el siguiente periodo. 
+\item Si se fabrica el producto 2 por tres o m\'as per\'iodos consecutivos entonces la m\'aquina debe descansar (\ie no trabajar) en el siguiente periodo. 
+\item Si se fabrica el producto 3 entonces eventualmente la m\'aquina debe descansar por un periodo y recibir mantenimiento en el posterior. 
+\item Si se fabrica el producto 4 y se desea posteriormente fabricar el producto 5 entonces se debe dar mantenimiento a la m\'aquina antes de fabricar el producto 5. 
+\end{enumerate}
+\QED
+
+\end{problem}
+\vspace{\baselineskip}
+
+\end{document}
