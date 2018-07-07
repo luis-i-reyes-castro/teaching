@@ -24,8 +24,8 @@
 \begin{problem}
 El due\~no de un nuevo centro comercial ha recibido ofertas por parte de varias empresas interesadas en alquilar locales comerciales. En particular: 
 \begin{itemize}
-\item El centro comercial tiene $p$ pisos, y cada piso puede albergar hasta $\ell$ locales comerciales. %Para cada \'indice de piso $i \in \upto{m}$ denotamos... 
-\item Existen $m$ empresas diferentes interesados en alquilar locales comerciales en el centro. Para cada empresa $i \in \upto{m}$ y cada piso $j \in \upto{p}$ denotamos al precio ofertado por esa empresa para alquilar un local en ese piso como $u_{ij}$. Las empresas se clasifican de acuerdo a su tipo de negocio: 
+\item El centro comercial tiene $p$ pisos, y cada piso puede albergar hasta $\ell$ locales comerciales. 
+\item Existen $m$ empresas diferentes interesados en alquilar locales comerciales en el centro. Para cada empresa $i \in \upto{p}$ y cada piso $j \in \upto{p}$ denotamos al precio ofertado por esa empresa para alquilar un local en ese piso como $u_{ij}$. Las empresas se clasifican de acuerdo a su tipo de negocio: 
 
 \begin{table}[htb]
 \centering
@@ -40,8 +40,6 @@ Lectura y Arte                                 & LA                 \\ \hline
 Comida                                         & C                  \\ \hline
 Banco (Servicios Bancarios)                    & BK                 \\ \hline
 Servicios al Cliente o T\'ecnicos              & SCT                \\ \hline
-
-
 \end{tabular}
 \end{table}
 
@@ -53,12 +51,330 @@ El due\~no del negocio desea maximizar sus ganancias por alquiler de locales com
 \item En todo piso donde haya cinco o m\'as locales de ropa (R) debe haber al menos un local de deportes y salud (DS) y un local de lectura y artes (LA). 
 \item En ning\'un piso pueden haber locales de comida (C) y bancos (BK). 
 \item Todos los locales de comida (C) deben estar concentrados en el mismo piso, el cual pasar\'a a contener la Plaza de Comidas del centro comercial. 
-\item En todo piso donde haya al menos un local de bienes inmuebles (BI) debe haber al menos \textit{(i)} tres locales de muebles o electrodom\'esticos (ME) y un banco, o \textit{(ii)} dos locales de ropa (R) y dos locales de lectura y arte (LA). 
+\item En todo piso donde haya al menos un local de bienes inmuebles (BI) debe haber al menos \textit{(i)} tres locales de muebles o electrodom\'esticos (ME) y un banco (BK), o \textit{(ii)} dos locales de ropa (R) y dos locales de lectura y arte (LA). 
 \end{enumerate}
 
-Con todo esto en mente, escriba el problema de decisi\'on del due\~no del centro comercial como un Programa Lineal Entero (PLE). 
+Con todo esto en mente, escriba el problema de decisi\'on del due\~no del centro comercial como un Programa Lineal Entero (PLE). \QED
 
-\QED
+% =========================================================
+\emph{Soluci\'on A:} Primero definimos una variable binaria para cada piso $i \in \upto{p}$ y empresa $j \in \upto{m}$, denotada $x_{ij}$, que toma el valor uno si y solo si en ese piso se le alquila un local a esa empresa. Segundo, modelamos las restricciones impuestas: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+% ---------------------------------------------------------
+\item \textbf{[Literal anulado porque fue utilizado de ejemplo]} \\[1ex]
+\emph{Restricci\'on:} En todo piso donde haya tres o m\'as locales de servicios al cliente o t\'ecnicos (SCT) debe haber al menos un banco (BK). \\[1ex]
+\emph{Implementaci\'on:}
+\begin{itemize}
+\item Introducimos una variable binaria indicadora para cada piso: 
+\[
+\forall \, i \in \upto{p} \; \colon \; a_i \in \{ 0, 1 \}
+\]
+\item Introducimos una restricci\'on para cada piso $i \in \upto{p}$ tal que si $x_{ij} = 1$ para tres o m\'as empresas $j \in \text{SCT}$ entonces $a_i = 1$. M\'as precisamente: 
+\[
+\forall \, i \in \upto{p}, \, \forall \, j \in \text{SCT} \; \colon \;
+x_{ij} \; \leq \; 2 + (\ell - 2) \, a_i
+\]
+\item Introducimos una restricci\'on para cada piso $i \in \upto{p}$ tal que si $a_i = 1$ entonces $x_{ij} = 1$ para al menos una empresa $j \in \text{BK}$. M\'as precisamente: 
+\[
+\forall \, i \in \upto{p} \; \colon \;
+a_i \; \leq \; \sum_{j \in \text{BK}} x_{ij}
+\]
+\end{itemize}
+% ---------------------------------------------------------
+\item \textbf{[4 Puntos]} \\[1ex]
+\emph{Restricci\'on:} En todo piso donde haya cinco o m\'as locales de ropa (R) debe haber al menos un local de deportes y salud (DS) y un local de lectura y artes (LA). \\[1ex]
+\emph{Implementaci\'on:}
+\begin{itemize}
+\item Introducimos una variable binaria indicadora para cada piso: 
+\[
+\forall \, i \in \upto{p} \; \colon \; a_i \in \{ 0, 1 \}
+\]
+\item Introducimos una restricci\'on para cada piso $i \in \upto{p}$ tal que si $x_{ij} = 1$ para cinco o m\'as empresas $j \in \text{R}$ entonces $a_i = 1$. M\'as precisamente: 
+\[
+\forall \, i \in \upto{p}, \, \forall \, j \in \text{R} \; \colon \;
+x_{ij} \; \leq \; 4 + (\ell - 4) \, a_i
+\]
+\item Introducimos una restricci\'on para cada piso $i \in \upto{p}$ tal que si $a_i = 1$ entonces $x_{ij} = 1$ para al menos una empresa $j \in \text{DS}$. M\'as precisamente: 
+\[
+\forall \, i \in \upto{p} \; \colon \;
+a_i \; \leq \; \sum_{j \in \text{DS}} x_{ij}
+\]
+\item Introducimos una restricci\'on para cada piso $i \in \upto{p}$ tal que si $a_i = 1$ entonces $x_{ij} = 1$ para al menos una empresa $j \in \text{LA}$. M\'as precisamente: 
+\[
+\forall \, i \in \upto{p} \; \colon \;
+a_i \; \leq \; \sum_{j \in \text{LA}} x_{ij}
+\]
+\end{itemize}
+% ---------------------------------------------------------
+\item \textbf{[4 Puntos]} \\[1ex]
+\emph{Restricci\'on:} En ning\'un piso pueden haber locales de comida (C) y bancos (BK). \\[1ex]
+\emph{Implementaci\'on:}
+\begin{itemize}
+\item Introducimos un par de variables binarias indicadoras para cada piso: 
+\[
+\forall \, i \in \upto{p} \; \colon \; a_i, b_i \in \{ 0, 1 \}
+\]
+\item Introducimos una restricci\'on o juego de restricciones para cada piso $i \in \upto{p}$ tal que si $x_{ij} = 1$ para al menos una empresa $j \in \text{C}$ entonces $a_i = 1$. Esto puede ser logrado de al menos dos maneras: 
+\begin{itemize}
+\item Introduciendo la siguiente restricci\'on: 
+\[
+\forall \, i \in \upto{p} \; \colon \;
+\sum_{j \in \text{C}} x_{ij} \; \leq \; |C| \, a_i
+\]
+\item Introduciendo el siguiente juego de restricciones: 
+\[
+\forall \, i \in \upto{p}, \, \forall \, j \in \text{C} \; \colon \;
+x_{ij} \; \leq \; a_i
+\]
+\end{itemize}
+\item Introducimos una restricci\'on o juego de restricciones para cada piso $i \in \upto{p}$ tal que si $x_{ij} = 1$ para al menos una empresa $j \in \text{BK}$ entonces $b_i = 1$. Esto puede ser logrado de al menos dos maneras: 
+\begin{itemize}
+\item Introduciendo la siguiente restricci\'on: 
+\[
+\forall \, i \in \upto{p} \; \colon \;
+\sum_{j \in \text{BK}} x_{ij} \; \leq \; |BK| \, b_i
+\]
+\item Introduciendo el siguiente juego de restricciones: 
+\[
+\forall \, i \in \upto{p}, \, \forall \, j \in \text{BK} \; \colon \;
+x_{ij} \; \leq \; b_i
+\]
+\end{itemize}
+\item Introducimos una restricci\'on para cada piso $i \in \upto{p}$ que impide que $a_i$ y $b_i$ tomen el valor uno simult\'aneamente. M\'as precisamente: 
+\[
+\forall \, i \in \upto{p} \; \colon \; a_i + b_i \; \leq \; 1
+\]
+\end{itemize}
+% ---------------------------------------------------------
+\item \textbf{[3 Puntos]} \\[1ex]
+\emph{Restricci\'on:} Todos los locales de comida (C) deben estar concentrados en el mismo piso, el cual pasar\'a a contener la Plaza de Comidas del centro comercial. \\[1ex]
+\emph{Implementaci\'on:}
+\begin{itemize}
+\item Introducimos una variable binaria indicadora para cada piso: 
+\[
+\forall \, i \in \upto{p} \; \colon \; a_i \in \{ 0, 1 \}
+\]
+\item Introducimos una restricci\'on o juego de restricciones para cada piso $i \in \upto{p}$ tal que si $x_{ij} = 1$ para al menos una empresa $j \in \text{C}$ entonces $a_i = 1$. Esto puede ser logrado de al menos dos maneras: 
+\begin{itemize}
+\item Introduciendo la siguiente restricci\'on: 
+\[
+\forall \, i \in \upto{p} \; \colon \;
+\sum_{j \in \text{C}} x_{ij} \; \leq \; |C| \, a_i
+\]
+\item Introduciendo el siguiente juego de restricciones: 
+\[
+\forall \, i \in \upto{p}, \, \forall \, j \in \text{C} \; \colon \;
+x_{ij} \; \leq \; a_i
+\]
+\end{itemize}
+\item Introducimos una restricci\'on tal que $a_i = 1$ para exactamente un solo piso $i \in \upto{p}$. M\'as precisamente: 
+\[
+\sum_{i \in \upto{p}} a_i \; = \; 1
+\]
+\end{itemize}
+
+% ---------------------------------------------------------
+\item \textbf{[5 Puntos]} \\[1ex]
+\emph{Restricci\'on:} En todo piso donde haya al menos un local de bienes inmuebles (BI) debe haber al menos \textit{(i)} tres locales de muebles o electrodom\'esticos (ME) y un banco (BK), o \textit{(ii)} dos locales de ropa (R) y dos locales de lectura y arte (LA). \\[1ex]
+\emph{Implementaci\'on:}
+\begin{itemize}
+\item Introducimos un tr\'io de variables binarias indicadoras para cada piso: 
+\[
+\forall \, i \in \upto{p} \; \colon \; a_i, b_i, c_i \in \{ 0, 1 \}
+\]
+\item Introducimos una restricci\'on o juego de restricciones para cada piso $i \in \upto{p}$ tal que si $x_{ij} = 1$ para al menos una empresa $j \in \text{BI}$ entonces $a_i = 1$. Esto puede ser logrado de al menos dos maneras: 
+\begin{itemize}
+\item Introduciendo la siguiente restricci\'on: 
+\[
+\forall \, i \in \upto{p} \; \colon \;
+\sum_{j \in \text{BI}} x_{ij} \; \leq \; |BI| \, a_i
+\]
+\item Introduciendo el siguiente juego de restricciones: 
+\[
+\forall \, i \in \upto{p}, \, \forall \, j \in \text{BI} \; \colon \;
+x_{ij} \; \leq \; a_i
+\]
+\end{itemize}
+\item Introducimos un par de restricciones para cada piso $i \in \upto{p}$ tal que si $b_i = 1$ entonces $x_{ij} = 1$ para al menos tres empresas $j \in \text{ME}$ y al menos una empresa $j \in \text{BK}$. \linebreak M\'as precisamente: 
+\begin{align*}
+& \forall \, i \in \upto{p} \; \colon \;
+3 \, a_i \; \leq \; \sum_{j \in \text{ME}} x_{ij} \\
+& \forall \, i \in \upto{p} \; \colon \;
+1 \, a_i \; \leq \; \sum_{j \in \text{BK}} x_{ij}
+\end{align*}
+\item Introducimos un par de restricciones para cada piso $i \in \upto{p}$ tal que si $c_i = 1$ entonces $x_{ij} = 1$ para al menos dos empresas $j \in \text{R}$ y al menos dos empresas $j \in \text{LA}$. \linebreak M\'as precisamente: 
+\begin{align*}
+& \forall \, i \in \upto{p} \; \colon \;
+2 \, a_i \; \leq \; \sum_{j \in \text{R}} x_{ij} \\
+& \forall \, i \in \upto{p} \; \colon \;
+2 \, a_i \; \leq \; \sum_{j \in \text{LA}} x_{ij}
+\end{align*}
+\item Introducimos una restricci\'on para cada piso $i \in \upto{p}$ tal que si $a_i = 1$ entonces $b_i = 1$ o $c_i = 1$. M\'as precisamente: 
+\[
+\forall \, i \in \upto{p} \; \colon \; a_i \; \leq \; b_i + c_i
+\]
+\end{itemize}
+
+\end{enumerate}
+
+% =========================================================
+\emph{Soluci\'on B:} Primero definimos una variable binaria para cada empresa $i \in \upto{m}$ y piso $j \in \upto{p}$, denotada $x_{ij}$, que toma el valor uno si y solo si a esa empresa se le alquila un local en ese piso. Segundo, modelamos las restricciones impuestas: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+% ---------------------------------------------------------
+\item \textbf{[Literal anulado porque fue utilizado de ejemplo]} \\[1ex]
+\emph{Restricci\'on:} En todo piso donde haya tres o m\'as locales de servicios al cliente o t\'ecnicos (SCT) debe haber al menos un banco (BK). \\[1ex]
+\emph{Implementaci\'on:}
+\begin{itemize}
+\item Introducimos una variable binaria indicadora para cada piso: 
+\[
+\forall \, j \in \upto{p} \; \colon \; a_j \in \{ 0, 1 \}
+\]
+\item Introducimos una restricci\'on para cada piso $j \in \upto{p}$ tal que si $x_{ij} = 1$ para tres o m\'as empresas $i \in \text{SCT}$ entonces $a_j = 1$. M\'as precisamente: 
+\[
+\forall \, j \in \upto{p}, \, \forall \, i \in \text{SCT} \; \colon \;
+x_{ij} \; \leq \; 2 + (\ell - 2) \, a_j
+\]
+\item Introducimos una restricci\'on para cada piso $j \in \upto{p}$ tal que si $a_j = 1$ entonces $x_{ij} = 1$ para al menos una empresa $i \in \text{BK}$. M\'as precisamente: 
+\[
+\forall \, j \in \upto{p} \; \colon \;
+a_j \; \leq \; \sum_{i \in \text{BK}} x_{ij}
+\]
+\end{itemize}
+% ---------------------------------------------------------
+\item \textbf{[4 Puntos]} \\[1ex]
+\emph{Restricci\'on:} En todo piso donde haya cinco o m\'as locales de ropa (R) debe haber al menos un local de deportes y salud (DS) y un local de lectura y artes (LA). \\[1ex]
+\emph{Implementaci\'on:}
+\begin{itemize}
+\item Introducimos una variable binaria indicadora para cada piso: 
+\[
+\forall \, j \in \upto{p} \; \colon \; a_j \in \{ 0, 1 \}
+\]
+\item Introducimos una restricci\'on para cada piso $j \in \upto{p}$ tal que si $x_{ij} = 1$ para cinco o m\'as empresas $i \in \text{R}$ entonces $a_j = 1$. M\'as precisamente: 
+\[
+\forall \, j \in \upto{p}, \, \forall \, i \in \text{R} \; \colon \;
+x_{ij} \; \leq \; 4 + (\ell - 4) \, a_j
+\]
+\item Introducimos una restricci\'on para cada piso $j \in \upto{p}$ tal que si $a_j = 1$ entonces $x_{ij} = 1$ para al menos una empresa $i \in \text{DS}$. M\'as precisamente: 
+\[
+\forall \, j \in \upto{p} \; \colon \;
+a_j \; \leq \; \sum_{i \in \text{DS}} x_{ij}
+\]
+\item Introducimos una restricci\'on para cada piso $j \in \upto{p}$ tal que si $a_j = 1$ entonces $x_{ij} = 1$ para al menos una empresa $i \in \text{LA}$. M\'as precisamente: 
+\[
+\forall \, j \in \upto{p} \; \colon \;
+a_j \; \leq \; \sum_{i \in \text{LA}} x_{ij}
+\]
+\end{itemize}
+% ---------------------------------------------------------
+\item \textbf{[4 Puntos]} \\[1ex]
+\emph{Restricci\'on:} En ning\'un piso pueden haber locales de comida (C) y bancos (BK). \\[1ex]
+\emph{Implementaci\'on:}
+\begin{itemize}
+\item Introducimos un par de variables binarias indicadoras para cada piso: 
+\[
+\forall \, j \in \upto{p} \; \colon \; a_j, b_j \in \{ 0, 1 \}
+\]
+\item Introducimos una restricci\'on o juego de restricciones para cada piso $j \in \upto{p}$ tal que si $x_{ij} = 1$ para al menos una empresa $i \in \text{C}$ entonces $a_j = 1$. Esto puede ser logrado de al menos dos maneras: 
+\begin{itemize}
+\item Introduciendo la siguiente restricci\'on: 
+\[
+\forall \, j \in \upto{p} \; \colon \;
+\sum_{i \in \text{C}} x_{ij} \; \leq \; |C| \, a_j
+\]
+\item Introduciendo el siguiente juego de restricciones: 
+\[
+\forall \, j \in \upto{p}, \, \forall \, i \in \text{C} \; \colon \;
+x_{ij} \; \leq \; a_j
+\]
+\end{itemize}
+\item Introducimos una restricci\'on o juego de restricciones para cada piso $j \in \upto{p}$ tal que si $x_{ij} = 1$ para al menos una empresa $i \in \text{BK}$ entonces $b_j = 1$. Esto puede ser logrado de al menos dos maneras: 
+\begin{itemize}
+\item Introduciendo la siguiente restricci\'on: 
+\[
+\forall \, j \in \upto{p} \; \colon \;
+\sum_{i \in \text{BK}} x_{ij} \; \leq \; |BK| \, b_j
+\]
+\item Introduciendo el siguiente juego de restricciones: 
+\[
+\forall \, j \in \upto{p}, \, \forall \, i \in \text{BK} \; \colon \;
+x_{ij} \; \leq \; b_j
+\]
+\end{itemize}
+\item Introducimos una restricci\'on para cada piso $j \in \upto{p}$ que impide que $a_j$ y $b_j$ tomen el valor uno simult\'aneamente. M\'as precisamente: 
+\[
+\forall \, j \in \upto{p} \; \colon \; a_j + b_j \; \leq \; 1
+\]
+\end{itemize}
+% ---------------------------------------------------------
+\item \textbf{[3 Puntos]} \\[1ex]
+\emph{Restricci\'on:} Todos los locales de comida (C) deben estar concentrados en el mismo piso, el cual pasar\'a a contener la Plaza de Comidas del centro comercial. \\[1ex]
+\emph{Implementaci\'on:}
+\begin{itemize}
+\item Introducimos una variable binaria indicadora para cada piso: 
+\[
+\forall \, j \in \upto{p} \; \colon \; a_j \in \{ 0, 1 \}
+\]
+\item Introducimos una restricci\'on o juego de restricciones para cada piso $j \in \upto{p}$ tal que si $x_{ij} = 1$ para al menos una empresa $i \in \text{C}$ entonces $a_j = 1$. Esto puede ser logrado de al menos dos maneras: 
+\begin{itemize}
+\item Introduciendo la siguiente restricci\'on: 
+\[
+\forall \, j \in \upto{p} \; \colon \;
+\sum_{i \in \text{C}} x_{ij} \; \leq \; |C| \, a_j
+\]
+\item Introduciendo el siguiente juego de restricciones: 
+\[
+\forall \, j \in \upto{p}, \, \forall \, i \in \text{C} \; \colon \;
+x_{ij} \; \leq \; a_j
+\]
+\end{itemize}
+\item Introducimos una restricci\'on tal que $a_j = 1$ para exactamente un solo piso $j \in \upto{p}$. M\'as precisamente: 
+\[
+\sum_{j \in \upto{p}} a_j \; = \; 1
+\]
+\end{itemize}
+
+% ---------------------------------------------------------
+\item \textbf{[5 Puntos]} \\[1ex]
+\emph{Restricci\'on:} En todo piso donde haya al menos un local de bienes inmuebles (BI) debe haber al menos \textit{(i)} tres locales de muebles o electrodom\'esticos (ME) y un banco (BK), o \textit{(ii)} dos locales de ropa (R) y dos locales de lectura y arte (LA). \\[1ex]
+\emph{Implementaci\'on:}
+\begin{itemize}
+\item Introducimos un tr\'io de variables binarias indicadoras para cada piso: 
+\[
+\forall \, j \in \upto{p} \; \colon \; a_j, b_j, c_j \in \{ 0, 1 \}
+\]
+\item Introducimos una restricci\'on o juego de restricciones para cada piso $j \in \upto{p}$ tal que si $x_{ij} = 1$ para al menos una empresa $i \in \text{BI}$ entonces $a_j = 1$. Esto puede ser logrado de al menos dos maneras: 
+\begin{itemize}
+\item Introduciendo la siguiente restricci\'on: 
+\[
+\forall \, j \in \upto{p} \; \colon \;
+\sum_{i \in \text{BI}} x_{ij} \; \leq \; |BI| \, a_j
+\]
+\item Introduciendo el siguiente juego de restricciones: 
+\[
+\forall \, j \in \upto{p}, \, \forall \, i \in \text{BI} \; \colon \;
+x_{ij} \; \leq \; a_j
+\]
+\end{itemize}
+\item Introducimos un par de restricciones para cada piso $j \in \upto{p}$ tal que si $b_j = 1$ entonces $x_{ij} = 1$ para al menos tres empresas $i \in \text{ME}$ y al menos una empresa $i \in \text{BK}$. \linebreak M\'as precisamente: 
+\begin{align*}
+& \forall \, j \in \upto{p} \; \colon \;
+3 \, a_j \; \leq \; \sum_{i \in \text{ME}} x_{ij} \\
+& \forall \, j \in \upto{p} \; \colon \;
+1 \, a_j \; \leq \; \sum_{i \in \text{BK}} x_{ij}
+\end{align*}
+\item Introducimos un par de restricciones para cada piso $j \in \upto{p}$ tal que si $c_j = 1$ entonces $x_{ij} = 1$ para al menos dos empresas $i \in \text{R}$ y al menos dos empresas $i \in \text{LA}$. \linebreak M\'as precisamente: 
+\begin{align*}
+& \forall \, j \in \upto{p} \; \colon \;
+2 \, a_j \; \leq \; \sum_{i \in \text{R}} x_{ij} \\
+& \forall \, j \in \upto{p} \; \colon \;
+2 \, a_j \; \leq \; \sum_{i \in \text{LA}} x_{ij}
+\end{align*}
+\item Introducimos una restricci\'on para cada piso $j \in \upto{p}$ tal que si $a_j = 1$ entonces $b_j = 1$ o $c_j = 1$. M\'as precisamente: 
+\[
+\forall \, i \in \upto{p} \; \colon \; a_j \; \leq \; b_j + c_j
+\]
+\end{itemize}
+
+\end{enumerate}
 
 \end{problem}
 \vspace{\baselineskip}
@@ -81,6 +397,64 @@ Con todo esto en mente, escriba las siguientes restricciones temporales en el le
 \item Si se fabrica el producto 4 y se desea posteriormente fabricar el producto 5 entonces se debe dar mantenimiento a la m\'aquina antes de fabricar el producto 5. 
 \end{enumerate}
 \QED
+
+% =========================================================
+\emph{Soluci\'on:}
+\begin{enumerate}[label=\textbf{\alph*)}]
+% ---------------------------------------------------------
+\item \textbf{[2 Puntos]} \\[1ex]
+\emph{Restricci\'on:} No se permite fabricar el producto 1 por m\'as de dos per\'iodos consecutivos. \\[1ex]
+\emph{Implementaci\'on:} Introducimos el siguiente juego de restricciones, donde $k = 1$ : 
+\[
+\forall \, t \in \upto{T-2} \; \colon \;
+x_{t,k} + x_{t+1,k} + x_{t+2,k} \; \leq \; 2
+\]
+% ---------------------------------------------------------
+\item \textbf{[2 Puntos]} \\[1ex]
+\emph{Restricci\'on:} Si se fabrica el producto 1 por dos periodos consecutivos entonces la m\'aquina debe recibir mantenimiento en el siguiente periodo. \\[1ex]
+\emph{Implementaci\'on:} Introducimos el siguiente juego de restricciones, donde $k = 1$ : 
+\[
+\forall \, t \in \upto{T-1} \; \colon \;
+x_{t,k} + x_{t+1,k} \; \leq \; 1 + y_{t+2}
+\]
+% ---------------------------------------------------------
+\item \textbf{[3 Puntos]} \\[1ex]
+\emph{Restricci\'on:} Si se fabrica el producto 2 por tres o m\'as per\'iodos consecutivos entonces la m\'aquina debe descansar (\ie no trabajar) en el siguiente periodo. \\[1ex]
+\emph{Implementaci\'on:} Introducimos el siguiente patr\'on de restricciones, donde $k = 2$ : 
+\begin{align*}
+& \forall \, t \in \upto{T-2} \; \colon \;
+\sum_{i = t}^{t+2} x_{i,k} \; \leq \; 2 + x_{t+3,k} + z_{t+3} \\
+& \forall \, t \in \upto{T-3} \; \colon \;
+\sum_{i = t}^{t+3} x_{i,k} \; \leq \; 3 + x_{t+4,k} + z_{t+4} \\
+& \forall \, t \in \upto{T-4} \; \colon \;
+\sum_{i = t}^{t+4} x_{i,k} \; \leq \; 4 + x_{t+5,k} + z_{t+5} \\
+& \dots
+\end{align*}
+% ---------------------------------------------------------
+\item \textbf{[3 Puntos]} \\[1ex]
+\emph{Restricci\'on:} Si se fabrica el producto 3 entonces eventualmente la m\'aquina debe descansar por un periodo y recibir mantenimiento en el posterior. \\[1ex]
+\emph{Implementaci\'on:} Fijamos $k = 3$. Luego: 
+\begin{itemize}
+\item Introducimos la serie temporal de variables binarias $\{ w_t \}_{t=1}^{T-2}$. 
+\item Introducimos una restricci\'on para cada periodo $t \in \upto{T-2}$ tal que si $x_{t,k} = 1$ entonces eventualmente $w_t = 1$. M\'as precisamente: 
+\[
+\forall \, t \in \upto{T-2} \; \colon \;
+x_{t,k} \; \leq \; \sum_{i=t+1}^{T-2} w_t
+\]
+\item Introducimos un par de restricciones para cada periodo $t \in \upto{T-2}$ tal que si $w_t = 1$ entonces $z_{t+1} = 1$ y $y_{t+2} = 1$. M\'as precisamente: 
+\begin{align*}
+& \forall \, t \in \upto{T-2} \; \colon \;
+w_t \; \leq \; z_{t+1} \\
+& \forall \, t \in \upto{T-3} \; \colon \;
+w_t \; \leq \; y_{t+2}
+\end{align*}
+\end{itemize}
+% ---------------------------------------------------------
+\item \textbf{[Literal anulado por exhibir muy alta complejidad]} \\[1ex]
+\emph{Restricci\'on:} Si se fabrica el producto 4 y se desea posteriormente fabricar el producto 5 entonces se debe dar mantenimiento a la m\'aquina antes de fabricar el producto 5. \\[1ex]
+\emph{Implementaci\'on:} Ser\'a mostrada en clase. 
+
+\end{enumerate}
 
 \end{problem}
 \vspace{\baselineskip}
