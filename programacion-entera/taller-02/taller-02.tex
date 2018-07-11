@@ -70,8 +70,8 @@ Con todo esto en mente, escriba el problema de decisi\'on del due\~no del centro
 \]
 \item Introducimos una restricci\'on para cada piso $i \in \upto{p}$ tal que si $x_{ij} = 1$ para tres o m\'as empresas $j \in \text{SCT}$ entonces $a_i = 1$. M\'as precisamente: 
 \[
-\forall \, i \in \upto{p}, \, \forall \, j \in \text{SCT} \; \colon \;
-x_{ij} \; \leq \; 2 + (\ell - 2) \, a_i
+\forall \, i \in \upto{p} \; \colon \;
+\sum_{ j \in \text{SCT} } x_{ij} \; \leq \; 2 + (\ell - 2) \, a_i
 \]
 \item Introducimos una restricci\'on para cada piso $i \in \upto{p}$ tal que si $a_i = 1$ entonces $x_{ij} = 1$ para al menos una empresa $j \in \text{BK}$. M\'as precisamente: 
 \[
@@ -90,8 +90,8 @@ a_i \; \leq \; \sum_{j \in \text{BK}} x_{ij}
 \]
 \item Introducimos una restricci\'on para cada piso $i \in \upto{p}$ tal que si $x_{ij} = 1$ para cinco o m\'as empresas $j \in \text{R}$ entonces $a_i = 1$. M\'as precisamente: 
 \[
-\forall \, i \in \upto{p}, \, \forall \, j \in \text{R} \; \colon \;
-x_{ij} \; \leq \; 4 + (\ell - 4) \, a_i
+\forall \, i \in \upto{p} \; \colon \;
+\sum_{ j \in \text{R} } x_{ij} \; \leq \; 4 + (\ell - 4) \, a_i
 \]
 \item Introducimos una restricci\'on para cada piso $i \in \upto{p}$ tal que si $a_i = 1$ entonces $x_{ij} = 1$ para al menos una empresa $j \in \text{DS}$. M\'as precisamente: 
 \[
@@ -230,8 +230,8 @@ x_{ij} \; \leq \; a_i
 \]
 \item Introducimos una restricci\'on para cada piso $j \in \upto{p}$ tal que si $x_{ij} = 1$ para tres o m\'as empresas $i \in \text{SCT}$ entonces $a_j = 1$. M\'as precisamente: 
 \[
-\forall \, j \in \upto{p}, \, \forall \, i \in \text{SCT} \; \colon \;
-x_{ij} \; \leq \; 2 + (\ell - 2) \, a_j
+\forall \, j \in \upto{p} \; \colon \;
+\sum_{  i \in \text{SCT} } x_{ij} \; \leq \; 2 + (\ell - 2) \, a_j
 \]
 \item Introducimos una restricci\'on para cada piso $j \in \upto{p}$ tal que si $a_j = 1$ entonces $x_{ij} = 1$ para al menos una empresa $i \in \text{BK}$. M\'as precisamente: 
 \[
@@ -250,8 +250,8 @@ a_j \; \leq \; \sum_{i \in \text{BK}} x_{ij}
 \]
 \item Introducimos una restricci\'on para cada piso $j \in \upto{p}$ tal que si $x_{ij} = 1$ para cinco o m\'as empresas $i \in \text{R}$ entonces $a_j = 1$. M\'as precisamente: 
 \[
-\forall \, j \in \upto{p}, \, \forall \, i \in \text{R} \; \colon \;
-x_{ij} \; \leq \; 4 + (\ell - 4) \, a_j
+\forall \, j \in \upto{p} \; \colon \;
+\sum_{ i \in \text{R} } x_{ij} \; \leq \; 4 + (\ell - 4) \, a_j
 \]
 \item Introducimos una restricci\'on para cada piso $j \in \upto{p}$ tal que si $a_j = 1$ entonces $x_{ij} = 1$ para al menos una empresa $i \in \text{DS}$. M\'as precisamente: 
 \[
