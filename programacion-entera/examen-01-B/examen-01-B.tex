@@ -1,0 +1,105 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{01}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Programaci\'on Entera (INDG-1019): Examen \numero-B \\[1ex]
+\small \textbf{Semestre:} 2018-2019 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Nacho es un empresario de la Rep\'ublica del Banano que ya est\'a harto de las r\'idiculas tasas arancelarias de su pa\'is, las cuales hacen que importar maquinaria para producir bienes o proveer servicios sea pr\'actimante un lujo. Por esta raz\'on Nacho ha decidido transladar la producci\'on de su \'unico producto a los Estados Unidos (EE.UU.), pero como \'el no dispone de instalaciones en ese pa\'is su plan consiste en alquilar contenedores a empresas de almacenamiento y usarlos tanto para producir como para almacenar. Por estos motivos el empresario ha calculado la demanda diaria esperada de su producto, la cual se encuentra resumida en la serie de tiempo $\{ d_t \}_{t=1}^T$, y ha compilado los siguientes datos: 
+\begin{itemize}
+\item Existe una empresa que alquila contendores a $c_p$ d\'olares por d\'ia por cada contenedor. Sin embargo, vale recalcar que cada vez que se desea solicitar contenedores adicionales se tiene que incurrir un costo fijo de tramitaci\'on de $c_f$ d\'olares, y solamente se puede solicitar hasta $B_c$ contenedores adicionales. En cambio, devolver contenedores a la empresa no tiene costo. 
+\item Cada contenedor puede ser utilizado para fabricar el producto o para almacenarlo, pero no para ambos prop\'ositos. Adicionalmente: 
+\begin{itemize}
+\item Si se utiliza el contenedor para fabricar el producto se puede fabricar hasta $B_p$ unidades al d\'ia a un costo de $q_p$ d\'olares por unidad. 
+\item Si se utiliza el contenedor para almacenar entonces se pueden guardar hasta $B_i$ unidades del producto terminado a la vez. Suponga que no hay costos de almacenamiento por unidad del producto por d\'ia adicionales al costo del alquiler de los contenedores. 
+\end{itemize}
+\end{itemize}
+
+Con todo esto en mente, modelaremos el problema conjunto de alquiler de contenedores y producci\'on e inventario que enfrenta Nacho como una extensi\'on del cl\'asico modelo de producci\'on e inventario con variables y restricciones enteras. Para esto primero introducimos, para cada d\'ia $t \in \upto{T}$, las siguientes variables: 
+\begin{itemize}
+\item La variable entera $x_t$, que indica el n\'umero de contenedores alquilados en ese d\'ia. 
+\item La variable entera $y_t^1$, que indica el n\'umero de contenedores que ese d\'ia se utilizaron para producci\'on, junto con la variable entera $y_t^2$, que indica el n\'umero de contenedores que ese d\'ia se utilizaron para almacenamiento. 
+\item La variable entera $z_t^1$, que indica el n\'umero total de unidades producidas ese d\'ia, junto con la variable entera $z_t^2$, que indica el n\'umero total de unidades en almacenamiento desde ese d\'ia hasta el siguiente. 
+\item La variable binaria $w_t$, que indica si en ese d\'ia se solicitaron contenedores adicionales. 
+\end{itemize}
+
+Ahora: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{[1 Punto]} Escriba las restricciones que hacen que cada contenedor alquilado solo pueda ser usado para producci\'on o para almacenamiento. 
+\item \textbf{[1 Punto]} Escriba las restricciones que impiden que se produza sin tener contenedores para hacerlo, junto con las restricciones que impiden que se almacene el producto terminado sin tener contenedores para hacerlo. 
+\item \textbf{[1 Punto]} Escriba las restricciones asociadas con la producci\'on, almacenamiento y demanda del producto. 
+\item \textbf{[1 Punto]} Escriba las restricciones que fuerzan a que si en el periodo $t$ se solicitan contenedores adicionales entonces la variable $w_t = 1$. 
+\item \textbf{[1 Punto]} Escriba la funci\'on de costo. 
+\end{enumerate}
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\emph{The Daily Show with Trevor Noah} es un show de comedia y s\'atira pol\'itica. Cada episodio del show termina con una entrevista de 15 minutos con un personaje famoso o con un comediante local. Actualmente, los productores se encuentran planificando las entrevistas para los siguientes $E$ episodios. Para esto han contactado a $P$ personajes famosos, pero como todos ellos tienen tantas cosas que hacer (\eg asistir a otras entrevistas) existe el problema de que no cualquier personaje puede ser entrevistado en cualquier episodio. Adem\'as, los personajes famosos son escasos y/o dif\'iciles de contactar (\ie $P < E$). Aun asi, los productores fueron meticulosos en sus conversaciones con los personajes y marcaron todas los episodios que podr\'ian ser asistidos por cada personaje. En particular, los productores tienen una tabla de disponibilidad $D$ tal que para todo personaje $i \in \upto{P}$ y todo episodio $j \in \upto{E}$ la entrada $D_{ij} = 1$ si ese personaje tiene disponibilidad para ser entrevistado en ese episodio. 
+
+Con esta informaci\'on disponible, los productores del show quieren determinar cu\'al es m\'aximo n\'umero de episodios que pueden terminar con una entrevista con un personaje famoso, puesto que los comediantes locales ocasionalmente no lograr ser chistosos. Afortunadamente para ellos, los productores son ingeniosos y se dieron cuenta r\'apidamente de que este problema puede ser modelado como un problema de flujo m\'aximo en redes de la siguiente manera: 
+\begin{enumerate}
+\item Para cada personaje famoso $i \in \upto{P}$ se crea un nodo $s_i$, mientras que para cada episodio $j \in \upto{E}$ se crea un nodo $t_j$. 
+\item Para cada personaje famoso $i$ que puede ser entrevistado en un episodio $j$, \ie para cada par $(i,j)$ tal que $D_{ij} = 1$, se crea un arco desde $s_i$ hasta $t_j$ con capacidad unitaria. 
+\item Se impone la restricci\'on de que cada flujo desde un nodo de personaje $i$ hasta un nodo de episodio $j$, denotado $x_{ij}$, sea binario. 
+\item Se busca el m\'aximo flujo desde el conjunto de nodos de personajes $S = \{ s_1, s_2, \dots, s_P \}$ hasta el conjunto de nodos de episodios $T = \{ t_1, t_2, \dots, t_E \}$. 
+\end{enumerate}
+
+Con todo esto en mente, complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{[4 Puntos]} Primero transformamos este problema de flujo m\'aximo desde un conjunto hasta otro en un problema de flujo m\'aximo desde un nodo hasta otro. Responda: 
+\begin{enumerate}[label=\textbf{\roman*)}]
+\item Si introducimos un nodo de origen $\alpha$, a cu\'ales nodos deber\'iamos conectarlo? Introduzca los arcos correspondientes. 
+\item Si introducimos un nodo de destinaci\'on $\omega$, a cu\'ales nodos deber\'iamos conectarlo? Introduzca los arcos correspondientes. 
+\item Es necesario introducir un arco desde el nodo $\alpha$ hasta el nodo $\omega$? Si la respuesta es en el afirmativo, indique si el arco debe tener una capacidad, y si esa otra respuesta tambi\'en es en el afirmativo, indique la capacidad. 
+\item Es necesario introducir un arco desde el nodo $\omega$ hasta el nodo $\alpha$? Si la respuesta es en el afirmativo, indique si el arco debe tener una capacidad, y si esa otra respuesta tambi\'en es en el afirmativo, indique la capacidad. 
+\end{enumerate}
+\item \textbf{[1 Punto]} Escriba la forma general de las restricciones de conservaci\'on de flujo en los nodos de personajes $i \in \upto{P}$. 
+\item \textbf{[1 Punto]} Escriba la forma general de las restricciones de conservaci\'on de flujo en los nodos de episodios $j \in \upto{E}$. 
+\item \textbf{[1 Punto]} Escriba la funci\'on de utilidad del nuevo problema. 
+\end{enumerate}
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Considere el problema de planificar la operaci\'on de una m\'aquina a lo largo de un horizonte de $T$ per\'iodos. En cada periodo la m\'aquina puede estar ocupada fabricando un lote de alguno de los $m$ productos diferentes que puede producir o puede estar recibiendo mantenimiento. Para representar estas actividades, introducimos dos series temporales de variables binarias: 
+\begin{itemize}
+\item Para cada periodo $t \in \upto{T}$ y cada producto $k \in \upto{m}$ la variable $x_{tk} = 1$ si y solo si en ese periodo la m\'aquina fabric\'o ese producto. 
+\item Para cada periodo $t \in \upto{T}$ la variable $y_t = 1$ si y solo si la m\'aquina recibi\'o mantenimiento durante ese periodo. 
+\end{itemize}
+
+Con todo esto en mente, escriba las siguientes restricciones temporales en el lenguage de la Progamaci\'on Lineal Entera (PLE). 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{[1 Punto]} No se puede fabricar el producto $k = 1$ por m\'as de 3 per\'iodos consecutivos. 
+\item \textbf{[2 Puntos]} Si se fabrica el producto $k = 2$ por tres o cuatro periodos consecutivos entonces la m\'aquina debe recibir mantenimiento en el siguiente periodo. 
+\item \textbf{[1 Punto]} Si se fabrica el producto $k = 3$ entonces eventualmente la m\'aquina debe recibir mantenimiento. 
+\item \textbf{[2 Puntos]} Los productos $k \in \{ 5, 6 \}$ deben ser eventualmente fabricados una sola vez (cada uno). Adem\'as, el producto $k = 5$ debe ser fabricado antes que el producto $k = 6$. 
+\item \textbf{[2 Puntos]} Si se fabrican los productos $k = 7$ y $k = 8$ uno tras otro, en ese orden, entonces la m\'aquina debe recibir mantenimiento en los dos per\'iodos sucesivos. 
+
+\end{enumerate}
+
+\end{problem}
+\fullskip
+
+\end{document}
