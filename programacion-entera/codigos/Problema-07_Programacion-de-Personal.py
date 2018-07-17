@@ -3,69 +3,69 @@ Problema de Programacion de Personal del Supermercado (Leccion 03, Problema 1)
 @author: Luis I. Reyes Castro
 """
 
-# Importamos los modulos requeridos
-import openpyxl # Para importar y exportar datos desde y hacia archivos de MS Excel
-import pulp # Para modelar y solucionar PLs
+import pandas as pd
+import pulp
 
-# Creamos una manija al archivo de MS Excel
-manija = openpyxl.load_workbook( 'Ejercicio_09_Datos_(LLENO).xlsx')
-# Extraemos los datos de la hoja 'Tiempo_Completo'
-hoja = manija.get_sheet_by_name( 'Tiempo_Completo')
-celdas_de_interes = hoja['B2':'E13']
-horarios_tc = [ [ cell.value for cell in row ] for row in celdas_de_interes ]
-# Extraemos los datos de la hoja 'Tiempo_Medio'
-hoja = manija.get_sheet_by_name( 'Tiempo_Medio')
-celdas_de_interes = hoja['B2':'J13']
-horarios_tm = [ [ cell.value for cell in row ] for row in celdas_de_interes ]
-# Extraemos los datos de la hoja 'Empleados_Requeridos'
-hoja = manija.get_sheet_by_name( 'Empleados_Requeridos')
-celdas_de_interes = hoja['B2':'B13']
-empleados_req = [ [ cell.value for cell in row ] for row in celdas_de_interes ]
+archivo = 'Datos/Datos_Problema-07.xlsx'
+datos   = { 'Tiempo_Completo'      : None,
+            'Tiempo_Medio'         : None,
+            'Empleados_Requeridos' : None }
 
-# Extraemos los numeros de intervalos, de turnos de empleados a tiempo completo, 
-# y de turnos de empleados a tiempo medio
-num_intervalos = len( horarios_tc )
-num_turnos_tc = len( horarios_tc[0] )
-num_turnos_tm = len( horarios_tm[0] )
+costo_tc = 14.50
+costo_tm = 9.50
+min_tc   = 6
 
-# Construirmos un objeto que representa un programa lineal
+for hoja in datos :
+    manija = open( archivo, 'rb')
+    datos[hoja] = pd.read_excel( manija, hoja, index_col = 0)
+    manija.close()
+
+df_req     = datos['Empleados_Requeridos']
+intervalos = list(df_req.index)
+m          = len(intervalos)
+vector_req = df_req.as_matrix().flatten()
+
+df_tc     = datos['Tiempo_Completo']
+turnos_tc = list(df_tc.columns)
+n_tc      = len(turnos_tc)
+matriz_tc = df_tc.as_matrix()
+horas_tc  = matriz_tc.sum(axis=0)
+
+df_tm     = datos['Tiempo_Medio']
+turnos_tm = list(df_tm.columns)
+n_tm      = len(turnos_tm)
+matriz_tm = df_tm.as_matrix()
+horas_tm  = matriz_tm.sum(axis=0)
+
 prob = pulp.LpProblem( 'Problema_del_Supermercado', pulp.LpMinimize)
 
-# Construimos una lista de variables de decision de empleados a tiempo completo
-x = [ \
-pulp.LpVariable( 'x_' + str(k).zfill(2), 0, None, pulp.LpInteger) for k in range(8,12) ]
-# Construimos una lista de variables de decision de empleados a tiempo medio
-y = [ \
-pulp.LpVariable( 'y_' + str(k).zfill(2), 0, None, pulp.LpInteger) for k in range(8,17) ]
+x = []
+for ( i, turno) in enumerate(turnos_tc) :
+    x_i = pulp.LpVariable( 'x_' + str(turno), 0, None, pulp.LpInteger)
+    x.append(x_i)
 
-# Ingresamos las restricciones por los numeros de empleados requeridos
-for k in range( 0, num_intervalos): 
-    prob += pulp.lpSum( horarios_tc[k][m] * x[m] for m in range( 0, num_turnos_tc) ) \
-    + pulp.lpSum( horarios_tm[k][n] * y[n] for n in range( 0, num_turnos_tm) ) \
-    >= empleados_req[k][0], \
-    'Intervalo_' + str(k+8).zfill(2) + 'h-' + str(k+9).zfill(2) + 'h'
+y = []
+for ( j, turno) in enumerate(turnos_tm) :
+    y_j = pulp.LpVariable( 'y_' + str(turno), 0, None, pulp.LpInteger)
+    y.append(y_j)
 
-# Ingresamos la restriccion por numero minimo de empleados a tiempo completo requeridos
-prob += pulp.lpSum( x[m] for m in range( 0, num_turnos_tc) ) >= 6, 'Imagen_Corporativa'
+for ( k, intervalo) in enumerate(intervalos) :
+    prob += pulp.lpSum( matriz_tc[k][i] * x[i] for i in range(n_tc) ) + \
+            pulp.lpSum( matriz_tm[k][j] * y[j] for j in range(n_tm) ) >= \
+            vector_req[k], 'Intervalo_' + str(intervalo)
 
-# Ingresamos la funcion de costo
-prob += 14.50 * 8 * pulp.lpSum( x[m] for m in range( 0, num_turnos_tc) ) \
-+ 9.50 * 4 * pulp.lpSum( y[n] for n in range( 0, num_turnos_tm) )
+prob += pulp.lpSum( x[i] for i in range(n_tc) ) >= min_tc, \
+        'Imagen_Corporativa'
 
-# Imprimimos al terminal el PL
+prob += costo_tc * pulp.lpSum( horas_tc[i] * x[i] for i in range(n_tc) ) + \
+        costo_tm * pulp.lpSum( horas_tm[j] * y[j] for j in range(n_tm) ), \
+        'Costos_de_salarios'
+
 print(prob)
-
-# Ordenamos al objeto que representa el PL que lo solucione
 prob.solve()
 
-# Imprimimos al terminal el estado de la solucion
 print( 'Estado (en ingles):', pulp.LpStatus[prob.status])
-
-# Iteramos sobre las variables de decision del problema, imprimiendo al terminal 
-# el valor optimo de cada variable
+print( 'Costo_Optimo =', pulp.value(prob.objective) )
 print( 'Valores optimos de las variables de decision:')
 for var in prob.variables() :
     print( var.name, '=', var.varValue)
-
-# Imprimimos al terminal la utilidad optima
-print( 'Costo_Optimo =', pulp.value(prob.objective) )

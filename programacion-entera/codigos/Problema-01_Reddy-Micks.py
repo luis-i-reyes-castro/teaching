@@ -35,10 +35,8 @@ prob += x_2 <= x_1 + 1, 'Encuesta_de_Mercado'
 # Declaramos la funcion de utilidad
 prob += 5 * x_1 + 4 * x_2
 
-# Imprimimos al terminal el PL
+# Imprimimos y resolvemos el PL
 print(prob)
-
-# Ordenamos al objeto que representa el PL que lo solucione
 prob.solve()
 
 # Imprimimos al terminal el estado de la solucion
