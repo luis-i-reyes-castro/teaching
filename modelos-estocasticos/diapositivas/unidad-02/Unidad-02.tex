@@ -6,6 +6,7 @@
 \useinnertheme{rectangles}
 \setbeamertemplate{frametitle continuation}{}
 \beamertemplatenavigationsymbolsempty
+\graphicspath{{./figures/}}
 \usepackage{../../../macros-general}
 \usepackage{../../../macros-beamer}
 \input{../../../beamer_section-slides}
@@ -24,6 +25,32 @@
 
 % =================================================================
 \section{Repaso de Variables Aleatorias}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Una variable aleatoria es un modelo de una cantidad escalar incierta. Para definir una variable aleatoria, digamos $X$, se requieren dos elementos: 
+\begin{itemize}
+\item Un \emph{soporte}, el cual es el conjunto de todos los valores que puede tomar la variable aleatoria. 
+\item Una \emph{funci\'on de probabilidad} que depende de la naturaleza de la variable: 
+\begin{itemize}
+\item Si $X$ es una variable aleatoria discreta entonces su \emph{masa} probabil\'istica, denotada $p_X$, es una funci\'on tal que: 
+\[
+\forall \, x \in \support(X) \colon \; p_X(x) \geq 0 \, ;
+\qquad
+\sum_{x \in \support(X)} p_X(x) \; = \; 1
+\]
+\item Si $X$ es una variable aleatoria continua entonces su \emph{densidad} probabil\'istica, denotada $f_X$, es una funci\'on tal que: 
+\[
+\forall \, x \in \support(X) \colon \; f_X(x) \geq 0 \, ;
+\qquad
+\int_{x \in \support(X)} f_X(x) \, dx \, \; = \; 1
+\]
+\end{itemize}
+\end{itemize}
+
+\end{frame}
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
@@ -109,7 +136,7 @@ N\'otese que esta relaci\'on en general no es v\'alida par variables aleatorias 
 \item Si $X \sim \Bernoulli(p)$ entonces su distribucion es: 
 \[
 \Pr( \, X = 0 \, ) \, = 1 - p \qquad \qquad \qquad
-\Pr( \, X = 0 \, ) \, = p
+\Pr( \, X = 1 \, ) \, = p
 \]
 \item Adicionalmente, su valor esperado y varianza son: 
 \[
@@ -136,7 +163,7 @@ Z \sim \Binomial(n,p)
 \item Si $Z \sim \Binomial(n,p)$ entonces su distribucion es: 
 \[
 \forall \, k \in \{ \, 0, \, 1, \, \dots, \, n \} \; \colon \;
-\Pr( \, Z = k \, ) \; = \; {n \choose k} p^k \, (1-p)^k
+\Pr( \, Z = k \, ) \; = \; {n \choose k} p^k \, (1-p)^{n-k}
 \]
 \item Adicionalmente, su valor esperado y varianza son: 
 \[
@@ -268,7 +295,7 @@ En una f\'abrica una m\'aquina tiene un componente que usualmente debe ser reemp
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-\textbf{Proceso Bernoulli con par\'ametro $p$:}
+\textbf{Proceso Bernoulli con Par\'ametro $p$:}
 \begin{itemize}
 \item Es una secuencia de variables aleatorias Bernoulli con par\'ametro $p$ independientes e ind\'enticamente distribuidas que representan la \linebreak presencia o ausencia de arribos. 
 \item Formalmente es una secuencia de variables aleatorias $X_1, \, X_2, \, X_3, \, X_4, \, \dots$ donde: 
@@ -285,13 +312,13 @@ En una f\'abrica una m\'aquina tiene un componente que usualmente debe ser reemp
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-\textbf{Tiempo entre arribos:}
+\textbf{Tiempos Entre Arribos:}
 \begin{itemize}
-\item Para todo \'indice $i$ la variable aleatoria $T_i$ representa el n\'umero de per\'iodos que transcurrieron desde el $i$\tsup{avo} arribo hasta el $(i+1)$\tsup{avo} arribo. 
+\item Para todo \'indice $i \geq 1$ la variable aleatoria $T_i$ representa el n\'umero de per\'iodos que transcurrieron desde el $(i-1)$\tsup{avo} arribo hasta el $i$\tsup{avo} arribo. 
 \begin{itemize}
 \item N\'otese que $\support(T_i) = \ZNN$. 
 \end{itemize}
-\item Cu\'al es la distribuci\'on de $T_1$? \Ie para cada valor $k \in \ZNN$, cu\'al es la \linebreak probabilidad de que $T_1 = k$? 
+\item Cu\'al es la distribuci\'on de $T_1$? \Ie para cada n\'umero de per\'iodos $k \in \ZNN$, cu\'al es la probabilidad de que $T_1 = k$? 
 \begin{itemize}
 \item Claramente $k = 0$ con probabilidad $p$. 
 \item Si $k = 1$ entonces $X_1 = 0$ y $X_2 = 1$, \ie en el primer per\'iodo no hubo un arribo y en el segundo per\'iodo hubo un arribo, lo cual sucede con \linebreak probabilidad $(1-p) \, p$. 
@@ -304,8 +331,10 @@ En una f\'abrica una m\'aquina tiene un componente que usualmente debe ser reemp
 \Pr( \, T_1 = k \, ) \, = \, (1-p)^k \, p 
 \quad \Longleftrightarrow \quad T_1 \sim \Geo(p)_0
 \]
-\item \underline{Teorema:} Para cada \'indice $i$ es el caso que $T_i \sim \Geo(p)_0$. 
-\item \underline{Corolario:} En un proceso Bernoulli con par\'ametro $p$ los tiempos entre arribos constituyen una secuencia de variables aleatorias independientes e identicamente distribuidas; en particular, con distribuci\'on $\sim \Geo(p)_0$. 
+\item M\'as generalmente, en un proceso Bernoulli con par\'ametro $p$ los tiempos entre arribos constituyen una secuencia de variables aleatorias independientes e identicamente distribuidas; en particular, con distribuci\'on geom\'etrica-0. \Iec
+\[
+\forall \, i \geq 1 \; \colon \; T_i \sim \Geo(p)_0
+\]
 \end{itemize}
 
 \end{frame}
@@ -314,22 +343,51 @@ En una f\'abrica una m\'aquina tiene un componente que usualmente debe ser reemp
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-\textbf{N\'umero de arribos en un intervalo:}
+\textbf{Propiedad Sin Memoria del Proceso Bernoulli:}
+\begin{itemize}
+\item Sup\'ongase que ha empezado el proceso y han transcurrido $t$ per\'iodos sin un arribo, \ie $t < T_1$. Cu\'al es la probabilidad de que haya que esperar $\tau \geq 1$ per\'iodos adicionales hasta el primer arribo? \Iec
+\[
+\tau \geq 1 \; \colon \; \Pr( \, T_1 = t + \tau \mid T_1 > t \, )
+\]
+\item Puesto que la variable aleatoria $T_1 \sim \Geo(p)_0$, \ie el n\'umero de per\'iodos que transcurrieron hasta el primer arribo tiene distribuci\'on geom\'etrica, y dado que en general para todo $i \geq 1$ es el caso que $T_i \sim \Geo(p)_0$, es f\'acil demostrar que,para todo \'indice de arribo $i \geq 1$ tenemos que $T_i \sim \Geo(p)_0$ para todo $i \geq 1$ : 
+\[
+\forall \, t \geq 1, \; \forall \, \tau \geq 1 \; \colon \;
+\Pr( \, T_i = t + \tau \mid T_i > t \, ) \; = \;
+\Pr( \, T_i = \tau \, )
+\]
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+\textbf{N\'umero de Arribos en un Intervalo:}
 \begin{itemize}
 \item Si para todo \'indice $k$ denotamos a la variable aleatoria $N_k$ como el n\'umero \linebreak de arribos desde el comienzo del proceso hasta el $k$\tsup{avo} periodo, entonces: 
 \[
 N_k \, = \, \sum_{t=1}^k X_t
 \]
-\item \Ie la variable aleatoria $N_k$ es la suma de $k$ variables aleatorias Bernoulli con par\'ametro $p$ independientes e identicamente distribuidas (IID). 
-\item \underline{Teorema:} Para cada \'indice $k$ es el caso que $N_k \sim \Binomial(k,p)$. 
-\item \underline{Corolario:} En un proceso Bernoulli con par\'ametro $p$ el n\'umero de arribos \linebreak a lo largo de un intervalo de $k$ per\'iodos es una variable aleatoria con distribuci\'on binomial con par\'ametros $k$ y $p$. 
+\Ie la variable aleatoria $N_k$ es la suma de $k$ variables aleatorias Bernoulli con par\'ametro $p$ independientes e identicamente distribuidas (IID). Consecuentemente: 
+\[
+N_k \sim \Binomial(k,p)
+\]
+\item M\'as generalmente, en un proceso Bernoulli con par\'ametro $p$ el n\'umero de arribos a lo largo de cualquier intervalo de $k$ per\'iodos de duraci\'on es una variable aleatoria con distribuci\'on binomial con par\'ametros $k$ y $p$. 
 \end{itemize}
 
 \end{frame}
 
+
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
+
+\textbf{Arribos en Intervalos Disjuntos:}
+\begin{itemize}
+\item En un proceso Bernoulli los n\'umeros de arribos a lo largo de intervalos de tiempo disjuntos son estad\'isticamente independientes. 
+\end{itemize}
+\fullskip
 
 \textbf{Combinaci\'on de Procesos Bernoulli:}
 \begin{itemize}
@@ -341,10 +399,10 @@ N_k \, = \, \sum_{t=1}^k X_t
 \item Consideremos un nuevo proceso donde se produce un arribo si y solo si \linebreak ocurre un arribo en ambos procesos. 
 \begin{itemize}
 \item Los arribos en el nuevo proceso son independientes entre si, pues en cada per\'iodo solo dependen en los arribos de los procesos generadores, los cuales \linebreak no dependen de arribos en tiempos anteriores. 
+\framebreak
 \item La probabilidad de un arribo en el nuevo proceso es el producto de las probabilidades de arribo en cada proceso generador, pues los procesos generadores son independientes. 
 \item En conclusi\'on el nuevo proceso es un proceso Bernoulli con par\'ametro $pq$. 
 \end{itemize}
-\framebreak
 \item Consideremos un nuevo proceso donde se produce un arribo si y solo si \linebreak ocurre un arribo en alguno de los dos procesos. 
 \begin{itemize}
 \item Los arribos en el nuevo proceso son independientes entre si, pues en cada per\'iodo solo dependen en los arribos de los procesos generadores, los cuales \linebreak no dependen de arribos en tiempos anteriores. 
@@ -387,15 +445,15 @@ N_k \, = \, \sum_{t=1}^k X_t
 
 \textbf{Proceso Poisson con par\'ametro $\lambda$:}
 \begin{itemize}
-\item Es una secuencia de variables aleatorias exponenciales con par\'ametro $\lambda$ independientes e ind\'enticamente distribuidas que representan los tiempos entre arribos. 
+\item Es una secuencia de variables aleatorias exponenciales con par\'ametro $\lambda$ independientes e ind\'enticamente distribuidas que representan los tiempos entre arribos (no los tiempos de los arribos). 
 \item Formalmente es una secuencia de variables aleatorias $X_1, \, X_2, \, X_3, \, X_4, \, \dots$ donde: 
 \begin{itemize}
 \item Para todo \'indice $i$ tenemos que $X_i \sim \Exponential(\lambda)$. 
 \item Para todo par de \'indices $i,j$ es el caso que $X_i$ es independiente de $X_j$. 
 \end{itemize}
-\item El proceso empieza en el tiempo cero, \ie $t = 0$, el primer arribo ocurre en \linebreak el tiempo $t = X_1$, el segundo en el tiempo $t = X_1 + X_2$, y as\'i sucesivamente; \ie el $i$\tsup{avo} arribo ocurre en: 
+\item El proceso empieza en el tiempo cero, \ie $t = 0$, el primer arribo ocurre en \linebreak el tiempo $t = X_1$, el segundo en el tiempo $t = X_1 + X_2$, y as\'i sucesivamente; \ie el $k$\tsup{avo} arribo ocurre en: 
 \[
-t \, = \, X_1 + \cdots + X_i
+t \, = \, X_1 + X_2 + \cdots + X_k
 \]
 \end{itemize}
 
@@ -405,16 +463,17 @@ t \, = \, X_1 + \cdots + X_i
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
 
-\textbf{Propiedades estad\'isticas:}
+\textbf{Propiedades del Proceso Poisson (con par\'ametro $\boldsymbol{\lambda}$):}
 \begin{itemize}
-\item \underline{Falta de memoria:} \\ En cada instante del proceso, la distribuci\'on del tiempo que falta para el siguiente arribo es independiente del tiempo transcurrido desde el \linebreak \'ultimo arribo. M\'as formalmente, para todo \'indice de arribo $i$: 
+\item \underline{Tiempos de los Arribos:} Para todo \'indice $k \geq 1$ el tiempo del $k$\tsup{avo} arribo tiene distribuci\'on Erlang con par\'ametros $k$ y $\lambda$. 
+\item \underline{Propiedad Sin Memoria:} En cada periodo la distribuci\'on del tiempo que falta para el siguiente arribo es independiente del tiempo transcurrido desde el \'ultimo arribo. M\'as formalmente, para todo \'indice de arribo $k \geq 1$ : 
 \[
 \forall \; t, \, \tau > 0 \; \colon \;
-\Pr( \, X_i > t + \tau \mid X_i > t \, ) \; = \;
-\Pr( \, X_i > \tau \, )
+\Pr( \, X_k > t + \tau \mid X_k > t \, ) \; = \;
+\Pr( \, X_k > \tau \, )
 \]
-\item \underline{N\'umero de arribos en un intervalo:} \\ En un proceso Poisson con par\'ametro $\lambda$ el n\'umero de arribos en un intervalo de $\tau$ unidades es una variable aleatoria Poisson con par\'ametro $\lambda \, \tau$. 
-\item \underline{Arribos en intervalos disjuntos:} \\ Si dos intervalos de tiempo son disjuntos entonces el n\'umero de arribos durante esos intervalos son estad\'isticamente independientes. 
+\item \underline{N\'umero de Arribos en un Intervalo:} El n\'umero de arribos en un intervalo de $\tau$ unidades es una variable aleatoria Poisson con par\'ametro $\lambda \, \tau$. 
+\item \underline{Arribos en Intervalos Disjuntos:} Si dos intervalos de tiempo son disjuntos entonces el n\'umero de arribos durante esos intervalos son independientes. 
 \end{itemize}
 
 \end{frame}
@@ -422,6 +481,17 @@ t \, = \, X_1 + \cdots + X_i
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsection}
+
+\underline{Ejercicio - H\&L Problema 17.4-2:}
+
+Los trabajos que deben realizarse en una m\'aquina espec\'ifica llegan de acuerdo con un proceso de entradas de Poisson con tasa media de 2 por hora. Suponga que la m\'aquina se descompone y su reparaci\'on tardar\'a 1 hora. Cu\'al es la probabilidad de que el n\'umero de trabajos que lleguen durante este tiempo sea: 
+\begin{itemize}
+\item Cero?
+\item Dos?
+\item Cinco o m\'as?
+\end{itemize}
+
+\framebreak
 
 \underline{Ejercicio - Taha Problema 18.3A-3:}
 
@@ -432,17 +502,6 @@ El tiempo entre llegadas a la Oficina Estatal de Hacienda es exponencial, \lineb
 \item En este momento son las 8:35. El \'ultimo cliente lleg\'o a la oficina a la 8:26. Cu\'al es la probabilidad de que el siguiente cliente llegue antes de las 8:38? De que no llegue alrededor de las 8:40?
 \item Cu\'al es el promedio de clientes que llegan entre las 8:10 y las 8:45?
 \end{enumerate}
-
-\framebreak
-
-\underline{Ejercicio - H\&L Problema 17.4-2:}
-
-Los trabajos que deben realizarse en una m\'aquina espec\'ifica llegan de acuerdo con un proceso de entradas de Poisson con tasa media de 2 por hora. Suponga que la m\'aquina se descompone y su reparaci\'on tardar\'a 1 hora. Cu\'al es la probabilidad de que el n\'umero de trabajos que lleguen durante este tiempo sea: 
-\begin{itemize}
-\item Cero?
-\item Dos?
-\item Cinco o m\'as?
-\end{itemize}
 
 \framebreak
 
@@ -485,7 +544,18 @@ Con esto en mente:
 \[
 \lambda_1 + \lambda_2
 \]
-\item Lo mismo aplica para la combinaci\'on de cualquier n\'umero de procesos independientes siempre y cuando cada uno sea un proceso Poisson. 
+De manera similar, si combinamos $n$ processos Poisson con par\'ametros $\lambda_1, \lambda_2, \dots, \lambda_n$ entonces el proceso combinado ser\'a un proceso Poisson \linebreak con par\'ametro: 
+\[
+\lambda_1 + \lambda_2 + \cdots + \lambda_n
+\]
+\item Adicionalmente, para cualquier arribo en el proceso combinado la probabibilidad de que ese arribo provenga del proceso $k \in \{ 1, 2 \}$ es: 
+\[
+\frac{\lambda_k}{ \lambda_1 + \lambda_2 }
+\]
+Similarmente, si combinamos $n$ processos Poisson como antes entonces la probabilidad de que un arribo en el proceso combinado haya provenido del $k$\tsup{avo} proceso es: 
+\[
+\frac{\lambda_k}{ \lambda_1 + \lambda_2 + \cdots + \lambda_n }
+\]
 \end{itemize}
 
 \end{frame}
@@ -903,11 +973,11 @@ Matricialmente, tenemos que:
 \[
 \vec{\pi_{t+1}'} \, = \, \vec{\pi_t'} \, \vec{P}
 \]
-\item Y mediante inducci\'on matem\'atica, es f\'acil ver que: 
-\[
-\forall t \geq 1 \colon \;
-\vec{\pi_t'} \, = \, \vec{\pi_0'} \, \vec{P}^t
-\]
+%\item Y mediante inducci\'on matem\'atica, es f\'acil ver que: 
+%\[
+%\forall t \geq 1 \colon \;
+%\vec{\pi_t'} \, = \, \vec{\pi_0'} \, \vec{P}^t
+%\]
 \end{itemize}
 \framebreak
 
@@ -925,8 +995,8 @@ Matricialmente, tenemos que:
 Esto implica que si la distribuci\'on del estado inicial de la cadena es igual a \linebreak la distribuci\'on estacionaria, \ie que si $X_0 \sim \vec{\pi^*}$, entonces la distribuci\'on de todo estado ser\'a igual a la distribuci\'on estacionaria, \ie para todo $t \geq 1$ \linebreak es el caso que $X_t \sim \vec{\pi^*}$. 
 \item Finalmente, escribiendo la ecuaci\'on matricial anterior como un sistema de ecuaciones escalares obtenemos: 
 \[
-\forall \, \text{estado } x \colon \, \vec{\pi^*}(x) \; = \; 
-\sum_{\text{estados }i} \vec{\pi^*}(i) \, \vec{P}(i,x) 
+\forall \, \text{estado } k \colon \, \vec{\pi^*}(k) \; = \; 
+\sum_{\text{estados }i} \vec{\pi^*}(i) \, \vec{P}(i,k) 
 \]
 N\'otese que las ecuaciones de balance no son linealmente independientes, \linebreak lo que significa que siempre existir\'a una ecuaci\'on redundante. 
 \end{itemize}
@@ -961,11 +1031,10 @@ Con todo esto en mente, construya un modelo de Cadena de Markov del comporamient
 
 Usualmente las Cadenas de Markov no son modelos suficientemente complejos como para representar el comportamiento humano, puesto que nuestros cerebros no tienen la Propiedad Markoviana, \ie tenemos memoria. A\'un asi, podemos usar cadenas de Markov para modelar a personas err\'aticas, impredecibles y posiblemente irracionales. Por ejemplo, considere el siguiente modelo de la presidencia de Donald Trump, donde los estados son: 
 \begin{enumerate}
-\item Hablar de como gan\'o las elecciones obteniendo la mayor\'ia de los colegios electorales, \linebreak a pesar de haber perdido el voto popular por m\'as de dos millones de votos. 
+\item Hablar de como gan\'o las elecciones obteniendo la mayor\'ia de los colegios electorales, a pesar de haber perdido el voto popular por m\'as de dos millones de votos. 
 \item Defenderse del esc\'andalo de Russia. 
 \item Insistir en construir una pared en la frontera sur con M\'exico. 
 \framebreak
-
 \item Hablar de los acuerdos de comerciales que dice que renegociar\'a (\eg NAFTA) y que dice que ser\'an ventajosos para su pa\'is. 
 \item Pelearse con celebridades en Twitter. 
 \end{enumerate}
@@ -990,65 +1059,123 @@ Con esto en mente, calcule la fracci\'on del tiempo a largo plazo que Donald Tru
 
 \end{frame}
 
-\end{document}
-
 % =================================================================
-\section{Cadenas de Markov de Tiempo Continuo}
-
-% =================================================================
-\subsection{Modelamiento}
+\subsection{Recompensas y Probabilidades de Absorci\'on}
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsubsection}
 
-Una \textbf{Cadena de Markov de Tiempo Continuo} es un modelo matem\'atico de un proceso estoc\'astico en tiempo continuo constitu\'ido por: 
+\underline{Ejemplo aleatorio:}
+
+Considere el siguiente modelo de una acci\'on en un proyecto: 
 \begin{itemize}
-\item Conjunto finito de $n$ estados, donde cada estado es una representaci\'on de una posible situaci\'on de inter\'es. 
-\item Matriz de tasas de transici\'on $\vec{Q} \in \Re^{n \times n}$, donde: 
+\item El proyecto empieza en el estado $A$, en el cual genera utilidades de \$200 mensuales. El proyecto avanza al estado $B$ con probabilidad del 40\% y permanece en el mismo estado con probabilidad del 60\%. 
+\item Una vez que el proyecto alcanza el estado $B$ genera \$400 mensuales. En este estado el proyecto avanza al estado $C$ con probabilidad del 30\% y permanece en el mismo estado con probabilidad del 70\%. 
+\item En el estado $C$ el proyecto genera \$700 mensuales. El proyecto regresa al estado $B$ con probabilidad del 50\% y permanece en el mismo estado con probabilidad del 50\%. 
+\end{itemize}
+\framebreak
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.9\columnwidth}
+\input{figures/prob-proyecto-inmobiliario.eps_tex}
+\end{figure}
+\framebreak
+
+Considere ahora las siguientes preguntas, suponiendo que el proyecto acaba de empezar y que nosotros somos los due\~nos de una acci\'on en el mismo. 
 \begin{itemize}
-\item Para todo estado $i$ tenemos que $\vec{Q}(i,i) = 0$. 
-\item La tasa de salida del estado $i$ se define como: 
+\item A largo plazo, cu\'anta utilidad genera el proyecto por periodo?
+\item Sup\'ongase que la tasa de inter\'es es $r = 5\%$. Cu\'al es el Valor Actual Neto Esperado (VAN-E) de la acci\'on? \Ie cu\'al deber\'ia ser su precio? 
+\item Cu\'al es el n\'umero esperado de per\'iodos que transcurrir\'an hasta que el proyecto alcance el estado $B$ por primera vez? Y hasta que el proyecto alcance el estado $C$ por primera vez? 
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+\underline{Ejemplo aleatorio:}
+
+Un inversionista de riesgo se encuentra evaluando varias nuevas empresas, \linebreak por lo cual las ha clasificado de la siguiente manera: 
+\begin{itemize}
+\item Las empresas rango $A$ son las mejores. Cada trimestre una empresa rango $A$ logra volverse totalmente rentable con probablidad del 20\%, se mantiene en el mismo rango con probabilidad del 50\% y desciende de rango con probabilidad del 30\%. 
+\item Las empresas rango $B$ son las segundas mejores. Cada trimestre una empresa rango $B$ asciende a rango $A$ con probabilidad del 25\%, se mantiene en el mismo rango con probabilidad del 55\% y desciende de rango con probabilidad del 20\%. 
+\item Las empresas rango $C$ son las problem\'aticas. Cada trimestre una empresa rango $C$ asciende a rango $B$ con probabilidad del 30\%, se mantiene en el mismo rango con probabilidad del 50\% y quiebra con probabilidad del 20\%. 
+\end{itemize}
+\framebreak
+
+Complete las siguientes actividades: 
+\begin{itemize}
+\item Para cada rango de empresa, calcule la probabilidad de que una empresa de ese rango eventualmente \textit{(i)} logre volverse totalmente rentable o \textit{(ii)} quiebre. 
+\item Suponga que el inversionista compra 200 acciones de empresas rango $A$ a \$3.40 cada una y 300 acciones de empresas rango $B$ a \$1.80 cada una. Suponiendo que el inversionista puede vender las acciones de una empresa que logra ser totalmente rentable en al menos \$5.00 cada una, y que el valor de una acci\'on se pierde totalmente cuando su respectiva empresa quiebra, es este plan de inversi\'on (\ie esta apuesta) rentable?
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsubsection}
+
+Cadenas de Markov con Recompensas: 
+\begin{itemize}
+\item Agregamos al modelo una funci\'on de recompensa $R$ que le asigna a cada estado $i$ una recompensa o ganancia $R(i)$. 
+\item Si la cadena es aperi\'odica y tiene una sola clase recurrente entonces la recompensa esperada por per\'iodo, denotada $\overline{R}$, se calcula ponderando la funci\'on de recompensa por las probabilidades estacionarias. \Iec
 \[
-\vec{Q}(i) \; \define \; \sum_{ 1 \leq j \leq n } \vec{Q}(i,j)
+\overline{R} \; = \; \sum_{\text{estados }i} R(i) \, \vec{\pi^*}(i)
 \]
 \framebreak
-\item Cada vez que la cadena ingresa a un estado $i$ la duraci\'on del intervalo \linebreak durante el cual la cadena permanece en ese estado, denotado $T_i$, es una variable aleatoria con distribuci\'on exponencial. M\'as precisamente: 
+
+\item En algunos modelos financieros se nos provee de una tasa de inter\'es $r \in (0,1)$ y se nos solicita que calculemos el Valor Actual Neto Esperado (VAN-E) de la recompensa total acumulada a lo largo del horizonte infinito del modelo. Para esto primero calculamos el factor de descuento:  
 \[
-T_i \, \sim \, \Exponential \, ( \, \vec{Q}(i) \, )
+\gamma \; = \; \frac{1}{1 + r}
 \]
-\item Para cada par de estados $i,j$: 
+Luego definimos una funci\'on $V$ que le asigna a cada estado $i$ el VAN-E de la recompensa total que acumular\'ia un agente que empieza el proceso desde el estado $i$, denotado $V(i)$. Esto nos permite escribir de manera recursiva una \emph{ecuaci\'on de valor} para cada estado: 
 \[
-\vec{P}(i,j) \; = \; 
-\Pr \, ( \, \text{siguiente estado sea } j \mid \text{estado actual es } i \, ) \; = \; 
-\frac{ \vec{Q}(i,j) }{ \; \vec{Q}(i) \; }
+\forall \, \text{estado } i \colon \; V(i) \; = \; R(i) \; + \;
+\gamma \, \sum_{\text{estados }j} \vec{P}(i,j) \, V(j)
 \]
-\item Observe adem\'as que para cualquier estado $i$ la sumatoria de las tasas de transici\'on $\vec{Q}(i,j)$ es positiva pero generalmente diferente de uno. 
-\end{itemize}
+Finalmente, resolvemos el sistema de ecuaciones lineales correspondiente y reportamos el VAN-E de estado de inter\'es. 
+\framebreak
+
+\item Sup\'ongase ahora que la cadena se encuentra en el estado $i$ y que nos interesa calcular el tiempo esperado de primera visita al estado $k$, \ie el n\'umero esperado de per\'iodos que transcurrir\'an hasta que la cadena visite el estado $k$. Entonces podemos definir una funci\'on $T$ que le asigna a cada estado $i$ el tiempo esperado de primera visita al estado $k$, denotado $T(i)$, y escribir de manera recursiva una ecuaci\'on de tiempo esperado de primera visita para cada estado: 
+\[
+\forall \, \text{estado } i \neq k \colon \; T(i) \; = \; 1 \; + \;
+\sum_{\text{estados }j \neq k} \vec{P}(i,j) \, T(j)
+\]
+Finalmente resolvemos el sistema de ecuaciones lineales correspondiente y reportamos el tiempo esperado de primera visita desde el estado $i$ hasta el estado $k$. 
+\framebreak
+
+\item Como hecho interesante, las ecuaciones de tiempo esperado de primera visita se pueden obtener a partir del m\'etodo para VAN-E en modelos financieros. M\'as precisamente: 
+\begin{enumerate}
+\item Definimos una funci\'on de recompensa que le asigna una unidad a cada estado excepto al estado $k$ (al cual le asigna cero unidades). 
+\item Fijamos la tasa de inter\'es en cero, \ie $r = 0$, lo cual a su vez causa que las recompensas futuras no sean descontadas, \ie $\gamma = 1$. 
+\item Fijamos $V(k) = 0$ y escribimos una ecuaci\'on de valor para cada estado. 
+\end{enumerate}
+
 \end{itemize}
 
 \end{frame}
-
-% =================================================================
-\subsection{Distribuci\'on en Estado Estable}
 
 % -----------------------------------------------------------------
 \begin{frame}[allowframebreaks]
 \frametitle{\insertsubsection}
 
-C\'alculo de la Distribuci\'on en Estado Estable: 
-\begin{enumerate}
-\item Escribimos una ecuaci\'on para cada uno de los $n$ estados: 
+Probabilidades de Absorci\'on: 
+\begin{itemize}
+\item Sup\'ongase que una cadena tiene al menos un estado transitorio que puede alcanzar a cualquiera de dos estados absorbentes, los cuales denotaremos como $k_1$ y $k_2$, y que nos interesa calcular la probabilidad de que la cadena alcance cada uno de los dos estados absorbentes si empieza desde cada uno de los otros estados. 
+\item Entonces podemos definir una funci\'on $A$ que le asigna a cada estado $i$ la probabilidad de que alcanzar el estado absorbente $k_1$. Obviamente: 
 \[
-\forall j \colon \, \vec{\pi}(j) \, \vec{Q}(j) \; = \; 
-\sum_{\text{estados }i} \vec{\pi}(i) \, \vec{Q}(i,j) 
+A(k_1) = 1 \qquad \qquad A(k_2) = 0
 \]
-\item Desechamos arbitrariamente una de las $n$ ecuaciones anteriores y la reemplazamos por: 
+En cambio, para el resto de estados escribimos de manera recursiva el siguiente juego de ecuaciones lineales: 
 \[
-\sum_{\text{estados }e} \vec{\pi}(e) \; = \; 1
+\forall \, \text{estado } i \neq k \colon \; A(i) \; = \,
+\sum_{\text{estados }j} \vec{P}(i,j) \, A(j)
 \]
-\item Resolvemos el sistema de ecuaciones lineales resultante, el cual tiene \linebreak $n$ inc\'ognitas y $n$ ecuaciones linealmente independientes. 
-
-\end{enumerate}
+\end{itemize}
 
 \end{frame}
+
+\end{document}
