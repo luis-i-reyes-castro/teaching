@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.91, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'prob-proyecto-inmobiliario.eps' (pdf, eps, ps)
+%% Accompanies image file 'fig_absorcion-00.eps' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -49,18 +49,22 @@
   \global\let\svgscale\undefined%
   \makeatother%
   \begin{picture}(1,0.3)%
-    \put(0,0){\includegraphics[width=\unitlength]{prob-proyecto-inmobiliario.eps}}%
-    \put(0.23200611,0.11057213){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$A$}}}%
-    \put(0.23300307,0.22675199){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.6}}}%
-    \put(0.33263723,0.13348327){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.4}}}%
-    \put(0.45428056,0.10985778){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$B$}}}%
-    \put(0.45443197,0.22675199){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.7}}}%
-    \put(0.67584066,0.10950071){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$C$}}}%
-    \put(0.67792572,0.22675199){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.5}}}%
-    \put(0.57333663,0.07034526){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.5}}}%
-    \put(0.57333663,0.15320236){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.3}}}%
-    \put(0.2254944,0.06348319){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\$200}}}%
-    \put(0.4497801,0.06348319){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\$400}}}%
-    \put(0.67763724,0.06348319){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{\$700}}}%
+    \put(0,0){\includegraphics[width=\unitlength]{fig_absorcion-00.eps}}%
+    \put(0.30574725,0.1105721){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$A$}}}%
+    \put(0.33888705,0.2224663){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.50}}}%
+    \put(0.22082147,0.13034609){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.20}}}%
+    \put(0.45428056,0.10985775){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$B$}}}%
+    \put(0.48657482,0.2224663){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.55}}}%
+    \put(0.60007922,0.10950068){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$C$}}}%
+    \put(0.63430713,0.2224663){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.50}}}%
+    \put(0.37015239,0.07691129){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.25}}}%
+    \put(0.37015239,0.14108049){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.30}}}%
+    \put(0.15603081,0.11057211){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$R$}}}%
+    \put(0.74817363,0.11057211){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$Q$}}}%
+    \put(0.66326827,0.13034609){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.20}}}%
+    \put(0.52117019,0.07691129){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.30}}}%
+    \put(0.52117019,0.14108049){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{0.20}}}%
+    \put(0.19140478,0.2224663){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{1}}}%
+    \put(0.79189094,0.2224663){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{1}}}%
   \end{picture}%
 \endgroup%

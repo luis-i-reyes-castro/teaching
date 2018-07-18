@@ -1078,8 +1078,8 @@ Considere el siguiente modelo de una acci\'on en un proyecto:
 
 \begin{figure}[htb]
 \centering
-\def\svgwidth{0.9\columnwidth}
-\input{figures/prob-proyecto-inmobiliario.eps_tex}
+\def\svgwidth{0.98\columnwidth}
+\input{figures/fig_recompensas-00.eps_tex}
 \end{figure}
 \framebreak
 
@@ -1104,6 +1104,13 @@ Un inversionista de riesgo se encuentra evaluando varias nuevas empresas, \lineb
 \item Las empresas rango $B$ son las segundas mejores. Cada trimestre una empresa rango $B$ asciende a rango $A$ con probabilidad del 25\%, se mantiene en el mismo rango con probabilidad del 55\% y desciende de rango con probabilidad del 20\%. 
 \item Las empresas rango $C$ son las problem\'aticas. Cada trimestre una empresa rango $C$ asciende a rango $B$ con probabilidad del 30\%, se mantiene en el mismo rango con probabilidad del 50\% y quiebra con probabilidad del 20\%. 
 \end{itemize}
+\framebreak
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.98\columnwidth}
+\input{figures/fig_absorcion-00.eps_tex}
+\end{figure}
 \framebreak
 
 Complete las siguientes actividades: 
@@ -1131,27 +1138,28 @@ Cadenas de Markov con Recompensas:
 \[
 \gamma \; = \; \frac{1}{1 + r}
 \]
-Luego definimos una funci\'on $V$ que le asigna a cada estado $i$ el VAN-E de la recompensa total que acumular\'ia un agente que empieza el proceso desde el estado $i$, denotado $V(i)$. Esto nos permite escribir de manera recursiva una \emph{ecuaci\'on de valor} para cada estado: 
+Luego definimos una funci\'on $V$ que le asigna a cada estado $i$ el VAN-E de la recompensa total que acumular\'ia un agente que empieza el proceso desde el estado $i$, denotado $V(i)$. Finalmente calculamos los valores de la funci\'on escribiendo de manera recursiva una \emph{ecuaci\'on de valor} para cada estado: 
 \[
 \forall \, \text{estado } i \colon \; V(i) \; = \; R(i) \; + \;
 \gamma \, \sum_{\text{estados }j} \vec{P}(i,j) \, V(j)
 \]
-Finalmente, resolvemos el sistema de ecuaciones lineales correspondiente y reportamos el VAN-E de estado de inter\'es. 
 \framebreak
 
-\item Sup\'ongase ahora que la cadena se encuentra en el estado $i$ y que nos interesa calcular el tiempo esperado de primera visita al estado $k$, \ie el n\'umero esperado de per\'iodos que transcurrir\'an hasta que la cadena visite el estado $k$. Entonces podemos definir una funci\'on $T$ que le asigna a cada estado $i$ el tiempo esperado de primera visita al estado $k$, denotado $T(i)$, y escribir de manera recursiva una ecuaci\'on de tiempo esperado de primera visita para cada estado: 
-\[
-\forall \, \text{estado } i \neq k \colon \; T(i) \; = \; 1 \; + \;
-\sum_{\text{estados }j \neq k} \vec{P}(i,j) \, T(j)
-\]
-Finalmente resolvemos el sistema de ecuaciones lineales correspondiente y reportamos el tiempo esperado de primera visita desde el estado $i$ hasta el estado $k$. 
+\item Sup\'ongase ahora que la cadena se encuentra en el estado $i$ y que nos interesa calcular el tiempo esperado de primera visita al estado $k$, \ie el n\'umero esperado de per\'iodos que transcurrir\'an hasta que la cadena visite el estado $k$. 
+
+Entonces podemos definir una funci\'on $T$ que le asigna a cada estado $i$ el tiempo esperado de primera visita al estado $k$, denotado $T(i)$, y calcular los valores de la funci\'on escribiendo de manera recursiva una ecuaci\'on de tiempo esperado de primera visita para cada estado: 
+\begin{align*}
+& T(k) = 0 \\
+& \forall \, \text{estado } i \neq k \colon \; T(i) \; = \; 1 \; + \;
+\sum_{\text{estados }j} \vec{P}(i,j) \, T(j)
+\end{align*}
 \framebreak
 
 \item Como hecho interesante, las ecuaciones de tiempo esperado de primera visita se pueden obtener a partir del m\'etodo para VAN-E en modelos financieros. M\'as precisamente: 
 \begin{enumerate}
 \item Definimos una funci\'on de recompensa que le asigna una unidad a cada estado excepto al estado $k$ (al cual le asigna cero unidades). 
 \item Fijamos la tasa de inter\'es en cero, \ie $r = 0$, lo cual a su vez causa que las recompensas futuras no sean descontadas, \ie $\gamma = 1$. 
-\item Fijamos $V(k) = 0$ y escribimos una ecuaci\'on de valor para cada estado. 
+\item Renombramos la funci\'on $V$ como funci\'on $T$, fijamos $T(k) = 0$ y escribimos una ecuaci\'on de valor para cada estado. 
 \end{enumerate}
 
 \end{itemize}
@@ -1165,15 +1173,17 @@ Finalmente resolvemos el sistema de ecuaciones lineales correspondiente y report
 Probabilidades de Absorci\'on: 
 \begin{itemize}
 \item Sup\'ongase que una cadena tiene al menos un estado transitorio que puede alcanzar a cualquiera de dos estados absorbentes, los cuales denotaremos como $k_1$ y $k_2$, y que nos interesa calcular la probabilidad de que la cadena alcance cada uno de los dos estados absorbentes si empieza desde cada uno de los otros estados. 
-\item Entonces podemos definir una funci\'on $A$ que le asigna a cada estado $i$ la probabilidad de que alcanzar el estado absorbente $k_1$. Obviamente: 
-\[
-A(k_1) = 1 \qquad \qquad A(k_2) = 0
-\]
-En cambio, para el resto de estados escribimos de manera recursiva el siguiente juego de ecuaciones lineales: 
-\[
-\forall \, \text{estado } i \neq k \colon \; A(i) \; = \,
-\sum_{\text{estados }j} \vec{P}(i,j) \, A(j)
-\]
+
+Entonces podemos definir una funci\'on $\alpha$ que le asigna a cada estado $i$ la probabilidad de que alcanzar el estado absorbente $k_1$ desde ese estado, denotada $\alpha(i)$, y calcular los valores de la funci\'on escribiendo de manera recursiva una ecuaci\'on de absorci\'on para cada estado: 
+\begin{align*}
+& \alpha(k_1) = 1 \\
+& \alpha(k_2) = 0 \\
+& \forall \, \text{estado } i \notin \{ k_1, k_2 \}
+\colon \; \alpha(i) \; = \,
+\sum_{\text{estados }j} \vec{P}(i,j) \, \alpha(j)
+\end{align*}
+
+
 \end{itemize}
 
 \end{frame}
