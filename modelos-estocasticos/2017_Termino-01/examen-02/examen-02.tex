@@ -1,8 +1,8 @@
 % -----------------------------------------------------------------
 % Document class: Article
 \documentclass[ a4paper, twoside, 11pt]{article}
-\usepackage{../../macros-general}
-\usepackage{../../macros-article}
+\usepackage{../../../macros-general}
+\usepackage{../../../macros-article}
 % Number of the handout, quiz, exam, etc.
 \newcommand{\numero}{02}
 \setcounter{numero}{\numero}
@@ -18,8 +18,8 @@
 \end{center}
 \halfskip
 
-\input{../../macros-espanol}
-\input{../../article_compromiso-honor}
+\input{../../../macros-espanol}
+\input{../../../article_compromiso-honor}
 \halfskip
 
 % -----------------------------------------------------------------
@@ -122,61 +122,61 @@ Los resultados se muestran en la siguiente tabla.
 \end{problem}
 \vspace{\baselineskip}
 
-% -----------------------------------------------------------------
-\begin{problem}
-\textbf{[4 Puntos]} Una Cadena de Markov tiene la siguiente matriz de transici\'on: 
-\[
-\vec{P} \; = \; \left[
-\begin{array}{cccc}
-0.2 & 0.8 & 0 & 0 \\
-0 & 0 & 0.6 & 0.4 \\
-0.8 & 0 & 0.2 & 0 \\
-0.6 & 0 & 0.4 & 0
-\end{array} \right]
-\]
-
-Suponga que se acumulan recompensas en cada estado de acuerdo a la siguiente tabla: 
-\begin{table}[htb]
-\centering
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-\textbf{Estado:} $i$ & 1 & 2 & 3 & 4 \\ \hline
-\textbf{Recompensa:} $R(i)$ & +2 & 0 & +4 & $-1$ \\ \hline
-\end{tabular}
-\end{table}
-
-Para un factor de descuento $\gamma = 0.95$ encuentre el Valor Actual Neto (VAN) de la recompensa total esperada suponiendo que la cadena arranca del estado uno. 
-
-\emph{Soluci\'on:} Para cada estado $i$ denotaremos al valor actual neto de la recompensa recibida si se arranca desde ese estado como $V(i)$. Entonces: 
-\[
-\forall \, \text{estado } i \; \colon \;
-V(i) \; = \; R(i)
-\; + \; \gamma \sum_{\text{estados } j} P(i,j) \, V(j)
-\]
-M\'as precisamente, las ecuaciones de valor de los estados son: 
-\begin{align*}
-V(1) \;
-& = \; +2 + 0.95 \, ( \, 0.2 \, V(1) + 0.8 \, V(2) \, ) \\
-V(2) \;
-& = \; +0 + 0.95 \, ( \, 0.6 \, V(3) + 0.4 \, V(4) \, ) \\
-V(3) \;
-& = \; +4 + 0.95 \, ( \, 0.8 \, V(1) + 0.2 \, V(3) \, ) \\
-V(4) \;
-& = \; -1 + 0.95 \, ( \, 0.6 \, V(1) + 0.4 \, V(3) \, )
-\end{align*}
-Resolviendo este sistema de ecuaciones lineales encontramos que: 
-\begin{table}[htb]
-\centering
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-\textbf{Estado:} $i$ & 1 & 2 & 3 & 4 \\ \hline
-\textbf{Valor:} $V(i)$ & $+32.308$ & $+31.802$ & $+35.252$ & $+30.811$ \\ \hline
-\end{tabular}
-\end{table}
-
-Consecuentemente, el Valor Actual Neto (VAN) de la recompensa total esperada suponiendo que la cadena arranca del estado uno es $+32.308$ unidades. 
-
-\end{problem}
-\vspace{\baselineskip}
+%% -----------------------------------------------------------------
+%\begin{problem}
+%\textbf{[4 Puntos]} Una Cadena de Markov tiene la siguiente matriz de transici\'on: 
+%\[
+%\vec{P} \; = \; \left[
+%\begin{array}{cccc}
+%0.2 & 0.8 & 0 & 0 \\
+%0 & 0 & 0.6 & 0.4 \\
+%0.8 & 0 & 0.2 & 0 \\
+%0.6 & 0 & 0.4 & 0
+%\end{array} \right]
+%\]
+%
+%Suponga que se acumulan recompensas en cada estado de acuerdo a la siguiente tabla: 
+%\begin{table}[htb]
+%\centering
+%\begin{tabular}{|c|c|c|c|c|}
+%\hline
+%\textbf{Estado:} $i$ & 1 & 2 & 3 & 4 \\ \hline
+%\textbf{Recompensa:} $R(i)$ & +2 & 0 & +4 & $-1$ \\ \hline
+%\end{tabular}
+%\end{table}
+%
+%Para un factor de descuento $\gamma = 0.95$ encuentre el Valor Actual Neto (VAN) de la recompensa total esperada suponiendo que la cadena arranca del estado uno. 
+%
+%\emph{Soluci\'on:} Para cada estado $i$ denotaremos al valor actual neto de la recompensa recibida si se arranca desde ese estado como $V(i)$. Entonces: 
+%\[
+%\forall \, \text{estado } i \; \colon \;
+%V(i) \; = \; R(i)
+%\; + \; \gamma \sum_{\text{estados } j} P(i,j) \, V(j)
+%\]
+%M\'as precisamente, las ecuaciones de valor de los estados son: 
+%\begin{align*}
+%V(1) \;
+%& = \; +2 + 0.95 \, ( \, 0.2 \, V(1) + 0.8 \, V(2) \, ) \\
+%V(2) \;
+%& = \; +0 + 0.95 \, ( \, 0.6 \, V(3) + 0.4 \, V(4) \, ) \\
+%V(3) \;
+%& = \; +4 + 0.95 \, ( \, 0.8 \, V(1) + 0.2 \, V(3) \, ) \\
+%V(4) \;
+%& = \; -1 + 0.95 \, ( \, 0.6 \, V(1) + 0.4 \, V(3) \, )
+%\end{align*}
+%Resolviendo este sistema de ecuaciones lineales encontramos que: 
+%\begin{table}[htb]
+%\centering
+%\begin{tabular}{|c|c|c|c|c|}
+%\hline
+%\textbf{Estado:} $i$ & 1 & 2 & 3 & 4 \\ \hline
+%\textbf{Valor:} $V(i)$ & $+32.308$ & $+31.802$ & $+35.252$ & $+30.811$ \\ \hline
+%\end{tabular}
+%\end{table}
+%
+%Consecuentemente, el Valor Actual Neto (VAN) de la recompensa total esperada suponiendo que la cadena arranca del estado uno es $+32.308$ unidades. 
+%
+%\end{problem}
+%\vspace{\baselineskip}
 
 \end{document}

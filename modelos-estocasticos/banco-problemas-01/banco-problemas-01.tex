@@ -1,0 +1,281 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+\graphicspath{{./figures/}}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{01}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Banco de Problemas \numero \\[1ex]
+\small \textbf{Semestre:} 2018-2019 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+
+Un fabricante tiene un par de m\'aquinas complicadas. Al comienzo de cada d\'ia si la m\'aquina principal est\'a operativa entonces con probabilidad $p$ la misma se descompondr\'a durante el d\'ia y los t\'ecinos ser\'an llamados para arreglarla al d\'ia siguiente. Puesto que los t\'ecnicos siempre se toman dos d\'ias para arreglar la m\'aquina, el fabricante tiene una m\'aquina de repuesto que utiliza solamente cuando la m\'aquina principal est\'a descompuesta. Similar al caso de la m\'aquina principal, si al comienzo de cualquier d\'ia la m\'aquina de repuesto est\'a operativa entonces con probabilidad $q$ se descompondr\'a durante el d\'ia y los t\'ecnicos ser\'an llamados a repararla al d\'ia siguiente. Nuevamente, los t\'ecnicos se tomar\'an dos d\'ias en arreglar la m\'aquina. 
+
+Modele esta nueva situaci\'on como una cadena de Markov y construya la matriz de transici\'on en funci\'on de $p$ y $q$. No necesita bosquejar el grafo de la cadena ni calcular probabilidades en estado estable. 
+
+\emph{Sugerencia:} En clase vimos un ejemplo similar, el cual corresponde a una m\'aquina considerada individualmente; en este caso para cada m\'aquina el modelo tendr\'ia tres estados. Partiendo de este modelo de tres estados para la m\'aquina principal, junto con un modelo similar de tres estado para la m\'aquina de repuesto, usted deber\'a tomar el ``producto'' de estos dos modelos para construir una Cadena de Markov con nueve estados. M\'as precisamente, para cada par $k, \ell \in \{ 0, 1, 2 \}$ introduzca un estado $( k, \ell)$ que modele d\'ias cuando la m\'aquina principal lleva $k$ ma\~nanas da\~nada y la m\'aquina de repuesto lleva $\ell$ ma\~nanas da\~nada. 
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Suponga que usted trabaja en una concesionaria de maquinaria industrial y para la construcci\'on. Usted ha sido encargado con calcular un precio para la garant\'ia de tres a\~nos para excavadoras que ofrece la empresa. Para lograrlo usted ha investigado los archivos del departamento de ventas, lo cual condujo a las siguientes observaciones: 
+\begin{itemize}
+\item El 4\% de los clientes solicitan la garant\'ia en el primer a\~no. 
+\item El 3\% de los clientes que no tuvieron problemas con su m\'aquina en el primer a\~no solicitan la garant\'ia en el segundo a\~no. 
+\item El 8\% de los clientes que no tuvieron problemas con su m\'aquina en el primer y segundo a\~no solicitan la garant\'ia en el tercer a\~no. 
+\end{itemize}
+
+Suponiendo que cada excavadora se vende en 180 mil d\'olares, calcule el precio m\'inimo de una garant\'ia de tres a\~nos. 
+
+\end{problem}
+\vspace{\baselineskip}
+
+% -----------------------------------------------------------------
+\begin{problem}
+Suponga que usted ha sido encargado con del manejo del inventario de algunos productos no-perecederos en un supermercado que abre todos los d\'ias a sus clientes por la misma cantidad de tiempo. Para mantener una consistencia en el manejo de inventario a trav\'es de los varios productos que se venden en el supermercado, el gerente ha dispuesto que todos los inventarios se controlen mediante pol\'iticas de punto de reposici\'on. 
+
+M\'as precisamente, al final de cada d\'ia se cuenta el inventario del producto y si este es menor o igual a $I_{rep}$ unidades se hace un pedido de reposici\'on por $Q_{rep}$ unidades al proveedor, el cual es entregado por el mismo al comienzo del siguiente d\'ia antes de la hora de apertura de la tienda; caso contrario, no se hace un pedido de reposici\'on. F\'ijese que bajo estas suposiciones el m\'aximo inventario posible es:
+\[
+I_{max} \, = \, I_{rep} + Q_{rep}
+\]
+Adicionalmente,como es de costumbre en este campo de estudio, usted hace la suposici\'on simplificatoria que las demandas del producto $D_1, \, D_2, \, \dots$ constituyen una secuencia de variables aleatorias i.i.d. con distribuci\'on Poisson con par\'ametro $\lambda$. M\'as a\'un, si para cada d\'ia $t$ denotamos a $I_t$ como el inventario a la hora de apertura de la tienda del \tavo d\'ia, a $D_t$ como la demanda del d\'ia, \ie la cantidad que se vender\'ia ese d\'ia si el inventario fuere inagotable, a $R_t$ como la cantidad repuesta entre la noche del \tavo d\'ia y la hora de apertura del \tMavo d\'ia, tenemos que:
+\[
+I_{t+1} \, = \, \max \{ \, 0, \, I_t - D_t \, \} + R_t \, ; \qquad
+R_t \, = \, 
+\begin{cases}
+Q_{rep}, & \text{si } 0 \leq I_t \leq I_{rep} \, ; \\
+0, & \text{caso contrario;}
+\end{cases}
+\]
+
+Con todo esto en mente, para cada problema de manejo de inventario con demanda $\lambda$ y pol\'itica de punto de reposici\'on $(I_{rep},Q_{rep})$ podemos construir una Cadena de Markov con \linebreak $n = I_{max} + 1$ estados (cada uno asociado a un nivel de inventario). 
+
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item Construya la matriz de transici\'on para el problema para cada uno de los siguientes casos: 
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Caso}           & $\bm{\lambda}$ & $\bm{I_{rep}}$ & $\bm{Q_{rep}}$ \\ \hline
+Producto 1 - Pol\'itica A & 0.8 & 1  & 1                  \\ \hline
+Producto 1 - Pol\'itica B & 0.8 & 2  & 1                  \\ \hline
+Producto 2 - Pol\'itica A & 1.5 & 1  & 3                  \\ \hline
+Producto 2 - Pol\'itica B & 1.5 & 2  & 2                  \\ \hline
+\end{tabular}
+\end{table}
+Por favor presente sus matrices como tablas con los decimales redondeados a tres d\'igitos. 
+
+\item Calcule la distribuci\'on en estado estable para cada uno de los cuatro casos de la actividad anterior. Por favor presente sus resultados en dos tablas separados, una para cada producto, de tal manera que se pueda apreciar la influencia de la pol\'itica de manejo de inventario sobre la distribuci\'on estacionaria de la cadena. 
+
+\item Para comparar las pol\'iticas necesitamos una funci\'on de utilidad. En nuestro caso, la funci\'on de utilidad ser\'a la diferencia entre la ganancia por ventas y el costo de retenci\'on de la mercader\'ia, puesto que el supermercado gana $u$ d\'olares por unidad de producto vendida pero afronta un costo de $c$ d\'olares por unidad de producto en inventario. 
+
+El n\'umero esperado de unidades de un producto que se venden depende del nivel de inventario. En particular, si para un d\'ia $t$ y un nivel de inventario $I_t$ denotamos al n\'umero esperado de unidades que se vender\'an ese d\'ia como $v(I_t)$ podemos ver que: 
+\[
+v(I_t) \; = \; (0) \, \Pr( D_t = 0 ) + (1) \, \Pr( D_t = 1 ) + \cdots + (I_t) \, \Pr( D_t \geq I_t )
+\]
+Entonces la utilidad diaria esperada de un nivel de inventario $I_t \in \{ \, 0, \, 1, \, \dots, \, I_{max} \, \}$ se calcula de la siguiente manera: 
+\[
+\text{Utilidad}(I_t) \, = \, u \, v(I_t) - c \, I_t
+\]
+Con esto en mente, es evidente que podemos evaluar el desempe\~no de una pol\'itica $\alpha$ ponderando las utilidades de los niveles de inventario por la distribuci\'on estacionaria: 
+\[
+\text{Utilidad} \, (\alpha) \; = \; 
+\sum_{ i = 0 }^{I_{max}} \pi^*_{\alpha}(i) \cdot \text{Utilidad}(i)
+\]
+
+Finalmente, suponiendo que el Producto A produce una ganancia de $u =$ \$7.25 por unidad y tiene un costo de retenci\'on por unidad por d\'ia de $c =$ \$0.16, calcule la utilidad de cada una de las dos pol\'iticas propuestas e indique cu\'al de las dos es mejor. Luego repita el ejercicio para el Producto B suponiendo que $u =$ \$2.55 y que $c =$ \$0.10. 
+
+\end{enumerate}
+\QED
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Busque en YouTube el video \href{https://www.youtube.com/watch?v=63HHmjlh794&list=PLhfK9LVRQ8ywzGXyQDIvH4_XBIcrPp89r}{\emph{``Can a Chess Piece Explain Markov Chains?''}} del canal PBS Infinite Series. Estudie el truco que el la presentadora utiliz\'o para calcular la distribuci\'on estacionaria de un caballo que se mueve sobre un tablero de ajedrez de manera aleatoria. Luego, considere un conjunto de instalaciones industriales vigiladas por robots; los mapas de las instalaciones se muestran en la figura de abajo. En cada instalaci\'on, el robot empieza en un \'area aleatoria y hace transiciones a otras \'areas adjacentes (o a la misma \'area) con probabilidad uniforme. 
+
+\begin{figure}[htb]
+\centering
+\def\svgwidth{0.98\columnwidth}
+\input{figures/prob_robot-vigilante.eps_tex}
+\end{figure}
+\halfskip
+
+Complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item Aprovechando el truco para el caballo, calcule, para cada instalaci\'on mostrada en la figura, la frecuencia de visitas a las \'areas $A_{ij}$ en el largo plazo y pres\'entelas sobre un mapa de la instaci\'on. Adicionalmente, indique cu\'ales son las \'areas m\'as seguras y las \'areas m\'as vulnerables. 
+\item Empezando con la pol\'itica aleatoria uniforme, modifique las probabilidades de transici\'on del robot del tal manera que a largo plazo todas las \'areas $A_{ij}$ sean visitadas con la misma frecuencia. (Obviamente, respetando las paredes). En particular, para cada instalaci\'on presente el grafo de la nueva cadena. \\ \emph{Sugerencia:} Imite el truco explicado por el instructor que consist\'ia en disponer el mismo n\'umero de `robots virtuales' en cada \'area y luego elegir probablidades de transici\'on en cada estado que cumplan con las ecuaciones de balance. \\
+\emph{Nota:} Esta \'ultima actividad no tiene una respuesta correcta \'unica. 
+\end{enumerate}
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+\textbf{[4 Puntos]} Una Cadena de Markov tiene la siguiente matriz de transici\'on: 
+\[
+\vec{P} \; = \; \left[
+\begin{array}{cccc}
+0.2 & 0.8 & 0 & 0 \\
+0 & 0 & 0.6 & 0.4 \\
+0.8 & 0 & 0.2 & 0 \\
+0.6 & 0 & 0.4 & 0
+\end{array} \right]
+\]
+
+Suponga que se acumulan recompensas en cada estado de acuerdo a la siguiente tabla: 
+\begin{table}[htb]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{Estado:} $i$ & 1 & 2 & 3 & 4 \\ \hline
+\textbf{Recompensa:} $R(i)$ & +2 & $\pm$0 & +4 & $-1$ \\ \hline
+\end{tabular}
+\end{table}
+
+Complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item Calcule la recompensa esperada por periodo, a largo plazo. 
+\item Para una tasa de inter\'es $r = 12\%$ encuentre el Valor Actual Neto (VAN) de la recompensa total esperada suponiendo que la cadena arranca del estado uno. 
+\end{enumerate}
+\QED
+
+%\emph{Soluci\'on:} Para cada estado $i$ denotaremos al valor actual neto de la recompensa recibida si se arranca desde ese estado como $V(i)$. Entonces: 
+%\[
+%\forall \, \text{estado } i \; \colon \;
+%V(i) \; = \; R(i)
+%\; + \; \gamma \sum_{\text{estados } j} P(i,j) \, V(j)
+%\]
+%M\'as precisamente, las ecuaciones de valor de los estados son: 
+%\begin{align*}
+%V(1) \;
+%& = \; +2 + 0.95 \, ( \, 0.2 \, V(1) + 0.8 \, V(2) \, ) \\
+%V(2) \;
+%& = \; +0 + 0.95 \, ( \, 0.6 \, V(3) + 0.4 \, V(4) \, ) \\
+%V(3) \;
+%& = \; +4 + 0.95 \, ( \, 0.8 \, V(1) + 0.2 \, V(3) \, ) \\
+%V(4) \;
+%& = \; -1 + 0.95 \, ( \, 0.6 \, V(1) + 0.4 \, V(3) \, )
+%\end{align*}
+%Resolviendo este sistema de ecuaciones lineales encontramos que: 
+%\begin{table}[htb]
+%\centering
+%\begin{tabular}{|c|c|c|c|c|}
+%\hline
+%\textbf{Estado:} $i$ & 1 & 2 & 3 & 4 \\ \hline
+%\textbf{Valor:} $V(i)$ & $+32.308$ & $+31.802$ & $+35.252$ & $+30.811$ \\ \hline
+%\end{tabular}
+%\end{table}
+%
+%Consecuentemente, el Valor Actual Neto (VAN) de la recompensa total esperada suponiendo que la cadena arranca del estado uno es $+32.308$ unidades. 
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Un transmisor digital tiene un \emph{buffer} con capacidad para tres paquetes. \linebreak En cada ciclo que empieza con al menos un paquete en el buffer el transmisor intenta enviar un paquete. El paquete es enviado con \'exito con probabilidad $p$, caso contrario ser\'a necesario re-intentar el env\'io en el siguiente per\'iodo. Adem\'as, en cada ciclo que empieza con dos o menos paquetes el transmisor recibe un nuevo paquete con probabilidad $q$. Suponga que en cada ciclo primero se intenta enviar un paquete, si hay al menos uno en el buffer, y luego se receptan nuevos paquetes si hay espacio en el buffer. 
+
+Con esto en mente: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item Modele el n\'umero de paquetes en el buffer como una Cadena de Markov con cuatro estados. En particular, provea el grafo de la cadena. 
+
+%\\[1ex] \emph{Soluci\'on:} Observe la siguiente figura, donde $\bar{p} \define 1-p$ y $\bar{q} \define 1-q$. 
+%
+%\begin{figure}[htb]
+%\centering
+%\def\svgwidth{0.9\columnwidth}
+%\input{figures/prob-transmisor-buffer.eps_tex}
+%\end{figure}
+
+\item Suponiendo que $p = 0.9$ y $q = 0.6$, y que actualmente el buffer est\'a lleno, encuentre el n\'umero esperado de ciclos que transcurrir\'an hasta la primera vez que el buffer este vac\'io. 
+
+%\\[1ex] \emph{Soluci\'on:} En la siguiente figura se muestra la cadena para los valores $p = 0.9$ y $q = 0.6$. En esta cadena nosotros buscamos encontrar el tiempo de la primera visita al estado cero. En particular, si para cada estado $i \in \{ 1, 2, 3 \}$ denotamos a $T_i$ como el tiempo esperado de primera visita al estado cero desde desde el estado $i$, tenemos: 
+%
+%\begin{figure}[htb]
+%\centering
+%\def\svgwidth{0.9\columnwidth}
+%\input{figures/prob-transmisor-buffer-valores.eps_tex}
+%\end{figure}
+%
+%\begin{align*}
+%T_1 \; & = \; 1 + 0.58 \, T_1 + 0.06 \, T_2 \\
+%T_2 \; & = \; 1 + 0.36 \, T_1 + 0.58 \, T_2 + 0.06 \, T_3 \\
+%T_3 \; & = \; 1 + 0.36 \, T_2 + 0.64 \, T_3
+%\end{align*}
+%Resolviendo las ecuaciones simult\'aneamente obtenemos: 
+%\begin{align*}
+%T_1 \; & = \; 3.32 \\
+%T_2 \; & = \; 6.56 \\
+%T_3 \; & = \; 9.34
+%\end{align*}
+%Consecuentemente, cuando el sistema empieza con el buffer lleno el tiempo esperado hasta la primera vez que el buffer este vac\'io es de 9.34 ciclos. 
+
+\item Ahora suponga que se cambia la disciplina del transmisor, de tal manera que en cada ciclo primero se pueden receptar nuevos paquetes si hay espacio en el buffer y luego se intenta enviar un paquete (a menos que el buffer est\'e vac\'io). Bosqueje el grafo de la nueva cadena. 
+
+\end{enumerate}
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Investigue el algoritmo PageRank y explique brevemente (\eg en un p\'arrafo) c\'omo se relaciona con los modelos de Cadenas de Markov. \QED
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Considere un proceso estoc\'astico Markoviano $X_0, \, X_1, \, X_2,\, \dots$ cuyos estados son los enteros no-negativos. El proceso evoluciona de la siguiente manera: 
+\begin{itemize}
+\item Si el estado $X_t = 0$ entonces: 
+\[
+\text{el estado } X_{t+1} \; = \; 
+\begin{cases}
+1, & \text{con probabilidad } p \\
+0, & \text{con probabilidad } 1-p 
+\end{cases}
+\]
+\item Si el estado $X_t = k > 0$ entonces: 
+\[
+\text{el estado } X_{t+1} \; = \; 
+\begin{cases}
+k+1, & \text{con probabilidad } p \\
+k-1, & \text{con probabilidad } q \\
+k, & \text{con probabilidad } 1-p-q
+\end{cases}
+\]
+\end{itemize}
+
+Con todo esto en mente: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item Construya un modelo de Cadena de Markov de nacimiento-muerte para este proceso. Para esto bosqueje el grafo para los primeros estados y para un estado t\'ipico $k \geq 2$. 
+\item Escriba las ecuaciones de balance para los primeros dos estados. Luego, escriba las ecuaciones de balance para el caso de un estado t\'ipico $k \geq 2$. 
+\item Escriba las probabilidades estacionarias de los estados uno y dos (\ie $ \pi_1$ y $\pi_2$) en funci\'on de la probabilidad estacionaria del estado cero ($\pi_0$). Luego, formule una hip\'otesis inductiva para la forma general de las probabilidades estacionarias de un estado t\'ipic $k$ ($\pi_k$) en funci\'on de la probabilidad estacionaria del estado cero ($\pi_0$) y demu\'estrela. 
+\end{enumerate}
+\QED
+
+\end{problem}
+\fullskip
+
+\end{document}

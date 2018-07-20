@@ -1,8 +1,8 @@
 % -----------------------------------------------------------------
 % Document class: Article
 \documentclass[ a4paper, twoside, 11pt]{article}
-\usepackage{../../macros-general}
-\usepackage{../../macros-article}
+\usepackage{../../../macros-general}
+\usepackage{../../../macros-article}
 % Number of the handout, quiz, exam, etc.
 \newcommand{\numero}{01}
 \setcounter{numero}{\numero}
@@ -12,7 +12,7 @@
 \begin{document}
 \allowdisplaybreaks
 
-\input{../../macros-espanol}
+\input{../../../macros-espanol}
 
 \begin{center}
 \Large Modelos Estoc\'asticos (INDG-1008): Examen \numero \\[2ex]
@@ -97,88 +97,88 @@ De esta manera:
 \end{problem}
 \fullskip
 
-% -----------------------------------------------------------------
-\begin{problem}
-Un transmisor digital tiene un \emph{buffer} con capacidad para tres paquetes. \linebreak En cada ciclo que empieza con al menos un paquete en el buffer el transmisor intenta enviar un paquete. El paquete es enviado con \'exito con probabilidad $p$, caso contrario ser\'a necesario re-intentar el env\'io en el siguiente per\'iodo. Adem\'as, en cada ciclo que empieza con dos o menos paquetes el transmisor recibe un nuevo paquete con probabilidad $q$. 
+%% -----------------------------------------------------------------
+%\begin{problem}
+%Un transmisor digital tiene un \emph{buffer} con capacidad para tres paquetes. \linebreak En cada ciclo que empieza con al menos un paquete en el buffer el transmisor intenta enviar un paquete. El paquete es enviado con \'exito con probabilidad $p$, caso contrario ser\'a necesario re-intentar el env\'io en el siguiente per\'iodo. Adem\'as, en cada ciclo que empieza con dos o menos paquetes el transmisor recibe un nuevo paquete con probabilidad $q$. 
+%
+%\emph{Clarificaci\'on:} Suponga que en cada ciclo primero se intenta enviar un paquete, si hay al menos uno en el buffer, y luego se receptan nuevos paquetes si hay espacio en el buffer. 
+%
+%Con esto en mente: 
+%\begin{enumerate}[label=\textbf{\alph*)}]
+%\item \textbf{4 Puntos:} Represente este modelo como una Cadena de Markov con cuatro estados. \linebreak En particular, provea el grafo de la cadena. \\[1ex] \emph{Soluci\'on:} Observe la siguiente figura, donde $\bar{p} \define 1-p$ y $\bar{q} \define 1-q$. 
+%
+%\begin{figure}[htb]
+%\centering
+%\def\svgwidth{0.9\columnwidth}
+%\input{figures/prob-transmisor-buffer.eps_tex}
+%\end{figure}
+%
+%\item \textbf{3 Puntos:} Suponiendo que $p = 0.9$ y $q = 0.6$, encuentre el n\'umero de ciclos esperado hasta que el sistema est\'a vac\'io (\ie tiene cero paquetes en el buffer) cuando empieza con el buffer lleno. \\[1ex] \emph{Soluci\'on:} En la siguiente figura se muestra la cadena para los valores $p = 0.9$ y $q = 0.6$. En esta cadena nosotros buscamos encontrar el tiempo de la primera visita al estado cero. En particular, si para cada estado $i \in \{ 1, 2, 3 \}$ denotamos a $T_i$ como el tiempo esperado de primera visita al estado cero desde desde el estado $i$, tenemos: 
+%
+%\begin{figure}[htb]
+%\centering
+%\def\svgwidth{0.9\columnwidth}
+%\input{figures/prob-transmisor-buffer-valores.eps_tex}
+%\end{figure}
+%
+%\begin{align*}
+%T_1 \; & = \; 1 + 0.58 \, T_1 + 0.06 \, T_2 \\
+%T_2 \; & = \; 1 + 0.36 \, T_1 + 0.58 \, T_2 + 0.06 \, T_3 \\
+%T_3 \; & = \; 1 + 0.36 \, T_2 + 0.64 \, T_3
+%\end{align*}
+%Resolviendo las ecuaciones simult\'aneamente obtenemos: 
+%\begin{align*}
+%T_1 \; & = \; 3.32 \\
+%T_2 \; & = \; 6.56 \\
+%T_3 \; & = \; 9.34
+%\end{align*}
+%Consecuentemente, cuando el sistema empieza con el buffer lleno el tiempo esperado hasta la primera vez que el buffer este vac\'io es de 9.34 ciclos. 
+%
+%\end{enumerate}
+%
+%\end{problem}
+%\fullskip
 
-\emph{Clarificaci\'on:} Suponga que en cada ciclo primero se intenta enviar un paquete, si hay al menos uno en el buffer, y luego se receptan nuevos paquetes si hay espacio en el buffer. 
-
-Con esto en mente: 
-\begin{enumerate}[label=\textbf{\alph*)}]
-\item \textbf{4 Puntos:} Represente este modelo como una Cadena de Markov con cuatro estados. \linebreak En particular, provea el grafo de la cadena. \\[1ex] \emph{Soluci\'on:} Observe la siguiente figura, donde $\bar{p} \define 1-p$ y $\bar{q} \define 1-q$. 
-
-\begin{figure}[htb]
-\centering
-\def\svgwidth{0.9\columnwidth}
-\input{figures/prob-transmisor-buffer.eps_tex}
-\end{figure}
-
-\item \textbf{3 Puntos:} Suponiendo que $p = 0.9$ y $q = 0.6$, encuentre el n\'umero de ciclos esperado hasta que el sistema est\'a vac\'io (\ie tiene cero paquetes en el buffer) cuando empieza con el buffer lleno. \\[1ex] \emph{Soluci\'on:} En la siguiente figura se muestra la cadena para los valores $p = 0.9$ y $q = 0.6$. En esta cadena nosotros buscamos encontrar el tiempo de la primera visita al estado cero. En particular, si para cada estado $i \in \{ 1, 2, 3 \}$ denotamos a $T_i$ como el tiempo esperado de primera visita al estado cero desde desde el estado $i$, tenemos: 
-
-\begin{figure}[htb]
-\centering
-\def\svgwidth{0.9\columnwidth}
-\input{figures/prob-transmisor-buffer-valores.eps_tex}
-\end{figure}
-
-\begin{align*}
-T_1 \; & = \; 1 + 0.58 \, T_1 + 0.06 \, T_2 \\
-T_2 \; & = \; 1 + 0.36 \, T_1 + 0.58 \, T_2 + 0.06 \, T_3 \\
-T_3 \; & = \; 1 + 0.36 \, T_2 + 0.64 \, T_3
-\end{align*}
-Resolviendo las ecuaciones simult\'aneamente obtenemos: 
-\begin{align*}
-T_1 \; & = \; 3.32 \\
-T_2 \; & = \; 6.56 \\
-T_3 \; & = \; 9.34
-\end{align*}
-Consecuentemente, cuando el sistema empieza con el buffer lleno el tiempo esperado hasta la primera vez que el buffer este vac\'io es de 9.34 ciclos. 
-
-\end{enumerate}
-
-\end{problem}
-\fullskip
-
-% -----------------------------------------------------------------
-\begin{problem}
-Considere el siguiente modelo de una acci\'on de un proyecto inmobiliario: 
-\begin{itemize}
-\item El proyecto empieza en el estado $A$, en el cual genera utilidades de \$200 mensuales. \linebreak El proyecto avanza al estado $B$ con probabilidad del 40\% y permanece en el mismo estado con probabilidad del 60\%. 
-\item Una vez que el proyecto alcanza el estado $B$ genera \$400 mensuales. En este estado el proyecto avanza al estado $C$ con probabilidad del 30\% y permanece en el mismo estado con probabilidad del 70\%. 
-\item En el estado $C$ el proyecto genera \$700 mensuales. El proyecto regresa al estado $B$ con probabilidad del 50\% y permanece en el mismo estado con probabilidad del 50\%. 
-\end{itemize}
-
-Con esto en mente: 
-\begin{enumerate}[label=\textbf{\alph*)}]
-\item \textbf{1.5 Puntos:} Represente este modelo como una Cadena de Markov con tres estados. \linebreak En particular, provea el grafo de la cadena. \\[1ex] \emph{Soluci\'on:} 
-
-\begin{figure}[htb]
-\centering
-\def\svgwidth{0.9\columnwidth}
-\input{figures/prob-proyecto-inmobiliario.eps_tex}
-\end{figure}
-
-\item \textbf{3 Puntos:} Suponiendo que la tasa de inter\'es es del $r = 5\%$, escriba las ecuaciones de Valor Actual Neto Esperado (VAN-E).  \\[1ex] \emph{Soluci\'on:} Para esa tasa de inter\'es el factor de descuento es: 
-\[
-\gamma \; = \; \frac{1}{1 + r} \; = \; 0.9524
-\]
-Ahora, si para cada estado $i$ denotamos a $v_i$ como el valor actual neto de empezar a recolectar recompensas desde ese estado, tenemos:
-\begin{align*}
-v_A \; & = \; 200 + 0.9524 \, ( \, 0.6 \, v_A + 0.4 \, v_B \, ) \\
-v_B \; & = \; 400 + 0.9524 \, ( \, 0.7 \, v_B + 0.3 \, v_C \, ) \\
-v_C \; & = \; 700 + 0.9524 \, ( \, 0.5 \, v_B + 0.5 \, v_C \, )
-\end{align*}
-
-\item \textbf{1.5 Puntos:} Resuelva las ecuaciones anteriores y reporte el Valor Actual Neto Esperado (VAN-E) de una acci\'on de este proyecto. \\[1ex] \emph{Soluci\'on:} Resolviendo las ecuaciones simult\'aneamente obtenemos: 
-\begin{align*}
-v_A \; & = \; \$9914 \\
-v_B \; & = \; \$10628 \\
-v_C \; & = \; \$10998
-\end{align*}
-Dado que el proyecto necesariamente empieza en el estado $A$, concluimos que el VAN-E de una acci\'on del proyecto es de \$9914. 
-\end{enumerate}
-
-\end{problem}
-\fullskip
+%% -----------------------------------------------------------------
+%\begin{problem}
+%Considere el siguiente modelo de una acci\'on de un proyecto inmobiliario: 
+%\begin{itemize}
+%\item El proyecto empieza en el estado $A$, en el cual genera utilidades de \$200 mensuales. \linebreak El proyecto avanza al estado $B$ con probabilidad del 40\% y permanece en el mismo estado con probabilidad del 60\%. 
+%\item Una vez que el proyecto alcanza el estado $B$ genera \$400 mensuales. En este estado el proyecto avanza al estado $C$ con probabilidad del 30\% y permanece en el mismo estado con probabilidad del 70\%. 
+%\item En el estado $C$ el proyecto genera \$700 mensuales. El proyecto regresa al estado $B$ con probabilidad del 50\% y permanece en el mismo estado con probabilidad del 50\%. 
+%\end{itemize}
+%
+%Con esto en mente: 
+%\begin{enumerate}[label=\textbf{\alph*)}]
+%\item \textbf{1.5 Puntos:} Represente este modelo como una Cadena de Markov con tres estados. \linebreak En particular, provea el grafo de la cadena. \\[1ex] \emph{Soluci\'on:} 
+%
+%\begin{figure}[htb]
+%\centering
+%\def\svgwidth{0.9\columnwidth}
+%\input{figures/prob-proyecto-inmobiliario.eps_tex}
+%\end{figure}
+%
+%\item \textbf{3 Puntos:} Suponiendo que la tasa de inter\'es es del $r = 5\%$, escriba las ecuaciones de Valor Actual Neto Esperado (VAN-E).  \\[1ex] \emph{Soluci\'on:} Para esa tasa de inter\'es el factor de descuento es: 
+%\[
+%\gamma \; = \; \frac{1}{1 + r} \; = \; 0.9524
+%\]
+%Ahora, si para cada estado $i$ denotamos a $v_i$ como el valor actual neto de empezar a recolectar recompensas desde ese estado, tenemos:
+%\begin{align*}
+%v_A \; & = \; 200 + 0.9524 \, ( \, 0.6 \, v_A + 0.4 \, v_B \, ) \\
+%v_B \; & = \; 400 + 0.9524 \, ( \, 0.7 \, v_B + 0.3 \, v_C \, ) \\
+%v_C \; & = \; 700 + 0.9524 \, ( \, 0.5 \, v_B + 0.5 \, v_C \, )
+%\end{align*}
+%
+%\item \textbf{1.5 Puntos:} Resuelva las ecuaciones anteriores y reporte el Valor Actual Neto Esperado (VAN-E) de una acci\'on de este proyecto. \\[1ex] \emph{Soluci\'on:} Resolviendo las ecuaciones simult\'aneamente obtenemos: 
+%\begin{align*}
+%v_A \; & = \; \$9914 \\
+%v_B \; & = \; \$10628 \\
+%v_C \; & = \; \$10998
+%\end{align*}
+%Dado que el proyecto necesariamente empieza en el estado $A$, concluimos que el VAN-E de una acci\'on del proyecto es de \$9914. 
+%\end{enumerate}
+%
+%\end{problem}
+%\fullskip
 
 \end{document}

@@ -1,8 +1,8 @@
 % -----------------------------------------------------------------
 % Document class: Article
 \documentclass[ a4paper, twoside, 11pt]{article}
-\usepackage{../../macros-general}
-\usepackage{../../macros-article}
+\usepackage{../../../macros-general}
+\usepackage{../../../macros-article}
 % Number of the handout, quiz, exam, etc.
 \newcommand{\numero}{01}
 \setcounter{numero}{\numero}
@@ -18,8 +18,8 @@
 \end{center}
 \fullskip
 
-\input{../../macros-espanol}
-\input{../../article_compromiso-honor}
+\input{../../../macros-espanol}
+\input{../../../article_compromiso-honor}
 
 % -----------------------------------------------------------------
 \begin{problem}
@@ -235,38 +235,38 @@ Con todo esto en mente, construya un modelo de Cadena de Markov de este proceso 
 \end{problem}
 \vspace{\baselineskip}
 
-% -----------------------------------------------------------------
-\begin{problem}
-Considere un proceso estoc\'astico Markoviano $X_0, \, X_1, \, X_2,\, \dots$ cuyos estados son los enteros no-negativos. El proceso evoluciona de la siguiente manera: 
-\begin{itemize}
-\item Si $X_t = 0$ entonces: 
-\[
-X_{t+1} \; = \; 
-\begin{cases}
-1, & \text{con probabilidad } p \\
-0, & \text{con probabilidad } 1-p 
-\end{cases}
-\]
-\item Si $X_t > 0$ entonces: 
-\[
-X_{t+1} \; = \; 
-\begin{cases}
-X_t + 1, & \text{con probabilidad } p \\
-X_t - 1, & \text{con probabilidad } q \\
-X_t, & \text{con probabilidad } 1-p-q
-\end{cases}
-\]
-\end{itemize}
-
-Con todo esto en mente: 
-\begin{enumerate}[label=\alph*.]
-\item \textbf{[2 Puntos]} Construya un modelo de Cadena de Markov de nacimiento-muerte para este proceso. En particular, bosqueje el grafo para los primeros cuatro estados. 
-\item \textbf{[3 Puntos]} Escriba las ecuaciones de estado estable para los primeros tres estados. 
-\item \textbf{[2 Puntos]} Escriba las probabilidades en estado estable de los n\'umeros uno y dos en funci\'on de la probabilidad en estado estable del n\'umero cero. 
-\item \textbf{[3 Puntos]} Escriba una expresi\'on para la probabilidad en estado estable de cualquier n\'umero $i \geq 1$ como funci\'on de la probabilidad en estado estable del n\'umero cero. 
-\end{enumerate}
-
-\end{problem}
-\vspace{\baselineskip}
+%% -----------------------------------------------------------------
+%\begin{problem}
+%Considere un proceso estoc\'astico Markoviano $X_0, \, X_1, \, X_2,\, \dots$ cuyos estados son los enteros no-negativos. El proceso evoluciona de la siguiente manera: 
+%\begin{itemize}
+%\item Si $X_t = 0$ entonces: 
+%\[
+%X_{t+1} \; = \; 
+%\begin{cases}
+%1, & \text{con probabilidad } p \\
+%0, & \text{con probabilidad } 1-p 
+%\end{cases}
+%\]
+%\item Si $X_t > 0$ entonces: 
+%\[
+%X_{t+1} \; = \; 
+%\begin{cases}
+%X_t + 1, & \text{con probabilidad } p \\
+%X_t - 1, & \text{con probabilidad } q \\
+%X_t, & \text{con probabilidad } 1-p-q
+%\end{cases}
+%\]
+%\end{itemize}
+%
+%Con todo esto en mente: 
+%\begin{enumerate}[label=\alph*.]
+%\item \textbf{[2 Puntos]} Construya un modelo de Cadena de Markov de nacimiento-muerte para este proceso. En particular, bosqueje el grafo para los primeros cuatro estados. 
+%\item \textbf{[3 Puntos]} Escriba las ecuaciones de estado estable para los primeros tres estados. 
+%\item \textbf{[2 Puntos]} Escriba las probabilidades en estado estable de los n\'umeros uno y dos en funci\'on de la probabilidad en estado estable del n\'umero cero. 
+%\item \textbf{[3 Puntos]} Escriba una expresi\'on para la probabilidad en estado estable de cualquier n\'umero $i \geq 1$ como funci\'on de la probabilidad en estado estable del n\'umero cero. 
+%\end{enumerate}
+%
+%\end{problem}
+%\vspace{\baselineskip}
 
 \end{document}

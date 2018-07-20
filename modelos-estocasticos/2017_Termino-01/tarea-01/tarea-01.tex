@@ -1,8 +1,8 @@
 % -----------------------------------------------------------------
 % Document class: Article
 \documentclass[ a4paper, twoside, 11pt]{article}
-\usepackage{../../macros-general}
-\usepackage{../../macros-article}
+\usepackage{../../../macros-general}
+\usepackage{../../../macros-article}
 % Number of the handout, quiz, exam, etc.
 \newcommand{\numero}{01}
 \setcounter{numero}{\numero}
@@ -12,7 +12,7 @@
 \begin{document}
 \allowdisplaybreaks
 
-\input{../../macros-espanol}
+\input{../../../macros-espanol}
 
 \begin{center}
 \Large Modelos Estoc\'asticos (INDG-1008): Tarea \numero \\[1ex]
@@ -36,32 +36,32 @@ Adem\'as, por favor entregue todas las funciones en Python que se le soliciten e
 \fullskip
 \halfskip
 
-% -----------------------------------------------------------------
-\begin{problem}
-\textbf{(2 Puntos)} Un fabricante tiene una m\'aquina complicada. Al comienzo de cada d\'ia si la m\'aquina est\'a operativa entonces con probabilidad $p$ la misma se descompondr\'a durante el d\'ia y los t\'ecinos ser\'an llamados para arreglarla al d\'ia siguiente. Suponiendo que los t\'ecnicos siempre se toman dos d\'ias para arreglar la m\'aquina, modele esta situaci\'on como una cadena de Markov con tres estados y construya la matriz de transici\'on de la cadena en funci\'on del par\'ametro $p$ y encuentre el porcentaje de los d\'ias que la m\'aquina empieza el d\'ia estando operativa. 
+%% -----------------------------------------------------------------
+%\begin{problem}
+%\textbf{(2 Puntos)} Un fabricante tiene una m\'aquina complicada. Al comienzo de cada d\'ia si la m\'aquina est\'a operativa entonces con probabilidad $p$ la misma se descompondr\'a durante el d\'ia y los t\'ecinos ser\'an llamados para arreglarla al d\'ia siguiente. Suponiendo que los t\'ecnicos siempre se toman dos d\'ias para arreglar la m\'aquina, modele esta situaci\'on como una cadena de Markov con tres estados y construya la matriz de transici\'on de la cadena en funci\'on del par\'ametro $p$ y encuentre el porcentaje de los d\'ias que la m\'aquina empieza el d\'ia estando operativa. 
+%
+%\end{problem}
+%\vspace{\baselineskip}
 
-\end{problem}
-\vspace{\baselineskip}
+%% -----------------------------------------------------------------
+%\begin{problem}
+%\textbf{(6 Puntos)} En el problema anterior, suponga que el fabricante tiene una m\'aquina de repuesto que utiliza solamente cuando la m\'aquina principal est\'a descompuesta. Similar al caso de la m\'aquina principal, si al comienzo de cualquier d\'ia la m\'aquina de repuesto est\'a operativa entonces con probabilidad $q$ se descompondr\'a durante el d\'ia y los t\'ecnicos ser\'an llamados a repararla al d\'ia siguiente. Nuevamente, los t\'ecnicos se tomar\'an dos d\'ias en arreglar la m\'aquina. Modele esta nueva situaci\'on como una cadena de Markov y construya la matriz de transici\'on en funci\'on de $p$ y $q$. No necesita bosquejar el grafo de la cadena ni calcular probabilidades en estado estable. 
+%
+%\end{problem}
+%\vspace{\baselineskip}
 
-% -----------------------------------------------------------------
-\begin{problem}
-\textbf{(6 Puntos)} En el problema anterior, suponga que el fabricante tiene una m\'aquina de repuesto que utiliza solamente cuando la m\'aquina principal est\'a descompuesta. Similar al caso de la m\'aquina principal, si al comienzo de cualquier d\'ia la m\'aquina de repuesto est\'a operativa entonces con probabilidad $q$ se descompondr\'a durante el d\'ia y los t\'ecnicos ser\'an llamados a repararla al d\'ia siguiente. Nuevamente, los t\'ecnicos se tomar\'an dos d\'ias en arreglar la m\'aquina. Modele esta nueva situaci\'on como una cadena de Markov y construya la matriz de transici\'on en funci\'on de $p$ y $q$. No necesita bosquejar el grafo de la cadena ni calcular probabilidades en estado estable. 
-
-\end{problem}
-\vspace{\baselineskip}
-
-% -----------------------------------------------------------------
-\begin{problem}
-\textbf{(3 Puntos)} Suponga que usted trabaja en una concesionaria de maquinaria de construcci\'on. Usted ha sido encargado con calcular el costo de la garant\'ia de tres a\~nos para excavadoras que ofrece la empresa. De los archivos del departamento de ventas, usted ha podido observar que: 
-\begin{itemize}
-\item Solo el 2\% de los clientes piden la garant\'ia en el primer a\~no. 
-\item El 5\% de los clientes que no tuvieron problemas con su m\'aquina en el primer a\~no piden la garant\'ia en el segundo a\~no. 
-\item El 9\% de los clientes que no tuvieron problemas con su m\'aquina en el primer y segundo a\~no piden la garant\'ia en el tercer a\~no. 
-\end{itemize}
-Suponiendo que cada excavadora se vende en 200 mil d\'olares, calcule el costo promedio de una garant\'ia de tres a\~nos. 
-
-\end{problem}
-\vspace{\baselineskip}
+%% -----------------------------------------------------------------
+%\begin{problem}
+%\textbf{(3 Puntos)} Suponga que usted trabaja en una concesionaria de maquinaria de construcci\'on. Usted ha sido encargado con calcular el costo de la garant\'ia de tres a\~nos para excavadoras que ofrece la empresa. De los archivos del departamento de ventas, usted ha podido observar que: 
+%\begin{itemize}
+%\item Solo el 2\% de los clientes piden la garant\'ia en el primer a\~no. 
+%\item El 5\% de los clientes que no tuvieron problemas con su m\'aquina en el primer a\~no piden la garant\'ia en el segundo a\~no. 
+%\item El 9\% de los clientes que no tuvieron problemas con su m\'aquina en el primer y segundo a\~no piden la garant\'ia en el tercer a\~no. 
+%\end{itemize}
+%Suponiendo que cada excavadora se vende en 200 mil d\'olares, calcule el costo promedio de una garant\'ia de tres a\~nos. 
+%
+%\end{problem}
+%\vspace{\baselineskip}
 
 % -----------------------------------------------------------------
 \begin{problem}
@@ -88,47 +88,47 @@ Con todo esto en mente, para cada problema de manejo de inventario con demanda $
 Escriba una funci\'on en Python que tome como entrada (1) el par\'ametro $\lambda$ de la distribuci\'on Poisson de la demanda, (2) el inventario de reposici\'on $I_{rep}$ y (3) la cantidad por reposici\'on $Q_{rep}$, \linebreak y que produzca como \'unica salida la matriz de transici\'on de la cadena de Markov correspondiente como un arreglo {\tt numpy} de taman\~no $(n,n)$. Por favor defina el nombre de su funci\'on como {\tt construye\_mat\_inventario}. Por ejemplo, yo usar\'ia mi funci\'on asi:
 \halfskip
 
-\begin{center}
-\begin{minipage}{0.9\textwidth}
-\begin{minted}[mathescape,
-               linenos,
-               numbersep=5pt,
-               gobble=0,
-               frame=lines,
-               framesep=2mm]{Python}
-import numpy as np
-from reyes_castro_tarea_01 import contruye_mat_inventario
-# Entradas:
-lambda_dem = 6.9 # Parametro de la demanda
-I_rep = 5 # Inventario de reposicion
-Q_rep = 5 # Cantidad por reposicion
-# Salida: Matriz de probabilidad de la Cadena de Markov
-P = contruye_mat_inventario( lambda_dem, I_rep, Q_rep)
-\end{minted}
-\end{minipage}
-\end{center}
-\fullskip
+%\begin{center}
+%\begin{minipage}{0.9\textwidth}
+%\begin{minted}[mathescape,
+%               linenos,
+%               numbersep=5pt,
+%               gobble=0,
+%               frame=lines,
+%               framesep=2mm]{Python}
+%import numpy as np
+%from reyes_castro_tarea_01 import contruye_mat_inventario
+%# Entradas:
+%lambda_dem = 6.9 # Parametro de la demanda
+%I_rep = 5 # Inventario de reposicion
+%Q_rep = 5 # Cantidad por reposicion
+%# Salida: Matriz de probabilidad de la Cadena de Markov
+%P = contruye_mat_inventario( lambda_dem, I_rep, Q_rep)
+%\end{minted}
+%\end{minipage}
+%\end{center}
+%\fullskip
 
 \emph{Sugerencia:} Para hacerse la vida m\'as f\'acil a la hora de calcular probabilidades le recomiendo que utilice la funcion {\tt poisson.pmf()} de la librer\'ia {\tt scipy.stats}. \href{https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.poisson.html}{Click aqu\'i} para m\'as informaci\'on. Por ejemplo: 
 \halfskip
 
-\begin{center}
-\begin{minipage}{0.9\textwidth}
-\begin{minted}[mathescape,
-               linenos,
-               numbersep=5pt,
-               gobble=0,
-               frame=lines,
-               framesep=2mm]{Python}
-from scipy.stats import poisson
-# Le asignamos a `prob' la probabilidad de que una 
-# variable aleatoria Poisson con parametro mu = 4.8 
-# tome el valor k = 3
-prob = poisson.pmf( mu = 4.8, k = 3)
-\end{minted}
-\end{minipage}
-\end{center}
-\fullskip
+%\begin{center}
+%\begin{minipage}{0.9\textwidth}
+%\begin{minted}[mathescape,
+%               linenos,
+%               numbersep=5pt,
+%               gobble=0,
+%               frame=lines,
+%               framesep=2mm]{Python}
+%from scipy.stats import poisson
+%# Le asignamos a `prob' la probabilidad de que una 
+%# variable aleatoria Poisson con parametro mu = 4.8 
+%# tome el valor k = 3
+%prob = poisson.pmf( mu = 4.8, k = 3)
+%\end{minted}
+%\end{minipage}
+%\end{center}
+%\fullskip
 
 \textbf{Segunda Actividad: (2 Puntos)}
 
@@ -187,27 +187,27 @@ Considere un conjunto de instalaciones industriales vigiladas por robots como se
 Escriba una funci\'on en Python que tome como entrada (1) el n\'umero $k$ de filas del arreglo que representa a la instalaci\'on, (2) el n\'umero $\ell$ de columnas del mismo arreglo y (3) una lista de 2-tuplas que especifica (en cualquier orden) los \'indices de los pares de \'areas que definen las paredes internas de la instalaci\'on, y que produzca como \'unica salida la matriz de transici\'on de la cadena de Markov correspondiente como un arreglo {\tt numpy} de taman\~no $(n,n)$, donde $n = k \, \ell$. Por favor defina el nombre de su funci\'on como {\tt construye\_mat\_robot}. Por ejemplo, para la geometr\'ia de la Instalaci\'on $A$, yo usar\'ia mi funci\'on asi:
 \halfskip
 
-\begin{center}
-\begin{minipage}{0.9\textwidth}
-\begin{minted}[mathescape,
-               linenos,
-               numbersep=5pt,
-               gobble=0,
-               frame=lines,
-               framesep=2mm]{Python}
-import numpy as np
-from reyes_castro_tarea_01 import contruye_mat_robots
-# Entradas:
-k = 4 # Numero de filas
-l = 5 # Numero de columnas
-paredes = [ (14,24), (15,25), (21,31), (22,32), (22,23), \
-(31,32), (33,34), (32,42), (34,44) ] # Lista de paredes
-# Salida: Matriz de probabilidad de la Cadena de Markov
-P = contruye_mat_robots( k, l, paredes)
-\end{minted}
-\end{minipage}
-\end{center}
-\fullskip
+%\begin{center}
+%\begin{minipage}{0.9\textwidth}
+%\begin{minted}[mathescape,
+%               linenos,
+%               numbersep=5pt,
+%               gobble=0,
+%               frame=lines,
+%               framesep=2mm]{Python}
+%import numpy as np
+%from reyes_castro_tarea_01 import contruye_mat_robots
+%# Entradas:
+%k = 4 # Numero de filas
+%l = 5 # Numero de columnas
+%paredes = [ (14,24), (15,25), (21,31), (22,32), (22,23), \
+%(31,32), (33,34), (32,42), (34,44) ] # Lista de paredes
+%# Salida: Matriz de probabilidad de la Cadena de Markov
+%P = contruye_mat_robots( k, l, paredes)
+%\end{minted}
+%\end{minipage}
+%\end{center}
+%\fullskip
 
 \textbf{Segunda Actividad: (2 Puntos)}
 

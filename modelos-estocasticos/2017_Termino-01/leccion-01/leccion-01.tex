@@ -1,8 +1,8 @@
 % -----------------------------------------------------------------
 % Document class: Article
 \documentclass[ a4paper, twoside, 11pt]{article}
-\usepackage{../../macros-general}
-\usepackage{../../macros-article}
+\usepackage{../../../macros-general}
+\usepackage{../../../macros-article}
 % Number of the handout, quiz, exam, etc.
 \newcommand{\numero}{01}
 \setcounter{numero}{\numero}
@@ -18,7 +18,7 @@
 \end{center}
 \halfskip
 
-\input{../../article_compromiso-honor}
+\input{../../../article_compromiso-honor}
 
 % -----------------------------------------------------------------
 \begin{problem}
@@ -167,89 +167,87 @@ p \, e^{-\lambda}
 \end{problem}
 \vspace{\baselineskip}
 
-% -----------------------------------------------------------------
-\begin{problem}
-Usualmente las Cadenas de Markov no son modelos suficientemente complejos como para representar el comportamiento humano, puesto que nuestros cerebros no tienen la Propiedad Markoviana, \ie tenemos memoria. A\'un asi, podemos usar cadenas de Markov para modelar a personas err\'aticas, impredecibles y posiblemente irracionales. Por ejemplo, considere el siguiente modelo de la presidencia de Donald Trump, donde los estados son: 
-\begin{enumerate}
-\item Hablar de como gan\'o las elecciones obteniendo la mayor\'ia de los colegios electorales, \linebreak a pesar de haber perdido el voto popular por m\'as de dos millones de votos. 
-\item Defenderse del esc\'andalo de Russia. 
-\item Insistir en construir una pared en la frontera sur con M\'exico. 
-\item Hablar de los acuerdos de comerciales que dice que renegociar\'a (\eg NAFTA) y que dice que ser\'an ventajosos para su pa\'is. 
-\item Pelearse con celebridades en Twitter. 
-\end{enumerate}
-La matriz de transici\'on para este modelo es: 
-\[
-\vec{P} \; = \; 
-\left[
-\begin{array}{ccccc}
-0.5 & 0 & 0.25 & 0.25 & 0 \\
-0 & 0.6 & 0 & 0 & 0.4 \\
-0 & 1 & 0 & 0 & 0 \\
-0.9 & 0.1 & 0 & 0 & 0 \\
-0 & 0.3 & 0.3 & 0 & 0.4
-\end{array}
-\right]
-\]
-Con esto en mente: 
-\begin{itemize}
-\item \textbf{[1 Punto]} Provea un an\'alisis de estados. En particular, indique: 
-\begin{itemize}
-\item Los estados transitorios
-\item Los estados recurrentes
-\item El numero de clases recurrentes
-\item La periodicidad de la cadena
-\item Si es o no es una cadena irreducible (\ie una uni-cadena)
-\end{itemize}
-\item \textbf{[2 Puntos]} Escriba un conjunto de ecuaciones lineales linealmente independientes de cuya soluci\'on se pueda obtener la distribuci\'on en estado estable de la cadena. 
-\item \textbf{[2 Puntos]} Calcule el porcentaje del tiempo que Donald Trump insistir\'a en construir la pared con M\'exico. 
-\end{itemize}
-
-\emph{Soluci\'on:}
-\begin{itemize}
-\item El an\'alisis de estados es como sigue: 
-\begin{itemize}
-\item Los estados transitorios son el 1 (Elecciones) y el 4 (NAFTA). 
-\item Los estados recurrentes son el 2 (Rusia), el 3 (Pared) y el 5 (Twitter). 
-\item Existe una \'unica clase recurrente compuesta por tres estados recurrentes. 
-\item La cadena es aperi\'odica. 
-\item La cadena no es irreducible puesto que tiene estados transitorios. 
-\end{itemize}
-\item Las ecuaciones de estado estacionario son: 
-\begin{align*}
-\pi_1 \; & \; = \; 
-0.5 \, \pi_1 + 0.9 \, \pi_4 \\
-\pi_2 \; & \; = \; 
-0.6 \, \pi_2 + \pi_3 + 0.1 \, \pi_4 + 0.3 \, \pi_5 \\
-\pi_3 \; & \; = \; 0.25 \, \pi_1 + 0.3 \, \pi_5 \\
-\pi_4 \; & \; = \; 0.25 \, \pi_1 \\
-\pi_5 \; & \; = \; 0.4 \, \pi_2 + 0.4 \, \pi_5
-\end{align*}
-Recordando que los estados 1 y 4 son transitorios, tenemos $\pi_1 = \pi_4 = 0$. A su vez esto implica que las ecuaciones asociadas con esos estados son triviales, por lo que nuestro sistema de ecuaciones se reduce a: 
-\begin{align*}
-\pi_2 \; & \; = \; 
-0.6 \, \pi_2 + \pi_3 + 0.3 \, \pi_5 \\
-\pi_3 \; & \; = \; 0.3 \, \pi_5 \\
-\pi_5 \; & \; = \; 0.4 \, \pi_2 + 0.4 \, \pi_5
-\end{align*}
-Finalmente, reemplazando cualquiera de las tres ecuaciones anteriores, \eg digamos que la \'ultima, por la condici\'on de que la suma de las probabilidades debe ser uno, \linebreak llegamos al siguiente sistema: 
-\begin{align*}
-\pi_2 \; & \; = \; 
-0.6 \, \pi_2 + \pi_3 + 0.3 \, \pi_5 \\
-\pi_3 \; & \; = \; 0.3 \, \pi_5 \\
-\pi_2 + \pi_3 + \pi_5 \; & \; = \; 1
-\end{align*}
-\item Las probabilidades en estado estable son: 
-\[
-\pi_2 \; \simeq \; 0.536 \qquad \qquad
-\pi_3 \; \simeq \; 0.107 \qquad \qquad
-\pi_5 \; \simeq \; 0.537
-\]
-Consecuentemente, de acuerdo a este modelo el porcentaje del tiempo que Donald Trump insistir\'a en construir la pared es del 10.7\%. 
-
-
-\end{itemize}
-
-\end{problem}
-\vspace{\baselineskip}
+%% -----------------------------------------------------------------
+%\begin{problem}
+%Usualmente las Cadenas de Markov no son modelos suficientemente complejos como para representar el comportamiento humano, puesto que nuestros cerebros no tienen la Propiedad Markoviana, \ie tenemos memoria. A\'un asi, podemos usar cadenas de Markov para modelar a personas err\'aticas, impredecibles y posiblemente irracionales. Por ejemplo, considere el siguiente modelo de la presidencia de Donald Trump, donde los estados son: 
+%\begin{enumerate}
+%\item Hablar de como gan\'o las elecciones obteniendo la mayor\'ia de los colegios electorales, \linebreak a pesar de haber perdido el voto popular por m\'as de dos millones de votos. 
+%\item Defenderse del esc\'andalo de Russia. 
+%\item Insistir en construir una pared en la frontera sur con M\'exico. 
+%\item Hablar de los acuerdos de comerciales que dice que renegociar\'a (\eg NAFTA) y que dice que ser\'an ventajosos para su pa\'is. 
+%\item Pelearse con celebridades en Twitter. 
+%\end{enumerate}
+%La matriz de transici\'on para este modelo es: 
+%\[
+%\vec{P} \; = \; 
+%\left[
+%\begin{array}{ccccc}
+%0.5 & 0 & 0.25 & 0.25 & 0 \\
+%0 & 0.6 & 0 & 0 & 0.4 \\
+%0 & 1 & 0 & 0 & 0 \\
+%0.9 & 0.1 & 0 & 0 & 0 \\
+%0 & 0.3 & 0.3 & 0 & 0.4
+%\end{array}
+%\right]
+%\]
+%Con esto en mente: 
+%\begin{itemize}
+%\item \textbf{[1 Punto]} Provea un an\'alisis de estados. En particular, indique: 
+%\begin{itemize}
+%\item Los estados transitorios
+%\item Los estados recurrentes
+%\item El numero de clases recurrentes
+%\item La periodicidad de la cadena
+%\item Si es o no es una cadena irreducible (\ie una uni-cadena)
+%\end{itemize}
+%\item \textbf{[2 Puntos]} Escriba un conjunto de ecuaciones lineales linealmente independientes de cuya soluci\'on se pueda obtener la distribuci\'on en estado estable de la cadena. 
+%\item \textbf{[2 Puntos]} Calcule el porcentaje del tiempo que Donald Trump insistir\'a en construir la pared con M\'exico. 
+%\end{itemize}
+%
+%\emph{Soluci\'on:}
+%\begin{itemize}
+%\item El an\'alisis de estados es como sigue: 
+%\begin{itemize}
+%\item Los estados transitorios son el 1 (Elecciones) y el 4 (NAFTA). 
+%\item Los estados recurrentes son el 2 (Rusia), el 3 (Pared) y el 5 (Twitter). 
+%\item Existe una \'unica clase recurrente compuesta por tres estados recurrentes. 
+%\item La cadena es aperi\'odica. 
+%\item La cadena no es irreducible puesto que tiene estados transitorios. 
+%\end{itemize}
+%\item Las ecuaciones de estado estacionario son: 
+%\begin{align*}
+%\pi_1 \; & \; = \; 
+%0.5 \, \pi_1 + 0.9 \, \pi_4 \\
+%\pi_2 \; & \; = \; 
+%0.6 \, \pi_2 + \pi_3 + 0.1 \, \pi_4 + 0.3 \, \pi_5 \\
+%\pi_3 \; & \; = \; 0.25 \, \pi_1 + 0.3 \, \pi_5 \\
+%\pi_4 \; & \; = \; 0.25 \, \pi_1 \\
+%\pi_5 \; & \; = \; 0.4 \, \pi_2 + 0.4 \, \pi_5
+%\end{align*}
+%Recordando que los estados 1 y 4 son transitorios, tenemos $\pi_1 = \pi_4 = 0$. A su vez esto implica que las ecuaciones asociadas con esos estados son triviales, por lo que nuestro sistema de ecuaciones se reduce a: 
+%\begin{align*}
+%\pi_2 \; & \; = \; 
+%0.6 \, \pi_2 + \pi_3 + 0.3 \, \pi_5 \\
+%\pi_3 \; & \; = \; 0.3 \, \pi_5 \\
+%\pi_5 \; & \; = \; 0.4 \, \pi_2 + 0.4 \, \pi_5
+%\end{align*}
+%Finalmente, reemplazando cualquiera de las tres ecuaciones anteriores, \eg digamos que la \'ultima, por la condici\'on de que la suma de las probabilidades debe ser uno, \linebreak llegamos al siguiente sistema: 
+%\begin{align*}
+%\pi_2 \; & \; = \; 
+%0.6 \, \pi_2 + \pi_3 + 0.3 \, \pi_5 \\
+%\pi_3 \; & \; = \; 0.3 \, \pi_5 \\
+%\pi_2 + \pi_3 + \pi_5 \; & \; = \; 1
+%\end{align*}
+%\item Las probabilidades en estado estable son: 
+%\[
+%\pi_2 \; \simeq \; 0.536 \qquad \qquad
+%\pi_3 \; \simeq \; 0.107 \qquad \qquad
+%\pi_5 \; \simeq \; 0.537
+%\]
+%Consecuentemente, de acuerdo a este modelo el porcentaje del tiempo que Donald Trump insistir\'a en construir la pared es del 10.7\%. 
+%\end{itemize}
+%
+%\end{problem}
+%\vspace{\baselineskip}
 
 \end{document}
