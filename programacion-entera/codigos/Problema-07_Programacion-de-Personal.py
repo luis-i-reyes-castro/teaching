@@ -7,13 +7,10 @@ import pandas as pd
 import pulp
 
 archivo = 'Datos/Datos_Problema-07.xlsx'
-datos   = { 'Tiempo_Completo'      : None,
+datos   = { 'Empleados_Requeridos' : None,
+            'Tiempo_Completo'      : None,
             'Tiempo_Medio'         : None,
-            'Empleados_Requeridos' : None }
-
-costo_tc = 14.50
-costo_tm = 9.50
-min_tc   = 6
+             'Otros-parametros'    : None }
 
 for hoja in datos :
     manija = open( archivo, 'rb')
@@ -23,19 +20,24 @@ for hoja in datos :
 df_req     = datos['Empleados_Requeridos']
 intervalos = list(df_req.index)
 m          = len(intervalos)
-vector_req = df_req.as_matrix().flatten()
+vector_req = df_req.values.flatten()
 
 df_tc     = datos['Tiempo_Completo']
 turnos_tc = list(df_tc.columns)
 n_tc      = len(turnos_tc)
-matriz_tc = df_tc.as_matrix()
+matriz_tc = df_tc.values
 horas_tc  = matriz_tc.sum(axis=0)
 
 df_tm     = datos['Tiempo_Medio']
 turnos_tm = list(df_tm.columns)
 n_tm      = len(turnos_tm)
-matriz_tm = df_tm.as_matrix()
+matriz_tm = df_tm.values
 horas_tm  = matriz_tm.sum(axis=0)
+
+df_otros = datos['Otros-parametros']
+costo_tc = df_otros.loc['Costo por Empleado a Tiempo Completo']['Valor']
+costo_tm = df_otros.loc['Costo por Empleado a Tiempo Medio']['Valor']
+min_tc   = df_otros.loc['Numero Minimo de Empleados a Tiempo Completo']['Valor']
 
 prob = pulp.LpProblem( 'Problema_del_Supermercado', pulp.LpMinimize)
 
