@@ -7,36 +7,39 @@ import os
 import numpy as np
 import pandas as pd
 import pulp
+from Rutinas_ProgEntera import importar_excel
+
+archivo_requerimientos = 'Datos/Datos_Problema-08.xlsx'
+hoja_requerimientos    = 'Requerimientos'
+columna_requerimientos = 'Profesores Requeridos'
+directorio_propuestas  = 'Datos/Datos_Problema-08_Propuestas/'
+hoja_propuestas        = 'Propuestas'
+columnas_propuestas    = [ 'Tiempo Medio', 'Tiempo Parcial', 'Tiempo Completo' ]
+archivo_solucion       = 'Soluciones/Solucion_Problema-08.xlsx'
+
+imprimir_prog_entero   = False
+imprimir_plan_optimo   = True
 
 print( '\n' + 'SOFTWARE PARA PROGRAMACION DE PROFESORES' )
 print( '\n' + 'EJECUCION INICIADA'  )
-imprimir_prog_entero = False
-imprimir_plan_optimo = True
-
 print( 'LEYENDO ARCHIVO DE REQUERIMIENTOS...' )
-archivo = 'Datos/Datos_Problema-08.xlsx'
-manija = open( archivo, 'rb')
-df_req = pd.read_excel( manija, 'Requerimientos', index_col = 0)
-manija.close()
 
+df_req         = importar_excel( archivo_requerimientos, hoja_requerimientos)
 materias       = list( df_req['Materia'] )
-requerimientos = df_req['Profesores Requeridos'].values.flatten()
+requerimientos = df_req[columna_requerimientos].values.flatten()
 
 print( 'LEYENDO ARCHIVOS DE POSTULACIONES...' )
-nom_directorio = 'Datos/Datos_Problema-08_Propuestas/'
-nom_archivos   = os.listdir( nom_directorio)
+nom_archivos   = os.listdir( directorio_propuestas)
 dict_dfs       = {}
 for nom_archivo in nom_archivos :
-    archivo  = nom_directorio + nom_archivo
+    archivo  = directorio_propuestas + nom_archivo
     profesor = nom_archivo[11:-5]
     print( 'Leyendo archivo:' + archivo )
-    manija = open( archivo, 'rb')
-    dict_dfs[profesor] = pd.read_excel( manija, 'Propuestas', index_col = 0)
-    manija.close()
+    dict_dfs[profesor] = importar_excel( archivo, hoja_propuestas)
 
 profesores = list( dict_dfs.keys() )
 profesores.sort()
-columnas    = [ 'Tiempo Medio', 'Tiempo Parcial', 'Tiempo Completo' ]
+
 matrices_D  = []
 vectores_c  = []
 vectores_p  = []
@@ -46,8 +49,8 @@ materias_tc = {}
 
 for profe in profesores :
 
-    df = dict_dfs[profe]
-    valores = df[columnas].values
+    df      = dict_dfs[profe]
+    valores = df[columnas_propuestas].values
 
     matriz_D_prof = valores[:-1,:]
     vector_c_prof = valores[-1,:]
@@ -125,52 +128,105 @@ prob += pulp.lpDot( vector_c, x), 'Costo_por_Salarios'
 if imprimir_prog_entero :
     print(prob)
 
+print( '\n' + 'RESOLVIENDO PROGRAMA ENTERO...' )
 prob.solve()
 
-if imprimir_prog_entero :
-    print( 'Estado (en ingles):', pulp.LpStatus[prob.status])
-    print( 'Costo_Optimo =', pulp.value(prob.objective) )
-    for var in prob.variables() :
-        if var.varValue > 0.0 :
-            print( var.name, '=', var.varValue)
+if pulp.LpStatus[prob.status] == 'Optimal' :
 
-if imprimir_plan_optimo :
+    print( 'Resultado: Solucion Optima Encontrada' )
 
-    profesores_tm = []
-    profesores_tp = []
-    profesores_tc = []
-    asignacion_materias = { materia : [] for materia in materias }
+    if imprimir_prog_entero :
+        print( 'Estado (en ingles):', pulp.LpStatus[prob.status])
+        print( 'Costo_Optimo =', pulp.value(prob.objective) )
+        for var in prob.variables() :
+            if var.varValue > 0.0 :
+                print( var.name, '=', var.varValue)
 
-    for ( i, x_i) in enumerate(x) :
-        if x_i.varValue > 0.0 :
-            profesor_x_i = dict_profe[x_i.name]
-            tiempo_x_i   = dict_tiempo[x_i.name]
-            materias_x_i = dict_materias[x_i.name]
-            if tiempo_x_i == 'TM' :
-                profesores_tm.append( profesor_x_i)
-            if tiempo_x_i == 'TP' :
-                profesores_tp.append( profesor_x_i)
-            if tiempo_x_i == 'TC' :
-                profesores_tc.append( profesor_x_i)
-            for materia_x_i in materias_x_i :
-                asignacion_materias[materia_x_i] += [ profesor_x_i]
+    if imprimir_plan_optimo :
 
-    print( '\n' + 'PLAN DE CONTRATACION OPTIMO:' )
-    print( '[+] Costo:' + str(pulp.value(prob.objective)) )
-    print( '[+] Profesores a Tiempo Medio:' )
-    for profe in profesores_tm :
-        print( '\t' + profe )
-    print( '[+] Profesores a Tiempo Parcial:' )
-    for profe in profesores_tp :
-        print( '\t' + profe )
-    print( '[+] Profesores a Tiempo Completo:' )
-    for profe in profesores_tc :
-        print( '\t' + profe )
+        profesores_tm = []
+        profesores_tp = []
+        profesores_tc = []
+        asignacion_materias = { materia : [] for materia in materias }
 
-    print( '\n' + 'ASIGNACION DE MATERIAS:' )
-    for materia in materias :
-        print( '[+] ' + materia + ' :' )
-        for profe in asignacion_materias[materia] :
-            print( '\t - ' + profe )
+        for ( i, x_i) in enumerate(x) :
+            if x_i.varValue > 0.0 :
+                profesor_x_i = dict_profe[x_i.name]
+                tiempo_x_i   = dict_tiempo[x_i.name]
+                materias_x_i = dict_materias[x_i.name]
+                if tiempo_x_i == 'TM' :
+                    profesores_tm.append( profesor_x_i)
+                if tiempo_x_i == 'TP' :
+                    profesores_tp.append( profesor_x_i)
+                if tiempo_x_i == 'TC' :
+                    profesores_tc.append( profesor_x_i)
+                for materia_x_i in materias_x_i :
+                    asignacion_materias[materia_x_i] += [ profesor_x_i]
+
+        print( '\n' + 'PLAN DE CONTRATACION OPTIMO:' )
+        print( '[+] Costo:' + str(pulp.value(prob.objective)) )
+        print( '[+] Profesores a Tiempo Medio:' )
+        for profe in profesores_tm :
+            print( '\t' + profe )
+        print( '[+] Profesores a Tiempo Parcial:' )
+        for profe in profesores_tp :
+            print( '\t' + profe )
+        print( '[+] Profesores a Tiempo Completo:' )
+        for profe in profesores_tc :
+            print( '\t' + profe )
+
+        print( '\n' + 'ASIGNACION DE MATERIAS:' )
+        lista_asignados = []
+
+        for materia in materias :
+
+            profesores_materia = asignacion_materias[materia]
+            print( '[+] ' + materia + ' :' )
+            for profe in profesores_materia :
+                print( '\t - ' + profe )
+
+            if len(profesores_materia) == 0 :
+                lista_asignados.append( 'N/A' )
+            elif len(profesores_materia) == 1 :
+                lista_asignados.append( profesores_materia[0] )
+            else :
+                nombres = ''
+                for profe in profesores_materia[:-1] :
+                    nombres += profe + ', '
+                nombres += profesores_materia[-1]
+                lista_asignados.append( nombres )
+
+        index_df_tm = [ i+1 for (i,_) in enumerate(profesores_tm) ]
+        df_tm       = pd.DataFrame( index = index_df_tm,
+                                    columns = [ 'Profesores' ],
+                                    data = profesores_tm )
+
+        index_df_tp = [ i+1 for (i,_) in enumerate(profesores_tp) ]
+        df_tp       = pd.DataFrame( index = index_df_tp,
+                                    columns = [ 'Profesores' ],
+                                    data = profesores_tp )
+
+        index_df_tc = [ i+1 for (i,_) in enumerate(profesores_tc) ]
+        df_tc       = pd.DataFrame( index = index_df_tc,
+                                    columns = [ 'Profesores' ],
+                                    data = profesores_tc )
+
+        index_df_as = [ i+1 for (i,_) in enumerate(materias) ]
+        df_as       = pd.DataFrame( index = index_df_as,
+                                    columns = [ 'Materias', 'Profesores' ] )
+        df_as['Materias']   = materias
+        df_as['Profesores'] = lista_asignados
+
+        print( '\n' + 'GUARDANDO PLAN OPTIMO EN ARCHIVO: ' + archivo_solucion )
+        writer = pd.ExcelWriter(archivo_solucion)
+        df_tm.to_excel( writer, sheet_name = 'Tiempo Medio')
+        df_tp.to_excel( writer, sheet_name = 'Tiempo Parcial')
+        df_tc.to_excel( writer, sheet_name = 'Tiempo Completo')
+        df_as.to_excel( writer, sheet_name = 'Asignacion de Materias')
+        writer.close()
+
+else :
+
+    print( 'Resultado: Problema infactible!' )
 
 print( '\n' + 'EJECUCION COMPLETADA' + '\n' )
