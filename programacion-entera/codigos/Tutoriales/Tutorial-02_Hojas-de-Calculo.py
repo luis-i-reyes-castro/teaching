@@ -1,5 +1,5 @@
 """
-Ejemplo de lectura de hojas de calculo.
+Tutorial sobre Importacion de Datos desde Hojas de Calculo
 @author: Luis I. Reyes Castro
 """
 
