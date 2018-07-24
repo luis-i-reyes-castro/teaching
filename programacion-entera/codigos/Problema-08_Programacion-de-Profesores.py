@@ -197,23 +197,19 @@ if pulp.LpStatus[prob.status] == 'Optimal' :
                 lista_asignados.append( nombres )
 
         index_df_tm = [ i+1 for (i,_) in enumerate(profesores_tm) ]
-        df_tm       = pd.DataFrame( index = index_df_tm,
-                                    columns = [ 'Profesores' ],
-                                    data = profesores_tm )
-
         index_df_tp = [ i+1 for (i,_) in enumerate(profesores_tp) ]
-        df_tp       = pd.DataFrame( index = index_df_tp,
-                                    columns = [ 'Profesores' ],
-                                    data = profesores_tp )
-
         index_df_tc = [ i+1 for (i,_) in enumerate(profesores_tc) ]
-        df_tc       = pd.DataFrame( index = index_df_tc,
-                                    columns = [ 'Profesores' ],
-                                    data = profesores_tc )
-
         index_df_as = [ i+1 for (i,_) in enumerate(materias) ]
-        df_as       = pd.DataFrame( index = index_df_as,
-                                    columns = [ 'Materias', 'Profesores' ] )
+
+        df_tm = pd.DataFrame( index = index_df_tm, columns = [ 'Profesores' ])
+        df_tp = pd.DataFrame( index = index_df_tp, columns = [ 'Profesores' ])
+        df_tc = pd.DataFrame( index = index_df_tc, columns = [ 'Profesores' ])
+        df_as = pd.DataFrame( index = index_df_as,
+                              columns = [ 'Materias', 'Profesores' ] )
+
+        df_tm['Profesores'] = profesores_tm
+        df_tp['Profesores'] = profesores_tp
+        df_tc['Profesores'] = profesores_tc
         df_as['Materias']   = materias
         df_as['Profesores'] = lista_asignados
 
