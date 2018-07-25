@@ -104,6 +104,7 @@ for profe in profesores :
     x_prof_tp = pulp.LpVariable( 'x_' + profe + '_TP', 0, 1, pulp.LpBinary)
     x_prof_tc = pulp.LpVariable( 'x_' + profe + '_TC', 0, 1, pulp.LpBinary)
 
+    # RESTRICCION: Cada candidato puede ser contratado a un solo tiempo
     prob += x_prof_tm + x_prof_tp + x_prof_tc <= 1, \
          'Restriccion para el candidato ' + profe
 
@@ -119,11 +120,20 @@ for profe in profesores :
 
     x += [ x_prof_tm, x_prof_tp, x_prof_tc ]
 
+# RESTRICCION: Satisfacer los requerimientos de las materias
 for ( k, materia) in enumerate(materias) :
+    # Sumatoria con lpDot
     prob += pulp.lpDot( matriz_D[k,:], x) >= requerimientos[k], \
             'Requerimiento de la materia ' + materia
+    # Sumatoria equivalente con lpSum
+    # prob += pulp.lpSum( matriz_D[k,i] * x[i] for (i,_) in enumerate(x) ) \
+    #         >= requerimientos[k], 'Requerimiento de la materia ' + materia
 
+# FUNCION DE COSTO: Costo por Salarios
+# Sumatoria con lpDot
 prob += pulp.lpDot( vector_c, x), 'Costo_por_Salarios'
+# Sumatoria equivalente con lpSum
+# prob += pulp.lpSum( vector_c[i] * x[i] for (i,_) in enumerate(x) ), 'Costo_por_Salarios'
 
 if imprimir_prog_entero :
     print(prob)
@@ -161,7 +171,7 @@ if pulp.LpStatus[prob.status] == 'Optimal' :
                 if tiempo_x_i == 'TC' :
                     profesores_tc.append( profesor_x_i)
                 for materia_x_i in materias_x_i :
-                    asignacion_materias[materia_x_i] += [ profesor_x_i]
+                    asignacion_materias[materia_x_i].append( profesor_x_i)
 
         print( '\n' + 'PLAN DE CONTRATACION OPTIMO:' )
         print( '[+] Costo:' + str(pulp.value(prob.objective)) )
