@@ -1,0 +1,69 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{04}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Lecci\'on \numero \\[1ex]
+\small \textbf{Semestre:} 2018-2019 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Un proceso de producci\'on incluye una m\'aquina que se deteriora con rapidez tanto en la calidad como en la cantidad de producci\'on con el trabajo pesado, por lo que se inspecciona al final de cada d\'ia. Despu\'es de la inspecci\'on se clasifica la condici\'on de la m\'aquina en uno de cuatro estados posibles:
+\begin{enumerate}
+\item Operable y tan buena como nueva. 
+\item Operable con deterioro m\'inimo. 
+\item Operable con deterioro m\'aximo. 
+\item Inoperable y en proceso de reemplazo. 
+\end{enumerate}
+La matriz de transici\'on del proceso es: 
+\[
+\vec{P} \; = \; \left[
+\begin{array}{cccc}
+0 & 7/8 & 1/16 & 1/16 \\
+0 & 3/4 & 1/8  & 1/8 \\
+0 & 0   & 1/2  & 1/2 \\
+1 & 0   & 0    & 0
+\end{array} \right]
+\]
+Complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{[6 Puntos]} Encuentre la distribuci\'on estacionaria de la cadena. 
+\item \textbf{[2 Puntos]} Si los costos de los estados 1, 2, 3 y 4 son \$0, \$1000, \$3000 y \$6000, respectivamente, cu\'al es el costo diario esperado a largo plazo? 
+\item \textbf{[4 Puntos]} Escriba las ecuaciones de cuya soluci\'on se puede obtener el tiempo esperado de primera visita al estado 4. No necesita resolver las ecuaciones. 
+\end{enumerate}
+\QED
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Un transmisor digital tiene un \emph{buffer} con capacidad para tres paquetes. \linebreak En cada ciclo que empieza con al menos un paquete en el buffer el transmisor intenta enviar un paquete. El paquete es enviado con \'exito con probabilidad $p$, caso contrario ser\'a necesario re-intentar el env\'io en el siguiente per\'iodo. Adem\'as, en cada ciclo que empieza con dos o menos paquetes el transmisor recibe un nuevo paquete con probabilidad $q$. Suponga que en cada ciclo primero se intenta enviar un paquete, si hay al menos uno en el buffer, y luego se receptan nuevos paquetes si hay espacio en el buffer. 
+
+Con esto en mente: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{[4 Puntos]} Modele el n\'umero de paquetes en el buffer como una Cadena de Markov con cuatro estados. En particular, provea el grafo de la cadena. 
+\item \textbf{[4 Puntos]} Escriba las ecuaciones de balance de la cadena. No necesita resolverlas. 
+\item \textbf{[4 Puntos]} Suponiendo que $p = 0.8$ y $q = 0.5$, y que actualmente el buffer est\'a lleno, encuentre el n\'umero esperado de ciclos que transcurrir\'an hasta la primera vez que el buffer este vac\'io. 
+\end{enumerate}
+\QED
+
+\end{problem}
+\fullskip
+
+
+\end{document}
