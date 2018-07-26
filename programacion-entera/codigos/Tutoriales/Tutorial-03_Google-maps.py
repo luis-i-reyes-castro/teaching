@@ -7,17 +7,17 @@ import googlemaps as gmaps
 import numpy as np
 
 origenes = [ 'Riocentro Ceibos, Calle 14 NO, Guayaquil',
-             'Mall del Sol, Joaquin J Orrantia Gonalez, Guayaquil',
+             'Mall del Sol, Joaquin J Orrantia Gonzalez, Guayaquil',
              'CityMall, Av Benjamin Carrion Mora, Guayaquil' ]
 
 destinos = [ 'Escuela Superior Politecnica del Litoral (ESPOL), ' +
              'Via Perimetral 5, Guayaquil',
              'Universidad de Guayaquil (UG), 1er Callejon 5 NO, Guayaquil',
              'Universidad Catolica de Santiago de Guayaquil, ' +
-             'Av Pdte. Carlos Julio Arosemena Tola, Guayaquil' ]
+             'Av Pdte Carlos Julio Arosemena Tola, Guayaquil' ]
 
 print( 'PROGRAMA PARA OBTENER DISTANCIAS Y TIEMPOS ENTRE DIRECCIONES' )
-print( 'EJECUCION EMPEZADA' )
+print( 'IMPORTACION DE DATOS DE DISTANCIAS Y TIEMPO EMPEZADA' )
 print( 'Direcciones de Origen:' )
 for origen in origenes :
     print( '\t -' + origen )
