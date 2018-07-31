@@ -56,7 +56,7 @@ def descargar_matrices( archivo_datos, archivo_matriz) :
     print( 'Solicitud de matriz de distancia completada.' )
     print( 'Estado de la solicitud: ' + dict_gm['status'] )
 
-    print( 'Compilando matrices de distancia y tiempo.' )
+    print( 'Compilando matrices de distancia y tiempo...' )
     m = len(origenes)
     n = len(destinos)
     matriz_D = np.zeros( shape = (m,n) )
