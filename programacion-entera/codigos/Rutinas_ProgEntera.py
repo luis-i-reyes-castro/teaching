@@ -15,7 +15,7 @@ def importar_excel( archivo, hoja_de_calculo) :
 
     return df
 
-def descargar_matrices( archivo_datos, archivo_matriz) :
+def descargar_matrices( modo, archivo_datos, archivo_matriz) :
 
     print( 'EJECUTANDO IMPORTADOR DE MATRICES DE DISTANCIAS Y TIEMPOS' )
     print( 'Archivo de datos: ' + str(archivo_datos) )
@@ -23,23 +23,44 @@ def descargar_matrices( archivo_datos, archivo_matriz) :
     df_origenes = importar_excel( archivo_datos, 'Origenes')
     df_destinos = importar_excel( archivo_datos, 'Destinos')
 
-    localidades = list( df_origenes['Localidad'] )
-    direcciones = list( df_origenes['Direccion'] )
-    ciudades    = list( df_origenes['Ciudad'] )
+    if modo == 'global' :
 
-    origenes = []
-    for (i,_) in enumerate(localidades) :
-        origen = localidades[i] + ', ' + direcciones[i] + ', ' + ciudades[i]
-        origenes.append( origen)
+        origenes = []
+        ciudades = list( df_origenes['Ciudad'] )
+        paises   = list( df_origenes['Pais'] )
+        for (i,_) in enumerate(ciudades) :
+            origen = ciudades[i] + ', ' + paises[i]
+            origenes.append( origen)
 
-    localidades = list( df_destinos['Localidad'] )
-    direcciones = list( df_destinos['Direccion'] )
-    ciudades    = list( df_destinos['Ciudad'] )
+        destinos = []
+        ciudades = list( df_destinos['Ciudad'] )
+        paises   = list( df_destinos['Pais'] )
+        for (i,_) in enumerate(ciudades) :
+            destino = ciudades[i] + ', ' + paises[i]
+            destinos.append( destino)
 
-    destinos = []
-    for (i,_) in enumerate(localidades) :
-        destino = localidades[i] + ', ' + direcciones[i] + ', ' + ciudades[i]
-        destinos.append( destino)
+    elif modo == 'local' :
+
+        origenes    = []
+        localidades = list( df_origenes['Localidad'] )
+        direcciones = list( df_origenes['Direccion'] )
+        ciudades    = list( df_origenes['Ciudad'] )
+        for (i,_) in enumerate(localidades) :
+            origen = localidades[i] + ', ' + direcciones[i] + ', ' + ciudades[i]
+            origenes.append( origen)
+
+        destinos    = []
+        localidades = list( df_destinos['Localidad'] )
+        direcciones = list( df_destinos['Direccion'] )
+        ciudades    = list( df_destinos['Ciudad'] )
+        for (i,_) in enumerate(localidades) :
+            destino = localidades[i] + ', ' + direcciones[i] + ', ' + ciudades[i]
+            destinos.append( destino)
+
+    else :
+
+        mensaje = 'MODO INVALIDO: Por favor escoger \'local\' o \'global\'.'
+        raise ValueError(mensaje)
 
     print( 'Direcciones de Origen:' )
     for origen in origenes :
