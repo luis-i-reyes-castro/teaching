@@ -6,10 +6,11 @@ Tutorial sobre Uso del Modulo Google Maps para Obtener Distancias
 import googlemaps as gmaps
 import numpy as np
 
+llave_api = 'COPIAR-LLAVE-AQUI'
+
 origenes = [ 'Riocentro Ceibos, Calle 14 NO, Guayaquil',
              'Mall del Sol, Joaquin J Orrantia Gonzalez, Guayaquil',
              'CityMall, Av Benjamin Carrion Mora, Guayaquil' ]
-
 destinos = [ 'Escuela Superior Politecnica del Litoral (ESPOL), ' +
              'Via Perimetral 5, Guayaquil',
              'Universidad de Guayaquil (UG), 1er Callejon 5 NO, Guayaquil',
@@ -26,7 +27,7 @@ for destino in destinos :
     print( '\t -' + destino )
 
 print( 'Solicitando matriz de distancias al servidor de Google Maps...' )
-cliente_gm = gmaps.Client( key = 'AIzaSyBIoDs5XQOEcAi9RxwBO5KL_rM_wSvAtF8')
+cliente_gm = gmaps.Client( key = llave_api)
 dict_gm    = cliente_gm.distance_matrix( origenes, destinos, mode = 'driving')
 
 print( 'Solicitud de matriz de distancia completada.' )

@@ -15,7 +15,7 @@ def importar_excel( archivo, hoja_de_calculo) :
 
     return df
 
-def descargar_matrices( modo, archivo_datos, archivo_matriz) :
+def descargar_matrices( llave_api, modo, archivo_datos, archivo_matriz) :
 
     print( 'EJECUTANDO IMPORTADOR DE MATRICES DE DISTANCIAS Y TIEMPOS' )
     print( 'Archivo de datos: ' + str(archivo_datos) )
@@ -70,7 +70,7 @@ def descargar_matrices( modo, archivo_datos, archivo_matriz) :
         print( '\t -' + destino )
 
     print( 'Solicitando matriz de distancias al servidor de Google Maps...' )
-    cliente_gm = gmaps.Client( key = 'AIzaSyBIoDs5XQOEcAi9RxwBO5KL_rM_wSvAtF8')
+    cliente_gm = gmaps.Client( key = llave_api)
     dict_gm    = cliente_gm.distance_matrix( origenes, destinos,
                                              mode = 'driving' )
 
