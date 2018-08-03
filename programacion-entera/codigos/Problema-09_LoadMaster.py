@@ -45,12 +45,12 @@ for i in filas :
             dict_x[var.name] = (i,j,k)
 
 # Declaramos las variables secundarias
-x_barra = LpVariable( nom, 0, None)
-y_barra = LpVariable( nom, 0, None)
-x_mas   = LpVariable( nom, 0, None)
-x_menos = LpVariable( nom, 0, None)
-y_mas   = LpVariable( nom, 0, None)
-y_menos = LpVariable( nom, 0, None)
+x_barra = LpVariable( 'x_barra', 0, None)
+y_barra = LpVariable( 'y_barra', 0, None)
+x_mas   = LpVariable( 'x_mas',   0, None)
+x_menos = LpVariable( 'x_menos', 0, None)
+y_mas   = LpVariable( 'y_mas',   0, None)
+y_menos = LpVariable( 'y_menos', 0, None)
 
 # Agregamos las restricciones que previenen que mas de un contenedor
 # sea puesto en cualquier locacion
