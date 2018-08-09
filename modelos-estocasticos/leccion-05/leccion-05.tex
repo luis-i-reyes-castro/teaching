@@ -1,0 +1,40 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{05}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Lecci\'on \numero \\[1ex]
+\small \textbf{Semestre:} 2018-2019 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Un sistema de colas tiene tres servidores y una sala de espera con capacidad para seis clientes. Los clientes arriban de acuerdo a un proceso Poisson con tasa media de 20 por hora, pero la probabilidad de que un cliente decida ingresar al sistema decae 10\% por cada cliente en cola. Los tiempos de servicio tiene distribuci\'on exponencial con tasa media de 6.5 minutos. 
+
+Con todo esto en mente, complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item Modele este sistema de colas como una Cadena de Markov en Tiempo Continuo. 
+\item Encuentre la distribuci\'on estacionaria de la cadena. 
+\item Calcule las m\'etricas de desempe\~no. 
+\item Calcule la probabilidad de que un nuevo cliente que arriba encuentre al menos dos clientes en cola. 
+\end{enumerate}
+\QED
+
+\end{problem}
+\fullskip
+
+
+\end{document}
