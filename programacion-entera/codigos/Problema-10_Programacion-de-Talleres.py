@@ -9,15 +9,17 @@ from Rutinas_ProgEntera import importar_excel
 
 # Declaramos las fuentes de datos y los importamos
 
-archivo_datos = 'Datos/Datos_Problema-10.xlsx'
+archivo_datos = 'Datos/Datos_Problema-10-B.xlsx'
 hoja_maquinas = 'Maquinas'
 hoja_trabajos = 'Trabajos'
+col_maquinas  = 'Maquina'
+col_trabajos  = 'Hoja'
 
 df_maquinas = importar_excel( archivo_datos, hoja_maquinas)
 df_trabajos = importar_excel( archivo_datos, hoja_trabajos)
 
-maquinas = list( df_maquinas.index )
-trabajos = list( df_trabajos['Hoja'] )
+maquinas = list( df_maquinas[col_maquinas] )
+trabajos = list( df_trabajos[col_trabajos] )
 m        = len( maquinas )
 n        = len( trabajos )
 
@@ -25,8 +27,8 @@ dict_df = {}
 for trabajo in trabajos :
     dict_df[trabajo] = importar_excel( archivo_datos, trabajo)
 
-sigma    = np.zeros( shape = (m,n), dtype = np.int)
-duracion = np.zeros( shape = (m,n) )
+sigma    = np.zeros( shape = (n,m), dtype = np.int)
+duracion = np.zeros( shape = (n,m) )
 for j in range(n) :
     trabajo = trabajos[j]
     df      = dict_df[trabajo]
@@ -50,14 +52,14 @@ for i in range(m) :
             z[(i,j,k)] = pulp.LpVariable( z_nom, 0, 1, pulp.LpBinary)
 
 # Declaramos las restricciones iniciales
-for i in range(m) :
+for ( i, maquina) in enumerate(maquinas) :
     for j in range(n) :
-        prob += z[(i,j,j)] <= 0, 'Trivialidad de z_M' + str(i) \
+        prob += z[(i,j,j)] == 0, 'Trivialidad de la variable z_M' + str(i) \
                                  + '_T' + str(j+1).zfill(2) \
                                  + '_T' + str(j+1).zfill(2)
         for k in range( j+1, n) :
             prob += z[(i,j,k)] + z[(i,k,j)] == 1, \
-            'En la maquina ' + str(i) + ' el trabajo ' \
+            'En la maquina ' + maquina + ' el trabajo ' \
             + str(j+1).zfill(2) + ' y el trabajo ' \
             + str(k+1).zfill(2) + ' no se translapan'
 
@@ -81,23 +83,23 @@ for (j, trabajo) in enumerate(trabajos) :
 # de trabajos el tiempo de arranque de uno de los dos trabajos sea mayor
 # o igual al tiempo de completacion del otro trabajo
 V = duracion.sum()
-for i in range(m) :
+for ( i, maquina) in enumerate(maquinas) :
     for j in range(n) :
         for k in range( j+1, n) :
-            
+
             operaciones_j = sigma[j,:]
             operaciones_k = sigma[k,:]
             duraciones_j  = duracion[j,:]
             duraciones_k  = duracion[k,:]
             p_i_j = duraciones_j[ np.nonzero( operaciones_j == i )[0][0] ]
             p_i_k = duraciones_k[ np.nonzero( operaciones_k == i )[0][0] ]
-            
+
             prob += x[(i,j)] >= x[(i,k)] + p_i_k - V * z[(i,j,k)], \
-            'Restriccion disjuntiva para la maquina M'  + str(i) \
+            'Restriccion disjuntiva para la maquina ' + maquina \
             + ', el trabajo T' + str(j+1).zfill(2) + ', y el trabajo T' \
             + str(k+1).zfill(2) + ', Altertiva-A'
             prob += x[(i,k)] >= x[(i,j)] + p_i_j - V * ( 1 - z[(i,j,k)] ), \
-            'Restriccion disjuntiva para la maquina M'  + str(i) \
+            'Restriccion disjuntiva para la maquina ' + maquina \
             + ', el trabajo T' + str(j+1).zfill(2) + ', y el trabajo T' \
             + str(k+1).zfill(2) + ', Altertiva-B'
 
@@ -117,9 +119,22 @@ print(prob)
 prob.solve()
 
 # Imprimimos resultados
+
 print( 'Estado (en ingles):', pulp.LpStatus[prob.status])
-print( 'Costo_Optimo =', pulp.value(prob.objective) )
-print( 'Valores optimos de las variables de decision no-triviales:')
-for var in prob.variables() :
-    if var.varValue > 0.0 :
-        print( var.name, '=', var.varValue)
+print( 'Costo_Optimo:', pulp.value(prob.objective) )
+print( 'Tiempos de arranques de los trabajos:' )
+
+for ( i, maquina) in enumerate(maquinas) :
+
+    print( '[+] Maquina ' + maquina + ':' )
+
+    lista_trabajo_tiempo = []
+    for ( j, trabajo) in enumerate(trabajos) :
+        var = x[(i,j)]
+        lista_trabajo_tiempo.append( ( trabajo, var.varValue) )
+
+    lista_trabajo_tiempo.sort( key = lambda par : par[1] )
+    for par_trabajo_tiempo in lista_trabajo_tiempo :
+        trabajo = par_trabajo_tiempo[0]
+        tiempo  = par_trabajo_tiempo[1]
+        print( '\t[-] ' + trabajo + ': min ' + str(tiempo) )
