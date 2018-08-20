@@ -1,0 +1,95 @@
+% =================================================================
+\documentclass[ 10pt, xcolor = dvipsnames]{beamer}
+\usepackage{ beamerthemesplit, lmodern}
+\usetheme{Madrid}
+\usecolortheme[named=Brown]{structure}
+\useinnertheme{rectangles}
+\setbeamertemplate{frametitle continuation}{}
+\beamertemplatenavigationsymbolsempty
+\usepackage{../../../macros-general}
+\usepackage{../../../macros-beamer}
+%\graphicspath{{./figures/}}
+
+% =================================================================
+\newcommand{\shorttitle}{INDG-1019: Juego de Diapositivas 02}
+\title[\shorttitle]{Programaci\'on Entera para Ingenier\'ia (INDG-1019): \textbf{Juego de Diapositivas 02} }
+\author[L. I. Reyes Castro]{Luis I. Reyes Castro}
+\institute[ESPOL]{\normalsize Escuela Superior Polit\'ecnica del Litoral (ESPOL) \\ Guayaquil - Ecuador}
+\date[2018-T1]{2018 - T\'ermino I}
+
+% -----------------------------------------------------------------
+\begin{document}
+\input{../../../beamer_table-contents}
+\input{../../../beamer_section-slides}
+\input{../../../macros-espanol}
+
+% =================================================================
+\section{Localizaci\'on de Instalaciones}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Datos del problema: 
+\begin{itemize}
+\item Conjunto de posibles instalaciones $S$, cada una con su respectiva localidad. 
+\item Conjunto de clientes $T$, cada uno con su respectiva localidad. 
+\item Matriz de distancias $D$ tal que para toda posible instalaci\'on $i \in S$ y todo cliente $j \in T$ la entrada $D_{ij}$ indica la distancia entre ellos. 
+\item Vector de costos por metro cuadrado de construcci\'on $p$ tal que para toda posible instalaci\'on $i \in S$ la entrada $p_i$ indica el precio por metro cuadrado de construcci\'on en esa instalaci\'on. 
+\item Vector de retroexcavadoras demandadas $q$ tal que para todo cliente $j \in T$ la entrada $q_j$ indica el n\'umero de retroexcavadoras demandadas por ese cliente. 
+\framebreak
+
+\item Toda retroexcavadora ocupa un \'area $A_{re}$, y el estacionamiento de cada instalaci\'on debe tener suficiente \'area para que sea posible guardar todas las retroexcavadoras que operan desde esa instalaci\'on. Adem\'as, toda instalaci\'on requiere que se destine un \'area fija $A_f$ para oficinas administrativas. 
+\item Se cuenta con un presupuesto $B$ para la construcci\'on de las nuevas instalaciones. 
+
+\end{itemize}
+
+Variables de decisi\'on: 
+\begin{itemize}
+\item Para cada posible instalaci\'on $i \in S$ y cliente $j \in T$ la variable entera $x_{ij}$ indica el n\'umero de retroexcavadoras que sirven a ese cliente desde esa instalaci\'on. 
+\item Para cada posible instalaci\'on $i \in S$ la variable binaria $y_i$ indica la decisi\'on de construir esa instalaci\'on. 
+\end{itemize}
+
+Constantes: 
+\begin{itemize}
+\item Demanda total: $Q = \sum_{j \in T} q_j$
+\end{itemize}
+
+\end{frame}
+
+% -----------------------------------------------------------------
+\begin{frame}[allowframebreaks]
+\frametitle{\insertsection}
+
+Restricciones: 
+\begin{itemize}
+\item Solo se puede servir clientes desde instalaciones que han sido constru\'idas. Existen dos formas de implementar estas restricciones: 
+\begin{itemize}
+\item Implementaci\'on 1: 
+\[
+\forall \, i \in S \colon \; \sum_{j \in T} x_{ij} \; \leq \; Q \, y_i
+\]
+\item Implementaci\'on 2:
+\[
+\forall \, i \in S, \, \forall \, j \in T \colon \;
+x_{ij} \leq q_j \, y_i
+\]
+\end{itemize}
+\item Todo cliente debe ser servido: 
+\[
+\forall \, j \in T \colon \; \sum_{i \in S} x_{ij} \; = \; q_j
+\]
+\item El presupuesto no puede ser excedido: 
+\[
+\sum_{i \in S} p_i \left( \; A_{re} \sum_{j \in T} x_{ij} \; + \; A_f \, y_i \; \right) \; \leq \; B
+\]
+\end{itemize}
+
+Funci\'on de costo: 
+\[
+\sum_{i \in S} \sum_{j \in T} D_{ij} \, x_{ij}
+\]
+
+\end{frame}
+
+\end{document}
