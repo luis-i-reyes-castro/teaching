@@ -1,0 +1,53 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{06}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Modelos Estoc\'asticos (INDG-1008): Lecci\'on \numero \\[1ex]
+\small \textbf{Semestre:} 2018-2019 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+En un taller se tiene cuatro m\'aquinas trozadoras cuyos discos de corte tienen una vida \'util aleatoria. Siempre hay trabajo para las m\'aquinas, puesto que estas constituyen el recurso cr\'itico del taller. Se ha observado que la vida \'util de los discos de corte puede ser modelada como una variable aleatoria exponencial con valor promedio de 5.8 horas. El taller dispone de dos t\'ecnicos para reemplazar los discos, y cada t\'ecnico trabaja a un ritmo promedio de un disco cada 1.5 horas. Suponga que cada remplazo de disco es asignado a un solo t\'ecnico y que los t\'ecnicos no comparten trabajo porque entre ellos se detestan. 
+
+Complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item Modele el n\'umero de m\'aquinas que requieren remplazo de disco como una Cadena de Markov en Tiempo Continuo. 
+\item Encuentre la distribuci\'on estacionaria de la cadena. 
+\item Encuentre el n\'umero promedio de m\'aquinas que requieren cambio de disco en espera a que un t\'ecnico pueda empezar a darles servicio (\ie el tama\~no de la cola). 
+\end{enumerate}
+\QED
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Considere un sistema de colas con un servidor y capacidad infinita donde los clientes arriban de acuerdo a un proceso Poisson con tasa media de 15 por hora. 
+
+Complete las siguientes actividades: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item Suponga que los tiempos de servicio tienen una distribuci\'on general con valor esperado de 2.2 minutos y desviaci\'on estandar de 0.71 minutos. Calcule las m\'etricas de desempe\~no. 
+\item Suponga que los tiempos de servicio son siempre id\'enticos e iguales a 2.4 minutos. Calcule las m\'etricas de desempe\~no. 
+\end{enumerate}
+\QED
+
+\end{problem}
+\fullskip
+
+
+\end{document}
