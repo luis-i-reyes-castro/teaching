@@ -51,9 +51,13 @@ for i in range(n) :
         if not np.isnan( distancias[i,j] ) :
             vecinas[ind_i].append(ind_j)
 
+# Ingresamos la restriccion de que se debe entrar y salir dos veces de GYE
+prob += pulp.lpSum( x[( '01', ind_j)] for ind_j in vecinas['01'] ) == 4, \
+        'Restriccion para el HQ en Guayaquil'
+
 # Iteramos por las ciudades creando las restricciones que exigen que se entre
 # y salga exactamente una vez de cada ciudad
-for i in range(n) :
+for i in range( 1, n) :
     ind_i = str(i+1).zfill(2)
     prob += pulp.lpSum( x[( ind_i, ind_j)] for ind_j in vecinas[ind_i] ) == 2, \
     'Restriccion para la ciudad ' + ciudades[i]
@@ -69,9 +73,19 @@ def arcos_fronterizos( indices_ciudades) :
     return list(arcos)
 
 # Iteracion 02
-S2 = [ '02', '08', '09']
-prob += pulp.lpSum( x_ij for x_ij in arcos_fronterizos(S2) ) >= 2, \
+S = [ '01', '03', '05', '06', '10']
+prob += pulp.lpSum( x_ij for x_ij in arcos_fronterizos(S) ) >= 2, \
         'Restriccion de la Iteracion 02'
+
+# Iteracion 03
+S = [ '02', '08', '09']
+prob += pulp.lpSum( x_ij for x_ij in arcos_fronterizos(S) ) >= 2, \
+        'Restriccion de la Iteracion 03'
+
+# Iteracion 04
+S = [ '02', '04', '08', '09']
+prob += pulp.lpSum( x_ij for x_ij in arcos_fronterizos(S) ) >= 2, \
+        'Restriccion de la Iteracion 04'
 
 # Resolvemos el problema
 print(prob)
