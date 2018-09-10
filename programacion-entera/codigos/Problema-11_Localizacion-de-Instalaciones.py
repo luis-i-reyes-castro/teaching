@@ -42,7 +42,7 @@ x = {}
 for ( i, origen) in enumerate(origenes) :
     for ( j, destino) in enumerate(destinos) :
         nom      = 'x_' + str(i+1).zfill(2) + '_' + str(j+1).zfill(2)
-        x[(i,j)] = pulp.LpVariable( nom, 0, None, pulp.LpContinuous)
+        x[(i,j)] = pulp.LpVariable( nom, 0, None, pulp.LpInteger)
 
 y = {}
 for ( i, origen) in enumerate(origenes) :
@@ -93,3 +93,15 @@ print( 'Valores optimos de las variables de decision no-triviales:')
 for var in prob.variables() :
     if var.varValue > 0.0 :
         print( var.name, '=', var.varValue)
+
+# Imprimimos las solucion de una manera amigable
+print( 'DESGLOSE DE LA SOLUCION OPTIMA:' )
+for ( i, origen) in enumerate(origenes) :
+    if y[i].varValue > 0.0 :
+        msg = '[+] Abrir locacion ' + str(i+1).zfill(2) + ' - ' + origenes[i]
+        print(msg)
+        for ( j, destino) in enumerate(destinos) :
+            if x[(i,j)].varValue > 0.0 :
+                msg = '\t[-] Servir al destino ' + str(j+1).zfill(2) + ' - ' \
+                    + destinos[j] + ': ' + str( x[(i,j)].varValue ) + ' unidades'
+                print(msg)
