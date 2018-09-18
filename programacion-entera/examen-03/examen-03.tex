@@ -1,0 +1,148 @@
+% -----------------------------------------------------------------
+% Document class: Article
+\documentclass[ a4paper, twoside, 11pt]{article}
+\usepackage{../../macros-general}
+\usepackage{../../macros-article}
+% Number of the handout, quiz, exam, etc.
+\newcommand{\numero}{03}
+\setcounter{numero}{\numero}
+
+% -----------------------------------------------------------------
+\begin{document}
+\allowdisplaybreaks
+
+\input{../../macros-espanol}
+
+\begin{center}
+\Large Programaci\'on Entera (INDG-1019): Examen \numero \\[1ex]
+\small \textbf{Semestre:} 2018-2019 T\'ermino I \qquad
+\textbf{Instructor:} Luis I. Reyes Castro
+\end{center}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+La gerenta de una planta est\'a planificando la producci\'on del \'unico producto que fabrica su empresa para el horizonte de los siguientes 8 meses. Mediante m\'etodos de pron\'ostico de series de tiempo, ella ha estimado la siguiente demanda. 
+
+\begin{table}[htb]
+\centering
+\label{tab:Problema_Generadores}
+\begin{tabular}{|c|c|c|}
+\hline
+\textbf{Semana}	& \textbf{Demanda} \\ \hline
+01 & 227 \\ \hline
+02 & 556 \\ \hline
+03 & 200 \\ \hline
+04 & 337 \\ \hline
+05 & 315 \\ \hline
+06 & 446 \\ \hline
+07 & 273 \\ \hline
+08 & 135 \\ \hline
+\end{tabular}
+\end{table}
+
+Adicionalmente, la gerenta sabe que: 
+\begin{itemize}
+\item El costo de producci\'on por unidad es de \$12.00, pero tambi\'e existe un costo fijo de operar la planta de \$1600.00. 
+\item El costo de almacenamiento es de \$0.80 por unidad de producto por mes. 
+\end{itemize}
+
+Con esto en mente, modele el problema de la gerenta como un Programa Lineal Entero (PLE). En particular: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{[3 Puntos]} Introduzca variables de decisi\'on apropiadas para el problema. 
+\item \textbf{[2 Puntos]} Escriba las restricciones que relacionan la producci\'on, el inventario y la demanda a lo largo del horizonte de planificaci\'on. 
+\item \textbf{[2 Puntos]} Escriba las restricciones que fuerzan a que las variables binarias que indican que si opera la planta en cada mes tomen valor uno si es que los n\'umeros de unidades producidas en los respectivos meses son estrictamente positivos. 
+\item \textbf{[3 Puntos]} Escriba la funci\'on de costo del problema. 
+\end{enumerate}
+\QED
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+
+El due\~no de un nuevo centro comercial ha recibido ofertas por parte de varias empresas interesadas en alquilar locales comerciales. En particular: 
+\begin{itemize}
+\item El edificio tiene $p$ pisos, y cada piso tiene capacidad para $\ell$ locales comerciales. 
+\item Existen $m$ empresas diferentes interesados en alquilar locales comerciales en el edificio. Para cada empresa $i \in \upto{m}$ y cada piso $j \in \upto{p}$ denotamos al precio ofertado por esa empresa para alquilar un local en ese piso como $u_{ij}$. Las empresas se clasifican de acuerdo a su tipo de negocio: 
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{|l|c|}
+\hline
+\multicolumn{1}{|c|}{\textbf{Tipo de Negocio}} & \textbf{S\'imbolo} \\ \hline
+Ropa                                           & RP                 \\ \hline
+Muebles o Electrodom\'esticos                  & ME                 \\ \hline
+Bienes Inmuebles                               & BI                 \\ \hline
+Deportes y Salud                               & DS                 \\ \hline
+Lectura y Arte                                 & LA                 \\ \hline
+Comida                                         & C                  \\ \hline
+Banco (Servicios Bancarios)                    & BK                 \\ \hline
+Servicios al Cliente o T\'ecnicos              & SCT                \\ \hline
+\end{tabular}
+\end{table}
+
+\end{itemize}
+
+El due\~no del negocio desea maximizar sus ganancias por alquiler de locales comerciales sujeto a las siguiente restricciones: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item En cada piso se pueden instalar hasta $\ell$ locales comerciales. 
+
+\item En ning\'un piso puede haber m\'as de cuatro locales de muebles o electrodom\'esticos (ME). 
+
+\item En todo piso donde haya locales de comida (C) no puede haber locales de servicios al cliente o t\'ecnicos (SCT), y vice-versa. \\ \emph{Sugerencia:} Introduzca un par de variables binarias auxiliares para cada piso. La primera variable binaria indicar\'a si el piso tiene al menos un local de comida (C), y la segunda indicar\'a si el piso tiene al menos un local de servicios al cliente o t\'ecnicos (SCT). 
+
+\item En todo piso donde haya al menos un local de bienes inmuebles (BI) debe haber al menos un banco (BK). \\ \emph{Sugerencia:} Introduzca un par de variables binarias auxiliares para cada piso. 
+
+\item En todo piso donde haya tres o m\'as bancos (BK) debe haber al menos dos locales de servicios al cliente o t\'ecnicos (SCT). \\ \emph{Sugerencia:} Introduzca un par de variables binarias auxiliares para cada piso. 
+
+%\item En todo piso donde haya locales de deportes y salud (DS) o lectura y arte (LA) debe haber al menos dos locales de ropa (R). \\ \emph{Sugerencia:} Introduzca un tr\'io de variables binarias auxiliares para cada piso. 
+
+\end{enumerate}
+
+Con esto en mente, el due\~no del centro comercial ha decidido implementar un Programa Lineal Entero (PLE) para encontrar una asignaci\'on de locales comerciales que maximice su ganancia. Para cada empresa $i \in \upto{m}$ y cada piso $j \in \upto{p}$, el due\~no del edificio defini\'o la variable binaria $x_{ij} \in \{ 0, 1 \}$ de tal manera que si la variable toma el valor uno entonces se le alquila un local a esa empresa en ese piso. 
+
+Complete las siguientes actividades: 
+\begin{itemize}
+\item \textbf{[11 Puntos]} Traduzca las restricciones de los cinco literales anteriores a restricciones lineales entre las variables enteras. 
+\item \textbf{[1 Punto]} Escriba la funci\'on de utilidad del problema. 
+\end{itemize}
+\QED
+
+\end{problem}
+\fullskip
+
+% -----------------------------------------------------------------
+\begin{problem}
+Considere el siguiente problema de Localizaci\'on de Instalaciones. 
+\begin{itemize}
+\item Existen $m$ posibles locaciones donde se pueden construir instalaciones para servir a cualquiera de los $n$ clientes. 
+\item Para cada posible locaci\'on $i \in \upto{m}$ denotamos su costo de alquiler como $CA(i)$ y su capacidad como $Q(i)$. 
+\item Para cada posible cliente $j \in \upto{n}$ denotamos su demanda como $d(j)$. 
+\item Para cada posible locaci\'on $i \in \upto{m}$ y cada cliente $j \in \upto{n}$ denotamos al costo de servir cada unidad del producto a ese cliente desde esa locaci\'on como $CS(i,j)$. 
+\item Cada posible instalaci\'on puede servir hasta $p$ clientes diferentes (donde $p < m$). 
+\end{itemize}
+
+Modelaremos este problema como un Programa Lineal Entero (PLE) cuyas variables de decisi\'on son como sigue. 
+\begin{itemize}
+\item Para cada posible locaci\'on $i \in \upto{m}$ y cada cliente $j \in \upto{n}$ la variable entera $x_{ij}$ denota el n\'umero de unidades que ser\'an despachadas desde esa locaci\'on a ese cliente. 
+\item Para cada posible locaci\'on $i \in \upto{m}$ y cada cliente $j \in \upto{n}$ la variable binaria $y_{ij}$ toma el valor uno si esa locaci\'on despacha unidades a ese cliente. 
+\item Para cada posible locaci\'on $i \in \upto{m}$ la variable binaria $z_i$ toma el valor uno si se decide alquilar esa locaci\'on. 
+\end{itemize}
+
+Con todo esto en mente: 
+\begin{enumerate}[label=\textbf{\alph*)}]
+\item \textbf{[2 Puntos]} Escriba las restricciones que exigen que toda las demandas de todos los clientes sean servidas. 
+\item \textbf{[2 Puntos]} Escriba las restricciones que exigen que cada locaci\'on respete su capacidad. 
+\item \textbf{[2 Puntos]} Escriba las restricciones que exigen que si una locaci\'on sirve clientes entonces esa locaci\'on debe ser alquilada. 
+\item \textbf{[2 Puntos]} Escriba las restricciones que exigen que si $x_{ij} > 0$ entonces $y_{ij} = 1$. 
+\item \textbf{[2 Puntos]} Escriba las restricciones que exigen que cada locaci\'on pueda servir a no m\'as de $p$ clientes diferentes. 
+\item \textbf{[2 Puntos]} Escriba la funci\'on de costo del problema. 
+\end{enumerate}
+\QED
+
+\end{problem}
+\fullskip
+
+\end{document}
