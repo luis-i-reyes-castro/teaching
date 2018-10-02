@@ -1,2 +1,2 @@
 # teaching
-Este repositorio contiene los codigos fuentes en LaTeX de los materiales que utilizo para dar clase. 
+Codigos fuente de los materiales que utilizaba para dictar clase
